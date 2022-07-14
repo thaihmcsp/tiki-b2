@@ -7,14 +7,14 @@ function SignUp() {
     return (
         
     <div className='box_container'>
-        <div class="menu">
-            <div class="menu-left">
+        <div className="menu">
+            <div className="menu-left">
                 <div>
                 <img src="https://salt.tikicdn.com/ts/upload/ae/f5/15/2228f38cf84d1b8451bb49e2c4537081.png" alt='tiki-logo'/>
                 </div>
             </div>
 
-            <div class="menu-right">
+            <div className="menu-right">
            
               
                 <a href="#team">
@@ -43,16 +43,16 @@ function SignUp() {
                         <div>
                             Nhập Email
                         </div>
-                        <input class="form-control" type="text"  placeholder="Vui lòng nhập email"/>
+                        <input className="form-control" type="text"  placeholder="Vui lòng nhập email"/>
                        
                         <div>
                             Nhập mật khẩu 
                         </div>
-                        <input class="form-control" type="password"  placeholder="Vui lòng nhập mật khẩu"/>
+                        <input className="form-control" type="password"  placeholder="Vui lòng nhập mật khẩu"/>
                         <div>
                             Nhập mật lại khẩu 
                         </div>
-                        <input class="form-control" type="password"  placeholder="Vui lòng nhập lại mật khẩu"/>
+                        <input className="form-control" type="password"  placeholder="Vui lòng nhập lại mật khẩu"/>
                         </div>
                     <div>
                         
