@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListCountry } from './ListCountry';
-
 import "./style.css"
+
 
 function SignUp() {
     return (

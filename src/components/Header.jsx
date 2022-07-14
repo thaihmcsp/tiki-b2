@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Outlet } from 'react-router-dom'
 import './Header.css'
 // import { Link } from "react-router-dom";
 
@@ -206,6 +207,7 @@ function Header() {
         <a href="">Thời trang</a>
       </div>
     </div>
+    <Outlet/>
 </div>
   )
 }
