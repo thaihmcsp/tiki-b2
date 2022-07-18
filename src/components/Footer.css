@@ -96,3 +96,9 @@
 .Footer-FooterReDetal-icon {
   width: 206px;
 }
+@media screen and (max-width: 768px){
+  .Footer{
+    display: none;
+    visibility: hidden;
+  }
+}

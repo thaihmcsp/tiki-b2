@@ -45,7 +45,7 @@ const Container = () => {
         modules={[Autoplay, Pagination2, Navigation]}
         loop={true}
         loopPreventsSlide={true}
-        className="mySwiper"
+        className="mySwiper_fillter"
        
       >
         <SwiperSlide>

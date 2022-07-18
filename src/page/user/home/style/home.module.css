@@ -3,6 +3,7 @@
     width: 100%;
     font-family: 'Roboto', sans-serif;
     background: #f5f5fa;
+    padding-top: 15px;
 }
 .container{
     width: 1240px;
@@ -29,6 +30,7 @@
         width: 100%;
         overflow-x: hidden;
         background: #005cd6;
+        
     }
     .image{
         display: none;
