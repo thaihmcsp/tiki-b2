@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
+import Footer from './Footer'
 import './Header.css'
 // import { Link } from "react-router-dom";
 
@@ -7,7 +8,8 @@ import './Header.css'
 function Header() {
   const [DataHeader,setDataHeader] = useState(['Thịt','Rau củ','Nhà cửa','Điện tử','Thiết Bị Số','Điện thoại','Mẹ & Bé'])
   return (
-   <div className="Header">
+   <div>
+    <div className="Header">
     <div className = 'HeaderBody'>
         <div className = 'HeaderTop'>
             <div className="HeaderTopContainer">
@@ -207,8 +209,10 @@ function Header() {
         <a href="">Thời trang</a>
       </div>
     </div>
-    <Outlet/>
 </div>
+    <Outlet/>
+    <Footer/>
+   </div>
   )
 }
 
