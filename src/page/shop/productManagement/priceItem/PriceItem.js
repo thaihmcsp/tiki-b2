@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { PlusOutlined } from "@ant-design/icons";
+import Tablelock from "./Tablelock";
 const PriceContainer = styled.div`
   padding: 20px;
   background: #fff;
@@ -227,6 +228,7 @@ const PriceItem = () => {
             </div>
           </div>
         </PriceBar>
+        <Tablelock />
       </PriceContainer>
     </div>
   );
