@@ -4,6 +4,7 @@ import SignUp from './page/user/signUp/SignUp';
 import SignIn from './page/user/signIn/SignIn';
 import Header from './components/Header';
 import Filter from './page/user/filter/Filter';
+import Home from './page/user/home/Home';
 import './App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
             <Route path='/create-shop' element={<CreateShop/>}/>
             <Route path='/' element={<Header/>}> 
                 <Route path='/filter' element={<Filter/>}/>
+                <Route path='/' element={<Home/>} />
             </Route>
             <Route path='*' element={<h1>error 404. not found</h1>}/>
         </Routes>
