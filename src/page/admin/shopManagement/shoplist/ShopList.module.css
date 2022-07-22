@@ -1,0 +1,77 @@
+.shoplist {
+    width: 610px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+.Shop_ProfileLeft {
+    display: flex;
+}
+.ListShopProfile {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
+    box-shadow: rgb(0 0 0 / 10%) 0px 0px 20px;
+    border-bottom: 1px solid #ccc ;
+    border-radius: 4px;
+    
+}
+.Shop_ProfileLeft img {
+    width: 70px;
+}
+.Shop_ProfileLeft h4 {
+    color: rgb(89, 91, 211);
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.ShowShopdata {
+    width: 100%;
+    margin-bottom: 60px;
+
+}
+.SetshopOptions {
+    display: flex;
+    background-color: #f7e9e9e0;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+    box-shadow: rgb(0 0 0 / 10%) 0px 0px 20px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 4px;
+}
+.ShopIDtext {
+    color: red;
+} 
+.Options button {
+    border: none;
+    padding: 7px;
+    font-weight: 600;
+    background-color: white;
+    color: black;
+    margin-right: 9px;
+}
+.Options button:hover {
+    cursor: pointer;
+}
+.Time_ShopStart span {
+    font-weight: bold;
+    margin-right: 5px;
+}
+@media screen and (max-width: 768px){
+    .Shop_ProfileLeft img {
+        width: 40px;
+    }
+    .Shop_ProfileLeft h4 {
+        font-size: 15px;
+    }
+    .ShopIDtext span{
+        font-size: 14px;
+    }
+    .Time_ShopStart span{ 
+        font-size: 16px;
+    }
+}
