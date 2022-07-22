@@ -13,6 +13,7 @@ import ProfileListHeader from './page/user/profile/ProfileLeft/ProfileListHeader
 import UserInfo from './page/user/profile/UserInfo_data/UserInfo';
 import './App.css';
 import UserInfoMenu from './page/user/profile/UserInfoMenu';
+import ShopHome from './page/shop/shopHome/ShopHome';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                 <Route path='/user' element={<UserInfoMenu/>}> 
                     <Route path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> } />
                 </Route>
+                <Route path='/ShopHome' element={<ShopHome/>}/>
             </Route>
             <Route path='*' element={<h1>error 404. not found</h1>}/>
         </Routes>

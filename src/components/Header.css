@@ -49,6 +49,7 @@
 }
 .componentHeaderInput:focus + .ShowCoverInput{
     display: block;
+    z-index: 1000000;
 }
 .componentHeaderInput:focus + .HeaderMiddleListData {
     display: none;
