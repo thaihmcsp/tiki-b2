@@ -4,9 +4,9 @@
     border-radius: 10px;
     overflow: hidden; */
 }
-.mySwiper2 >.swiper-button-next,
-.mySwiper2 >.swiper-button-prev{
-    /* top: 40%; */
+.mySwiper2 >.swiper-button-next::after,
+.mySwiper2 >.swiper-button-prev::after{
+    /* background: none; */
 }
 #list__item_header2{
     height: 280px;
