@@ -1,15 +1,13 @@
 import React from 'react';
-
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Input, Space } from 'antd';
 import 'antd/dist/antd.css';
 import { Select } from 'antd';
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
-import { Link, useNavigate } from 'react-router-dom'
 
-import "./StyleIn.css"
+import "./styleLogin.css";
 
-function SignIn() {
+function Login() {
+
     const { Option } = Select;
     return (
 
@@ -35,7 +33,7 @@ function SignIn() {
                 <div className='box_background'>
                 </div>
                 <div className="container">
-                    <div className="title"><h1>Đăng nhập</h1></div>
+                    <div className="title"><h1>Admin Đăng nhập</h1></div>
                     <div className="inputGroup">
                         <div>
                             Nhập Email
@@ -70,36 +68,18 @@ function SignIn() {
                             <p>
                                 <div>Bạn chưa có tài khoản?</div>
 
-                                <Link to='/signin'><i><a href="">Đăng kí</a></i></Link>
-
-                            </p>
+                                <a href="">Đăng ký</a></p>
                         </div>
                     </div>
                     <div className="buttonGroup">
                         <button className="login">Đăng nhập</button>
 
                     </div>
-                    <div className="line"></div>
 
-
-                    <div className="buttonGroup1">
-                        <button href="#" className="field facebook">
-                            <FacebookOutlinedIcon className=' facebook iconface' />
-                            <span>Đăng nhập với Facebook</span>
-                        </button>
-                    </div>
-
-                    <div className="buttonGroup1">
-                        <button href="#" className="field google">
-
-                            <img src="https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1" alt="" className="google-img" />
-                            <span>Đăng nhập với Google</span>
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
     );
 }
 
-export default SignIn;
+export default Login;

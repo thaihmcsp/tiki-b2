@@ -1,20 +1,30 @@
-import logo from './logo.svg';
+
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
-import React, { lazy } from 'react'
+
+import React, { lazy, useState } from 'react'
 import SignUp from './page/user/signUp/SignUp';
 import SignIn from './page/user/signIn/SignIn';
 import Main from './page/user/order/maintotal/Main';
+// import Login from './page/admin/login/Login';
+import Login from './page/shop/login/Login';
+
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
 
-  return (
-    <div >
-      {/* <SignIn /> */}
-      <Main/>
-      {/* <SignUp /> */}
 
+  return (
+
+
+    <div>
+      <SignUp />
     </div>
+
+
   );
 }
 

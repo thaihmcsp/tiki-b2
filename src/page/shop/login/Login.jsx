@@ -5,11 +5,11 @@ import { Input, Space } from 'antd';
 import 'antd/dist/antd.css';
 import { Select } from 'antd';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
-import { Link, useNavigate } from 'react-router-dom'
 
-import "./StyleIn.css"
 
-function SignIn() {
+import "./styleLogin.css"
+
+function Login() {
     const { Option } = Select;
     return (
 
@@ -35,7 +35,7 @@ function SignIn() {
                 <div className='box_background'>
                 </div>
                 <div className="container">
-                    <div className="title"><h1>Đăng nhập</h1></div>
+                    <div className="title"><h1>Đăng nhập với Shop</h1></div>
                     <div className="inputGroup">
                         <div>
                             Nhập Email
@@ -70,9 +70,7 @@ function SignIn() {
                             <p>
                                 <div>Bạn chưa có tài khoản?</div>
 
-                                <Link to='/signin'><i><a href="">Đăng kí</a></i></Link>
-
-                            </p>
+                                <a href="">Đăng ký</a></p>
                         </div>
                     </div>
                     <div className="buttonGroup">
@@ -102,4 +100,4 @@ function SignIn() {
     );
 }
 
-export default SignIn;
+export default Login;
