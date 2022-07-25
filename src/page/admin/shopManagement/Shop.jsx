@@ -22,86 +22,86 @@ function SetActiveButton(status){
 function Shop() {
   const [ShopListdata,setShopListdata] = useState([
     {
-      name : 'shop hoa qua1 ',
+      name : 'Shop hoa qua1 ',
       timestart: '2022/7/25',
-      shopid : '123sscc',
+      Shopid : '123sscc',
       status : 'pending',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg'
     },
     {
-      name : 'shop mực',
+      name : 'Shop mực',
       timestart: '2022/5/20',
-      shopid : '1sd',
+      Shopid : '1sd',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'block',
     },
     {
-      name : 'shop cá',
+      name : 'Shop cá',
       timestart: '2022/5/28',
-      shopid : 'ddr34',
+      Shopid : 'ddr34',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'block',
     },
     {
-      name : 'shop cua',
+      name : 'Shop cua',
       timestart: '2022/6/25',
-      shopid : '556sd',
+      Shopid : '556sd',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'pending',
     },
     {
-      name : 'shop hoa',
+      name : 'Shop hoa',
       timestart: '2022/5/25',
-      shopid : '1ht7d',
+      Shopid : '1ht7d',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'active',
     },
     {
-      name : 'shop máy in',
+      name : 'Shop máy in',
       timestart: '2022/5/25',
-      shopid : '1ht7d',
+      Shopid : '1ht7d',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'active',
     },
     {
-      name : 'shop máy tính',
+      name : 'Shop máy tính',
       timestart: '2022/5/25',
-      shopid : '1ht7d',
+      Shopid : '1ht7d',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'active',
     },
     {
-      name : 'shop điện thoại',
+      name : 'Shop điện thoại',
       timestart: '2022/5/25',
-      shopid : '1ht7d',
+      Shopid : '1ht7d',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'active',
     },
     {
-      name : 'shop tôm',
+      name : 'Shop tôm',
       timestart: '2022/5/25',
-      shopid : '1ht7d',
+      Shopid : '1ht7d',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'block',
     },
     {
-      name : 'shop rau',
+      name : 'Shop rau',
       timestart: '2022/5/25',
-      shopid : '1ht7d',
+      Shopid : '1ht7d',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'pending',
     },
     {
-      name : 'shop dưa',
+      name : 'Shop dưa',
       timestart: '2022/5/25',
-      shopid : '1ht7d',
+      Shopid : '1ht7d',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'active',
     },
     {
-      name : 'shop thịt lợn',
+      name : 'Shop thịt lợn',
       timestart: '2022/5/25',
-      shopid : '1ht7d',
+      Shopid : '1ht7d',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'pending',
     },
@@ -172,7 +172,7 @@ function Shop() {
                 <button onClick={ListShopBlock} className = {clsx(style.Header_ButtonActive)} >Đã Khóa</button>
             </div>
         </div>
-        <div className={style.shoplist}>
+        <div className={style.Shoplist}>
            <ShopList newListdata = {newListdata} Shopstatus = {Shopstatus} ShopListdata = {ShopListdata} setnewListdata = {setnewListdata} setShopstatus = {setShopstatus} start = {start}> </ShopList>
         </div>
       <div className = {style.Pagination}>

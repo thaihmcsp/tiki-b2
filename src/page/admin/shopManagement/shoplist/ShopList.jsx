@@ -9,29 +9,30 @@ function Pending (props) {
     )
 }
 const AccepctShop = (id,newdata,listdata)=> {
-    let index = newdata.findIndex((value)=> value.shopid === id);
+    let index = newdata.findIndex((value)=> value.Shopid === id);
     let clone = [...newdata]
     clone[index].status = 'active';
     listdata(clone);
 }
 const RefuseShop = (id,newdata,listdata)=> { 
-   let index = newdata.findIndex((value)=> value.shopid === id);
+   let index = newdata.findIndex((value)=> value.Shopid === id);
     let clone = [...newdata]
     clone[index].status = 'block';
     listdata(clone);
 }
 const UnblockShop = (id,newdata,listdata)=> {
-    let index = newdata.findIndex((value)=> value.shopid === id);
+    let index = newdata.findIndex((value)=> value.Shopid === id);
     let clone = [...newdata]
     clone[index].status = 'active';
     listdata(clone);
 }
 const BlockShop = (id,newdata,listdata)=> {
-    let index = newdata.findIndex((value)=> value.shopid === id);
+    let index = newdata.findIndex((value)=> value.Shopid === id);
     let clone = [...newdata]
     clone[index].status = 'block';
     listdata(clone);
 }
+
 function Active (props) {
     return (
         <div>
@@ -60,22 +61,21 @@ function ShopList(props) {
                     if( after.status.length > before.status.length ) {
                         return -1
                     } else {
-                        if( new Date(after.status) > new Date(before.status)){
+                        if( new Date(after.timestart) > new Date(before.timestart)) {
                             return -1
                         }
                     }
                 })
             if(props.Shopstatus.length === 0) {
-                setData(props.newListdata)  
+                setData(props.newListdata)   
                 setdataPagination(props.newListdata.slice(props.start,props.start+5)) 
             } else {
                 setData(newdata.filter((value) => value.status === props.Shopstatus))
-                setdataPagination(newdata.filter((value) => value.status === props.Shopstatus).slice(props.start,props.start+5)) 
+                setdataPagination(newdata.filter((value) => value.status === props.Shopstatus).slice(props.start,props.start+5))
             }
      },[props.newListdata,props.start])
-    
   return (
-    <div className={style.shoplist}> 
+    <div className={style.Shoplist}> 
         {dataPagination.map((value, index)=>{
             return <div className= {style.ShowShopdata}>
                 <div className={style.ListShopProfile}>
@@ -93,14 +93,14 @@ function ShopList(props) {
 
                     </div>
                 </div>
-                <div className={style.SetshopOptions}>
+                <div className={style.SetShopOptions}>
                     <div className={style.Time_ShopStart}>
                         <span>Applied on :</span>{value.timestart}
                     </div>
                     <div className={style.Options}>
-                        {value.status === 'pending' ? <Pending AccepctShop={AccepctShop} id={value.shopid} newdata={props.newListdata} setnewListdata = {props.setnewListdata}  RefuseShop = {RefuseShop}/>  : null}
-                        {value.status === 'active' ? <Active id={value.shopid} newdata={props.newListdata} setnewListdata = {props.setnewListdata} /> : null}
-                        {value.status === 'block' ? <Block UnblockShop = {UnblockShop} id={value.shopid} newdata={props.newListdata} setnewListdata = {props.setnewListdata} /> : null}              
+                        {value.status === 'pending' ? <Pending AccepctShop={AccepctShop} id={value.Shopid} newdata={props.newListdata} setnewListdata = {props.setnewListdata}  RefuseShop = {RefuseShop}/>  : null}
+                        {value.status === 'active' ? <Active id={value.Shopid} newdata={props.newListdata} setnewListdata = {props.setnewListdata} /> : null}
+                        {value.status === 'block' ? <Block UnblockShop = {UnblockShop} id={value.Shopid} newdata={props.newListdata} setnewListdata = {props.setnewListdata} /> : null}              
                     </div>
                 </div>
             </div>

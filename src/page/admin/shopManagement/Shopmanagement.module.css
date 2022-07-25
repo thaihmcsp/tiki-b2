@@ -19,7 +19,7 @@
 .ShopManage {
     margin-right: 50px;
     background-color: #f4f7f6;
-    margin-left: 190px;
+    margin-left: 270px;
 }
 .Header_ButtonActive {
  
@@ -38,7 +38,8 @@
 }
 .HeaderLeft h3 {
     cursor: pointer;
-    color: red;
+    margin-bottom: 0;
+    color: #206a9d;
 }
 .HeaderRight {
     border:  1px solid blue;
@@ -51,7 +52,7 @@
     border: none;
     padding: 5px 15px;
 }
-.shoplist {
+.Shoplist {
     display: flex;
     justify-content: center;
     

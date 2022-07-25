@@ -73,7 +73,7 @@ function User() {
     {
       name : 'User điện thoại',
       Userid : '1ht7d',
-      datejoin: '2022/7/30',
+      datejoin: '2022/3/30',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'active',
     },
@@ -147,10 +147,8 @@ function User() {
     setnewListdata(UserListdata)
   }
   function onChangePagination(page,pageSize){
-    console.log(page,pageSize)
     setcurrent(page)
     setstart(pageSize*(page-1));
-    console.log(start)
   }
   return (
     <div className={style.UserManage}>

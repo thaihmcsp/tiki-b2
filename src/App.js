@@ -8,7 +8,7 @@ import User from './page/admin/userManagement/User';
 function App() {
   return (
     <div className="App">
-    <Shop></Shop>
+      <Shop></Shop>
     </div>
   );
 }

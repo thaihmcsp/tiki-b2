@@ -73,7 +73,7 @@ function UserList(props) {
                     </div>
                     <div className={style.UserID}>
                         <h4 className={style.UserIDtext}>
-                          <span style = {{fontWeight: '400', color : 'black'}}>Trạng Thái : </span>
+                          <span style = {{fontWeight: '400', color : 'black',fontSize: '15px'}}>Trạng Thái : </span>
                           {value.status}
                         </h4>
 
