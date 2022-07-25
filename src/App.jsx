@@ -1,5 +1,6 @@
 import 'antd/dist/antd.css';
 import './App.css';
+import Admin from './page/admin/Admin';
 import ShopDashBoardAll from './page/shop/dashboard/ShopDashBoardAll';
 import Cart from './page/user/cart/Cart';
 import ProfileList from './page/user/profile/ProfileLeft/ProfileList';
@@ -21,9 +22,10 @@ function App() {
       </div>
       </div>
       </div> */}
-      <div>
+      {/* <div>
         <ShopDashBoardAll/>
-      </div>
+      </div> */}
+      <Admin/>
     </div>
   );
 }
