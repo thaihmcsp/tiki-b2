@@ -1,11 +1,18 @@
-.App {
-  text-align: center;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(245, 245, 250) !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App {
+  width: 1240px;
+  max-width: 100%;
+  margin: 0 auto;
 }
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -24,9 +31,6 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
 
 @keyframes App-logo-spin {
   from {
@@ -35,4 +39,15 @@
   to {
     transform: rotate(360deg);
   }
+}
+.userInformation {
+  display: flex;
+  background-color: rgb(245, 245, 250);
+}
+.profile{
+  display: flex;
+}
+
+body {
+  background-color: #f5f5fa;
 }

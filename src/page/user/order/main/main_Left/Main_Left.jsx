@@ -13,7 +13,6 @@ function Main_Left() {
                     <div className="eEHLZh">
                         <div className="shipping-method-list">
                             <div><label className="IYkXU">
-
                                 <input type="radio" readOnly="" name="shipping-method" value="1" />
                                 <span className="radio-fake"></span>
 

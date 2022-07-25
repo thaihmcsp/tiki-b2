@@ -6,118 +6,81 @@ import 'antd/dist/antd.css';
 import { Select } from 'antd';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import { Link, useNavigate } from 'react-router-dom'
+import { postAPI } from '../../../config/api'
 import "./style.css"
 
 function SignUp(props) {
-    function handleSubmit() {
-        const username = document.querySelector('#username').value
-        const password = document.querySelector('#password').value
-        const email = document.querySelector('#email').value
-        const password1 = document.querySelector('#password1').value
-        const warname = document.querySelector('#warname')
+    const nav = useNavigate()
+
+    function checkPhone() {
+        const warphone = document.querySelector('#warphone')
+        warphone.style.display = 'none'
+    }
+    function checkMail() {
         const warmail = document.querySelector('#warmail')
+        warmail.style.display = 'none'
+    }
+    function checkPass() {
         const warpass = document.querySelector('#warpass')
+        warpass.style.display = 'none'
+    }
+    function checkPass1() {
         const warpass1 = document.querySelector('#warpass1')
-        // if (username.trim() == '') {
-
-        //     warname.innerHTML = 'Vui lòng nhập username'
-        // }
-        // else {
-        //     warname.innerHTML = ''
-        // }
-        // if (email.trim() == '') {
-
-        //     warmail.innerHTML = 'Vui lòng nhập email'
-        // }
-        // if (password.trim() == '') {
-
-        //     warpass.innerHTML = 'Vui lòng nhập mật khẩu'
-        // }
-        // if (password1.trim() == '') {
-
-        //     warpass1.innerHTML = 'Vui lòng nhập lại mật khẩu'
-        // }
-
-        // if (password1 != password && password1 && password) {
-        //     warpass1.innerHTML = 'Vui lòng nhập mật khẩu chính xác'
-        // }
-        // else {
-        //     warpass1.innerHTML = ''
-        // }
-        if (username.trim() == '') {
-
-            warname.innerHTML = 'Vui lòng nhập username'
-        }
-        else {
-            warname.innerHTML = ''
-        }
-
-        var mailformat = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if (email.trim() == '') {
-            warmail.innerHTML = "Vui lòng nhập email";
-        }
-        else if (!mailformat.test(email)) {
-            warmail.innerHTML = "email không hợp lệ";
-        }
-        else {
-            warname.innerHTML = ''
-        }
-        if (password.trim() == '') {
-            warpass.innerHTML = "Vui lòng nhập mật khẩu"
-        } else if (password.length < 6) {
-            warpass.innerHTML = "Mật khẩu phải có ít nhất 6 ký tự"
-        } else if (password1.trim() == "" || password !== password1) {
-            document.querySelector(".singin_again_text").innerHTML = "Mật khẩu không khớp"
-        }
-
-        // function testPassword(pass) {
-        //     var arr = /^(?=.*[a-zA-Z0-9](?=.*\d)[A-Za-z0-9]{6,})$/;
-        //     if (arr.test(pass) || pass.length < 6) {
-        //         warpass.innerHTML =
-        //             "Mật khẩu phải có ít nhất 6 ký tự";
-        //     } else {
-        //         warpass.innerHTML = "";
-        //     }
-        // }
-
-        function testEmail(email) {
+        warpass1.style.display = 'none'
+    }
+    async function handleSubmit() {
+        try {
+            const phonenumber = document.querySelector('#phone').value
+            const password = document.querySelector('#password').value
+            const email = document.querySelector('#email').value
+            const password1 = document.querySelector('#password1').value
+            const username = email.slice(0, email.indexOf('@'));
+            const warphone = document.querySelector('#warphone')
+            const warmail = document.querySelector('#warmail')
+            const warpass = document.querySelector('#warpass')
+            const warpass1 = document.querySelector('#warpass1')
+            var phoneformat = /((09|03|07|08|05)+([0-9]{8})\b)/g;
             var mailformat = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-            if (email.trim() == '') {
+
+            if (phonenumber.trim() === '') {
+
+                warphone.innerHTML = 'Vui lòng nhập SĐT'
+            }
+            else if (!phoneformat.test(phonenumber)) {
+                warphone.style.display = 'block'
+                warphone.innerHTML = "sđt không hợp lệ";
+            }
+
+            else if (email.trim() === '') {
                 warmail.innerHTML = "Vui lòng nhập email";
-            } if (!mailformat.test(email)) {
-                warmail.innerHTML = "Email không hợp lệ";
+            }
+            else if (!mailformat.test(email)) {
+                warpass.style.display = 'block'
+                warmail.innerHTML = "email không hợp lệ";
+            }
+            else if (password.trim() === '') {
+                warpass.innerHTML = "Vui lòng nhập mật khẩu"
+            } else if (password.length < 6) {
+                warpass.style.display = 'block'
+
+                warpass.innerHTML = "Mật khẩu phải có ít nhất 6 ký tự"
+            } else if (password1.trim() === "" || password !== password1) {
+                warpass1.style.display = 'block'
+                warpass1.innerHTML = "Mật khẩu không khớp"
             } else {
-                warmail.innerHTML =
-                    "";
+             
+                var resp = await postAPI('/auth/register', { email, password, phone: phonenumber, username })
+                console.log(73, resp)
+                nav('/sign-in')
             }
         }
-        // if (email && email != /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/) {
-        //     warmail.innerHTML = 'email không đúng định dạng'
+        catch ( error) {
+            console.log(78,error)
+        }
 
-        // }
-        // else {
-        //     warmail.innerHTML = ''
-        // }
-        // if (password && password.length < 6) {
-        //     warpass.innerHTML = 'Mật khẩu phải từ 6 kí tự trở nên'
-        // }
-        // else {
-        //     warpass.innerHTML = ''
-        // }
-
-
-        console.log(1, handleSubmit);
-        console.log(2, username, email, password, password1);
-        console.log(3, warname, warpass, warpass, warpass1)
     }
 
     const { Option } = Select;
-    // const { handleChange, handleSubmit, values, errors } = useForm(
-    //     submitForm,
-    //     validate
-    // );
-
-    // const navigate = useNavigate()
 
 
 
@@ -143,36 +106,27 @@ function SignUp(props) {
                 </div>
             </div>
 
-
             <div className='box'>
                 <div className='box_background'>
-
                 </div>
-
                 <div className="container">
                     <div className="title"><h1>Đăng ký</h1></div>
                     <div className="inputGroup">
                         <div>
-                            Nhập user Name
+                            Nhập SĐT
                         </div>
-
                         <Space direction="vertical">
-
-                            <Input
-                                id='username'
+                           <Input
+                                id='phone'
                                 className="form-control phoneNumber"
-                                placeholder="Nhập user Name"
-                                type='text'
-                                name='username'
+                                placeholder="Nhập SĐT"
+                                type='number'
+                                name='phonenumber'
 
-                            // value={values.username}
-                            // onChange={handleChange}
-
+                                onChange={checkPhone}
                             />
-                            {/* {errors.username && <p>{errors.username}</p>} */}
-                            <span className="warning" id='warname'></span>
+                            <span className="warning" id='warphone'></span>
                         </Space>
-
                         <div>
                             Nhập Email
                         </div>
@@ -185,64 +139,56 @@ function SignUp(props) {
                                 id='email'
                                 type='email'
                                 name='email'
-                            // value={values.email}
-                            // onChange={handleChange}
+                                // value={values.email}
+                                onChange={checkMail}
 
                             />
                             <span className="warning" id='warmail'></span>
-                            {/* {errors.email && <p>{errors.email}</p>} */}
                         </Space>
 
+                        <div className='grid-container'>
+                            <div>
+                                <p>Nhập mật khẩu</p>
+                                <Space direction="vertical">
 
-                        <div>
-                            Nhập mật khẩu
-                        </div>
+                                    <Input.Password
+                                        id="password"
+                                        className="form-control "
+                                        placeholder="Nhập mật khẩu"
+                                        type='password'
+                                        name='password'
+                                        onChange={checkPass}
+                                        iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                                    />
+                                    <span className="warning" id='warpass'></span>                         
+                                </Space>
+                            </div>
+                            <div>
+                                <p>Nhập mật lại khẩu</p>
+                                <Space direction="vertical">
+                                    <Input.Password
+                                        id="password1"
+                                        className="form-control"
+                                        placeholder="Nhập lại mật khẩu"
+                                        type='password'
+                                        name='password2'
+                                        onChange={checkPass1}
+                                        iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                                    />
+                                    <span className="warning" id='warpass1'></span>                            
+                                </Space>
+                            </div>
 
-                        <Space direction="vertical">
-
-                            <Input.Password
-                                id="password"
-                                className="form-control "
-                                placeholder="Nhập mật khẩu"
-                                type='password'
-                                name='password'
-
-                                // value={values.password}
-                                // onChange={handleChange}
-                                iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                            />
-                            <span className="warning" id='warpass'></span>
-                            {/* {errors.password && <p>{errors.password}</p>} */}
-                        </Space>
-                        <div>
-                            Nhập mật lại khẩu
                         </div>
 
                     </div>
                     <div>
-                        <Space direction="vertical">
-
-                            <Input.Password
-                                id="password1"
-                                className="form-control"
-                                placeholder="Nhập lại mật khẩu"
-                                type='password'
-                                name='password2'
-
-                                // value={values.password2}
-                                // onChange={handleChange}
-                                iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                            />
-                            <span className="warning" id='warpass1'></span>
-                            {/* {errors.password2 && <p>{errors.password2}</p>} */}
-                        </Space>
                         <div className="textGroup">
                             <p> <a href="">Bạn quên mật khẩu</a></p>
 
                             <p> <div>Bạn đã có tài khoản?</div>
 
-                                <i><a href="">Đăng nhập</a></i>
-
+                                <Link to='/sign-in'><i><a href="">Đăng nhập</a></i></Link>
                             </p>
                         </div>
                     </div>
@@ -252,8 +198,6 @@ function SignUp(props) {
 
                     </div>
                     <div className="line"></div>
-
-
                     <div className="buttonGroup1">
                         <button href="#" className="field facebook">
                             <FacebookOutlinedIcon className=' facebook iconface' />
@@ -263,7 +207,6 @@ function SignUp(props) {
 
                     <div className="buttonGroup1">
                         <button href="#" className="field google">
-
                             <img src="https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1" alt="" className="google-img" />
                             <span>Đăng nhập với Google</span>
                         </button>

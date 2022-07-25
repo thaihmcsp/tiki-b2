@@ -6,11 +6,80 @@ import 'antd/dist/antd.css';
 import { Select } from 'antd';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import { Link, useNavigate } from 'react-router-dom'
+import {postAPI} from '../../../config/api'
 
 import "./StyleIn.css"
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
 
 function SignIn() {
     const { Option } = Select;
+    const nav = useNavigate()
+    
+    
+    function checkMail() {
+        const warmail = document.querySelector('#warmail')
+        warmail.style.display = 'none'
+    }
+    function checkPass() {
+        const warpass = document.querySelector('#warpass')
+        warpass.style.display = 'none'
+    }
+    
+    async function handleSignIn() {
+        try {
+           
+            const password = document.querySelector('#password').value
+            const email = document.querySelector('#email').value
+          
+            
+            const warmail = document.querySelector('#warmail')
+            const warpass = document.querySelector('#warpass')
+            
+            var mailformat = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+            if (email.trim() === '') {
+                warmail.innerHTML = "Vui lòng nhập email";
+            }
+            else if (!mailformat.test(email)) {
+                warpass.style.display = 'block'
+                warmail.innerHTML = "email không hợp lệ";
+            }
+            else if (password.trim() === '') {
+                warpass.innerHTML = "Vui lòng nhập mật khẩu"
+            } else if (password.length < 6) {
+                warpass.style.display = 'block'
+
+                warpass.innerHTML = "Mật khẩu phải có ít nhất 6 ký tự"
+            } 
+             else {
+               
+
+                var resp = await postAPI('/auth/login', { email, password})
+
+                if (resp.data.status === 'undefined password') {
+                    alert(resp.data.status);
+                } else {
+                    // console.log(25, resp.data.token)
+                    setCookie('tiki-user', resp.data.token, 57);
+                   
+                    nav('/');
+                }
+                
+             
+                // nav('/')
+            }
+        }
+        catch (error) {
+            console.log(error)
+        }
+
+    }
+    
     return (
 
         <div className='box_container'>
@@ -21,7 +90,7 @@ function SignIn() {
                     </div>
                 </div>
 
-                <div class="menu-right">
+                <div className="menu-right">
                     <a href="#team">
                         <Select defaultValue="Tiếng Việt" style={{ width: 120 }} >
                             <Option value="jack">Tiếng Việt</Option>
@@ -37,28 +106,44 @@ function SignIn() {
                 <div className="container">
                     <div className="title"><h1>Đăng nhập</h1></div>
                     <div className="inputGroup">
-                        <div>
+                    <div>
                             Nhập Email
                         </div>
+
                         <Space direction="vertical">
 
                             <Input
-                                className="form-control"
+                                className="form-control email"
                                 placeholder="Nhập email"
-
+                                id='email'
+                                type='email'
+                                name='email'
+                               
+                                onChange={checkMail}
+                           
                             />
+                            <span className="warning" id='warmail'></span>
+                            
                         </Space>
 
                         <div>
                             Nhập mật khẩu
                         </div>
+
                         <Space direction="vertical">
 
                             <Input.Password
-                                className="form-control"
+                                id="password"
+                                className="form-control "
                                 placeholder="Nhập mật khẩu"
+                                type='password'
+                                name='password'
+                                onChange={checkPass}
+
                                 iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                             />
+                            <span className="warning" id='warpass'></span>
+                          
                         </Space>
                     </div>
                     <div>
@@ -70,13 +155,13 @@ function SignIn() {
                             <p>
                                 <div>Bạn chưa có tài khoản?</div>
 
-                                <Link to='/signin'><i><a href="">Đăng kí</a></i></Link>
+                                <Link to='/sign-up'><i><a href="">Đăng kí</a></i></Link>
 
                             </p>
                         </div>
                     </div>
                     <div className="buttonGroup">
-                        <button className="login">Đăng nhập</button>
+                        <button className="login" onClick={handleSignIn}>Đăng nhập</button>
 
                     </div>
                     <div className="line"></div>
