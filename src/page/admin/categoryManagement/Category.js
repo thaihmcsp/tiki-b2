@@ -4,8 +4,11 @@ import styles from './category.module.css'
 import { Pagination } from 'antd';
 import './Category.css'
 import { Button, Modal } from 'antd';
+import { useOutletContext } from "react-router-dom";
 import 'antd/dist/antd.css';
-function Category({data}) {
+function Category() {
+  const data = useOutletContext()
+  console.log(data)
   const [pagination,setPagination] = useState([])
   const [listData, setListData] = useState(ListCategory)
   const [pageSize, setPageSize] = useState(6)
@@ -21,6 +24,7 @@ function Category({data}) {
       const newData =  ListCategory.filter(function(item) {
         return item.name.toLowerCase().includes(data)
       })
+      console.log(21, newData)
       return newData
     })  
   },[data])
@@ -54,9 +58,7 @@ function Category({data}) {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  
   return (
-    
     <div>
       <div className={styles.category}> 
       <>

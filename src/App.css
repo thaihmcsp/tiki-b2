@@ -1,6 +1,10 @@
-.App {
-  margin: 0 auto;
-  
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(245, 245, 250) !important;
 }
 
 .App {

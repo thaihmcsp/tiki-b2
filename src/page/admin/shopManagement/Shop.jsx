@@ -161,7 +161,8 @@ function Shop() {
     setcurrent(page)
   }
   return (
-    <div className={style.ShopManage}>
+   <div className={style.Shop}>
+       <div className={style.ShopManage}>
         <div className={style.ShopManageHeader}>
             <div className={style.HeaderLeft}>
                   <h3 onClick={ListShop}>LIST SHOP</h3>
@@ -179,6 +180,7 @@ function Shop() {
       <Pagination  itemRender={itemRender} defaultCurrent={1} current = {current} total={newListdata.length} onChange = {onChangePagination} defaultPageSize = {5} />
       </div>
     </div>
+   </div>
   )
 }
 
