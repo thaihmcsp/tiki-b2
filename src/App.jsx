@@ -11,9 +11,10 @@ import Profile from './page/user/profile/ProfileManu/ProfileMenu';
 import ProfileList from './page/user/profile/ProfileLeft/ProfileList';
 import ProfileListHeader from './page/user/profile/ProfileLeft/ProfileListHeader';
 import UserInfo from './page/user/profile/UserInfo_data/UserInfo';
+import Shop from '.././src/page/admin/shopManagement/Shop'
 import './App.css';
 import UserInfoMenu from './page/user/profile/UserInfoMenu';
-
+import Admin from './page/admin/dashboard/DashBoard'
 function App() {
   return (
     <BrowserRouter>
@@ -21,6 +22,10 @@ function App() {
             <Route path='/sign-up' element={<SignUp/>} />
             <Route path='/sign-in' element={<SignIn/>} />
             <Route path='/create-shop' element={<CreateShop/>}/>
+            {/* <Route path='/admin' element={<Admin/>} > */}
+                {/* <Route path='/admin/category' element={<CatogoryList/>} />*/}
+                {/* <Route path='/admin/shop' element={<Shop/>}></Route>
+            </Route> */}
             <Route path='/' element={<Header/>}> 
                 <Route path='/' element={<Home/>} />
                 <Route path='/filter' element={<Filter/>}/>
