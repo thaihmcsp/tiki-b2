@@ -14,7 +14,9 @@ import UserInfo from './page/user/profile/UserInfo_data/UserInfo';
 import Shop from '.././src/page/admin/shopManagement/Shop'
 import './App.css';
 import UserInfoMenu from './page/user/profile/UserInfoMenu';
-import Admin from './page/admin/dashboard/DashBoard'
+import Category from './page/admin/categoryManagement/Category';
+import Admin from './page/admin/Admin';
+
 function App() {
   return (
     <BrowserRouter>
@@ -22,10 +24,10 @@ function App() {
             <Route path='/sign-up' element={<SignUp/>} />
             <Route path='/sign-in' element={<SignIn/>} />
             <Route path='/create-shop' element={<CreateShop/>}/>
-            {/* <Route path='/admin' element={<Admin/>} > */}
-                {/* <Route path='/admin/category' element={<CatogoryList/>} />*/}
-                {/* <Route path='/admin/shop' element={<Shop/>}></Route>
-            </Route> */}
+            <Route path='/admin' element={<Admin/>} >
+                <Route path='category' element={<Category/>} />
+                <Route path='shop' element={<Shop/>}></Route>
+            </Route>
             <Route path='/' element={<Header/>}> 
                 <Route path='/' element={<Home/>} />
                 <Route path='/filter' element={<Filter/>}/>
