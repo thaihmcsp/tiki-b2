@@ -23,62 +23,62 @@ function Shop() {
   const [ShopListdata,setShopListdata] = useState([
     {
       name : 'shop hoa qua1 ',
-      timestart: '2022/5/25',
+      timestart: '2022/7/25',
       shopid : '123sscc',
       status : 'pending',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg'
     },
     {
-      name : 'shop hoa qua2',
+      name : 'shop mực',
       timestart: '2022/5/20',
       shopid : '1sd',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'block',
     },
     {
-      name : 'shop hoa qua3',
+      name : 'shop cá',
       timestart: '2022/5/28',
       shopid : 'ddr34',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'block',
     },
     {
-      name : 'shop hoa qua4',
+      name : 'shop cua',
       timestart: '2022/6/25',
       shopid : '556sd',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'pending',
     },
     {
-      name : 'shop hoa qua5',
+      name : 'shop hoa',
       timestart: '2022/5/25',
       shopid : '1ht7d',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'active',
     },
     {
-      name : 'shop hoa qua5',
+      name : 'shop máy in',
       timestart: '2022/5/25',
       shopid : '1ht7d',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'active',
     },
     {
-      name : 'shop hoa qua5',
+      name : 'shop máy tính',
       timestart: '2022/5/25',
       shopid : '1ht7d',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'active',
     },
     {
-      name : 'shop hoa qua5',
+      name : 'shop điện thoại',
       timestart: '2022/5/25',
       shopid : '1ht7d',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
       status : 'active',
     },
     {
-      name : 'shop hoa qua5',
+      name : 'shop tôm',
       timestart: '2022/5/25',
       shopid : '1ht7d',
       avatar : 'https://salt.tikicdn.com/cache/200x200/ts/product/de/ca/61/7690cda47aded2e53106f5239b32a287.jpg',
@@ -108,15 +108,22 @@ function Shop() {
   ])
   const [Shopstatus, setShopstatus] = useState('')
   const [newListdata,setnewListdata] = useState([...ShopListdata])
+  const [start,setstart] = useState(0)
+  const [current,setcurrent] = useState(1)
+  
   const ListShopActive = ()=> {
     setShopstatus('active')
     SetActiveButton('Đang Hoạt Động')
+    setstart(0)
+    setcurrent(1)
     setnewListdata(ShopListdata.filter((value)=> {
       return  value.status === 'active' 
   })  )
   }
   const ListShopPending = ()=> {
     setShopstatus('pending')
+    setstart(0)
+    setcurrent(1)
     SetActiveButton('Chờ Kích Hoạt')
     setnewListdata(ShopListdata.filter((value)=> {
       return  value.status === 'pending' 
@@ -124,6 +131,8 @@ function Shop() {
   }
   const ListShopBlock = ()=> {
     setShopstatus('block')
+    setstart(0)
+    setcurrent(1)
     SetActiveButton('Đã Khóa')
     setnewListdata(ShopListdata.filter((value)=> {
       return  value.status === 'block' 
@@ -131,10 +140,26 @@ function Shop() {
   }
   const ListShop = ()=> {
     setShopstatus('')
+    setstart(0)
+    setcurrent(1)
     SetActiveButton('ok')
     setnewListdata(ShopListdata)
   }
+  const itemRender = (_, type, originalElement) => {
+    if (type === 'prev') {
+      return <a>Previous</a>;
+    }
   
+    if (type === 'next') {
+      return <a>Next</a>;
+    }
+  
+    return originalElement;
+  };
+  function onChangePagination(page,pageSize){ 
+    setstart(pageSize*(page-1));
+    setcurrent(page)
+  }
   return (
     <div className={style.ShopManage}>
         <div className={style.ShopManageHeader}>
@@ -148,10 +173,10 @@ function Shop() {
             </div>
         </div>
         <div className={style.shoplist}>
-           <ShopList newListdata = {newListdata} Shopstatus = {Shopstatus} ShopListdata = {ShopListdata} setnewListdata = {setnewListdata} setShopstatus = {setShopstatus}></ShopList>
+           <ShopList newListdata = {newListdata} Shopstatus = {Shopstatus} ShopListdata = {ShopListdata} setnewListdata = {setnewListdata} setShopstatus = {setShopstatus} start = {start}> </ShopList>
         </div>
       <div className = {style.Pagination}>
-          <Pagination defaultCurrent={1} total={ShopListdata.length} />
+      <Pagination  itemRender={itemRender} defaultCurrent={1} current = {current} total={newListdata.length} onChange = {onChangePagination} defaultPageSize = {5} />
       </div>
     </div>
   )

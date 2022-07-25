@@ -1,0 +1,77 @@
+.Userlist {
+    width: 610px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+.User_ProfileLeft {
+    display: flex;
+}
+.ListUserProfile {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
+    box-shadow: rgb(0 0 0 / 10%) 0px 0px 20px;
+    border-bottom: 1px solid #ccc ;
+    border-radius: 4px;
+    
+}
+.User_ProfileLeft img {
+    width: 70px;
+}
+.User_ProfileLeft h4 {
+    color: rgb(89, 91, 211);
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.ShowUserdata {
+    width: 100%;
+    margin-bottom: 60px;
+
+}
+.SetUserOptions {
+    display: flex;
+    background-color: #f7e9e9e0;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+    box-shadow: rgb(0 0 0 / 10%) 0px 0px 20px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 4px;
+}
+.UserIDtext {
+    color: red;
+} 
+.Options button {
+    border: none;
+    padding: 7px;
+    font-weight: 600;
+    background-color: white;
+    color: black;
+    margin-right: 9px;
+}
+.Options button:hover {
+    cursor: pointer;
+}
+.Time_UserStart span {
+    font-weight: bold;
+    margin-right: 5px;
+}
+@media screen and (max-width: 768px){
+    .User_ProfileLeft img {
+        width: 40px;
+    }
+    .User_ProfileLeft h4 {
+        font-size: 15px;
+    }
+    .UserIDtext span{
+        font-size: 14px;
+    }
+    .Time_UserStart span{ 
+        font-size: 16px;
+    }
+}

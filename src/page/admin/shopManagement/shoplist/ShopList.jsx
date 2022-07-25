@@ -51,6 +51,7 @@ function Block (props) {
 }
 function ShopList(props) {
     const [data, setData] = useState([])
+    const [dataPagination,setdataPagination] = useState([])
      useEffect(()=> {   
         let newdata = props.newListdata.sort((after, before)=> {
                     if(after.status.length < before.status.length) {
@@ -59,20 +60,23 @@ function ShopList(props) {
                     if( after.status.length > before.status.length ) {
                         return -1
                     } else {
-                        if( after.timestart > before.timestart ){
+                        if( new Date(after.status) > new Date(before.status)){
                             return -1
                         }
                     }
                 })
             if(props.Shopstatus.length === 0) {
-                setData(props.newListdata)   
+                setData(props.newListdata)  
+                setdataPagination(props.newListdata.slice(props.start,props.start+5)) 
             } else {
                 setData(newdata.filter((value) => value.status === props.Shopstatus))
+                setdataPagination(newdata.filter((value) => value.status === props.Shopstatus).slice(props.start,props.start+5)) 
             }
-     },[props.newListdata])
+     },[props.newListdata,props.start])
+    
   return (
     <div className={style.shoplist}> 
-        {data.map((value, index)=>{
+        {dataPagination.map((value, index)=>{
             return <div className= {style.ShowShopdata}>
                 <div className={style.ListShopProfile}>
                     <div className={style.Shop_ProfileLeft}>
