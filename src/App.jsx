@@ -19,6 +19,7 @@ import UserInfoMenu from './page/user/profile/UserInfoMenu';
 import Category from './page/admin/categoryManagement/Category';
 import User from './page/admin/userManagement/User';
 import Order from './page/user/order/Order';
+import Detail from './page/user/detail/Detail';
 
 function App() {
   return (
@@ -28,12 +29,15 @@ function App() {
             <Route path='/sign-in' element={<SignIn/>} />
             <Route path='/create-shop' element={<CreateShop/>}/>
             <Route path='/admin' element={<Admin/>} >
+
+                
                 <Route path='category' element={<Category/>} />
                 <Route path='shop' element={<Shop/>}></Route>
                 <Route path='user' element={<User/>}></Route>
 
             </Route>
             <Route path='/' element={<Header/>}> 
+            <Route path='product' element={<Detail/>} />
                 <Route path='/' element={<Home/>} />
                 <Route path='/filter' element={<Filter/>}/>
                 <Route path='/shop/dashboard' element={<ShopDashBoardAll/>} />

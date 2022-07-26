@@ -1,0 +1,12 @@
+.product-content {
+  display: flex;
+  margin-top: 24px;
+  padding: 0 16px;
+}
+.Detai {
+  width: 1450px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
