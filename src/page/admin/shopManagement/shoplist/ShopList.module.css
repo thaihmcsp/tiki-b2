@@ -33,17 +33,16 @@
 .ShowShopdata {
     width: 100%;
     margin-bottom: 30px;
+    border: 1px solid rgb(0, 81, 255);
+    border-radius: 4px 4px 0 0;
 
 }
 .SetShopOptions {
     display: flex;
-    background-color: #e6e3eee0;
+    background-color: rgb(46, 144, 255);
     justify-content: space-between;
     align-items: center;
     padding: 5px 10px;
-    box-shadow: rgb(0 0 0 / 10%) 0px 0px 2px;
-    border-bottom: 1px solid #ccc;
-    border-radius: 0 4px 4px 0;
 }
 .ShopIDtext {
     color: red;
@@ -51,12 +50,14 @@
     margin: 5px 5px 0 0;
 } 
 .Options button {
-    border: none;
-    padding: 3px;
-    font-weight: 450;
-    background-color: white;
-    color: black;
-    margin-right: 9px;
+    background: rgb(255, 255, 255);
+    margin-right: 4px;
+    color: rgb(0, 0, 0);
+    padding: 2px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    border: 0;
+    box-shadow: inset 1px 1px 2px rgb(0 0 0 / 90%);
 }
 .Options button:hover {
     cursor: pointer;
@@ -64,6 +65,10 @@
 .Time_ShopStart span {
     font-weight: bold;
     margin-right: 5px;
+    
+}
+.Time_ShopStart {
+    color: #fff ;
 }
 @media screen and (max-width: 768px){
     .Shop_ProfileLeft img {

@@ -4,8 +4,6 @@
 .OderTitle {
     margin-top: 15px;
     background-color: rgb(255, 255,255);
-   
-  
 }
 .Oder_HeaderTitle {
     font-size: 18px;
@@ -13,7 +11,8 @@
     display: flex;
     align-items: center;
    padding: 10px 10px 10px 20px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid rgb(238, 233, 233);
+    margin-bottom: 0;
 }
 .MidleTitle {
     position: relative;
@@ -27,9 +26,9 @@
 }
 
 .ImageTitle {
-    width: 100px;
+    width: 60px;
     border:  1px solid #b0a9ab;
-    height: 100px;
+    height: 60px;
     margin-right: 10px;
     border-radius: 4px  ;
     margin-top: auto;
@@ -39,7 +38,7 @@
     display: flex;
     position: absolute;
     color: red;
-    top: 15px;
+    top: 5px;
     right: 15px;
     align-items: flex-end;
     flex-direction: column;
@@ -47,6 +46,7 @@
 }
 .ImageTitleText p {
     margin-top: 6px;
+    margin-bottom: 6px;
     flex: right;
 }
 .ImageNumber {
@@ -54,10 +54,16 @@
     justify-content: flex-end;
 }
 .EmptyOder {
-    background-color: wi;
+    background-color: rgb(255, 255,255);
+    text-align: center;
+    height: 0;
+}
+.EmptyOder img {
+    width: 200px;
+    margin: 30px 0;
 }
 .BottomTitle {
-   padding: 10px 15px 10px 0;
+   padding: 5px 15px 5px 0;
 }  
 
 .BottomTitle_Button:hover{
@@ -66,7 +72,7 @@
 
 
 .BottomTitle_Button {
-    padding: 7px;
+    padding: 3px;
     background-color: white;
     border: 1.5px solid rgb(139, 192, 223);
     margin-left: 10px;

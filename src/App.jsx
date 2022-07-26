@@ -18,6 +18,7 @@ import './App.css';
 import UserInfoMenu from './page/user/profile/UserInfoMenu';
 import Category from './page/admin/categoryManagement/Category';
 import User from './page/admin/userManagement/User';
+import Order from './page/user/order/Order';
 
 function App() {
   return (
@@ -38,11 +39,13 @@ function App() {
                 <Route path='/shop/dashboard' element={<ShopDashBoardAll/>} />
                 <Route path='/shop/product/manage' element={<Product />} />
                 <Route path='/user' element={<UserInfoMenu/>}> 
-                    <Route path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> } />
+                    <Route path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> }/>
+                    <Route path='/user/order' element={ <div className='order'><Order/></div> } />
                 </Route>
             </Route>
             <Route path='*' element={<h1>error 404. not found</h1>}/>
         </Routes>
+       
     </BrowserRouter>
   );
 }

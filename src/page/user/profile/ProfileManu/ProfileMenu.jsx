@@ -29,7 +29,7 @@ function Profile() {
   };
   return (
     <div >
-      <div className="manuListSmartPhone">
+      <div className={styles.manuListSmartPhone}>
       <Space>
         <Radio.Group value={placement} onChange={onChange}></Radio.Group>
         <MenuIcon type='primary' onClick={showDrawer}></MenuIcon>
