@@ -16,6 +16,7 @@ import UserInfo from "./page/user/profile/UserInfo_data/UserInfo";
 import "./App.css";
 import UserInfoMenu from "./page/user/profile/UserInfoMenu";
 import Category from "./page/admin/categoryManagement/Category";
+import Detail from "./page/user/detail/Detail";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/create-shop" element={<CreateShop />} />
         <Route path="/" element={<Header />}>
+          <Route path="/product" element={<Detail />} />
           <Route path="/" element={<Home />} />
           <Route path="/filter" element={<Filter />} />
           <Route path="/shop/dashboard" element={<ShopDashBoardAll />} />
@@ -43,7 +45,7 @@ function App() {
         </Route>
 
         <Route path="/admin" element={<Admin />}>
-          <Route path="/  " element={<Category />} />
+          <Route path="/admin/category" element={<Category />} />
         </Route>
         <Route path="*" element={<h1>error 404. not found</h1>} />
       </Routes>

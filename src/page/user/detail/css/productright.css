@@ -51,13 +51,14 @@ a {
     rgb(242 242 242) -1px -1px 0px 0px inset;
 }
 
-.title {
+.header .title {
   margin: 0px 0px 4px;
   color: rgb(36, 36, 36);
   font-size: 24px;
   font-weight: 300;
   line-height: 32px;
   word-break: break-word;
+  text-align: start;
 }
 .price-and-icon {
   display: flex;
@@ -387,4 +388,16 @@ a {
   width: 40px;
   padding: 3px;
   border: 1px solid rgb(236, 236, 236);
+}
+.selectproduct,
+.selected-indicator,
+.addtocard,
+.delivery {
+  padding: 15px 0 15px 15px;
+}
+
+.info-shop,
+.insurance,
+.refund {
+  background-color: white;
 }
