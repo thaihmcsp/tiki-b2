@@ -19,7 +19,7 @@ import "./css/productbottom.css";
 import ProductRight from "./js/ProductRight";
 import Productbottom from "./js/Productbottom";
 import { Image } from "antd";
-
+import Header from "../../../components/Header";
 function Detail() {
   const [isDisabled, setIsDisable] = useState(true);
   const [colorDetail, setcolorDetail] = useState({
@@ -64,6 +64,15 @@ function Detail() {
     }
   }
 
+  function buyProduct() {
+    let soluong =
+      document.getElementsByClassName("HeaderCartTitle")[0].innerHTML * 1;
+    soluong += 1;
+    document.getElementsByClassName(
+      "HeaderCartTitle"
+    )[0].innerHTML = `${soluong}`;
+  }
+
   return (
     <div className="Detai">
       <div className="product-content">
@@ -93,6 +102,7 @@ function Detail() {
           selectSize={selectSize}
           AmoutnUp={AmoutnUp}
           AmoutnDown={AmoutnDown}
+          buyProduct={buyProduct}
           isDisabled={isDisabled}
         />
       </div>

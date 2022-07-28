@@ -173,7 +173,7 @@ function ProductRight(props) {
                 </button>
               </div>
               <div className="group-button">
-                <button>Chọn mua</button>
+                <button onClick={() => props.buyProduct()}>Chọn mua</button>
               </div>
             </div>
           </div>
