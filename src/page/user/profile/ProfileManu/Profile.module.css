@@ -52,7 +52,9 @@
 .manuListSmartPhone{
   display: none;
 }
-
+.ProfileManuLeft{
+  display: inline-block;
+}
 @media screen and (max-width: 768px) {
 
   .manuUserContainer {

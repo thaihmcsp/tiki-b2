@@ -43,6 +43,7 @@ body {
 .userInformation {
   display: flex;
   background-color: rgb(245, 245, 250);
+  width: 100%;
 }
 .profile{
   display: flex;
@@ -50,4 +51,14 @@ body {
 
 body {
   background-color: #f5f5fa;
+}
+
+@media screen and (max-width: 768px){
+  .profile{
+    display: flex ;
+    flex-direction: column;
+  }
+  .userInformation {
+    flex-direction: column;
+  }
 }

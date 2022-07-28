@@ -41,7 +41,7 @@ body {
   display: none !important;
 }
 
-.ant-modal-root{
+.filter .ant-modal-root{
   display: none;
 }
 

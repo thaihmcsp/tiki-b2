@@ -45,7 +45,7 @@
   width: 12px;
 }
 .acountForm {
-  min-height: 500px;
+  min-height: 600px;
   padding: 16px 24px 16px 16px;
   background-color: rgb(255, 255, 255);
   font-size: 14px;
@@ -127,3 +127,79 @@
   margin: 30px 0;
   margin-left: 125px;
 }
+
+@media screen and (max-width: 768px){
+  .userInfomation{
+    width: 100%;
+  }
+  .profile {
+    display: flex;
+    flex-direction: column;
+  }
+  .formP {
+    margin-right: 0 ;
+    width: unset;
+  }
+  .formInput {
+    width: unset;
+  }
+  .formDatetimeInput {
+    width: 80px;
+  }
+  .formDate p{
+    width: 68px;
+  }
+  .formAvatar {
+    width: 80px;
+    height: 80px;
+  }
+  #formCountriesInput {
+    width: 75%;
+    padding:unset;
+  }
+  .formCountries p{
+    padding-right: 0;
+    width: 30%;
+  }
+  .formDatetimeInput {
+    margin-right: 9px;
+  }
+  .acountForm {
+    padding: 16px;
+  }
+  .formAvatar{
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 8px;}
+    .avatarView img {
+      width: unset;
+      position: relative;
+      right: -2px;
+      height: 30px;
+    }
+    .formInfor {
+      display: grid;
+      grid-template-columns: 30% 70%;
+      align-items: center;
+    }
+    .edit {
+      position: absolute;
+      bottom: 0;
+      right: 5px;
+      background-color: #a6a0a0;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  .formControl {
+    display: grid;
+    grid-template-columns: 35% 65%;
+  }
+}
+
