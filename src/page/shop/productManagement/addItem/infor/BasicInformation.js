@@ -426,7 +426,7 @@ const BasicInformation = () => {
                     <span class="label-inner label-required-mark required" data-text-optional="( Optional )">
                       <span class="dada-required"></span>Danh mục ngành hàng
                     </span>
-                  </span>
+                  </span> 
                 </label>
               </div>
               <div className="next-form-item-control">
