@@ -115,7 +115,7 @@ const Variant = (props) => {
         </IconButton>
       </Tooltip>
       <StateBlock id="variant">
-        <span className="state-block-text">Biến thể </span>
+        <span className="state-block-text">Biến thể</span>
 
         <div className="state-block-body">
           <span className="state-block-next-text">Tên biến thể </span>
