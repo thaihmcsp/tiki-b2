@@ -22,6 +22,9 @@ function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,
             setOption(option2)
             setOption2([])
         }
+        if(index==1){
+            setOption([])
+        }
         setAddVarient(()=>{
             const newVarient = [...addVarient]
             newVarient.splice(index,1)
@@ -32,7 +35,7 @@ function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,
 
     const handleChangeAddOption = (e)=>{
         if(e.target.value != '' && e.key == 'Enter'){
-            console.log(e.target.value)
+            // console.log(e.target.value)
             const value = e.target.value
             setOption(()=>{
                 const newData = [...option,value]

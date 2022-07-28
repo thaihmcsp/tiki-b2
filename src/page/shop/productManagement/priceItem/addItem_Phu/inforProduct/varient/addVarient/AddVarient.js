@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './addVarient.module.css'
 import SubVarient from './varient/Varient'
 function AddVarient() {
@@ -8,17 +8,31 @@ function AddVarient() {
     const [key1,setKey1] = useState('Nhóm Màu')
     const [key2,setKey2] = useState('Biến Thể')
     const [addVarient,setAddVarient] = useState([])
-
-//  const initialState = [
-//     {
-//         option:option1,
-//         key:key1
-//     },
-//     {
-//         option:option2,
-//         key:key2
-//     },
-//  ]
+    
+    const initialState = [
+        {
+            option:option1,
+            key:key1
+        },
+        {
+            option:option2,
+            key:key2
+        },
+    ]
+    const [data,setData] = useState(initialState)
+    useEffect(function(){
+        setData([
+            {
+                option:option1,
+                key:key1
+            },
+            {
+                option:option2,
+                key:key2
+            }
+        ])
+    },[option1,option2,key1,key2])
+    console.log(23,data)
   const handleAddVarient =()=>{
     setAddVarient(()=>{
         const newVarient = [...addVarient,1]
