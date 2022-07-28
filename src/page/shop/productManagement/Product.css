@@ -1,0 +1,34 @@
+.ant-menu-dark.ant-menu-inline,.ant-menu-dark.ant-menu-vertical{
+    height: 95vh;
+}
+.db-Product{
+    display: flex;
+    background: rgba(218, 218, 218, 0.565);
+    position: relative;
+}
+.db-Product-right{
+    width: 100%;
+    padding: 12px 24px;
+}
+.db-Product-left{
+    position: fixed;
+    z-index: 1; 
+}
+.db-Product-left .ant-menu-item span{
+    color: black;
+}
+.db-Product-left .ant-menu.ant-menu-dark{
+    background-color: whitesmoke;
+}
+.db-Product-left .ant-btn-primary{
+    background-color:#1e5d87 ;
+}
+.db-Product-left .ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected{
+    background-color:#1e5d87 ;
+}
+.db-Product-left .ant-btn-primary:focus{
+    color: #fff;
+    border-color: #1e5d87;
+    background: #1e5d87;
+}
+
