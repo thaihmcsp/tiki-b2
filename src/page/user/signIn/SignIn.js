@@ -6,9 +6,13 @@ import 'antd/dist/antd.css';
 import { Select } from 'antd';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import { Link, useNavigate } from 'react-router-dom'
-import {postAPI} from '../../../config/api'
+import {postAPI,getAPI} from '../../../config/api'
+import { useDispatch, useSelector } from 'react-redux';
+
+import { userLogin } from '../../../redux/userSlice';
 
 import "./StyleIn.css"
+
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -16,9 +20,10 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
 
-function SignIn() {
+function SignIn({setUsers}) {
     const { Option } = Select;
     const nav = useNavigate()
+    const dispatch = useDispatch();
     
     
     function checkMail() {
@@ -39,6 +44,7 @@ function SignIn() {
             
             const warmail = document.querySelector('#warmail')
             const warpass = document.querySelector('#warpass')
+            // const check = setUsers(email,password)
             
             var mailformat = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
@@ -60,22 +66,28 @@ function SignIn() {
                
 
                 var resp = await postAPI('/auth/login', { email, password})
-
-                if (resp.data.status === 'undefined password') {
-                    alert(resp.data.status);
-                } else {
-                    // console.log(25, resp.data.token)
-                    setCookie('tiki-user', resp.data.token, 57);
-                   
-                    nav('/');
-                }
                 
-             
-                // nav('/')
+                setCookie('tiki-user', resp.data.token, 57);
+                
+                console.log(20,resp)
+                
+                const res = await getAPI('/auth/me');
+                console.log(res.data)
+                window.localStorage.setItem('tiki-user',JSON.stringify(res.data))
+                const action = userLogin(res.data);
+                    dispatch(action);
+                      
+                  nav('/')
+                 
+                }
+
+           
+               
             }
-        }
+        
         catch (error) {
-            console.log(error)
+            console.log('loi',error)
+            alert(error.response.data.message)
         }
 
     }
@@ -83,8 +95,8 @@ function SignIn() {
     return (
 
         <div className='box_container'>
-            <div class="menu">
-                <div class="menu-left">
+            <div className="menu">
+                <div className="menu-left">
                     <div>
                         <img src="https://salt.tikicdn.com/ts/upload/ae/f5/15/2228f38cf84d1b8451bb49e2c4537081.png" alt='tiki-logo' />
                     </div>

@@ -70,12 +70,14 @@ function SignUp(props) {
             } else {
              
                 var resp = await postAPI('/auth/register', { email, password, phone: phonenumber, username })
-                console.log(73, resp)
                 nav('/sign-in')
+                console.log(73, resp)
+                
             }
         }
         catch ( error) {
-            console.log(78,error)
+            console.log(78,error.response.data.message)
+            alert(error.response.data.message)
         }
 
     }

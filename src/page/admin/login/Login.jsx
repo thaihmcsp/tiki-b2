@@ -4,7 +4,11 @@ import { Input, Space } from 'antd';
 import 'antd/dist/antd.css';
 import { Select } from 'antd';
 import { Link, useNavigate } from 'react-router-dom'
-import {postAPI} from '../../../config/api'
+
+import {postAPI,getAPI} from '../../../config/api'
+import { useDispatch, useSelector } from 'react-redux';
+
+import { userLogin } from '../../../redux/userSlice';
 
 import "./styleLogin.css";
 function setCookie(cname, cvalue, exdays) {
@@ -17,6 +21,7 @@ function setCookie(cname, cvalue, exdays) {
 function Login() {
     const { Option } = Select;
     const nav = useNavigate()
+    const dispatch = useDispatch();
     
     function checkMail() {
         const warmail = document.querySelector('#warmail')
@@ -53,17 +58,24 @@ function Login() {
             } 
              else {
                 var resp = await postAPI('/auth/login/admin', { email, password})
+                setCookie('tiki-user', resp.data.token, 57);
 
-                if (resp.data.status === 'undefined password') {
-                    alert(resp.data.status);
-                } else {
-                    setCookie('tiki-user', resp.data.token, 57);         
-                    nav('/');
+                console.log(20,resp)
+                
+                const res = await getAPI('/auth/me');
+                window.localStorage.setItem('tiki-user',JSON.stringify(res.data))
+                const action = userLogin(res.data);
+                    dispatch(action);
+                      
+                  nav('/')
+                 
                 }
+
             }
-        }
+        
         catch (error) {
-            console.log(error)
+            console.log('loi',error)
+            alert(error.response.data.message)
         }
 
     }
