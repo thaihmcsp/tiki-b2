@@ -46,13 +46,5 @@
     line-height: 32px;
     font-weight: 300;
     margin: 4px 0px 12px;
-    padding-top: 50px;
-}
-@media screen and (max-width: 768px){
-  .ProfileList{
-    width: 100%;
-  }
-  .ProfileListHeader{
-    padding-top: 0;
-  }
+    margin-top: 60px;
 }

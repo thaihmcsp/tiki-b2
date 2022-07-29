@@ -13,9 +13,12 @@ import Profile from './page/user/profile/ProfileManu/ProfileMenu';
 import ProfileList from './page/user/profile/ProfileLeft/ProfileList';
 import ProfileListHeader from './page/user/profile/ProfileLeft/ProfileListHeader';
 import UserInfo from './page/user/profile/UserInfo_data/UserInfo';
+import Shop from '.././src/page/admin/shopManagement/Shop'
 import './App.css';
 import UserInfoMenu from './page/user/profile/UserInfoMenu';
 import Category from './page/admin/categoryManagement/Category';
+import User from './page/admin/userManagement/User';
+import Order from './page/user/order/Order';
 
 function App() {
   return (
@@ -24,21 +27,25 @@ function App() {
             <Route path='/sign-up' element={<SignUp/>} />
             <Route path='/sign-in' element={<SignIn/>} />
             <Route path='/create-shop' element={<CreateShop/>}/>
+            <Route path='/admin' element={<Admin/>} >
+                <Route path='category' element={<Category/>} />
+                <Route path='shop' element={<Shop/>}></Route>
+                <Route path='user' element={<User/>}></Route>
+
+            </Route>
             <Route path='/' element={<Header/>}> 
                 <Route path='/' element={<Home/>} />
                 <Route path='/filter' element={<Filter/>}/>
                 <Route path='/shop/dashboard' element={<ShopDashBoardAll/>} />
                 <Route path='/shop/product/manage' element={<Product />} />
                 <Route path='/user' element={<UserInfoMenu/>}> 
-                    <Route path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> } />
+                    <Route path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> }/>
+                    <Route path='/user/order' element={ <div className='order'><Order/></div> } />
                 </Route>
-            </Route>
-
-            <Route path='/admin' element={<Admin/>} >
-              <Route path='/admin/category' element={ <Category /> } />
             </Route>
             <Route path='*' element={<h1>error 404. not found</h1>}/>
         </Routes>
+       
     </BrowserRouter>
   );
 }

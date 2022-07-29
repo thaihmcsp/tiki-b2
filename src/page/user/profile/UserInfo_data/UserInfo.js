@@ -96,7 +96,7 @@ function UserInfo() {
           src={imageUrl}
           alt="avatar"
           style={{
-            width: '300px',
+            width: '100%',
           }}
         />
       ) : (
