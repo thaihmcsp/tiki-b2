@@ -1,27 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import style from './addVarient.module.css'
 import SubVarient from './varient/Varient'
-function AddVarient() {
+function AddVarient({setVarient}) {
     
     const [option1,setOption1] = useState([])
     const [option2,setOption2] = useState([])
     const [key1,setKey1] = useState('Nhóm Màu')
     const [key2,setKey2] = useState('Biến Thể')
     const [addVarient,setAddVarient] = useState([])
-    
-    const initialState = [
-        {
-            option:option1,
-            key:key1
-        },
-        {
-            option:option2,
-            key:key2
-        },
-    ]
-    const [data,setData] = useState(initialState)
     useEffect(function(){
-        setData([
+        setVarient([
             {
                 option:option1,
                 key:key1
@@ -32,7 +20,6 @@ function AddVarient() {
             }
         ])
     },[option1,option2,key1,key2])
-    console.log(23,data)
   const handleAddVarient =()=>{
     setAddVarient(()=>{
         const newVarient = [...addVarient,1]
@@ -61,6 +48,7 @@ function AddVarient() {
                 + Thêm sản phẩm ({addVarient.length}/2)
             </button>
         }
+
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useState, Component,useRef } from 'react'
+import React, { useState, Component,useRef,useEffect } from 'react'
 import { Select } from 'antd';
 import { Checkbox } from 'antd';
 import * as React1 from 'react';
@@ -15,6 +15,12 @@ const onChange = (e) => {
 
 function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,option2,setOption2,Key2}) {
 
+  const [newKey,setNewKey] = useState(Key)
+
+  useEffect(function(){
+    setNewKey(Key)
+  },[Key])
+
   const handleDeleteVarient =(index)=>{
     if(window.confirm('Bạn có thực sự muốn xoá Biến thể này?')){
         if(index==0){
@@ -23,6 +29,7 @@ function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,
             setOption2([])
         }
         if(index==1){
+            setKey('Biến thể')
             setOption([])
         }
         setAddVarient(()=>{
@@ -32,6 +39,7 @@ function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,
         })
     }
   }
+//   console.log(Key,Key2)
 
     const handleChangeAddOption = (e)=>{
         if(e.target.value != '' && e.key == 'Enter'){
@@ -48,7 +56,7 @@ function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,
     const handleSelectedChange=(value,option)=>{
         setKey(value)
     }
-    console.log(38,option)
+    // console.log(38,option)
   return (
     <div className={style.SubVarient}>
         <h3>Biến thể {index+1}</h3>
@@ -67,7 +75,7 @@ function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,
                 optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
 
                 }
-                defaultValue={Key}
+                value={newKey}
                 onChange={handleSelectedChange}
             >
                 <Option value="Nhóm màu">Nhóm màu</Option>
