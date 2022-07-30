@@ -4,10 +4,11 @@ import "./App.css";
 
 import ShopDashboard from "./page/shop/dashboard/ShopDashboard";
 import AddItem from "./page/shop/productManagement/priceItem/addItem_Phu/AddItem";
+import Cart from "./page/user/cart/Cart";
 function App() {
   return (
     <div className="App">
-      <AddItem />
+      <Cart />
     </div>
   );
 }
