@@ -22,35 +22,35 @@ import Order from './page/user/order/Order';
 import Detail from './page/user/detail/Detail';
 
 function App() {
-  return (
-    <BrowserRouter>
-        <Routes>
-            <Route path='/sign-up' element={<SignUp/>} />
-            <Route path='/sign-in' element={<SignIn/>} />
-            <Route path='/create-shop' element={<CreateShop/>}/>
-            <Route path='/admin' element={<Admin/>} >
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path='/sign-up' element={<SignUp />} />
+                <Route path='/sign-in' element={<SignIn />} />
+                <Route path='/create-shop' element={<CreateShop />} />
+                <Route path='/admin' element={<Admin />} >
 
-                
-                <Route path='category' element={<Category/>} />
-                <Route path='shop' element={<Shop/>}></Route>
-                <Route path='user' element={<User/>}></Route>
 
-            </Route>
-            <Route path='/' element={<Header/>}> 
-            <Route path='product' element={<Detail/>} />
-                <Route path='/' element={<Home/>} />
-                <Route path='/filter' element={<Filter/>}/>
-                <Route path='/shop/dashboard' element={<ShopDashBoardAll/>} />
-                <Route path='/shop/product/manage' element={<Product />} />
-                <Route path='/user' element={<UserInfoMenu/>}> 
-                    <Route path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> }/>
-                    <Route path='/user/order' element={ <div className='order'><Order/></div> } />
+                    <Route path='category' element={<Category />} />
+                    <Route path='shop' element={<Shop />}></Route>
+                    <Route path='user' element={<User />}></Route>
+
                 </Route>
-            </Route>
-            <Route path='*' element={<h1>error 404. not found</h1>}/>
-        </Routes>
-       
-    </BrowserRouter>
-  );
+                <Route path='/' element={<Header />}>
+                    <Route path='product' element={<Detail />} />
+                    <Route path='/' element={<Home />} />
+                    <Route path='/filter' element={<Filter />} />
+                    <Route path='/shop/dashboard' element={<ShopDashBoardAll />} />
+                    <Route path='/shop/product/manage' element={<Product />} />
+                    <Route path='/user' element={<UserInfoMenu />}>
+                        <Route path='profile' element={<div className='profile'> <UserInfo /> <ProfileList /> </div>} />
+                        <Route path='order' element={<div className='order'><Order /></div>} />
+                    </Route>
+                </Route>
+                <Route path='*' element={<h1>error 404. not found</h1>} />
+            </Routes>
+
+        </BrowserRouter>
+    );
 }
 export default App;
