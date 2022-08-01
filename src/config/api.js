@@ -26,27 +26,27 @@ function refreshToken (){
     
 }
 
-export const getAPI = async function (url, option){
-    const option = addAuthorization(option);
+export const getAPI = async function (url, option={headers:{}}){
+    option = addAuthorization(option);
     return axios.get(url, option)
 }
 
-export const postAPI = async function (url, data, option){
-    const option = addAuthorization(option);
+export const postAPI = async function (url, data, option={headers:{}}){
+    option = addAuthorization(option);
     return axios.post(url, data ,option)
 }
 
-export const patchAPI = async function (url, data, option){
-    const option = addAuthorization(option);
+export const patchAPI = async function (url, data, option={headers:{}}){
+    option = addAuthorization(option);
     return axios.patch(url, data ,option)
 }
 
-export const putAPI = async function (url, data, option){
-    const option = addAuthorization(option);
+export const putAPI = async function (url, data, option={headers:{}}){
+    option = addAuthorization(option);
     return axios.put(url, data ,option)
 }
 
-export const deleteAPI = async function (url, data, option){
-    const option = addAuthorization(option);
+export const deleteAPI = async function (url, data, option={headers:{}}){
+    option = addAuthorization(option);
     return axios.delete(url, option)
 }
