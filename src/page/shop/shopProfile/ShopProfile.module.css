@@ -2,9 +2,26 @@
     display: flex;
     background-color: rgb(255, 255, 255);
     flex-direction: column;
-    margin:15px 15px 15px 30px;
+    margin:15px 15px 15px 0px;
     border-radius: 18px;
+    padding-left: 20px;
 }
+.shopProfile_header {
+    margin-left: 0px;
+}
+.shopProfile_header h2 {
+    padding: 0px;
+    font-weight: 800;
+    font-size: 22px;
+}
+.Shop_Profiletext span {
+    margin-right: 5px;
+}
+.Shop_Profiletext svg {
+    font-size: 9px;
+    margin-bottom: 2px;
+}
+
 .Profile_Text {
     margin: 10px 0;
 }
@@ -22,13 +39,14 @@
 .Profile_needchange p {
     margin-bottom: 0;
     margin-right: 10px;
+    opacity: 0.8;
 }
 .Profile_needchange span {
 
     color: rgb(28, 17, 192);
 }
 .Profileshop_bottom {
-    margin: 5px 15px 15px 30px;
+    margin: 5px 15px 15px 0px;
     padding: 10px;
     display: flex;
     justify-content: flex-end;

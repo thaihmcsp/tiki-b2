@@ -1,0 +1,27 @@
+.flterSpan{
+    display: block;
+    margin: 12px;
+}
+.filter{
+    display: flex;
+}
+.filterInput{
+    display: flex;
+ 
+}
+.ant-select{
+    width: 30%;
+}
+.width33{
+    width: 33%;
+    margin: 12px;
+}
+.search{
+    width: 70%;
+}
+.width70{
+    width: 70%;
+}
+.ant-select-selector{
+    border-radius: 6px;
+}

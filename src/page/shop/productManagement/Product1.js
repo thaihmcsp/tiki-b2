@@ -1,7 +1,7 @@
 import React from "react";
 import PriceItem from "./priceItem/PriceItem";
 
-const Product = () => {
+const Product1 = () => {
   return (
     <div>
       <PriceItem />
@@ -9,4 +9,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default Product1;
