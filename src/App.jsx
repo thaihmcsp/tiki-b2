@@ -23,6 +23,7 @@ import ShopHome from './page/shop/shopHome/ShopHome';
 import Oder from './page/user/order/Order';
 import Shop from './page/admin/shopManagement/Shop';
 import Detail from "./page/user/detail/Detail";
+import AddItem from "./page/shop/productManagement/priceItem/addItem_Phu/AddItem";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
                 </Route>
                 <Route path='/ShopHome' element={<ShopHome/>}/>
                 <Route path='/shop' element={<Shop></Shop>}/>
+                <Route path="/addItem" element={<AddItem/>}/>
                 <Route path='/detail' element={<Detail />}/>
             </Route>
 
