@@ -20,17 +20,17 @@ import Category from './page/admin/categoryManagement/Category';
 import User from './page/admin/userManagement/User';
 import Order from './page/user/order/Order';
 import Detail from './page/user/detail/Detail';
+import ShopProfile from './page/shop/shopProfile/ShopProfile';
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
+
                 <Route path='/sign-up' element={<SignUp />} />
                 <Route path='/sign-in' element={<SignIn />} />
                 <Route path='/create-shop' element={<CreateShop />} />
                 <Route path='/admin' element={<Admin />} >
-
-
                     <Route path='category' element={<Category />} />
                     <Route path='shop' element={<Shop />}></Route>
                     <Route path='user' element={<User />}></Route>
@@ -41,6 +41,7 @@ function App() {
                     <Route path='/' element={<Home />} />
                     <Route path='/filter' element={<Filter />} />
                     <Route path='/shop/dashboard' element={<ShopDashBoardAll />} />
+                    <Route path='shop/profile' element={<ShopProfile />} />
                     <Route path='/shop/product/manage' element={<Product />} />
                     <Route path='/user' element={<UserInfoMenu />}>
                         <Route path='profile' element={<div className='profile'> <UserInfo /> <ProfileList /> </div>} />

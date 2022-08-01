@@ -1,0 +1,47 @@
+.shopProfile {
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    flex-direction: column;
+    margin:15px 15px 15px 30px;
+    border-radius: 18px;
+}
+.Profile_Text {
+    margin: 10px 0;
+}
+.profileshop_data {
+    font-size: 17px;
+    opacity: 0.7;
+    margin-bottom: 0px;
+} 
+.Profile_needchange {
+    display: flex;
+    margin-top: 3px;
+    font-size: 15px;
+    align-items: center;
+}
+.Profile_needchange p {
+    margin-bottom: 0;
+    margin-right: 10px;
+}
+.Profile_needchange span {
+
+    color: rgb(28, 17, 192);
+}
+.Profileshop_bottom {
+    margin: 5px 15px 15px 30px;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    background: rgb(255, 255, 255);
+    border-radius: 18px;
+   
+}
+.Profileshop_bottom button {
+    color: white;
+    background-color: rgb(72, 144, 211);
+    border: none;
+    margin-right: 15px;
+    padding: 5px 10px;
+    border-radius: 6px;
+
+}
