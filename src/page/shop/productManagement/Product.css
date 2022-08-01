@@ -31,4 +31,6 @@
     border-color: #1e5d87;
     background: #1e5d87;
 }
-
+.ant-input-group.ant-input-group-compact .ant-input{
+    height: 30px;
+}
