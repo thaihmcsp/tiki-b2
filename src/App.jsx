@@ -22,6 +22,7 @@ import Order from './page/user/order/maintotal/Main';
 import ShopHome from './page/shop/shopHome/ShopHome';
 import Oder from './page/user/order/Order';
 import Shop from './page/admin/shopManagement/Shop';
+import Detail from "./page/user/detail/Detail";
 
 function App() {
   return (
@@ -43,8 +44,9 @@ function App() {
                 </Route>
                 <Route path='/ShopHome' element={<ShopHome/>}/>
                 <Route path='/shop' element={<Shop></Shop>}/>
+                <Route path='/detail' element={<Detail />}/>
             </Route>
-            
+
             <Route path='/admin' element={<Admin/>} >
               <Route path='/admin/category' element={ <Category /> } />
             </Route>
