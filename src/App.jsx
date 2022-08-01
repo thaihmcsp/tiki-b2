@@ -44,10 +44,11 @@ function App() {
                 <Route path='/ShopHome' element={<ShopHome/>}/>
                 <Route path='/shop' element={<Shop></Shop>}/>
             </Route>
-
+            
             <Route path='/admin' element={<Admin/>} >
               <Route path='/admin/category' element={ <Category /> } />
             </Route>
+
             <Route path='*' element={<h1>error 404. not found</h1>}/>
         </Routes>
     </BrowserRouter>

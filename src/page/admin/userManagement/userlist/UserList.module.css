@@ -1,4 +1,4 @@
-.Shoplist {
+.Userlist {
     width: 610px;
     display: flex;
     flex-direction: column;
@@ -6,10 +6,10 @@
     justify-content: space-between;
     margin-top: 40px;
 }
-.Shop_ProfileLeft {
+.User_ProfileLeft {
     display: flex;
 }
-.ListShopProfile {
+.ListUserProfile {
     display: flex;
     justify-content: space-between;
     background-color: rgb(255, 255, 255);
@@ -19,23 +19,23 @@
     border-radius: 4px 4px 0 0;
     
 }
-.Shop_ProfileLeft img {
+.User_ProfileLeft img {
     width: 55px;
    
 }
-.Shop_ProfileLeft h4 {
+.User_ProfileLeft h4 {
     color: rgb(89, 91, 211);
     font-weight: 480;
     font-size: 16px;
     margin-left: 10px;
 }
 
-.ShowShopdata {
+.ShowUserdata {
     width: 100%;
     margin-bottom: 30px;
 
 }
-.SetShopOptions {
+.SetUserOptions {
     display: flex;
     background-color: #e6e3eee0;
     justify-content: space-between;
@@ -45,7 +45,7 @@
     border-bottom: 1px solid #ccc;
     border-radius: 0 4px 4px 0;
 }
-.ShopIDtext {
+.UserIDtext {
     color: red;
     font-size: 15px;
     margin: 5px 5px 0 0;
@@ -61,21 +61,21 @@
 .Options button:hover {
     cursor: pointer;
 }
-.Time_ShopStart span {
+.Time_UserStart span {
     font-weight: bold;
     margin-right: 5px;
 }
 @media screen and (max-width: 768px){
-    .Shop_ProfileLeft img {
+    .User_ProfileLeft img {
         width: 40px;
     }
-    .Shop_ProfileLeft h4 {
+    .User_ProfileLeft h4 {
         font-size: 15px;
     }
-    .ShopIDtext span{
+    .UserIDtext span{
         font-size: 14px;
     }
-    .Time_ShopStart span{ 
+    .Time_UserStart span{ 
         font-size: 16px;
     }
 }
