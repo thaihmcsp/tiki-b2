@@ -50,6 +50,20 @@ function Product() {
   return (
     <div className="db-Product" style={{ height: '100vh' }}>
       <div className="db-Product-left" style={{ height: '100vh' }}>
+        {/* <button
+          style={{
+            width: 80,
+            height: 50,
+            border: "none",
+            backgroundColor: "whitesmoke",
+          }}
+        >
+          <img
+            style={{ width: "65%", height: "100%" }}
+            src="https://blogtietkiem.com/wp-content/uploads/2020/12/logo-mgg-tiki.png"
+            alt=""
+          />
+        </button> */}
         <Button type="primary" style={{ width: 80 }}>
           {" "}
           <HomeOutlined />{" "}
