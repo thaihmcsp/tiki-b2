@@ -1,0 +1,75 @@
+.Alloder_Title {
+    margin-top: 15px;
+}
+.OderTitle {
+    margin-top: 15px;
+    background-color: rgb(255, 255,255);
+   
+  
+}
+.Oder_HeaderTitle {
+    font-size: 18px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+   padding: 10px 10px 10px 20px;
+    border-bottom: 1px solid #ccc;
+}
+.MidleTitle {
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    padding:10px;
+    width: 100%;
+}
+.MidleTitle_Left {
+    display: flex;
+    
+}
+
+.ImageTitle {
+    width: 100px;
+    border:  1px solid #b0a9ab;
+    height: 100px;
+    margin-right: 10px;
+    border-radius: 4px  ;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.ImageTitleText {
+    display: flex;
+    position: absolute;
+    color: red;
+    top: 15px;
+    right: 15px;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.ImageTitleText p {
+    margin-top: 6px;
+    flex: right;
+}
+.ImageNumber {
+    display: flex;
+    justify-content: flex-end;
+}
+.EmptyOder {
+    background-color: wi;
+}
+.BottomTitle {
+   padding: 10px 15px 10px 0;
+}  
+
+.BottomTitle_Button:hover{
+    cursor: pointer;
+}
+
+
+.BottomTitle_Button {
+    padding: 7px;
+    background-color: white;
+    border: 1.5px solid rgb(139, 192, 223);
+    margin-left: 10px;
+    border-radius: 4px;
+    outline: none;
+}

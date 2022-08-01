@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { Outlet } from 'react-router-dom'
-import Footer from './Footer'
-import './Header.css'
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import Footer from './Footer';
+import './Header.css';
+import  style from'./Header.module.css';
 // import { Link } from "react-router-dom";
 
 import {useSelector} from 'react-redux';

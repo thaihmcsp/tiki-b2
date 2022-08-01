@@ -20,6 +20,8 @@ import AdminLogin from './page/admin/login/Login';
 import ShopLogin from './page/shop/login/Login';
 import Order from './page/user/order/maintotal/Main';
 import ShopHome from './page/shop/shopHome/ShopHome';
+import Oder from './page/user/order/Order';
+import Shop from './page/admin/shopManagement/Shop';
 
 function App() {
   return (
@@ -37,9 +39,10 @@ function App() {
                 <Route path='/shop/dashboard' element={<ShopDashBoardAll/>} />
                 <Route path='/shop/product/manage' element={<Product />} />
                 <Route path='/user' element={<UserInfoMenu/>}> 
-                    <Route path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> } />
+                    <Route path='/user' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> } />
                 </Route>
                 <Route path='/ShopHome' element={<ShopHome/>}/>
+                <Route path='/shop' element={<Shop></Shop>}/>
             </Route>
 
             <Route path='/admin' element={<Admin/>} >
