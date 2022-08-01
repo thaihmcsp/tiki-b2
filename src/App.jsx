@@ -16,6 +16,9 @@ import UserInfo from './page/user/profile/UserInfo_data/UserInfo';
 import './App.css';
 import UserInfoMenu from './page/user/profile/UserInfoMenu';
 import Category from './page/admin/categoryManagement/Category';
+import AdminLogin from './page/admin/login/Login';
+import ShopLogin from './page/shop/login/Login';
+import Order from './page/user/order/maintotal/Main';
 
 function App() {
   return (
@@ -23,7 +26,10 @@ function App() {
         <Routes>
             <Route path='/sign-up' element={<SignUp/>} />
             <Route path='/sign-in' element={<SignIn/>} />
+            <Route path='/sign-in-admin' element={<AdminLogin/>} />
+            <Route path='/sign-in-shop' element={<ShopLogin/>} />
             <Route path='/create-shop' element={<CreateShop/>}/>
+            <Route path='/order' element={<Order/>}/>
             <Route path='/' element={<Header/>}> 
                 <Route path='/' element={<Home/>} />
                 <Route path='/filter' element={<Filter/>}/>

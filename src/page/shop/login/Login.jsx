@@ -5,26 +5,24 @@ import { Input, Space } from 'antd';
 import 'antd/dist/antd.css';
 import { Select } from 'antd';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
+
 import { Link, useNavigate } from 'react-router-dom'
+
 import {postAPI,getAPI} from '../../../config/api'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { userLogin } from '../../../redux/userSlice';
-
-import "./StyleIn.css"
-
+import "./styleLogin.css"
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     let expires = "expires="+ d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
-
-function SignIn({setUsers}) {
+function Login() {
     const { Option } = Select;
     const nav = useNavigate()
     const dispatch = useDispatch();
-    
     
     function checkMail() {
         const warmail = document.querySelector('#warmail')
@@ -35,16 +33,13 @@ function SignIn({setUsers}) {
         warpass.style.display = 'none'
     }
     
-    async function handleSignIn() {
+    async function shopSignIn() {
         try {
            
             const password = document.querySelector('#password').value
-            const email = document.querySelector('#email').value
-          
-            
+            const email = document.querySelector('#email').value 
             const warmail = document.querySelector('#warmail')
             const warpass = document.querySelector('#warpass')
-            // const check = setUsers(email,password)
             
             var mailformat = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
@@ -62,36 +57,27 @@ function SignIn({setUsers}) {
 
                 warpass.innerHTML = "Mật khẩu phải có ít nhất 6 ký tự"
             } 
-             else {
-               
-
-                var resp = await postAPI('/auth/login', { email, password})
-                
+             else {    
+                var resp = await postAPI('/auth/login/shop', { email, password})
                 setCookie('tiki-user', resp.data.token, 57);
-                
+
                 console.log(20,resp)
                 
                 const res = await getAPI('/auth/me');
-                console.log(res.data)
                 window.localStorage.setItem('tiki-user',JSON.stringify(res.data))
                 const action = userLogin(res.data);
                     dispatch(action);
                       
-                  nav('/')
-                 
-                }
-
-           
-               
-            }
-        
+                  nav('/')          
+                
+        }
+    }
         catch (error) {
             console.log('loi',error)
             alert(error.response.data.message)
         }
 
     }
-    
     return (
 
         <div className='box_container'>
@@ -116,7 +102,7 @@ function SignIn({setUsers}) {
                 <div className='box_background'>
                 </div>
                 <div className="container">
-                    <div className="title"><h1>Đăng nhập</h1></div>
+                    <div className="title"><h1>Đăng nhập với Shop</h1></div>
                     <div className="inputGroup">
                     <div>
                             Nhập Email
@@ -130,50 +116,42 @@ function SignIn({setUsers}) {
                                 id='email'
                                 type='email'
                                 name='email'
-                               
                                 onChange={checkMail}
-                           
+
                             />
                             <span className="warning" id='warmail'></span>
-                            
                         </Space>
 
                         <div>
                             Nhập mật khẩu
                         </div>
-
                         <Space direction="vertical">
 
-                            <Input.Password
-                                id="password"
-                                className="form-control "
-                                placeholder="Nhập mật khẩu"
-                                type='password'
-                                name='password'
-                                onChange={checkPass}
-
-                                iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                            />
-                            <span className="warning" id='warpass'></span>
-                          
-                        </Space>
+                                    <Input.Password
+                                        id="password"
+                                        className="form-control "
+                                        placeholder="Nhập mật khẩu"
+                                        type='password'
+                                        name='password'
+                                        onChange={checkPass}
+                                        iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                                    />
+                                    <span className="warning" id='warpass'></span>
+                                  
+                                </Space>
                     </div>
                     <div>
-
-
                         <div className="textGroup">
                             <p> <a href="">Quên mật khẩu</a></p>
 
                             <p>
                                 <div>Bạn chưa có tài khoản?</div>
 
-                                <Link to='/sign-up'><i><a href="">Đăng kí</a></i></Link>
-
-                            </p>
+                                <a href="">Đăng ký</a></p>
                         </div>
                     </div>
                     <div className="buttonGroup">
-                        <button className="login" onClick={handleSignIn}>Đăng nhập</button>
+                        <button className="login" onClick={shopSignIn}>Đăng nhập</button>
 
                     </div>
                     <div className="line"></div>
@@ -188,7 +166,6 @@ function SignIn({setUsers}) {
 
                     <div className="buttonGroup1">
                         <button href="#" className="field google">
-
                             <img src="https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1" alt="" className="google-img" />
                             <span>Đăng nhập với Google</span>
                         </button>
@@ -199,4 +176,4 @@ function SignIn({setUsers}) {
     );
 }
 
-export default SignIn;
+export default Login;
