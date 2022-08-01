@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { Image } from "antd";
 import "antd/dist/antd.css";
+import ProductRight from "./ProductRight";
 
 function ProductLeft(props) {
   return (
@@ -9,9 +10,10 @@ function ProductLeft(props) {
       <div>
         <Image
           id="main"
-          // height={444}
-          // width={444}
           src={props.colorDetail.color}
+          preview={{
+            src: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+          }}
         />
 
         <div>

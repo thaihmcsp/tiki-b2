@@ -40,6 +40,9 @@ function Detail() {
 
     document.getElementById("img-small").setAttribute("src", imgpath);
     document.getElementById("detail-color").innerHTML = `Màu : ${getColorName}`;
+    document
+      .querySelector(".ant-image-preview-img")
+      .setAttribute("src", imgpath);
   }
   function selectSize(id) {
     let selectSize = document.getElementById(id).innerHTML;
@@ -79,6 +82,7 @@ function Detail() {
         <ProductLeft
           colorDetail={colorDetail}
           icon={listcontact}
+          rate={rate}
           banner="https://salt.tikicdn.com/cache/w1080/ts/tka/1d/8f/00/d8d6ff67e8c1eed442001b4827297e5f.jpg"
         />
         <ProductRight
