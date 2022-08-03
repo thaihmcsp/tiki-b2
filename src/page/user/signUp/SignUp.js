@@ -1,12 +1,9 @@
 import React from 'react';
-
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Input, Space } from 'antd';
 import 'antd/dist/antd.css';
 import { Select } from 'antd';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
-
-
 import "./style.css"
 
 function Signup() {

@@ -18,6 +18,7 @@ import UserInfoMenu from "./page/user/profile/UserInfoMenu";
 import Category from "./page/admin/categoryManagement/Category";
 import ManagementProduct from "./page/shop/productManagement/ManagementProduct ";
 import Product from "./page/shop/productManagement/Product";
+import Order from './page/shop/orderManagement/orderContainer/OrderContainer.jsx';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/filter" element={<Filter />} />
           <Route path="/shop/dashboard" element={<ShopDashBoardAll />} />
           <Route path="/shop/product/manage" element={<Product1 />} />
+          <Route path="/order" element={<Order />} />
           <Route path="/user" element={<UserInfoMenu />}>
             <Route
               path="/user/profile"
