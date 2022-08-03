@@ -21,10 +21,11 @@
     background-color: whitesmoke;
 }
 .db-Product-left .ant-btn-primary{
-    background-color:#1e5d87 ;
+    background-color:#1e5d87c9 ;
 }
 .db-Product-left .ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected{
-    background-color:#1e5d87 ;
+    /* background-color:#1e5d87 ; */
+    background-color:#579fff ;
 }
 .db-Product-left .ant-btn-primary:focus{
     color: #fff;
@@ -33,4 +34,11 @@
 }
 .ant-input-group.ant-input-group-compact .ant-input{
     height: 30px;
+}
+.db-Product-left .ant-btn{
+    display: block !important;
+    background-color: whitesmoke;
+}
+.db-Product-left  .ant-menu-item:first-child   {
+    margin: 0;
 }

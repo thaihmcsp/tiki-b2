@@ -40,10 +40,10 @@ body {
   background:none !important;
   display: none !important;
 }
-
+/* 
 .ant-modal-root{
   display: none;
-}
+} */
 
 .ant-btn {
   display:  none !important;

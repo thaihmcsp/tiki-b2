@@ -19,7 +19,7 @@ function Modall(props) {
   };
 
   return (
-    <div>
+    <div className={styles.modal}>
       <div id={props.id}>
         <EditOutlined onClick={showModal} />
         <Modal

@@ -36,3 +36,8 @@
 .container {
     width: 20% !important;
 }
+.modal{
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}

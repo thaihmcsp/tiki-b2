@@ -50,7 +50,7 @@ function Product() {
   return (
     <div className="db-Product">
       <div className="db-Product-left">
-        <button
+        {/* <button
           style={{
             width: 80,
             height: 50,
@@ -63,10 +63,10 @@ function Product() {
             src="https://blogtietkiem.com/wp-content/uploads/2020/12/logo-mgg-tiki.png"
             alt=""
           />
-        </button>
-        {/* <Button type="HomeOutlined" style={{ width: 80 }}>
+        </button> */}
+        <Button type="HomeOutlined" style={{ width: 80 }}>
           <HomeOutlined />
-        </Button> */}
+        </Button>
         <Menu
           defaultSelectedKeys={["1"]}
           defaultOpenKeys={["sub1"]}
