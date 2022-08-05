@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import { message, Upload } from "antd";
-
+import { message } from "antd";
+import { Cascader } from "antd";
+import "./BasicInformation.css";
+import { Modal, Upload } from "antd";
 const InforContainer = styled.div`
   padding: 20px;
   background: #fff;
@@ -99,6 +101,10 @@ const FormTitle = styled.div`
         .translate-source {
           flex: 1;
           min-width: 500px;
+          .ipnut-modal {
+            position: relative;
+            overflow: hidden;
+          }
           .next-input {
             vertical-align: middle;
             display: inline-table;
@@ -226,87 +232,24 @@ const FormCategory = styled.div`
   }
 `;
 
-const ButtonSend = styled.div`
-  margin-top: 15px;
-  .label-hoc-top {
-    display: flex;
-    flex-direction: column;
-    .data-affix-container {
-      padding: 20px 24px;
-      border-radius: 18px;
-      background: #fff;
-      display: flex;
-      width: 100%;
-      justify-content: flex-end;
-      box-shadow: 0 2px 18px 0 rgb(0 0 0 / 4%);
-      .btn-send {
-        display: flex;
-        flex-direction: column;
-        margin-right: 0;
-        button {
-          border-radius: 8px;
-          padding: 0 12px;
-          height: 36px;
-          line-height: 34px;
-          font-size: 14px;
-          border-width: 1px;
-          position: relative;
-          display: inline-block;
-          -webkit-box-shadow: none;
-          box-shadow: none;
-          text-decoration: none;
-          text-align: center;
-          text-transform: none;
-          white-space: nowrap;
-          vertical-align: middle;
-          user-select: none;
-        }
-      }
-    }
-  }
-`;
+const getBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = () => resolve(reader.result);
+
+    reader.onerror = (error) => reject(error);
+  });
 
 const BasicInformation = () => {
-  const getBase64 = (img, callback) => {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => callback(reader.result));
-    reader.readAsDataURL(img);
-  };
-
-  const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-
-    if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
-    }
-
-    const isLt2M = file.size / 1024 / 1024 < 2;
-
-    if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
-    }
-
-    return isJpgOrPng && isLt2M;
-  };
-
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
 
-  const handleChange = (info) => {
-    if (info.file.status === "uploading") {
-      setLoading(true);
-      return;
-    }
-
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (url) => {
-        setLoading(false);
-        setImageUrl(url);
-      });
-    }
-  };
-
+  const [previewVisible, setPreviewVisible] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
+  const [previewTitle, setPreviewTitle] = useState("");
+  const [fileList, setFileList] = useState([]);
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -319,7 +262,77 @@ const BasicInformation = () => {
       </div>
     </div>
   );
+  const options = [
+    {
+      value: "zhejiang",
+      label: "Zhejiang",
+      children: [
+        {
+          value: "hangzhou",
+          label: "Hangzhou",
+          children: [
+            {
+              value: "xihu",
+              label: "West Lake",
+            },
+            {
+              value: "xiasha",
+              label: "Xia Sha",
+              disabled: true,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      value: "jiangsu",
+      label: "Jiangsu",
+      children: [
+        {
+          value: "nanjing",
+          label: "Nanjing",
+          children: [
+            {
+              value: "zhonghuamen",
+              label: "Zhong Hua men",
+            },
+          ],
+        },
+      ],
+    },
+  ];
 
+  const onChange = (value, selectedOptions) => {
+    console.log(value, selectedOptions);
+  };
+
+  const filter = (inputValue, path) => path.some((option) => option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1);
+  const handleCancel = () => setPreviewVisible(false);
+
+  const handlePreview = async (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+
+    setPreviewImage(file.url || file.preview);
+    setPreviewVisible(true);
+    setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf("/") + 1));
+  };
+
+  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
+
+  const uploadButtonImg = (
+    <div>
+      <PlusOutlined />
+      <div
+        style={{
+          marginTop: 8,
+        }}
+      >
+        Upload
+      </div>
+    </div>
+  );
   return (
     <div>
       <InforContainer>
@@ -339,27 +352,18 @@ const BasicInformation = () => {
                 </div>
                 <div className="image-zone">
                   <div>
-                    <Upload
-                      name="avatar"
-                      listType="picture-card"
-                      className="avatar-uploader"
-                      showUploadList={false}
-                      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                      beforeUpload={beforeUpload}
-                      onChange={handleChange}
-                    >
-                      {imageUrl ? (
-                        <img
-                          src={imageUrl}
-                          alt="avatar"
-                          style={{
-                            width: "100%",
-                          }}
-                        />
-                      ) : (
-                        uploadButton
-                      )}
+                    <Upload action="https://www.mocky.io/v2/5cc8019d300000980a055e76" listType="picture-card" fileList={fileList} onPreview={handlePreview} onChange={handleChange}>
+                      {fileList.length >= 8 ? null : uploadButton}
                     </Upload>
+                    <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
+                      <img
+                        alt="example"
+                        style={{
+                          width: "100%",
+                        }}
+                        src={previewImage}
+                      />
+                    </Modal>
                   </div>
                   <div class="gc-action-zone">
                     <button type="button" class=" next-btn-text" role="button">
@@ -422,16 +426,25 @@ const BasicInformation = () => {
                     <span class="label-inner label-required-mark required" data-text-optional="( Optional )">
                       <span class="dada-required"></span>Danh mục ngành hàng
                     </span>
-                  </span>
+                  </span> 
                 </label>
               </div>
               <div className="next-form-item-control">
                 <div className="hoc-label-top">
                   <div className="translate-input">
                     <div className="translate-source">
-                      <span className="next-input next-medium">
-                        <input placeholder="Danh mục Tìm kiếm" maxlength="255" height="100%" />
-                      </span>
+                      <div>
+                        {/* <input placeholder="Danh mục Tìm kiếm" maxlength="255" height="100%" /> */}
+                        <Cascader
+                          options={options}
+                          onChange={onChange}
+                          placeholder="Danh mục tìm kiếm"
+                          showSearch={{
+                            filter,
+                          }}
+                          onSearch={(value) => console.log(value)}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -440,17 +453,6 @@ const BasicInformation = () => {
           </FormCategory>
         </div>
       </InforContainer>
-      <ButtonSend>
-        <div className="label-hoc-top">
-          <div className="data-affix-container">
-            <div className="btn-send">
-              <button disabled="" aria-haspopup="true" aria-expanded="false" type="button" class="next-btn next-medium next-btn-primary" role="button">
-                Gửi đi
-              </button>
-            </div>
-          </div>
-        </div>
-      </ButtonSend>
     </div>
   );
 };
