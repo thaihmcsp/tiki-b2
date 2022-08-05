@@ -16,12 +16,16 @@ import UserInfoMenu from './page/user/profile/UserInfoMenu';
 import AdminLogin from './page/admin/login/Login';
 import ShopLogin from './page/shop/login/Login';
 import Order from './page/user/order/maintotal/Main';
+import Odertotal from './page/user/order/ordertotal/Odertotal';
+import PrivateRouter from './components/PrivateRouter';
 
 function App() {
   return (
     <BrowserRouter>
         <Routes>
+          
             <Route path='/sign-up' element={<SignUp/>} />
+     
             <Route path='/sign-in' element={<SignIn/>} />
             <Route path='/sign-in-admin' element={<AdminLogin/>} />
             <Route path='/sign-in-shop' element={<ShopLogin/>} />
@@ -36,7 +40,17 @@ function App() {
                     <Route path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> } />
                 </Route>
             </Route>
-            <Route path='*' element={<h1>error 404. not found</h1>}/>
+            {/* ///private */}
+            <Route path='*'
+             element={<SignIn/>}/>
+             
+             <Route path='/user' element={<UserInfoMenu/>}> 
+                  <Route exact path='/user/profile' element={<PrivateRouter/>}>
+                        <Route exact path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> }/>
+                  </Route>
+              </Route>
+            
+            
         </Routes>
     </BrowserRouter>
   );

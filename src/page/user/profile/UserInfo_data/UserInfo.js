@@ -6,8 +6,22 @@ import 'antd/dist/antd.css';
 import { Radio } from 'antd';
 import DataMonth from './DataMonth';
 import Countries from './Countries';
+import { Link, useNavigate } from 'react-router-dom'
+
+// const abc = () =>{
+//   if(localStorage.getItem('tiki-user1') == null){
+//     console.log('abc')  
+//     window.location = '/sign-in'
+//   }
+// }
+// abc()
+
+
 
 function UserInfo() {
+  const nav = useNavigate()
+
+
   return (
     <div className= {styles.userInfomation}>
       <div className= {styles.acountForm}>

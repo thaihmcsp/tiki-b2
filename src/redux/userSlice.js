@@ -15,7 +15,7 @@ const userSlice = createSlice({
     name: 'user',
     initialState: init,
     reducers: {
-        userLogin: function( action) {
+        userLogin: function(state, action) {
             window.localStorage.getItem('tiki-user', JSON.stringify(action.payload))
             return action.payload;
         }

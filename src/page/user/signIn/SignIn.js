@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { userLogin } from '../../../redux/userSlice';
 
+
 import "./StyleIn.css"
 
 function setCookie(cname, cvalue, exdays) {
@@ -20,7 +21,27 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
 
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  console.log(39, getCookie('tiki-user'))
+
 function SignIn({setUsers}) {
+    const user = useSelector(state => state.user)
+    console.log(user)
     const { Option } = Select;
     const nav = useNavigate()
     const dispatch = useDispatch();
@@ -67,19 +88,17 @@ function SignIn({setUsers}) {
 
                 var resp = await postAPI('/auth/login', { email, password})
                 
-                setCookie('tiki-user', resp.data.token, 57);
-                
-                console.log(20,resp)
-                
+                setCookie('tiki-user', resp.data.token,30);
                 const res = await getAPI('/auth/me');
-                console.log(res.data)
-                window.localStorage.setItem('tiki-user',JSON.stringify(res.data))
                 const action = userLogin(res.data);
-                    dispatch(action);
+
+                dispatch(action);
+                window.localStorage.setItem('tiki-user',JSON.stringify(res.data))
                       
                   nav('/')
-                 
-                }
+
+                // console.log(99,localStorage.getItem('tiki-user'))
+             }
 
            
                
