@@ -7,7 +7,7 @@ import Slider4 from './slider4/Slider4'
 
 function Brand() {
   return (
-    <div className={style.brand}>
+    <div className={style.brand} id='Brand_Shop__Home'>
         <div className={style.header}>
             <div className={style.header_right}>
                 <img src='https://salt.tikicdn.com/ts/upload/33/0f/67/de89fab36546a63a8f3a8b7d038bff81.png' />
