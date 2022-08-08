@@ -50,8 +50,7 @@ function ProfileManuLeft(props) {
         alert('mật khẩu phải trùng nhau');
       }else if(Newpassword === RepNewpassword) {
       const pass = await patchAPI('/user/change-password/'+user._id, {oldPass,newPass: Newpassword});
-      const action = updateInfo(pass.data.user);
-      dispatch(action);
+     nav('/sign-in')
       alert('Cập nhật mật khẩu thành công')
       }
     } catch (error) {
