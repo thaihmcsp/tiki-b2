@@ -49,6 +49,10 @@
 }
 .componentHeaderInput:focus + .ShowCoverInput{
     display: block;
+<<<<<<<<< Temporary merge branch 1
+=========
+    z-index: 1000000;
+>>>>>>>>> Temporary merge branch 2
 }
 .componentHeaderInput:focus + .HeaderMiddleListData {
     display: none;
@@ -73,7 +77,7 @@
     height: 20px;
 }
 .SearchWord{
- text-align: center;
+    text-align: center;
 }
 .SearchWord span svg{
     display: inline-block;
@@ -101,8 +105,11 @@
 .HeaderTopContainerUser {
     display: flex;
     color: white;
+<<<<<<<<< Temporary merge branch 1
     margin: 5px 0 0 0;
     position: relative;
+=========
+>>>>>>>>> Temporary merge branch 2
 }
 .HeaderUserLoginContainer {
     display: flex;
@@ -116,6 +123,12 @@
 .HeaderUserLogin{
     font-size: 11px;
 }
+<<<<<<<<< Temporary merge branch 1
+=========
+.HeaderUserLogin span{
+    color: white;
+}
+>>>>>>>>> Temporary merge branch 2
 .HeaderUserImgdown {
     width: 16px;
     height: 16px;
@@ -235,7 +248,11 @@
     box-shadow: rgb(0 0 0 / 28%) 0px 6px 12px 0px;
     background-color: rgb(255, 255, 255);
     position: absolute;
+<<<<<<<<< Temporary merge branch 1
     z-index: 100;
+=========
+    z-index: 1;
+>>>>>>>>> Temporary merge branch 2
     width: calc(100% - 120px);
     display: none;
 }
@@ -244,7 +261,10 @@
 }
 .HistorySeach {
   border-bottom:  1px solid rgb(225, 225, 225);
+<<<<<<<<< Temporary merge branch 1
   
+=========
+>>>>>>>>> Temporary merge branch 2
    
 }
 .HeaderCoverInput {
@@ -262,11 +282,14 @@
     font-weight: 500;
    
 }
+<<<<<<<<< Temporary merge branch 1
 .SearchWord {
     margin-left: 20px;
     font-weight: 700;
     display: flex;
 }
+=========
+>>>>>>>>> Temporary merge branch 2
 .ListHistorySeach {
     display: flex;
 
@@ -323,6 +346,7 @@
     color: black;
     font-size: 13px;
 }
+<<<<<<<<< Temporary merge branch 1
 /* ///////////////////hover admin */
 
 .HeaderTopContainerUser:hover .header_navbar_iteam_mypage_selec {
@@ -376,6 +400,17 @@
         display: none;
     }
 }
+<<<<<<<<< Temporary merge branch 1
+=========
+@media  only screen and (min-width:769px) and (max-width:992px){
+    .HeaderBody {
+        display: none;
+    }
+    .HeaderMobie {
+        display: block;
+    }
+}
+>>>>>>>>> Temporary merge branch 2
 @media only screen and (max-width: 768px){
     .HeaderBody{
         display: none;
@@ -385,5 +420,40 @@
 @media only screen and (max-width: 600px){
     .HeaderMobieBottom {
         width: 100vw;
+<<<<<<<<< Temporary merge branch 1
+=========
+        padding: 0 0 5px 15px;
+    }
+    .HeaderMobieBottom::-webkit-scrollbar{
+        display: none;
+    }
+    .HeaderMobieTop img:last-child{
+        width: 20px;
+        height: 20px;  
+    }
+    .HeaderMobieTop img:nth-child(2){
+        height: 20px;
+    }
+    .HeaderMobieTop img:nth-child(1){
+        height: 11px;
+    }
+    .HeaderMobieTop{
+        padding: 10px 20px 0 16px;
+        align-items: baseline;
+    }
+    .HeaderMobieText{
+        padding: 0 8px;
+        font-size: 13px;
+        font-weight: 400;
+        width: 100%;
+        height: 30px;
+    }
+    .HeaderMobieText::placeholder{
+        opacity: 0.8;
+    }
+    .Header{
+        background: rgba(0 ,92, 214,1);
+        margin-bottom: -10px;
+>>>>>>>>> Temporary merge branch 2
     }
 }

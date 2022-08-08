@@ -15,8 +15,13 @@ const userSlice = createSlice({
     name: 'user',
     initialState: init,
     reducers: {
+<<<<<<<<< Temporary merge branch 1
         userLogin: function(state, action) {
             window.localStorage.getItem('tiki-user', JSON.stringify(action.payload))
+=========
+        userLogin: function( state, action) {
+            window.localStorage.setItem('tiki-user', JSON.stringify(action.payload));
+>>>>>>>>> Temporary merge branch 2
             return action.payload;
         },
         updateInfo: function( state, action) {
