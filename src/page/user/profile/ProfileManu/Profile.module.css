@@ -17,6 +17,7 @@
 .manuUser a {
   color: #000;
 }
+
 .header {
   width: 100%;
   padding: 15px 0px;
@@ -56,12 +57,17 @@
   display: inline-block;
 }
 @media screen and (max-width: 768px) {
-
   .manuUserContainer {
     display: none;
   }
-  .ant-drawer-body{
+  .manuUserContainer ant-drawer-body{
     padding: 0;
+    flex-grow: 1;
+    overflow: auto;
+    font-size: 14px;
+    line-height: 1.5715;
+    word-wrap: break-word;
+    width: 250px;
   }
 .manuListSmartPhone{
   display: block;

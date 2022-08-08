@@ -37,8 +37,8 @@ body {
 
 .ant-btn-primary {
   border: unset !important;
-  background:none !important;
-  display: none !important;
+  /* background:none !important;
+  display: none !important; */
 }
 
 .filter .ant-modal-root{
@@ -46,7 +46,7 @@ body {
 }
 
 .ant-btn {
-  display:  none !important;
+  /* display:  none !important; */
 }
 .mySwiper_fillter .swiper-button-next:after, .mySwiper_fillter .swiper-button-prev:after {
   font-size: 1rem !important;

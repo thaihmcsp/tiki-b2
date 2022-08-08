@@ -19,6 +19,8 @@ import UserInfoMenu from './page/user/profile/UserInfoMenu';
 import Category from './page/admin/categoryManagement/Category';
 import User from './page/admin/userManagement/User';
 import Order from './page/user/order/Order';
+import AdminLogin from './page/admin/login/Login';
+import ShopLogin from './page/shop/login/Login';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
         <Routes>
             <Route path='/sign-up' element={<SignUp/>} />
             <Route path='/sign-in' element={<SignIn/>} />
+            <Route path='/sign-in-admin' element={<AdminLogin/>} />
+            <Route path='/sign-in-shop' element={<ShopLogin/>} />
             <Route path='/create-shop' element={<CreateShop/>}/>
             <Route path='/admin' element={<Admin/>} >
                 <Route path='category' element={<Category/>} />
@@ -43,6 +47,7 @@ function App() {
                     <Route path='/user/order' element={ <div className='order'><Order/></div> } />
                 </Route>
             </Route>
+
             <Route path='*' element={<h1>error 404. not found</h1>}/>
         </Routes>
        

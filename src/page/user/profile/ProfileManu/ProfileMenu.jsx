@@ -30,18 +30,18 @@ function Profile() {
   return (
     <div >
       <div className={styles.manuListSmartPhone}>
-      <Space>
-        <Radio.Group value={placement} onChange={onChange}></Radio.Group>
-        <MenuIcon type='primary' onClick={showDrawer}></MenuIcon>
-      </Space>
-      <Drawer
-        // title='Basic Drawer'
-        placement={placement}
-        closable={false}
-        onClose={onClose}
-        visible={visible}
-        key={placement}
-      >
+        <Space>
+          <Radio.Group value={placement} onChange={onChange}></Radio.Group>
+          <MenuIcon type='primary' onClick={showDrawer}></MenuIcon>
+        </Space>
+        <Drawer
+          // title='Basic Drawer'
+          placement={placement}
+          closable={false}
+          onClose={onClose}
+          visible={visible}
+          key={placement}
+        >
         <div className={styles.header}>
           <MenuUserIcon
             title2='Trang chủ'
@@ -50,31 +50,33 @@ function Profile() {
           />
         </div>
         <div className= {styles.account}>
-          <MenuUserIcon icon={listIcon[1]}>
-            <div className='info-account'>
+        <Link to='/user/profile'> <MenuUserIcon icon={listIcon[1]}>
+            <div>
               <span>Tài khoản của</span>
               <br />
               <strong>Trung Thành</strong>
             </div>
-          </MenuUserIcon>
+          </MenuUserIcon></Link>
         </div>
         <div className= {styles.headerList}>
-          <MenuUserIcon
-            icon={<PersonRoundedIcon />}
-            title='Thông tin tài khoản'
-          />
-          <MenuUserIcon icon={<BellFilled />} title='Thông báo của tôi' />
-          <MenuUserIcon icon={listIcon[2]} title='Quản lý đơn hàng' />
-          <MenuUserIcon icon={listIcon[3]} title='Quản lý đổi trả' />
-          <MenuUserIcon icon={<EnvironmentFilled />} title='Sổ địa chỉ' />
-          <MenuUserIcon icon={listIcon[5]} title='Thông tin thanh toán' />
-          <MenuUserIcon icon={listIcon[6]} title='Nhận xét sản phẩm đã mua' />
-          <MenuUserIcon icon={listIcon[8]} title='Nhận xét của tôi' />
-          <MenuUserIcon icon={listIcon[9]} title='Mã giảm giá' />
-          <MenuUserIcon icon={listIcon[7]} title='Quản lý Tiki Xu của tôi' />
-          <MenuUserIcon icon={listIcon[10]} title='BookCare của tôi' />
-        </div>
-      </Drawer>
+          <Link to='/user/profile'>
+            <MenuUserIcon
+              icon={<PersonRoundedIcon />}
+              title='Thông tin tài khoản'
+            />
+          </Link>
+            <MenuUserIcon icon={<BellFilled />} title='Thông báo của tôi' />
+          <Link to='/user/order'> <MenuUserIcon icon={listIcon[2]} title='Quản lý đơn hàng' /></Link>
+            <MenuUserIcon icon={listIcon[3]} title='Quản lý đổi trả' />
+            <MenuUserIcon icon={<EnvironmentFilled />} title='Sổ địa chỉ' />
+            <MenuUserIcon icon={listIcon[5]} title='Thông tin thanh toán' />
+            <MenuUserIcon icon={listIcon[6]} title='Nhận xét sản phẩm đã mua' />
+            <MenuUserIcon icon={listIcon[8]} title='Nhận xét của tôi' />
+            <MenuUserIcon icon={listIcon[9]} title='Mã giảm giá' />
+            <MenuUserIcon icon={listIcon[7]} title='Quản lý Tiki Xu của tôi' />
+            <MenuUserIcon icon={listIcon[10]} title='BookCare của tôi' />
+          </div>
+          </Drawer>
       </div>
       <div className={styles.manuUserContainer}>
         <div className={styles.header}>
