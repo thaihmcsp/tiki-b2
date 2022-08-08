@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import style from '../allOder/AllOder.module.css'
 function AllOder(props) {
-     console.log(4, props)
      const [statusTitle, setstatusTitle] = useState()
      const [daterender, setdaterender] = useState([...props.newdata]);
      useEffect(() => {
           setdaterender(props.newdata.slice(props.start, props.start + 3))
      }, [props.start, props.newdata])
 
-     console.log(11, daterender)
      return (
           <div className={style.Alloder_Title}>
                {daterender.map(function (value, index) {

@@ -63,3 +63,23 @@
     border-radius: 6px;
 
 }
+.InputsetEmail {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.InputsetEmail input {
+    margin-top: 10px;
+    padding-left: 15px;
+}
+.InputsetPhone {
+    margin-bottom: 10px;
+}
+.InputsetPhone input {
+width: 100%;
+}
+.InputsetName input {
+    width: 100%;
+    padding-left: 15px;
+}
+.SetPhone {}

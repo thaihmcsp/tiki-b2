@@ -22,12 +22,12 @@ import Order from './page/user/order/Order';
 import Detail from './page/user/detail/Detail';
 import ShopProfile from './page/shop/shopProfile/ShopProfile';
 import Product from './page/shop/productManagement/Product';
+import Datatest from './page/user/order/Datatest';
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
-
                 <Route path='/sign-up' element={<SignUp />} />
                 <Route path='/sign-in' element={<SignIn />} />
                 <Route path='/create-shop' element={<CreateShop />} />
@@ -36,7 +36,6 @@ function App() {
                     <Route path='shop' element={<Shop />}></Route>
                     <Route path='user' element={<User />}></Route>
                 </Route>
-
                 <Route path='/shop' element={<Product />} >
                     <Route path='/shop/dashboard' element={<ShopDashBoardAll />} />
                     <Route path='/shop/profile' element={<ShopProfile />} />

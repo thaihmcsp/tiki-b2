@@ -1,107 +1,54 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import OderTitle from './odertitle/OderTitle'
 import styles from './odertitle/OderTitle.module.css'
 import { useState } from 'react'
 import AllOder from './allOder/AllOder'
 import { Pagination } from 'antd';
+import { data } from './Orderdata';
+
 function Order() {
-  const [dataOderTitle, setdataOderTitle] = useState([
-    {
-      img: 'https://salt.tikicdn.com/cache/280x280/ts/product/0d/14/6a/f506972108510f0f5e9a6677060caf4d.jpg',
-      name: 'táo',
-      price: 100000,
-      shopId: {
-        shopname: 'chuyên hoa quả miền bắc',
-        shoplogo: 'https://kynguyenlamdep.com/wp-content/uploads/2022/06/anh-gai-xinh-cuc-dep.jpg',
-      },
-      status: 'Chờ thanh toán',
-      sold: 3,
-    },
-    {
-      img: 'https://salt.tikicdn.com/cache/280x280/ts/product/0d/14/6a/f506972108510f0f5e9a6677060caf4d.jpg',
-      name: 'táo',
-      price: 100000,
-      status: 'Chờ thanh toán',
-      shopId: {
-        shopname: 'Thiết Bị Điện miền bắc',
-        shoplogo: 'https://kynguyenlamdep.com/wp-content/uploads/2022/06/anh-gai-xinh-cuc-dep.jpg',
-      },
+  const newdata = []
+  function DATA() {
+    data.listOrder.map((value, index) => {
+      let valueStatus = '';
+      if (value.status === 'pending') {
+        valueStatus = 'Đang xử lí'
+      } else if (value.status === 'shipping') {
+        valueStatus = 'Đang vận chuyển'
+      } else if (value.status === 'waitpayment') {
+        valueStatus = 'Chờ thanh toán'
+      } else if (value.status === 'cancel') {
+        valueStatus = 'Đã Hủy'
+      } else if (value.status === 'complete') {
+        valueStatus = 'Đã Giao'
+      };
+      value.listProduct.map((val, i) => {
+        newdata.push(
+          {
+            name: `${val.productDetailId.productId.productName}`,
+            sold: `${val.quantity}`,
+            shopId: {
+              shopname: `${value.shopId.shopName}`,
+              shoplogo: `${value.shopId.logo}`
+            },
+            status: `${valueStatus}`,
+            price: `${val.productDetailId.price}`,
+            img: ``
 
-      sold: 3,
-    },
-    {
-      img: 'https://salt.tikicdn.com/cache/280x280/ts/product/0d/14/6a/f506972108510f0f5e9a6677060caf4d.jpg',
-      name: 'táo',
-      price: 100000,
-      status: 'Chờ thanh toán',
-      shopId: {
-        shopname: 'TV miền bắc',
-        shoplogo: 'https://kynguyenlamdep.com/wp-content/uploads/2022/06/anh-gai-xinh-cuc-dep.jpg',
-      },
+          }
+        )
+      })
+      console.log(41, newdata)
+    })
+    return newdata
+  }
+  const [dataOderTitle, setdataOderTitle] = useState(DATA());
 
-      sold: 3,
-    },
-    {
-      img: 'https://salt.tikicdn.com/cache/280x280/ts/product/0d/14/6a/f506972108510f0f5e9a6677060caf4d.jpg',
-      name: 'táo',
-      price: 100000,
-      status: 'Chờ thanh toán',
-      shopId: {
-        shopname: 'Laptop miền bắc',
-        shoplogo: 'https://kynguyenlamdep.com/wp-content/uploads/2022/06/anh-gai-xinh-cuc-dep.jpg',
-      },
+  console.log(19, newdata)
+  console.log(dataOderTitle)
 
-      sold: 3,
-    },
-    {
-      img: 'https://salt.tikicdn.com/cache/280x280/ts/product/0d/14/6a/f506972108510f0f5e9a6677060caf4d.jpg',
-      name: 'sách vở',
-      price: 100000,
-      status: 'Đang ',
-      shopId: {
-        shopname: 'chuyên hoa quả miền trung',
-        shoplogo: 'https://kynguyenlamdep.com/wp-content/uploads/2022/06/anh-gai-xinh-cuc-dep.jpg',
-      },
 
-      sold: 12,
-    },
-    {
-      img: 'https://salt.tikicdn.com/cache/280x280/ts/product/0d/14/6a/f506972108510f0f5e9a6677060caf4d.jpg',
-      name: 'quần áo',
-      price: 100000,
-      status: 'Đang xử lí',
-      shopId: {
-        shopname: 'chuyên hoa quả miền nam',
-        shoplogo: 'https://kynguyenlamdep.com/wp-content/uploads/2022/06/anh-gai-xinh-cuc-dep.jpg',
-      },
 
-      sold: 1,
-    },
-    {
-      img: 'https://salt.tikicdn.com/cache/280x280/ts/product/0d/14/6a/f506972108510f0f5e9a6677060caf4d.jpg',
-      name: 'thiết bị điện ',
-      price: 100000,
-      status: 'Đã Hủy',
-      shopId: {
-        shopname: 'chuyên hoa quả miền trung',
-        shoplogo: 'https://kynguyenlamdep.com/wp-content/uploads/2022/06/anh-gai-xinh-cuc-dep.jpg',
-      },
-
-      sold: 1,
-    },
-    {
-      img: 'https://salt.tikicdn.com/cache/280x280/ts/product/0d/14/6a/f506972108510f0f5e9a6677060caf4d.jpg',
-      name: 'dụng cụ nhà bếp',
-      price: 100000,
-      status: 'Đã Giao',
-      shopId: {
-        shopname: 'chuyên hoa quả miền nam',
-        shoplogo: 'https://kynguyenlamdep.com/wp-content/uploads/2022/06/anh-gai-xinh-cuc-dep.jpg',
-      },
-      sold: 1,
-    }
-  ]
-  )
   const [status, setstatus] = useState('none')
   const [dataInputSeach, setdataInputSeach] = useState([...dataOderTitle])
   const [emptyOder, setemptyOder] = useState('')

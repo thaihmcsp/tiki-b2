@@ -8,14 +8,10 @@ function Pending(props) {
         </div>
     )
 }
-const abc = `{ <div>
-    <p>ok</p>
-</div>}`
-console.log(14, abc)
 const AccepctShop = (id, newdata, listdata) => {
     let index = newdata.findIndex((value) => value.Shopid === id);
     let clone = [...newdata]
-    clone[index].status = 'active';
+    clone[index].status = 'accepted';
     listdata(clone);
 }
 const RefuseShop = (id, newdata, listdata) => {
@@ -103,7 +99,7 @@ function ShopList(props) {
                         </div>
                         <div className={style.Options}>
                             {value.status === 'pending' ? <Pending AccepctShop={AccepctShop} id={value.Shopid} newdata={props.newListdata} setnewListdata={props.setnewListdata} RefuseShop={RefuseShop} /> : null}
-                            {value.status === 'active' ? <Active id={value.Shopid} newdata={props.newListdata} setnewListdata={props.setnewListdata} /> : null}
+                            {value.status === 'accepted' ? <Active id={value.Shopid} newdata={props.newListdata} setnewListdata={props.setnewListdata} /> : null}
                             {value.status === 'block' ? <Block UnblockShop={UnblockShop} id={value.Shopid} newdata={props.newListdata} setnewListdata={props.setnewListdata} /> : null}
                         </div>
                     </div>
