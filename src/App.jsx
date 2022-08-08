@@ -25,7 +25,10 @@ import Oder from './page/user/order/Order';
 import Shop from './page/admin/shopManagement/Shop';
 import Detail from "./page/user/detail/Detail";
 import AddItem from "./page/shop/productManagement/priceItem/addItem_Phu/AddItem";
-
+import ShopProfile from './page/shop/shopProfile/ShopProfile';
+import ShopMenu from './page/shop/productManagement/Product';
+console.log(30, ShopMenu);
+console.log(31, UserInfoMenu);
 function App() {
     return (
         <BrowserRouter>
@@ -42,12 +45,15 @@ function App() {
                     <Route path='/' element={<Home />} />
                     <Route path='/filter' element={<Filter />} />
                     <Route path='/shop/dashboard' element={<ShopDashBoardAll />} />
-                    <Route path='/shop/product/manage' element={<Product />} />
+                    {/* <Route path='/shop/product/manage' element={<Product />} /> */}
                     <Route path='/user' element={<UserInfoMenu />}>
                         <Route path='/user' element={<div className='profile'> <UserInfo /> <ProfileList /> </div>} />
                     </Route>
-                    <Route path='/ShopHome' element={<ShopHome />} />
-                    <Route path='/shop' element={<Shop></Shop>} />
+
+                    <Route path='/shop/ShopHome' element={<ShopHome />} />
+
+
+
                     <Route path="/addItem" element={<AddItem />} />
                     <Route path='/detail' element={<Detail />} />
                 </Route>
@@ -55,16 +61,20 @@ function App() {
 
                 <Route path='/admin' element={<Admin />} >
                     <Route path='/admin/category' element={<Category />} />
+                    <Route path='/admin/shop' element={<Shop></Shop>} ></Route>
+                </Route>
+                <Route path='/shop' element={<ShopMenu />} >
+                    <Route path='/shop/profile' element={<ShopProfile />} />
                 </Route>
 
                 <Route path='*'
                     element={<SignIn />} />
 
-                <Route path='/user' element={<UserInfoMenu />}>
+                {/* <Route path='/user' element={<UserInfoMenu />}>
                     <Route exact path='/user/profile' element={<PrivateRouter />}>
                         <Route exact path='/user/profile' element={<div className='profile'> <UserInfo /> <ProfileList /> </div>} />
                     </Route>
-                </Route>
+                </Route> */}
 
 
             </Routes>

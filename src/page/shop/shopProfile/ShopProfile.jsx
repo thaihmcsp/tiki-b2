@@ -4,7 +4,8 @@ import 'antd/dist/antd.css';
 import { InfoCircleOutlined, RightOutlined } from '@ant-design/icons';
 import { Button, Modal } from 'antd';
 function ShopProfile() {
-    const data = JSON.parse(window.localStorage.getItem('tiki-user'))
+    const data = JSON.parse(window.localStorage.getItem('tiki-user'));
+    console.log(data)
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [checkModal, setcheckModal] = useState('');
     const showModal = (e) => {
@@ -68,6 +69,8 @@ function ShopProfile() {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
+
+    console.log(72, 'shopProfile')
     return (
 
         <div>
