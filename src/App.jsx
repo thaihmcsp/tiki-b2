@@ -30,31 +30,43 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
+
                 <Route path='/sign-up' element={<SignUp />} />
+
                 <Route path='/sign-in' element={<SignIn />} />
                 <Route path='/sign-in-admin' element={<AdminLogin />} />
                 <Route path='/sign-in-shop' element={<ShopLogin />} />
                 <Route path='/create-shop' element={<CreateShop />} />
-                {/* <Route path='/order' element={<Order />} /> */}
+                <Route path='/order' element={<Order />} />
                 <Route path='/' element={<Header />}>
                     <Route path='/' element={<Home />} />
                     <Route path='/filter' element={<Filter />} />
                     <Route path='/shop/dashboard' element={<ShopDashBoardAll />} />
-                    {/* <Route path='/shop/product/manage' element={<Product />} /> */}
+                    <Route path='/shop/product/manage' element={<Product />} />
                     <Route path='/user' element={<UserInfoMenu />}>
                         <Route path='/user' element={<div className='profile'> <UserInfo /> <ProfileList /> </div>} />
                     </Route>
-                    {/* <Route path='/ShopHome' element={<ShopHome />} /> */}
+                    <Route path='/ShopHome' element={<ShopHome />} />
                     <Route path='/shop' element={<Shop></Shop>} />
-                    {/* <Route path="/addItem" element={<AddItem />} /> */}
-                    {/* <Route path='/detail' element={<Detail />} /> */}
+                    <Route path="/addItem" element={<AddItem />} />
+                    <Route path='/detail' element={<Detail />} />
                 </Route>
+                {/* ///private */}
 
                 <Route path='/admin' element={<Admin />} >
                     <Route path='/admin/category' element={<Category />} />
                 </Route>
 
-                <Route path='*' element={<h1>error 404. not found</h1>} />
+                <Route path='*'
+                    element={<SignIn />} />
+
+                <Route path='/user' element={<UserInfoMenu />}>
+                    <Route exact path='/user/profile' element={<PrivateRouter />}>
+                        <Route exact path='/user/profile' element={<div className='profile'> <UserInfo /> <ProfileList /> </div>} />
+                    </Route>
+                </Route>
+
+
             </Routes>
         </BrowserRouter>
     );
