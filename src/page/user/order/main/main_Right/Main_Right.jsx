@@ -1,9 +1,11 @@
 import React from 'react';
+import { Data } from './Data';
+import { ListAddress } from './ListAddress';
 
 import './StyleRight.css'
 
-
-function Main_Right() {
+function Main_Right({data,money}) {
+   console.log(8,data)
     function showProduct() {
         document.querySelector('.left').style.display = 'block';
         console.log('abc');
@@ -18,18 +20,25 @@ function Main_Right() {
 
 
                 }>
-                <div className="bVA-DDf cTGPxG">
+                                            
+                        <div className="bVA-DDf cTGPxG">
                     <div className="block-header">
                         <h3 className="block-header__title">Giao tới</h3><a className="block-header__nav"
                             href="/checkout/shipping?fbclid=IwAR2RVS7RSAt7l1Hqgjp2s57e5d59YaBz-ZeKEwLvp_MPbb3LskkQq34F1Lo">Thay
                             đổi</a>
                     </div>
                     <div className="customer_info">
-                        <p className="customer_info__name">Tiến Thành</p><i></i>
-                        <p className="customer_info__phone">0387690974</p>
+                        <p className="customer_info__name">{data.name}</p><i></i>
+                        <p className="customer_info__phone">{data.phone}</p>
                     </div>
-                    <div className="address">380 bd, Phường Chương Dương Độ, Quận Hoàn Kiếm, Hà Nội</div>
-                </div>
+                    <div className="address">{data.address}</div>
+                </div> 
+                        
+
+                        
+
+                        
+                
             </div>
             <div className="bVA-DDf jMrZxT">
                 <div className="block-header">
@@ -119,7 +128,7 @@ function Main_Right() {
                     </div>
                 </div>
 
-                <div hidden="" className="cIdCpS">
+                {/* <div hidden="" className="cIdCpS">
                     <div className="list-container">
                         <div className="bSkntM">
                             <div className="item-info">
@@ -138,11 +147,11 @@ function Main_Right() {
                             <div className="item-price">0 ₫</div>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className="eWlcNY">
                     <div className="bSkntM">
-                        <div className="summary-label">Tạm tính</div>
-                        <div className="summary-value">81.000đ</div>
+                        <div className="summary-label" >Tạm tính</div>
+                        <div className="summary-value">{money}</div>
                     </div>
                     <div className="bSkntM">
                         <div className="summary-label">Phí vận chuyển</div>
@@ -153,7 +162,7 @@ function Main_Right() {
                 <div className="bSkntM order-total">
                     <div className="order-total__label">Tổng tiền</div>
                     <div className="order-total__value">
-                        <div className="order-total__total">99.000 ₫</div>
+                        <div className="order-total__total">{money}</div>
                         <div className="order-total__additional-text">(Đã bao gồm VAT nếu có)</div>
                     </div>
                 </div>

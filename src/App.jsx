@@ -24,12 +24,16 @@ import Oder from './page/user/order/Order';
 import Shop from './page/admin/shopManagement/Shop';
 import Detail from "./page/user/detail/Detail";
 import AddItem from "./page/shop/productManagement/priceItem/addItem_Phu/AddItem";
+import Odertotal from './page/user/order/ordertotal/Odertotal';
+import PrivateRouter from './components/PrivateRouter';
 
 function App() {
   return (
     <BrowserRouter>
         <Routes>
+          
             <Route path='/sign-up' element={<SignUp/>} />
+     
             <Route path='/sign-in' element={<SignIn/>} />
             <Route path='/sign-in-admin' element={<AdminLogin/>} />
             <Route path='/sign-in-shop' element={<ShopLogin/>} />
@@ -48,12 +52,22 @@ function App() {
                 <Route path="/addItem" element={<AddItem/>}/>
                 <Route path='/detail' element={<Detail />}/>
             </Route>
+            {/* ///private */}
 
             <Route path='/admin' element={<Admin/>} >
               <Route path='/admin/category' element={ <Category /> } />
             </Route>
 
-            <Route path='*' element={<h1>error 404. not found</h1>}/>
+            <Route path='*'
+             element={<SignIn/>}/>
+             
+             <Route path='/user' element={<UserInfoMenu/>}> 
+                  <Route exact path='/user/profile' element={<PrivateRouter/>}>
+                        <Route exact path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> }/>
+                  </Route>
+              </Route>
+            
+            
         </Routes>
     </BrowserRouter>
   );

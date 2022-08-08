@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import Footer from './Footer';
-// import axios from 'axios'
-import 'antd/dist/antd.css';
-import { SearchOutlined } from '@ant-design/icons';
-import {postAPI,getAPI} from '../config/api';
-// import  style from'./Header.module.css';
+import React, { useState } from 'react'
+import { Outlet } from 'react-router-dom'
+import Footer from './Footer'
+import axios from 'axios'
+import './Header.css'
 // import { Link } from "react-router-dom";
 
 import {useSelector} from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
 
 import { userLogin } from '../redux/userSlice';
-import { style } from '@mui/system'
-// import { withCookies, Cookies } from 'react-cookie'
-import './Header.css'
 
 function Header(props) {
-  const nav = useNavigate()
   const [word, setWord] = useState([]);
   const [search, setSearch] = useState("");
   
@@ -30,59 +23,48 @@ function Header(props) {
 
   const user_information = useSelector(function(state){ 
     return state.user})
-   function SearchTitle(e) {
+  function SearchTitle(e) {
+
 
     let getInputSearch=document.querySelector(".componentHeaderInput").value; 
     setSearch(getInputSearch);
     // props.getValue(getInputSearch);
     clearTimeout(setTime)
-    setTime =setTimeout(()=>{
-      const res =  getAPI(`/product/find-product-by-name?productName=${e}`)
-      .then((data) =>{
-        console.log(36,data.data.product)
-        let dataSearch = data.data.product;
-          if (dataSearch.length > 0) {
-            setWord(dataSearch);
-          } else {
-            setWord([
-              {
-                productName:
-                  "không có kết quả nào phù hợp, mời bạn nhập lại !!!",
-              },
-            ]);
-          }
-          clearTimeout(setTime);
-        
-      })
-      .catch((err) => {
-        console.log(err);
-        clearTimeout(setTime);
-      })
-    },[500])
+    try {
+       setTime= setTimeout(function () {
+            
+        }, 500)
+    } catch (e) {
+        console.log('eeee!')
+        console.log(e)
+    }
+    // setTime =setTimeout(()=>{
+      
+    //   .get(`/product/find-product-by-name?productName=${e}`)
+    //   .then(function(res){
+    //     console.log(12,res);
+    //     let dataSearch = res.data;
+    //       if (dataSearch.length > 0) {
+    //         setWord(dataSearch);
+    //       } else {
+    //         setWord([
+    //           {
+    //             productName:
+    //               "không có kết quả tìm kiếm",
+    //           },
+    //         ]);
+    //       }
+          
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     clearTimeout(setTime);
+    //   });
+    // },[500])
 
   }
-  function on_mypage() {
-    nav("/user/profile");
-  }
-  //đăng xuất xóa cookie và local
- function logout() {
-
-    window.localStorage.removeItem("tiki-user");
-    document.cookie = 'tiki-user' +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+ 
   
-    nav("/sign-in");
-  }
-  ///hiển thị số lượng Sản phâm ở giỏ hàng
-  const  [numberCart,setNumberCart]=useState(0)
-  useEffect(()=>{
-    getAPI("/cart/get-loged-in-cart")
-    .then((data)=>{
-      setNumberCart(data.data.cart.listProduct.length)
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  },[])
   // const  userLogin = useSelector(function (state) {
     
   //   return state.user;
@@ -105,34 +87,15 @@ function Header(props) {
                   <div className="InputCover">
                       <input type="text" name="" id="" className = 'componentHeaderInput' 
                       placeholder = 'Tìm sản phẩm, danh mục hay thương hiệu mong muốn ...' 
-                      onChange={(e) => {
-                        document.querySelector('.HeaderCoverInput').setAttribute('style','display:none')
-                        SearchTitle(e.target.value)} }
-                      
+                      onChange={(e) => SearchTitle(e.target.value)}
                       />
                       <div className="ShowCoverInput">
                             <a href=""className='HeaderCoverInput'>
                                 <span className='HeaderCoverInputText'>Săn Sale Công Nghệ</span>
-                                <img src
-                                ="https://salt.tikicdn.com/cache/140x28/ts/banner/ec/32/4e/2227fe4869feaf2a75598c0ab0a8cf29.png"
-                                 alt="" />
+                                <img src="https://salt.tikicdn.com/cache/140x28/ts/banner/ec/32/4e/2227fe4869feaf2a75598c0ab0a8cf29.png" alt="" />
                             </a>
-                            <div className="HistorySeach"
-                               style={search ? { display: "inline-block" } : { display: "none" }}
-                              
-                              >
-                                {  
-                                      word.slice(0,5).map(value=>{
-                                                return(
-                                                    <div  className="SearchWord"> 
-                                                                       <SearchOutlined className = 'seach-icon'/>
-                                                                      {value.productName}
-                                                      </div>
-                                                           )       
-                                                                
-                                                           })
-                                                        }
-                                            {/* <p className='ListHistorySeach'>
+                            <div className="HistorySeach">
+                                   <p className='ListHistorySeach'>
                                       <img src="https://salt.tikicdn.com/ts/upload/e8/aa/26/42a11360f906c4e769a0ff144d04bfe1.png" alt="" witdth = '40px' height= '40px' />
                                       tai  nghe blutool
                                   </p>                          
@@ -143,9 +106,8 @@ function Header(props) {
                                    <p  className='ListHistorySeach'>
                                       <img src="https://salt.tikicdn.com/ts/upload/e8/aa/26/42a11360f906c4e769a0ff144d04bfe1.png" alt=""  witdth = '40px' height= '40px'/>
                                       Điều hòa không khí
-                                  </p>                           */}
+                                  </p>                          
                             </div>
-                            
                             <div className="CoverInputListItems">
                                 <div className="InputCoverItemTop">
                                   <img src="https://salt.tikicdn.com/ts/upload/4f/03/a0/2455cd7c0f3aef0c4fd58aa7ff93545a.png" alt=""  width='27px' height='25px'  />
@@ -259,37 +221,8 @@ function Header(props) {
                  <span>{ user_information.username? user_information.username:'hello'}</span>
                  <img src="https://salt.tikicdn.com/ts/upload/d7/d4/a8/34939af2da1ceeeae9f95b7485784233.png" alt=""  className = 'HeaderUserImgdown'/>
                  </div>
-
-
                </span>
                </div> 
-               <div className="header_navbar_iteam_mypage_selec">
-                    <div
-                        className="header_navbar_iteam_mypage_selec-item"
-                     
-                      >
-                        Đơn hàng của tôi
-                      </div>
-                      <div
-                        className="header_navbar_iteam_mypage_selec-item"
-                     
-                      >
-                       Thông báo của tôi
-                      </div>
-                      <div
-                        className="header_navbar_iteam_mypage_selec-item"
-                        onClick={on_mypage}
-                      >
-                        Tài khoản của tôi
-                      </div>
-                      <div
-                        className="header_navbar_iteam_mypage_selec-item"
-                        onClick={logout}
-                      >
-                        Đăng xuất
-                      </div>
-                    </div>
-
                
               
               </div>
@@ -321,7 +254,7 @@ function Header(props) {
                 <div className="HeaderTopContainerCartWallet cursorPoiter">
                   <div className="HeaderWalletCart">
                   <img src="https://salt.tikicdn.com/ts/upload/40/44/6c/b80ad73e5e84aeb71c08e5d8d438eaa1.png" alt="" className = 'HeaderCart' />
-                    <span className = 'HeaderCartTitle'> {numberCart}</span>
+                    <span className = 'HeaderCartTitle'>0</span>
                   </div>
                     <span className = 'HeaderCartText'>Giỏ Hàng</span>
                 </div>
