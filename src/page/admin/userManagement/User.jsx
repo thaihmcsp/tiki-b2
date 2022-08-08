@@ -151,7 +151,8 @@ function User() {
     setstart(pageSize*(page-1));
   }
   return (
-    <div className={style.UserManage}>
+  <div className={style.User}>
+        <div className={style.UserManage}>
         <div className={style.UserManageHeader}>
             <div className={style.HeaderLeft}>
                   <h3 onClick={ListUser}>LIST USER</h3>
@@ -168,6 +169,7 @@ function User() {
           <Pagination  itemRender={itemRender} defaultCurrent={1} current = {current} total={newListdata.length} onChange = {onChangePagination} defaultPageSize = {5} />
       </div>
     </div>
+  </div>
   )
 }
 

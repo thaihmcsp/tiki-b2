@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from '../allOder/AllOder.module.css'
 function AllOder(props) {
+     console.log(4,props)
   const [statusTitle,setstatusTitle] = useState()  
-  if( props.newdata.length === 0) {
-     // document.querySelector(`${style.OderTitle}`).setAttribute('style', 'display: none')
-     // document.querySelector(`${style.EmptyOder}`).setAttribute("style", "display: flex;")
-  }
+  const [daterender,setdaterender] = useState([...props.newdata]);
+  useEffect(()=> {
+     setdaterender(props.newdata.slice(props.start,props.start+3))
+  },[props.start,props.newdata     ])
+
+  console.log(11,daterender)
     return (
-    <div className={style.Alloder_Title}>
-         {props.newdata.map(function (value,index){
-          console.log(value);
+     <div className={style.Alloder_Title}>
+         {daterender.map(function (value,index){
            return <div key={index} className = {style.OderTitle}>
                 <p className={style.Oder_HeaderTitle}>{value.status}</p>
                <div className={style.MidleTitle}>
@@ -24,7 +26,7 @@ function AllOder(props) {
                    
                </div>
                <div className={style.BottomTitle}>
-                    <p style={{textAlign: 'right',fontSize: '16px',opacity:'0.7',marginBottom: '10px'}} >Tổng tiền : <span style={{opacity:'1', fontWeight:'bold',color:'red'}} >{ (value.price * value.number).toLocaleString()}đ</span></p>
+                    <p style={{textAlign: 'right',fontSize: '16px',opacity:'0.7',marginBottom: '5px'}} >Tổng tiền : <span style={{opacity:'1', fontWeight:'bold',color:'red'}} >{ (value.price * value.number).toLocaleString()}đ</span></p>
                    <div style={{textAlign: 'right'}}>
                         <button className={style.BottomTitle_Button}>Mua lại</button>
                         <button  className={style.BottomTitle_Button}>Xem Chi Tiết</button>

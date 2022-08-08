@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Footer from './Footer';
+import './Header.css'
 // import axios from 'axios'
 import 'antd/dist/antd.css';
 import { SearchOutlined } from '@ant-design/icons';

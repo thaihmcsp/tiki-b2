@@ -8,7 +8,6 @@ import { useOutletContext } from "react-router-dom";
 import 'antd/dist/antd.css';
 function Category() {
   const data = useOutletContext()
-  console.log(data)
   const [pagination,setPagination] = useState([])
   const [listData, setListData] = useState(ListCategory)
   const [pageSize, setPageSize] = useState(6)
@@ -24,7 +23,6 @@ function Category() {
       const newData =  ListCategory.filter(function(item) {
         return item.name.toLowerCase().includes(data)
       })
-      console.log(21, newData)
       return newData
     })  
   },[data])
@@ -48,6 +46,7 @@ function Category() {
     console.log(key);
   };
   const showModal = () => {
+    console.log(isModalVisible)
     setIsModalVisible(true);
   };
 
@@ -61,8 +60,8 @@ function Category() {
   return (
     <div>
       <div className={styles.category}> 
-      <>
-      <Modal title="Admin Modal" 
+      <div>
+      <Modal title="Admin Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}
       footer= {
         <div>
           <button className={styles.categorybutton}>update</button>
@@ -70,13 +69,12 @@ function Category() {
           <button className={styles.categorybutton}> delete</button>
           <button className={styles.categorybutton}>cancel</button>
         </div>
-      }
-      visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      }>
         <input type="text" className={styles.modalInput} placeholder='Ảnh'/>
         <input type="text" className={styles.modalInput} placeholder='Tên sản phẩm'/>
         <input type="text" className={styles.modalInput} placeholder='ID'/>
       </Modal>
-      </>
+      </div>
         <div className={styles.PageCategory}>Categories</div>
         <div className={styles.listProductCategory}>
         {pagination.map((value, index) =>{
@@ -96,8 +94,7 @@ function Category() {
           })}
           </div>
           <Pagination className={styles.pagination} total={listData.length} itemRender={itemRender} defaultPageSize={6} onChange={SoListData} defaultCurrent={1} />;
-      </div>
-      
+      </div>     
     </div>
   )
 }

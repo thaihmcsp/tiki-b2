@@ -11,6 +11,7 @@ function UserInfoMenu() {
                 <div>
                     <ProfileListHeader/>
                     <Outlet/>
+                    
                 </div>
             </div>
         </div>
