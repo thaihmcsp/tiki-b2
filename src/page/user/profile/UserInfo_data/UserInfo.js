@@ -3,128 +3,25 @@ import styles from './UserInfor.module.css';
 import data from './data';
 import DataDay from './DataDay';
 import 'antd/dist/antd.css';
-import { Radio } from 'antd';
+import { Radio, Modal } from 'antd';
 import DataMonth from './DataMonth';
 import Countries from './Countries';
-import { Button, Modal } from 'antd';
-import { useState } from 'react';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { message, Upload } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
-import './userinfor.css';
-import { patchAPI } from '../../../../config/api';
-import { updateInfo } from '../../../../redux/userSlice';
+import { Link, useNavigate } from 'react-router-dom'
+
+// const abc = () =>{
+//   if(localStorage.getItem('tiki-user1') == null){
+//     console.log('abc')  
+//     window.location = '/sign-in'
+//   }
+// }
+// abc()
 
 
-const getBase64 = (img, callback) => {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-};
 
-const beforeUpload = (file) => {
-  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-
-  if (!isJpgOrPng) {
-    message.error('You can only upload JPG/PNG file!');
-  }
-
-  const isLt2M = file.size / 1024 / 1024 < 2;
-
-  if (!isLt2M) {
-    message.error('Image must smaller than 2MB!');
-  }
-
-  return isJpgOrPng && isLt2M;
-};
 function UserInfo() {
-  const dispatch = useDispatch()
-  const user = useSelector((state => state.user))
-  console.log(43,user)
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState();
-  const [imageObject, setImageObject] = useState({});
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = async () => {
-    try {
-      const formData = new FormData();
-      formData.append('avatar', imageObject)
-      const res = await patchAPI('/user/update-user-info/'+user._id, formData);
-      console.log(58, res);
-      const action = updateInfo(res.data.user)
-      dispatch(action)
-      setIsModalVisible(false);
-    } catch (error) {
-      console.log(error)
-    }
-
-  };
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+  const nav = useNavigate()
 
 
-
-  const handleChange = (info) => {
-    let url = URL.createObjectURL(info.file.originFileObj);
-    setImageObject(info.file.originFileObj);
-    setImageUrl(url)
-
-    // if (info.file.status === 'uploading') {
-    //   setLoading(true);
-    //   return;
-    // }
-
-    // if (info.file.status === 'done') {
-    //   // Get this url from response in real world.
-    //   getBase64(info.file.originFileObj, (url) => {
-    //     setLoading(false);
-    //     setImageUrl(url);
-    //   });
-    // }
-  };
-
-  const uploadButton = (
-    <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div
-        style={{
-          marginTop: 8,
-        }}
-      >
-        Upload
-      </div>
-    </div>
-  );
-  async function handleUpdate () {
-    try {
-      const adusername = document.querySelector('#adusername').value;
-      const adFirstName = document.querySelector('#first_last_name').value;
-      const dateTime = document.querySelector('#datetime').value;
-      const dataMother = document.querySelector('#dataMonth').value;
-      const dataDay = document.querySelector('#dataDay').value;
-      const nationality = document.querySelector('#formCountriesInput').value;
-      const male = document.querySelector('#male');
-      const female = document.querySelector('#female');
-      const other = document.querySelector('#other');
-      let dateOfBirth
-      if(dateTime * 1 && dataMother * 1 && dataDay * 1){
-        dateOfBirth = dateTime+'/'+dataMother+'/'+dataDay
-      }
-      const name = await patchAPI('/user/update-user-info/'+user._id, {username: adusername, fullname:adFirstName,
-      dateOfBirth,
-      sex:male.checked===true?male.value:female.checked===true?female.value:other.value,nationality:nationality});
-      const action = updateInfo(name.data.user)
-      dispatch(action)
-    }catch (error){
-      console.log(97,error)
-    }
-  }
   return (
   <div className= {styles.userInfomation}>
     <>

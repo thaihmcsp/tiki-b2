@@ -1,0 +1,11 @@
+.ProductBanner{
+    height: 415px;
+    background: #fff;
+}
+@media screen and (max-width: 768px){
+    .ProductBanner{
+        width: 100vw;
+        height: calc(100vw / 3);
+        background: #ffffff;
+    }
+}

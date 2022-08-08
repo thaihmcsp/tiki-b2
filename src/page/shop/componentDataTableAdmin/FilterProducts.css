@@ -1,0 +1,15 @@
+.FilterProducts_filter__Y3lFM .ant-input-affix-wrapper{
+    width: 70%;
+}
+.FilterProducts_filter__Y3lFM .ant-input-group.ant-input-group-compact > .ant-select:first-child > .ant-select-selector{
+    border-radius: 10px
+}
+.FilterProducts_filter__Y3lFM .ant-input-group.ant-input-group-compact > *:last-child{
+    border-radius: 10px;
+}
+.ant-table-cell{
+    width: 24%;
+}
+.ant-table-selection-column{
+    width: 4%;
+}

@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { PlusOutlined } from "@ant-design/icons";
+import Tablelock from "./Tablelock";
+import { Select } from "antd";
+import Variant from "./Variant";
 const PriceContainer = styled.div`
   padding: 20px;
   background: #fff;
@@ -52,9 +55,38 @@ const PriceContainer = styled.div`
       }
     }
   }
+  .btn-addItem {
+    color: #333;
+    border-style: solid;
+    background-color: #fff;
+    border-color: #c4c6cf;
+    border-radius: 8px;
+    padding: 0 12px;
+    height: 36px;
+    line-height: 34px;
+    font-size: 14px;
+    border-width: 1px;
+    margin-bottom: 8px;
+  }
+  .btn-addItem:hover {
+    color: #333;
+    background-color: #f2f3f7;
+    border-color: #f2f3f7;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+  }
 `;
 
 const PriceBar = styled.div`
+  .dada-required {
+    margin-bottom: 10px;
+  }
+  .dada-required::before {
+    margin-right: 4px;
+    content: "*";
+    color: #e64a4a;
+  }
   .tableTopToolBar {
     display: flex;
     margin-bottom: 4px;
@@ -165,7 +197,28 @@ const PriceBar = styled.div`
   }
 `;
 
-const PriceItem = () => {
+const PriceItem = (props) => {
+  const [data, setData] = React.useState({});
+  const [variant, setVariant] = React.useState({});
+  const [show, setShow] = React.useState(false);
+  const [showOne, setShowOne] = React.useState(false);
+  const [count, setCount] = React.useState(0);
+  const handleChangePrice = (e) => {
+    const valuePrice = document.getElementById("value-price").value;
+    const valueSpecial = document.getElementById("value-special-price").value;
+    const valueWarehouse = document.getElementById("value-warehouse").value;
+    const valueSellerKu = document.getElementById("value-sellerKu").value;
+    setData({ valuePrice, valueSpecial, valueWarehouse, valueSellerKu });
+  };
+
+  const handleOpenVariants = (e) => {
+    setShow(true);
+  };
+
+  const handleOpenVariantsOne = (e) => {
+    setShowOne(true);
+  };
+
   return (
     <div>
       <PriceContainer>
@@ -176,7 +229,7 @@ const PriceItem = () => {
             <div className="price-item-form">
               <div className="price-item-form-control">
                 <div className="price-item-form-text">
-                  <button type="button" className="btn-addItem">
+                  <button type="button" className="btn-addItem" onClick={() => handleOpenVariants()}>
                     <PlusOutlined />
                     Thêm sản phẩm (0/2)
                   </button>
@@ -185,9 +238,17 @@ const PriceItem = () => {
             </div>
           </div>
         </div>
+        {show && <Variant handleOpenVariants={handleOpenVariants} />}
+        {show && (
+          <button type="button" className="btn-addItem" onClick={() => handleOpenVariantsOne()}>
+            <PlusOutlined />
+            Thêm sản phẩm (1/2)
+          </button>
+        )}
+        {showOne && <Variant handleOpenVariants={handleOpenVariants} />}
         <PriceBar>
           <div>
-            <span>Giá bán & Kho hàng</span>
+            <span className="dada-required">Giá bán & Kho hàng</span>
           </div>
           <div className="tableTopToolBar">
             <div className="next-form">
@@ -195,7 +256,7 @@ const PriceItem = () => {
                 <div className="next-input">
                   <span className="next-input-text">VND</span>
                   <span className="next-value">
-                    <input className="next-input-value" type="number" placeholder="Giá" />
+                    <input className="next-input-value " type="number" placeholder="Giá" id="value-price" />
                   </span>
                 </div>
               </div>
@@ -203,30 +264,31 @@ const PriceItem = () => {
                 <div className="next-input">
                   <span className="next-input-text">VND</span>
                   <span className="next-value">
-                    <input className="next-input-value with-especially" type="number" placeholder="Giá đặc biệt" />
+                    <input className="next-input-value with-especially" type="number" placeholder="Giá đặc biệt" id="value-special-price" />
                   </span>
                 </div>
               </div>
               <div className="input-field">
                 <div className="next-input">
                   <span className="next-value">
-                    <input className="next-input-value boder-warehouse" type="number" placeholder="Kho Hàng" />
+                    <input className="next-input-value boder-warehouse" type="number" placeholder="Kho Hàng" id="value-warehouse" />
                   </span>
                 </div>
               </div>
               <div className="input-field">
                 <div className="next-input">
                   <span className="next-value">
-                    <input className="next-input-value with-seller boder-warehouse " type="text" placeholder="Seller Ku" />
+                    <input className="next-input-value with-seller boder-warehouse " type="number" placeholder="Seller Ku" id="value-sellerKu" />
                   </span>
                 </div>
               </div>
             </div>
             <div className="addon">
-              <button>Áp dụng cho tất cả</button>
+              <button onClick={handleChangePrice}>Áp dụng cho tất cả</button>
             </div>
           </div>
         </PriceBar>
+        <Tablelock data={data} />
       </PriceContainer>
     </div>
   );

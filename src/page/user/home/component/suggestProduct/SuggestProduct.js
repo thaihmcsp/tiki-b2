@@ -27,7 +27,6 @@ function SuggestProduct() {
   });   
 
   window.addEventListener('resize', (event)=>{
-    console.log('resize')
     if(window.innerWidth <= 768){
       setMobile(true)
     }else{
