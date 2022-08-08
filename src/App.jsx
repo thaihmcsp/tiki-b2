@@ -13,16 +13,18 @@ import Profile from './page/user/profile/ProfileManu/ProfileMenu';
 import ProfileList from './page/user/profile/ProfileLeft/ProfileList';
 import ProfileListHeader from './page/user/profile/ProfileLeft/ProfileListHeader';
 import UserInfo from './page/user/profile/UserInfo_data/UserInfo';
-import Shop from '.././src/page/admin/shopManagement/Shop'
+// import Shop from '.././src/page/admin/shopManagement/Shop'
 import './App.css';
 import UserInfoMenu from './page/user/profile/UserInfoMenu';
 import Category from './page/admin/categoryManagement/Category';
-import User from './page/admin/userManagement/User';
-import Order from './page/user/order/Order';
-import Detail from './page/user/detail/Detail';
-import ShopProfile from './page/shop/shopProfile/ShopProfile';
-import Product from './page/shop/productManagement/Product';
-import Datatest from './page/user/order/Datatest';
+import AdminLogin from './page/admin/login/Login';
+import ShopLogin from './page/shop/login/Login';
+import Order from './page/user/order/maintotal/Main';
+import ShopHome from './page/shop/shopHome/ShopHome';
+import Oder from './page/user/order/Order';
+import Shop from './page/admin/shopManagement/Shop';
+import Detail from "./page/user/detail/Detail";
+import AddItem from "./page/shop/productManagement/priceItem/addItem_Phu/AddItem";
 
 function App() {
     return (
@@ -30,29 +32,30 @@ function App() {
             <Routes>
                 <Route path='/sign-up' element={<SignUp />} />
                 <Route path='/sign-in' element={<SignIn />} />
+                <Route path='/sign-in-admin' element={<AdminLogin />} />
+                <Route path='/sign-in-shop' element={<ShopLogin />} />
                 <Route path='/create-shop' element={<CreateShop />} />
-                <Route path='/admin' element={<Admin />} >
-                    <Route path='category' element={<Category />} />
-                    <Route path='shop' element={<Shop />}></Route>
-                    <Route path='user' element={<User />}></Route>
-                </Route>
-                <Route path='/shop' element={<Product />} >
-                    <Route path='/shop/dashboard' element={<ShopDashBoardAll />} />
-                    <Route path='/shop/profile' element={<ShopProfile />} />
-                </Route>
-                <Route path='/shop/product/manage' element={<Product1 />} />
+                {/* <Route path='/order' element={<Order />} /> */}
                 <Route path='/' element={<Header />}>
-                    <Route path='product' element={<Detail />} />
                     <Route path='/' element={<Home />} />
                     <Route path='/filter' element={<Filter />} />
+                    <Route path='/shop/dashboard' element={<ShopDashBoardAll />} />
+                    {/* <Route path='/shop/product/manage' element={<Product />} /> */}
                     <Route path='/user' element={<UserInfoMenu />}>
-                        <Route path='profile' element={<div className='profile'> <UserInfo /> <ProfileList /> </div>} />
-                        <Route path='order' element={<div className='order'><Order /></div>} />
+                        <Route path='/user' element={<div className='profile'> <UserInfo /> <ProfileList /> </div>} />
                     </Route>
+                    {/* <Route path='/ShopHome' element={<ShopHome />} /> */}
+                    <Route path='/shop' element={<Shop></Shop>} />
+                    {/* <Route path="/addItem" element={<AddItem />} /> */}
+                    {/* <Route path='/detail' element={<Detail />} /> */}
                 </Route>
+
+                <Route path='/admin' element={<Admin />} >
+                    <Route path='/admin/category' element={<Category />} />
+                </Route>
+
                 <Route path='*' element={<h1>error 404. not found</h1>} />
             </Routes>
-
         </BrowserRouter>
     );
 }

@@ -100,9 +100,6 @@
 .HeaderUserLogin{
     font-size: 11px;
 }
-.HeaderUserLogin span{
-    color: white;
-}
 .HeaderUserImgdown {
     width: 16px;
     height: 16px;
@@ -309,14 +306,6 @@
         display: none;
     }
 }
-@media  only screen and (min-width:769px) and (max-width:992px){
-    .HeaderBody {
-        display: none;
-    }
-    .HeaderMobie {
-        display: block;
-    }
-}
 @media only screen and (max-width: 768px){
     .HeaderBody{
         display: none;
@@ -326,37 +315,5 @@
 @media only screen and (max-width: 600px){
     .HeaderMobieBottom {
         width: 100vw;
-        padding: 0 0 5px 15px;
-    }
-    .HeaderMobieBottom::-webkit-scrollbar{
-        display: none;
-    }
-    .HeaderMobieTop img:last-child{
-        width: 20px;
-        height: 20px;  
-    }
-    .HeaderMobieTop img:nth-child(2){
-        height: 20px;
-    }
-    .HeaderMobieTop img:nth-child(1){
-        height: 11px;
-    }
-    .HeaderMobieTop{
-        padding: 10px 20px 0 16px;
-        align-items: baseline;
-    }
-    .HeaderMobieText{
-        padding: 0 8px;
-        font-size: 13px;
-        font-weight: 400;
-        width: 100%;
-        height: 30px;
-    }
-    .HeaderMobieText::placeholder{
-        opacity: 0.8;
-    }
-    .Header{
-        background: rgba(0 ,92, 214,1);
-        margin-bottom: -10px;
     }
 }
