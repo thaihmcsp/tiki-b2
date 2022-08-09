@@ -1,8 +1,8 @@
 import "./App.css";
-import Footer from "./components/Footer";
+import ShopProfile from "./page/shop/shopProfile/ShopProfile";
 
 function App() {
-  return <Footer />;
+  return <ShopProfile />;
 }
 
 export default App;

@@ -1,0 +1,10 @@
+.shop-profile {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-wrap: wrap;
+}
+.ShopModal {
+  background: white !important;
+  color: #1890ff;
+}
