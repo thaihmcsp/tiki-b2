@@ -23,6 +23,7 @@
 }
 .modalUpdate{
     display: flex;
+    align-items: center;
 }
 .modalUpdate p{
     margin-right: 6px;
@@ -35,9 +36,4 @@
 }
 .container {
     width: 20% !important;
-}
-.modal{
-    display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
 }

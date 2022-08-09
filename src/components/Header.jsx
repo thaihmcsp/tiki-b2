@@ -1,11 +1,37 @@
-import React, { useState } from 'react'
-import { Outlet } from 'react-router-dom'
-import Footer from './Footer'
-import './Header.css'
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import Footer from './Footer';
+import './Header.css';
+import  style from'./Header.module.css';
 // import { Link } from "react-router-dom";
 
+import {useSelector} from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom'
+
+import { userLogin } from '../redux/userSlice';
 
 function Header() {
+  const user_information = useSelector(function(state){ 
+    
+    return state.user})
+  console.log(21,user_information)
+  
+   function user_log(){
+    return (
+      <div>
+        <p>ok</p>
+      </div>
+    )
+   }
+ 
+  
+  // const  userLogin = useSelector(function (state) {
+    
+  //   return state.user;
+  // });
+  // console.log(21, userLogin)
+  
+
   const [DataHeader,setDataHeader] = useState(['Thịt','Rau củ','Nhà cửa','Điện tử','Thiết Bị Số','Điện thoại','Mẹ & Bé'])
   return (
    <div>
@@ -138,17 +164,44 @@ function Header() {
                </div>
               </div>
             <div className="HeaderTopContainerRight">
-            
+            { user_information.username ? 
+               
                <div className="HeaderTopContainerUser cursorPoiter">
+               <img src="https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png" alt="" className = 'HeaderUserImg' />
+               <div className="HeaderUserLoginContainer">
+               
+               <span>
+                 
+                 
+                 <div>
+                 <span>{ user_information.username? user_information.username:'hello'}</span>
+                 <img src="https://salt.tikicdn.com/ts/upload/d7/d4/a8/34939af2da1ceeeae9f95b7485784233.png" alt=""  className = 'HeaderUserImgdown'/>
+                 </div>
+               </span>
+               </div> 
+               
+              
+              </div>:<div className="HeaderTopContainerUser cursorPoiter">
                 <img src="https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png" alt="" className = 'HeaderUserImg' />
                 <div className="HeaderUserLoginContainer">
-                <span className="HeaderUserLogin">Đăng Nhập / Đăng Ký</span>
+                <span className="HeaderUserLogin">
+                  <Link to='/sign-in'>  <span >Đăng Nhập</span></Link>
+                
+                  
+                   / <Link to='/sign-up'><span >Đăng kí</span></Link>
+                   </span>
                 <span>
-                  <span className="HeaderUserLoginUser">  Tài khoản</span>
+                  <span className="HeaderUserLoginUser"> 
+                  
+                   Tài khoản</span>
                   <img src="https://salt.tikicdn.com/ts/upload/d7/d4/a8/34939af2da1ceeeae9f95b7485784233.png" alt=""  className = 'HeaderUserImgdown'/>
+                 
                 </span>
-                </div>
-               </div>
+                </div> 
+                
+               
+               </div>} 
+
                <div className="HeaderTopContainerCart">
                 <div className="HeaderTopContainerCartWallet cursorPoiter">
                   <div className="HeaderWalletCart">

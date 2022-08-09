@@ -2,17 +2,15 @@ import React from "react";
 import { listBranch } from "./listBranch";
 import "./CreateShop.css";
 import { useSelector } from "react-redux";
-import { patchAPI } from "../../../config/api";
+import { postAPI } from "../../../config/api";
 function CreateShop() {
   const shop = useSelector((state) => state.user);
   console.log(7, shop);
   async function handleClick() {
     try {
-      const shopName = document.querySelector("#ShopName");
-      const res = await patchAPI("/shop/create-shop/" + shop._id, {
-        shopName: shopName,
-      });
-      console.log(12, res);
+      const shopName = document.querySelector("#ShopName").value;
+      const res = await postAPI("/shop/create-shop", { shopName: shopName});
+      console.log(res);
     } catch (err) {
       console.log(err);
     }
@@ -24,19 +22,19 @@ function CreateShop() {
         <form action="">
           <div className="user-createShop-input">
             <p>Shop Name</p>
-            <input type="text" id="ShopName" placeholder="Shop Name" />
+            <input type="text" id="ShopName" placeholder="Shop name" />
           </div>
           <div className="user-createShop-input">
             <p>SĐT liên hệ</p>
-            <input type="text" id="" placeholder="Nhập SĐT liên hệ " />
+            <input type="number" id="Phone" placeholder="Phone" />
           </div>
           <div className="user-createShop-input">
             <p>Email </p>
-            <input type="text" id="" placeholder="Nhập Email" />
+            <input type="text" id="Email" placeholder="Nhập Email" />
           </div>
-          <div className="user-createShop-input">
+          <div className="user-createShop-input" >
             <p>Ngành hàng chủ lực của Anh/Chị?</p>
-            <select name="" id="" className="user-createShop-select">
+            <select name="" id="branch" className="user-createShop-select">
               <option value="">Vui lòng chọn</option>
               {listBranch.map((branch, index) => {
                 return (
@@ -52,13 +50,13 @@ function CreateShop() {
               {" "}
               Cửa hàng doanh nghiệp của Anh/Chị đã đăng ký kinh doanh chưa?
             </p>
-            <select name="" id="" className="user-createShop-select">
+            <select name="" id="license" className="user-createShop-select">
               <option value="">Vui lòng chọn</option>
               <option value="">Đã đăng ký rồi</option>
               <option value="">Chưa đăng ký</option>
             </select>
           </div>
-          <button onClick={handleClick}>Gửi yêu cầu tư vấn</button>
+          <button type="button" onClick={handleClick}>Gửi yêu cầu </button>
         </form>
       </div>
     </div>

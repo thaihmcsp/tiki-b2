@@ -87,3 +87,12 @@
   .mgm-product{
     margin-left: 80px;
   }
+  .card-container .ant-tabs {
+    color: black;
+  }
+  .card-container .ant-tabs .ant-tabs-nav{
+    left: 0;
+  }
+  .card-container .ant-tabs-content-holder{
+    margin-top: 0;
+  }
