@@ -119,3 +119,6 @@
 }
 .TotalCheckItemStore {
 }
+.remove_all {
+  cursor: pointer;
+}
