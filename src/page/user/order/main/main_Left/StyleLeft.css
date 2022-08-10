@@ -132,7 +132,7 @@ label {
     /* width: 100%; */
     border-radius: 12px;
     border: 1px solid rgb(221, 221, 227);
-    margin-top: 20px;
+    margin-top: 35px;
     padding: 20px 16px 16px;
     position: relative;
     display: flex;
@@ -168,7 +168,7 @@ label {
 }
 .fyhLrw .left-content {
     margin-right: 46px;
-    max-width: 482px;
+    width: 482px;
 }
 .fyhLrw .left-content .package-summary {
     margin-top: 8px;

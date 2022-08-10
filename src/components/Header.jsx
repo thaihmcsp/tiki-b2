@@ -14,6 +14,7 @@ import { userLogin } from '../redux/userSlice';
 import { style } from '@mui/system'
 import { withCookies, Cookies } from 'react-cookie'
 import './Header.css'
+import logout from './Logout';
 
 function Header(props) {
   const nav = useNavigate()
@@ -60,17 +61,13 @@ function Header(props) {
     },[500])
 
   }
+  ///
+  
   function on_mypage() {
     nav("/user/profile");
   }
   //đăng xuất xóa cookie và local
- function logout() {
 
-    window.localStorage.removeItem("tiki-user");
-    document.cookie = 'tiki-user' +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-  
-    nav("/sign-in");
-  }
   ///hiển thị số lượng Sản phâm ở giỏ hàng
   const  [numberCart,setNumberCart]=useState(0)
   useEffect(()=>{
@@ -82,6 +79,37 @@ function Header(props) {
       console.log(err);
     })
   },[])
+  // chuyển đến phần tìm kiếm:
+  function removeAccents(str) {
+    var AccentsMap = [
+      "aàảãáạăằẳẵắặâầẩẫấậ",
+      "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
+      "dđ",
+      "DĐ",
+      "eèẻẽéẹêềểễếệ",
+      "EÈẺẼÉẸÊỀỂỄẾỆ",
+      "iìỉĩíị",
+      "IÌỈĨÍỊ",
+      "oòỏõóọôồổỗốộơờởỡớợ",
+      "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
+      "uùủũúụưừửữứự",
+      "UÙỦŨÚỤƯỪỬỮỨỰ",
+      "yỳỷỹýỵ",
+      "YỲỶỸÝỴ",
+    ];
+    for (var i = 0; i < AccentsMap.length; i++) {
+      var re = new RegExp("[" + AccentsMap[i].substr(1) + "]", "g");
+      var char = AccentsMap[i][0];
+      str = str.replace(re, char);
+    }
+    return str;
+  }
+  function filterProduct(e) {
+    let linkProduct = document.querySelector('.componentHeaderInput').value;
+    let linkProductModify = removeAccents(linkProduct);
+    console.log(linkProductModify)
+    nav(`/filter?seaarch=${linkProductModify}`);
+  }
   // const  userLogin = useSelector(function (state) {
     
   //   return state.user;
@@ -237,7 +265,12 @@ function Header(props) {
                             </div>
                       </div>
                   </div>
-                  <button className = 'HeaderbuttonSeach cursorPoiter'>
+                  <button className = 'HeaderbuttonSeach cursorPoiter'
+                  onClick={(e) => {
+                    filterProduct(e);
+                  }}
+                  >
+                    
                     <img src="https://salt.tikicdn.com/ts/upload/ed/5e/b8/8538366274240326978318348ea8af7c.png" className = 'icon-seach' alt="" />
                     Tìm Kiếm
                   </button>
@@ -248,7 +281,11 @@ function Header(props) {
                
                (
                 <div className="HeaderTopContainerUser cursorPoiter">
-               <img src="https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png" alt="" className = 'HeaderUserImg' />
+                  {/* //hiển thi avartar */}
+               <img src=
+               {user_information.avatar.length>0? 
+               user_information.avatar:"https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png"} 
+               alt="" className = 'HeaderUserImg' />
                <div className="HeaderUserLoginContainer">
                
                <span>
@@ -283,7 +320,9 @@ function Header(props) {
                       </div>
                       <div
                         className="header_navbar_iteam_mypage_selec-item"
-                        onClick={logout}
+                        onClick={()=>
+                          logout(nav)
+                        }
                       >
                         Đăng xuất
                       </div>

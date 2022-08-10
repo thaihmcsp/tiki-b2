@@ -103,6 +103,10 @@
     color: white;
     margin: 5px 0 0 0;
     position: relative;
+    
+}
+.HeaderTopContainerUser img {
+    border-radius: 50%;
 }
 .HeaderUserLoginContainer {
     display: flex;
@@ -348,6 +352,7 @@
     z-index: 999;
     cursor: pointer;
     padding: 20px;
+    /* margin-top: 12px; */
   }
   
   /* .header_navbar_iteam_mypage_selec-item:hover {

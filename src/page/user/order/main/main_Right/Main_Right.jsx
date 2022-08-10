@@ -1,15 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Data } from './Data';
 import { ListAddress } from './ListAddress';
-
 import './StyleRight.css'
 
 function Main_Right({data,money}) {
-   console.log(8,data)
+ 
     function showProduct() {
-        document.querySelector('.left').style.display = 'block';
-        console.log('abc');
+        // document.querySelector('.left').style.display = 'block';
+        if(check){
+            document.querySelector('.HeMLl').setAttribute("style","display:none")
+            setCheck(false)
+            document.querySelector('.viewpro').innerHTML=`<span>Xem thông tin</span>`
+        
+        }
+        else{
+            document.querySelector('.HeMLl').setAttribute("style","display:flex; align-items: center")
+            setCheck(true)
+        
+        document.querySelector('.viewpro').innerHTML=`<span>Thu gọn</span>`
+        }
+        
     }
+    const [check,setCheck]=useState(false)
+    
+    // hiển thị số lượng sản phẩm
+    var count = 0;
+   {
+    
+    data.listOrder.map((items)=>{
+   
+    count = count + items.listProduct.length;
+   })
+   
     return (
         <div className="right">
             <div className="flcp_container"
@@ -118,43 +140,60 @@ function Main_Right({data,money}) {
                             href="/checkout/cart?src=checkout_payment">Thay đổi</a>
                     </div>
                     <div className="block-header__sub-title">
-                        <p className="sub-title-text">2 sản phẩm.</p>
-                        <p onClick={showProduct} className="sub-title-link">Xem thông tin<svg className="sub-title-link__arrow" width="20"
+                        <p className="sub-title-text">{count} sản phẩm.</p>
+                        <p onClick={showProduct} className="sub-title-link"><span className='viewpro'>Xem thông tin</span><svg className="sub-title-link__arrow" width="20"
                             height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" clipRule="evenodd"
                                 d="M9.96967 8.46967C10.2626 8.17678 10.7374 8.17678 11.0303 8.46967L14.0303 11.4697C14.3232 11.7626 14.3232 12.2374 14.0303 12.5303L11.0303 15.5303C10.7374 15.8232 10.2626 15.8232 9.96967 15.5303C9.67678 15.2374 9.67678 14.7626 9.96967 14.4697L12.4393 12L9.96967 9.53033C9.67678 9.23744 9.67678 8.76256 9.96967 8.46967Z"
                                 fill="#0B74E5"></path>
-                        </svg></p>
+                        </svg>
+                        </p>
                     </div>
                 </div>
+                <div className="HeMLl">
+                <div className="list-container">
+                {
+                    data.listOrder.map((item,index)=>{
+                        
+                        return (
+                            
+                                <>
+                                {item.listProduct.map(subItem=>{
+                                    console.log(162,typeof String(subItem.productDetailId.price.toLocaleString()));
+                                return(
 
-                {/* <div hidden="" className="cIdCpS">
-                    <div className="list-container">
-                        <div className="bSkntM">
-                            <div className="item-info">
-                                <div className="item-info__qty">1 x</div>
-                                <div className="item-info__name">Sữa Rửa Mặt Tạo Bọt Chiết Xuất Đất Sét Trắng
-                                    Senka Perfect
-                                    White Clay New 14840 (120g)</div>
-                            </div>
-                            <div className="item-price">81.000 ₫</div>
-                        </div>
-                        <div className="bSkntM">
-                            <div className="item-info">
-                                <div className="item-info__qty">1 x</div>
-                                <div className="item-info__name">[Gift] Lưới tạo bọt Senka</div>
-                            </div>
-                            <div className="item-price">0 ₫</div>
-                        </div>
+                                   
+                                    <div class="bSkntM">
+                                        <div class="item-info">
+                                            <div class="item-info__qty">
+                                            {subItem.quantity} x
+                                            </div>
+                                            <div class="item-info__name">{subItem.productDetailId.productId.productName}</div>
+                                        </div>
+                                            <div class="item-price">{String(subItem.productDetailId.price.toLocaleString())} đ</div>
+                                    </div>
+
+                        
+                                )     
+                    }
+                    )} </>    
+                     ) }
+                        )
+                    }
                     </div>
-                </div> */}
+                </div> 
+                
                 <div className="eWlcNY">
                     <div className="bSkntM">
                         <div className="summary-label" >Tạm tính</div>
-                        <div className="summary-value">{money}</div>
+                        <div className="summary-value">{String(money.toLocaleString())}</div>
                     </div>
                     <div className="bSkntM">
                         <div className="summary-label">Phí vận chuyển</div>
+                        <div className="summary-value">18.000đ</div>
+                    </div>
+                    <div className="bSkntM">
+                        <div className="summary-label">Giảm giá</div>
                         <div className="summary-value">18.000đ</div>
                     </div>
                 </div>
@@ -162,7 +201,7 @@ function Main_Right({data,money}) {
                 <div className="bSkntM order-total">
                     <div className="order-total__label">Tổng tiền</div>
                     <div className="order-total__value">
-                        <div className="order-total__total">{money}</div>
+                        <div className="order-total__total"> {String(money.toLocaleString())}</div>
                         <div className="order-total__additional-text">(Đã bao gồm VAT nếu có)</div>
                     </div>
                 </div>
@@ -173,5 +212,5 @@ function Main_Right({data,money}) {
 
     );
 }
-
-export default Main_Right;
+}
+export default Main_Right
