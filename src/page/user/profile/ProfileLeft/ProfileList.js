@@ -5,12 +5,9 @@ import { useSelector } from 'react-redux';
 
 function ProfileList() {
   const user = useSelector((state => state.user))
-  console.log(7, user)
- 
   return (
     
-    <div className= {styles.ProfileList} >
-     
+    <div className= {styles.ProfileList} > 
       <ProfileManuLeft header='Số điện thoại và Email' infors={[
         {
           icon:'https://frontend.tikicdn.com/_desktop-next/static/img/account/phone.png',

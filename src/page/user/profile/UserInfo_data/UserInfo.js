@@ -7,8 +7,6 @@ import { Radio, Modal } from 'antd';
 import DataMonth from './DataMonth';
 import Countries from './Countries';
 import { Link, useNavigate } from 'react-router-dom'
-
-import { Button, Modal } from 'antd';
 import { useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
@@ -68,9 +66,6 @@ function UserInfo() {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
-
-
   const handleChange = (info) => {
     let url = URL.createObjectURL(info.file.originFileObj);
     setImageObject(info.file.originFileObj);

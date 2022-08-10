@@ -49,9 +49,12 @@ function ProfileManuLeft(props) {
       if(Newpassword !== RepNewpassword) {
         alert('mật khẩu phải trùng nhau');
       }else if(Newpassword === RepNewpassword) {
-      const pass = await patchAPI('/user/change-password/'+user._id, {oldPass,newPass: Newpassword});
-     nav('/sign-in')
+      await patchAPI('/user/change-password/'+user._id, {oldPass,newPass: Newpassword});
       alert('Cập nhật mật khẩu thành công')
+      window.localStorage.removeItem("tiki-user");
+      document.cookie = 'tiki-user' +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      console.log(55, document.cookie)
+      nav('/sign-in')
       }
     } catch (error) {
       console.log(error);
