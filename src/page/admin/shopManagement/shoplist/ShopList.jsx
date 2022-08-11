@@ -1,51 +1,70 @@
 import React, { useEffect, useState } from 'react'
 import style from '../shoplist/ShopList.module.css'
+import { patchAPI } from '../../../../config/api'
+async function BlockShop(id, newdata, listdata, setCount, count) {
+    console.log(id)
+    try {
+        const res = await patchAPI('/shop/admin-change-shop-status/' + id, { 'status': 'closed' })
+        setCount(count + 1)
+    } catch (err) {
+        console.log(err);
+    }
+}
+async function UnblockShop(id, newdata, listdata, setCount, count) {
+    console.log(id)
+    try {
+        const res = await patchAPI('/shop/admin-change-shop-status/' + id, { 'status': 'accepted' })
+        setCount(count + 1)
+    } catch (err) {
+        console.log(err);
+    }
+}
+async function RefuseShop(id, newdata, listdata, setCount, count) {
+    console.log(id)
+    try {
+        const res = await patchAPI('/shop/admin-change-shop-status/' + id, { 'status': 'rejected' })
+        setCount(count + 1)
+    } catch (err) {
+        console.log(err);
+    }
+}
+async function AccepctShop(id, newdata, listdata, setCount, count) {
+    console.log(id)
+    try {
+        const res = await patchAPI('/shop/admin-change-shop-status/' + id, { 'status': 'accepted' })
+        setCount(count + 1)
+    } catch (err) {
+        console.log(err);
+    }
+}
 function Pending(props) {
     return (
         <div>
-            <button className={style.Option_Pending} onClick={() => { props.AccepctShop(props.id, props.newdata, props.setnewListdata) }} >Accept</button>
-            <button className={style.Option_Pending} onClick={() => { props.RefuseShop(props.id, props.newdata, props.setnewListdata) }} >Refuse</button>
+            <button className={style.Option_Pending} onClick={() => { props.AccepctShop(props.id, props.newdata, props.setnewListdata, props.setCount, props.count) }} >Accept</button>
+            <button className={style.Option_Pending} onClick={() => { props.RefuseShop(props.id, props.newdata, props.setnewListdata, props.setCount, props.count) }} >Refuse</button>
         </div>
     )
 }
-const AccepctShop = (id, newdata, listdata) => {
-    let index = newdata.findIndex((value) => value.Shopid === id);
-    let clone = [...newdata]
-    clone[index].status = 'accepted';
-    listdata(clone);
+function Stop(props) {
+    return (
+        <div>
+            <button className={style.Option_Active} onClick={() => { AccepctShop(props.id, props.newdata, props.setnewListdata, props.setCount, props.count) }}>Open</button>
+            <button className={style.Option_Active} onClick={() => { BlockShop(props.id, props.newdata, props.setnewListdata, props.setCount, props.count) }}>Closed</button>
+        </div>
+    )
 }
-const RefuseShop = (id, newdata, listdata) => {
-    let index = newdata.findIndex((value) => value.Shopid === id);
-    let clone = [...newdata]
-    clone[index].status = 'block';
-    listdata(clone);
-}
-const UnblockShop = (id, newdata, listdata) => {
-    let index = newdata.findIndex((value) => value.Shopid === id);
-    let clone = [...newdata]
-    clone[index].status = 'active';
-    listdata(clone);
-}
-const BlockShop = (id, newdata, listdata) => {
-    let index = newdata.findIndex((value) => value.Shopid === id);
-    let clone = [...newdata]
-    clone[index].status = 'block';
-    listdata(clone);
-}
-
 function Active(props) {
     return (
         <div>
             <button className={style.Option_Active}>Send Message</button>
-            <button className={style.Option_Active} onClick={() => { BlockShop(props.id, props.newdata, props.setnewListdata) }}>Block</button>
+            <button className={style.Option_Active} onClick={() => { RefuseShop(props.id, props.newdata, props.setnewListdata, props.setCount, props.count) }}>Stop</button>
         </div>
     )
 }
-
 function Block(props) {
     return (
         <div>
-            <button className={style.Option_Block} onClick={() => { UnblockShop(props.id, props.newdata, props.setnewListdata) }}>UnBlock</button>
+            <button className={style.Option_Block} onClick={() => { UnblockShop(props.id, props.newdata, props.setnewListdata, props.setCount, props.count) }}>UnBlock</button>
         </div>
 
     )
@@ -53,6 +72,7 @@ function Block(props) {
 function ShopList(props) {
     const [data, setData] = useState([])
     const [dataPagination, setdataPagination] = useState([])
+
     useEffect(() => {
         let newdata = props.newListdata.sort((after, before) => {
             if (after.status.length < before.status.length) {
@@ -74,6 +94,7 @@ function ShopList(props) {
             setdataPagination(newdata.filter((value) => value.status === props.Shopstatus).slice(props.start, props.start + 5))
         }
     }, [props.newListdata, props.start])
+
     return (
         <div className={style.Shoplist}>
             {dataPagination.map((value, index) => {
@@ -98,9 +119,10 @@ function ShopList(props) {
                             <span>Applied on :</span>{value.timestart}
                         </div>
                         <div className={style.Options}>
-                            {value.status === 'pending' ? <Pending AccepctShop={AccepctShop} id={value.Shopid} newdata={props.newListdata} setnewListdata={props.setnewListdata} RefuseShop={RefuseShop} /> : null}
-                            {value.status === 'accepted' ? <Active id={value.Shopid} newdata={props.newListdata} setnewListdata={props.setnewListdata} /> : null}
-                            {value.status === 'block' ? <Block UnblockShop={UnblockShop} id={value.Shopid} newdata={props.newListdata} setnewListdata={props.setnewListdata} /> : null}
+                            {value.status === 'pending' ? <Pending AccepctShop={AccepctShop} id={value.Shopid} newdata={props.newListdata} setnewListdata={props.setnewListdata} RefuseShop={RefuseShop} count={props.count} setCount={props.setCount} /> : null}
+                            {value.status === 'accepted' ? <Active id={value.Shopid} newdata={props.newListdata} setnewListdata={props.setnewListdata} setCount={props.setCount} count={props.count} /> : null}
+                            {value.status === 'rejected' ? <Stop id={value.Shopid} newdata={props.newListdata} setnewListdata={props.setnewListdata} setCount={props.setCount} count={props.count} /> : null}
+                            {value.status === 'closed' ? <Block UnblockShop={UnblockShop} id={value.Shopid} newdata={props.newListdata} setnewListdata={props.setnewListdata} setCount={props.setCount} count={props.count} /> : null}
                         </div>
                     </div>
                 </div>

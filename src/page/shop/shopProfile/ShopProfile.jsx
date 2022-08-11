@@ -3,9 +3,10 @@ import styles from '../../../.././src/page/shop/shopProfile/ShopProfile.module.c
 import 'antd/dist/antd.css';
 import { InfoCircleOutlined, RightOutlined } from '@ant-design/icons';
 import { Button, Modal } from 'antd';
+import { useSelector } from 'react-redux';
 function ShopProfile() {
-    const data = JSON.parse(window.localStorage.getItem('tiki-user'));
-    console.log(data)
+    const data = useSelector(state => state.user)
+    console.log(data);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [checkModal, setcheckModal] = useState('');
     const showModal = (e) => {
@@ -20,7 +21,7 @@ function ShopProfile() {
             setcheckModal('ChangeName')
         }
     };
-    const handleOk = () => {
+    function handleOk() {
         if (checkModal === 'ChangeEmail') {
             const OldEmail = document.getElementById('OldEmail').value;
             const NewEmail = document.getElementById('NewEmail').value;
@@ -33,7 +34,6 @@ function ShopProfile() {
                 } else if (NewEmail !== RetypeNewEmail) {
                     window.alert('Email không trùng nhau')
                 } if (OldEmail === data.email && NewEmail === RetypeNewEmail) {
-                    console.log(1)
                     setIsModalVisible(false);
                 }
 
@@ -45,7 +45,7 @@ function ShopProfile() {
                 if (!NewPhone) {
                     window.alert('Vui lòng nhập đủ thông tin')
                 } else {
-                    console.log(1)
+
                     setIsModalVisible(false);
                 }
             } else {
@@ -133,6 +133,7 @@ function ShopProfile() {
             </div>
             <div className={styles.Profileshop_bottom}>
                 <button>Sửa đổi</button>
+                <img src={data.shop.logo} alt="" />
             </div>
         </div>
     )

@@ -18,6 +18,9 @@ const userSlice = createSlice({
         userLogin: function(state, action) {
             window.localStorage.getItem('tiki-user', JSON.stringify(action.payload))
             return action.payload;
+        },
+        adminChangShopstatus: function(state, action) {
+            
         }
     }
 })

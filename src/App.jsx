@@ -47,13 +47,11 @@ function App() {
                     <Route path='/shop/dashboard' element={<ShopDashBoardAll />} />
                     {/* <Route path='/shop/product/manage' element={<Product />} /> */}
                     <Route path='/user' element={<UserInfoMenu />}>
-                        <Route path='/user' element={<div className='profile'> <UserInfo /> <ProfileList /> </div>} />
+
+                        <Route path='/user' element={<div className='profile'> <UserInfo /><ProfileList /> </div>} />
                     </Route>
 
                     <Route path='/shop/ShopHome' element={<ShopHome />} />
-
-
-
                     <Route path="/addItem" element={<AddItem />} />
                     <Route path='/detail' element={<Detail />} />
                 </Route>
@@ -62,11 +60,11 @@ function App() {
                 <Route path='/admin' element={<Admin />} >
                     <Route path='/admin/category' element={<Category />} />
                     <Route path='/admin/shop' element={<Shop></Shop>} ></Route>
+                    <Route path='/admin/dashbosh' element={<Shop></Shop>} ></Route>
                 </Route>
                 <Route path='/shop' element={<ShopMenu />} >
                     <Route path='/shop/profile' element={<ShopProfile />} />
                 </Route>
-
                 <Route path='*'
                     element={<SignIn />} />
 
