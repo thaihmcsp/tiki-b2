@@ -10,21 +10,13 @@
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
-<<<<<<< HEAD
-    "@mui/material": "^5.9.2",
-=======
     "@mui/material": "^5.8.7",
     "@mui/x-data-grid": "^5.13.0",
->>>>>>> d22136af27879ef67dee30f6a2e57a7a2d26ff5f
     "@reduxjs/toolkit": "^1.8.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
-<<<<<<< HEAD
-    "antd": "^4.22.0",
-=======
     "antd": "^4.21.7",
->>>>>>> d22136af27879ef67dee30f6a2e57a7a2d26ff5f
     "axios": "^0.27.2",
     "clsx": "^1.2.1",
     "@tinymce/tinymce-react": "^4.1.0",
