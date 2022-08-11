@@ -9,5 +9,4 @@ const ShopSteps = () => (
     <Step title="Waiting" />
   </Steps>
 );
-
 export default ShopSteps;
