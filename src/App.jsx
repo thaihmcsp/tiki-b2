@@ -14,12 +14,16 @@ import UserInfo from './page/user/profile/UserInfo_data/UserInfo';
 import './App.css';
 import UserInfoMenu from './page/user/profile/UserInfoMenu';
 import ShopHome from './page/shop/shopHome/ShopHome';
+import Cart from './page/user/cart/cart/Cart';
+import AddItem from './page/shop/productManagement/priceItem/addItem_Phu/AddItem';
 
 function App() {
   return (
     <BrowserRouter>
         <Routes>
             <Route path='/sign-up' element={<SignUp/>} />
+            <Route path='/addItem' element={<AddItem/>} />
+            <Route path='/card' element={<Cart/>} />
             <Route path='/sign-in' element={<SignIn/>} />
             <Route path='/create-shop' element={<CreateShop/>}/>
             <Route path='/' element={<Header/>}> 
