@@ -16,7 +16,7 @@ import {
 import { Button, Menu } from "antd";
 import React, { useState } from "react";
 import "antd/dist/antd.css";
-import "./Product.css";
+import "./ShopMenu.css";
 import { Outlet } from "react-router-dom";
 
 function getItem(label, key, icon, children, type) {
@@ -44,26 +44,13 @@ const items = [
   getItem("Option 11", "12", <DeleteOutlined />),
 ];
 
-function Product() {
+function ShopMenu() {
   const [collapsed, setCollapsed] = useState(true);
 
   return (
     <div className="db-Product">
       <div className="db-Product-left">
-        {/* <button
-          style={{
-            width: 80,
-            height: 50,
-            border: "none",
-            backgroundColor: "whitesmoke",
-          }}
-        >
-          <img
-            style={{ width: "65%", height: "100%" }}
-            src="https://blogtietkiem.com/wp-content/uploads/2020/12/logo-mgg-tiki.png"
-            alt=""
-          />
-        </button> */}
+  
         <Button type="HomeOutlined" style={{ width: 80 }}>
           <HomeOutlined />
         </Button>
@@ -83,4 +70,4 @@ function Product() {
   );
 }
 
-export default Product;
+export default ShopMenu;

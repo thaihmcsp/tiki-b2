@@ -4,14 +4,26 @@ import {
   PlusOutlined,
   RightOutlined,
 } from "@ant-design/icons";
-import React from "react";
+import React, { useState } from "react";
 import ComponentTableProducts from "../componentDataTableAdmin/ComponentTableProducts";
 import "./ManagementProduct.css";
 import { Tabs } from "antd";
 import FilterProducts from "../componentDataTableAdmin/FilterProducts";
+import {  useNavigate } from "react-router-dom";
 
 const { TabPane } = Tabs;
 function ManagementProduct() {
+  const nav = useNavigate()
+  function handleClick(){
+      nav('/user')
+  }
+  const [value, setValue] = useState('')
+  console.log(value)
+  function handleClose(){
+    const close = document.querySelector(".mgm-product-notification");
+    close.innerHTML= ''
+    close.style.backgroundColor = 'unset'
+  }
   return (
     <div className="mgm-product">
       <p>
@@ -25,7 +37,7 @@ function ManagementProduct() {
           <select name="" id="">
             <option value="">Quản lý số lượng lớn</option>
           </select>
-          <button>
+          <button onClick={handleClick}>
             <PlusOutlined />
             Thêm sản phẩm
           </button>
@@ -37,14 +49,14 @@ function ManagementProduct() {
           phẩm. <a href="">Tìm hiểu thêm</a>
         </span>
         <span>
-          <CloseOutlined />
+          <CloseOutlined onClick={handleClose}/>
         </span>
       </div>
       <div className="" style={{ width: "100%", margin: "24px 0" }}>
         <div className="card-container">
           <Tabs type="card">
             <TabPane tab="Tất cả" key="1">
-              <FilterProducts />,
+              <FilterProducts setValue = {setValue}/>,
             </TabPane>
             <TabPane tab="Đang hoạt động" key="2">
               <FilterProducts />
@@ -68,7 +80,7 @@ function ManagementProduct() {
         </div>
       </div>
       <div>
-        <ComponentTableProducts />
+        <ComponentTableProducts value = {value}/>
       </div>
     </div>
   );

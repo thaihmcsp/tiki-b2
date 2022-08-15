@@ -3,16 +3,20 @@ import { listBranch } from "./listBranch";
 import "./CreateShop.css";
 import { useSelector } from "react-redux";
 import { postAPI } from "../../../config/api";
+import { useNavigate } from "react-router-dom";
 function CreateShop() {
   const shop = useSelector((state) => state.user);
+  const nav = useNavigate()
   console.log(7, shop);
   async function handleClick() {
     try {
       const shopName = document.querySelector("#ShopName").value;
       const res = await postAPI("/shop/create-shop", { shopName: shopName});
-      console.log(res);
+      console.log(13,res);
+      nav("/user")
     } catch (err) {
-      console.log(err);
+      window.confirm(err.response.data.message)
+      console.log(15,err.response.data.message);
     }
   }
   return (
