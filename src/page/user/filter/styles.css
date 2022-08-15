@@ -35,6 +35,7 @@ body {
   align-items: center;
 }
 
+<<<<<<< HEAD
 .filter_modal span {
   font-size: 1rem;
   font-weight: 300 !important;
@@ -42,6 +43,20 @@ body {
 
 .filter_modal {
   display:  none !important;
+=======
+.ant-btn-primary {
+  border: unset !important;
+  /* background:none !important;
+  display: none !important; */
+}
+
+.filter .ant-modal-root{
+  display: none;
+}
+
+.ant-btn {
+  /* display:  none !important; */
+>>>>>>> d22136af27879ef67dee30f6a2e57a7a2d26ff5f
 }
 .mySwiper_fillter .swiper-button-next:after, .mySwiper_fillter .swiper-button-prev:after {
   font-size: 1rem !important;
