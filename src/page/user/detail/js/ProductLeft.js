@@ -12,7 +12,7 @@ function ProductLeft(props) {
           id="main"
           src={props.colorDetail.color}
           preview={{
-            src: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+            src: props.colorDetail.color,
           }}
         />
 

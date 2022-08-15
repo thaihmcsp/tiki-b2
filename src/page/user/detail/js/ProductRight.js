@@ -1,28 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StarOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
+import { color } from "@mui/system";
+import { getAPI } from "../../../../config/api";
 function ProductRight(props) {
-  // const element = document.getElementsByClassName("color");
-  // element.addEventListener("onClick", myfunction());
-  // function myfunction(key) {
-  //   const key = element.getAttribute("id");
-  //   console.log(key);
-  // }
+  const listProduct = props.Product.product.productDetailId;
+  const [count, setCount] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [listproduct, setListProducts] = useState([]);
+  console.log(listproduct);
+  useEffect(() => {
+    setCount(0);
+    for (let i = 0; i < listProduct.length; i++) {
+      if (
+        props.myColor === listProduct[i].option[0].value &&
+        props.mySize === listProduct[i].option[1].value
+      ) {
+        setIndex(i);
+        setCount(1);
+      }
+    }
+  }, [props.myColor, props.mySize]);
+  console.log(count, index);
 
-  // element.setAttribute("onclick", "changecolor()");
-  // console.log(element);
-  // function changecolor(id) {
-  //   console.log(id);
-  // let imgPath = document.getElementById(id).getAttribute("src");
-  // console.log(imgPath);
-  // }
-  // function addEvent(id) {
-  //   console.log(id);
-  // }
-  // addEvent("than");
-  // function changecolor() {
-  //   console.log(1);
-  // }
+  //get Data
+  useEffect(() => {
+    getAPI("/product/get-all-products")
+      .then((data) => {
+        setListProducts(data.data.listProduct);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div className="productright">
@@ -41,9 +51,7 @@ function ProductRight(props) {
             </p>
           </div>
         </div>
-        <h1 className="title">
-          áo thun nam dài tay áo thể thao nam body giữ nhiệt
-        </h1>
+        <h1 className="title">{props.Product.product.productName}</h1>
         <div className="below-title">
           <div>
             <div className="rate">
@@ -58,7 +66,15 @@ function ProductRight(props) {
         <div className="left">
           <div className="price-and-icon">
             <div className="price-discount">
-              <div className="current-price">{props.price}</div>
+              <div className="current-price">
+                {props.mySize == undefined || props.myColor == undefined ? (
+                  <>{listProduct[0].price}</>
+                ) : count == 1 ? (
+                  <>{listProduct[index].price.toLocaleString()}₫</>
+                ) : (
+                  "Hết hàng"
+                )}
+              </div>
               <div className="list-price">{props.listprice}</div>
               <div className="discount">{props.discount}</div>
             </div>
@@ -70,78 +86,44 @@ function ProductRight(props) {
           <div className="selectproduct">
             <div className="select-color">
               <p className="detail-color">
-                <p id="detail-color">Màu: {props.colorDetail.name}</p>
+                <p id="detail-color">
+                  Màu: <span id="color-select">{props.colorDetail.name}</span>
+                </p>
               </p>
               <div className="product-color">
-                <div
-                  id="than"
-                  className="color"
-                  onClick={() => props.changecolor("than")}
-                >
-                  {props.productColor[0]} {props.color[0]}
-                  {props.tich}
-                </div>
-                <div
-                  id="white"
-                  className="color"
-                  onClick={() => props.changecolor("white")}
-                >
-                  {props.productColor[1]} {props.color[1]}
-                  {props.tich}
-                </div>
-                <div
-                  id="blue"
-                  className="color"
-                  onClick={() => props.changecolor("blue")}
-                >
-                  {props.productColor[2]} {props.color[2]}
-                  {props.tich}
-                </div>
-                <div
-                  id="gray"
-                  className="color"
-                  onClick={() => props.changecolor("gray")}
-                >
-                  {props.productColor[3]} {props.color[3]}
-                  {props.tich}
-                </div>
-                <div
-                  id="black"
-                  className="color"
-                  onClick={() => props.changecolor("black")}
-                >
-                  {props.productColor[4]} {props.color[4]}
-                  {props.tich}
-                </div>
-                <div
-                  id="red"
-                  className="color"
-                  onClick={() => props.changecolor("red")}
-                >
-                  {props.productColor[5]} {props.color[5]}
-                  {props.tich}
-                </div>
+                {props.imgproduct.map((item, index) => {
+                  return (
+                    <div
+                      className="option1"
+                      id={item.name}
+                      onClick={() => props.hanldeColor(item.name)}
+                    >
+                      <img src={item.img} width={50} height={50}></img>
+                      <span>{item.name}</span>
+                      {props.tich}
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div className="select-size">
-              <p id="detail-size">Size</p>
+              <p id="detail-size">
+                Size: <span id="size-select">{props.colorDetail.size}</span>
+              </p>
               <div className="size">
-                <button onClick={() => props.selectSize("M")}>
-                  {props.size[0]}
-                  {props.tich}
-                </button>
-                <button onClick={() => props.selectSize("L")}>
-                  {props.size[1]}
-                  {props.tich}
-                </button>
-                <button onClick={() => props.selectSize("XL")}>
-                  {props.size[2]}
-                  {props.tich}
-                </button>
-                <button onClick={() => props.selectSize("XXL")}>
-                  {props.size[3]}
-                  {props.tich}
-                </button>
+                {props.size.map((item, index) => {
+                  return (
+                    <button
+                      className="option2"
+                      id={item}
+                      key={index}
+                      onClick={() => props.hanldeSize(item)}
+                    >
+                      <span>{item}</span>
+                      {props.tich}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -183,10 +165,13 @@ function ProductRight(props) {
             <div className="seller-info">
               <a className="overview">
                 <picture className="overview-left">
-                  <img className="logo" src={props.logo}></img>
+                  <img
+                    className="logo"
+                    src={props.Product.product.shopId.logo}
+                  ></img>
                 </picture>
                 <div className="overview-right">
-                  <span>FASHION TREND</span>
+                  <span>{props.Product.product.shopId.shopName}</span>
                 </div>
               </a>
             </div>

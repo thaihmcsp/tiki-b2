@@ -17,11 +17,13 @@ import "./App.css";
 import UserInfoMenu from "./page/user/profile/UserInfoMenu";
 import Category from "./page/admin/categoryManagement/Category";
 import Detail from "./page/user/detail/Detail";
+import Huy from "./page/user/detail/product/product";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/huy" element={<Huy />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/create-shop" element={<CreateShop />} />
