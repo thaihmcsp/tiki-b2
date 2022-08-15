@@ -4,4 +4,4 @@ const instance = axios.create({
     baseURL: 'https://tiki.thaihm.site',
 });
 
-export default instance
+export default instance;
