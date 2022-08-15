@@ -24,7 +24,6 @@ function Category() {
       const newData =  ListCategory.filter(function(item) {
         return item.name.toLowerCase().includes(data)
       })
-      console.log(21, newData)
       return newData
     })  
   },[data])
