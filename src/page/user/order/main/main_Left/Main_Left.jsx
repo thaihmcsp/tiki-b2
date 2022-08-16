@@ -46,8 +46,9 @@ function Main_Left({data}) {
                         <div className="fyhLrw">
                             <div className="giCRPo">
                                 <div className="package-title"><img width="24" height="24" alt="icon"
-                                    src="https://salt.tikicdn.com/ts/upload/ad/b7/93/7094a85d0b6d299f30ed89b03511deb9.png" />Gói <span>{index+1}</span>
-                                </div><span className="package-leadTime">Giao vào Chủ Nhật, 17/07</span>
+                                    src="https://salt.tikicdn.com/ts/upload/ad/b7/93/7094a85d0b6d299f30ed89b03511deb9.png" />
+                                    Gói {index+1}
+                                </div><span className="package-leadTime">Giao hàng 24h</span>
                             </div>
                             
                             
@@ -92,8 +93,10 @@ function Main_Left({data}) {
                                                             <div className="item-info__first-line"><span className="item-info__product-name"
                                                                 title="">{subItem.productDetailId.productId.productName}</span></div>
                                                             <div className="item-info__second-line">
-                                                                <div className="item-info__qty">{subItem.quantity}</div>
-                                                                <div className="item-info__price">{subItem.productDetailId.price}</div>
+                                                                <div className="item-info__qty"> SL:x {subItem.quantity}</div>
+                                                                <div className="item-info__price">
+                                                                {String(subItem.productDetailId.price.toLocaleString())}
+                                                                     đ</div>
                                                             </div>
                                                         </div>
                                                         </div>
@@ -120,7 +123,8 @@ function Main_Left({data}) {
                                         fill="#38383D"></path>
                                 </svg>
                                     <div>
-                                        <p className="fulfillment-text">Được giao bởi TikiNOW Smart Logistics (giao
+                                        <p className="fulfillment-text">Được giao bởi TikiNOW Smart <br/>
+                                         Logistics (giao
                                             từ Hồ Chí Minh)</p>
                                         <p className="fulfillment-text fulfillment-text--warning"></p>
                                     </div>

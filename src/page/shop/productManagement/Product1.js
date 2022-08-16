@@ -6,7 +6,7 @@ import Tablelock from "./priceItem/Tablelock";
 import ButtonSend from "./buttonSend/ButtonSend";
 import ProductSpecifications from "./productSpecifications/ProductSpecifications";
 
-const Product = () => {
+const Product1 = () => {
   return (
     <div>
       <BasicInformation />
@@ -18,4 +18,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default Product1;

@@ -9,14 +9,17 @@ import Admin from './page/admin/Admin';
 import 'antd/dist/antd.css';
 import ShopDashBoardAll from './page/shop/dashboard/ShopDashBoardAll';
 import Product from './page/shop/productManagement/Product.js';
-// import Profile from './page/user/profile/ProfileManu/ProfileMenu';
+import Profile from './page/user/profile/ProfileManu/ProfileMenu';
 import ProfileList from './page/user/profile/ProfileLeft/ProfileList';
 import ProfileListHeader from './page/user/profile/ProfileLeft/ProfileListHeader';
 import UserInfo from './page/user/profile/UserInfo_data/UserInfo';
 import './App.css';
 import UserInfoMenu from './page/user/profile/UserInfoMenu';
 import Category from './page/admin/categoryManagement/Category';
+<<<<<<<<< Temporary merge branch 1
 import User from './page/admin/userManagement/User';
+import Order from './page/user/order/Order';
+=========
 import AdminLogin from './page/admin/login/Login';
 import ShopLogin from './page/shop/login/Login';
 import Order from './page/user/order/maintotal/Main';
@@ -24,7 +27,9 @@ import ShopHome from './page/shop/shopHome/ShopHome';
 import Shop from './page/admin/shopManagement/Shop';
 import Detail from "./page/user/detail/Detail";
 import AddItem from "./page/shop/productManagement/priceItem/addItem_Phu/AddItem";
+import Odertotal from './page/user/order/ordertotal/Odertotal';
 import PrivateRouter from './components/PrivateRouter';
+>>>>>>>>> Temporary merge branch 2
 
 function App() {
 
@@ -44,20 +49,30 @@ function App() {
                 <Route path='user' element={<User/>}></Route>
 
             </Route>
+=========
+            <Route path='/order' element={<Order/>}/>
+>>>>>>>>> Temporary merge branch 2
             <Route path='/' element={<Header/>}> 
                 <Route path='/' element={<Home/>} />
-                <Route path='/filter' element={<Filter />}/>
+                <Route path='/filter' element={<Filter/>}/>
                 <Route path='/shop/dashboard' element={<ShopDashBoardAll/>} />
                 <Route path='/shop/product/manage' element={<Product />} />
                 <Route path='/user' element={<UserInfoMenu/>}> 
+<<<<<<<<< Temporary merge branch 1
                     <Route path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> }/>
                     <Route path='/user/order' element={ <div className='order'><Order/></div> } />
+=========
+                    <Route path='/user' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> } />
+>>>>>>>>> Temporary merge branch 2
                 </Route>
                 <Route path='/ShopHome' element={<ShopHome/>}/>
                 <Route path='/shop' element={<Shop></Shop>}/>
                 <Route path="/addItem" element={<AddItem/>}/>
                 <Route path='/detail' element={<Detail />}/>
             </Route>
+<<<<<<<<< Temporary merge branch 1
+            <Route path='*' element={<h1>error 404. not found</h1>}/>
+=========
             {/* ///private */}
 
             <Route path='/admin' element={<Admin/>} >
@@ -74,6 +89,7 @@ function App() {
               </Route>
             
             
+>>>>>>>>> Temporary merge branch 2
         </Routes>
        
     </BrowserRouter>

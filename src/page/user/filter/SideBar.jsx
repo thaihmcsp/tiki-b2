@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react'
-
 import { List1 } from './List1'
 // import { listAddress } from './listAddress'
 // import { listSupplier } from './listSupplier'
@@ -8,41 +7,12 @@ import { DownOutlined } from '@ant-design/icons';
 import { v4 as uuidv4 } from 'uuid';
 import './styles.css'
 
-const SideBar = ({setData,setInp,setPrice1,setPrice750, listProducts}) => {
-  const [address, setAddress] = useState([])
-  const [brand, setBrand] = useState([])
-  const [provider, setProvider] = useState([])
-  const [data1, setData1] = useState([]);
+const SideBar = () => {
+  
+  const [data, setData] = useState([]);
   const [listdata, setListData] = useState([]);
   const [supplier, setSupplier] = useState([]);
-  const [check, setCheck] = useState(0);
-  const [dem1, setDem1] = useState(false)
-  const [dem2, setDem2] = useState(false)
-  const [dem3, setDem3] = useState(false)
-const [listAddress, setTListAddress] = useState([])
-  const [listsupplier, setListsupplier] = useState([])
-  useEffect(() => {
-    setListsupplier(() => { 
-      const newData = []
-      listProducts.map(value => {
-        if(!newData.includes(value.shopId.shopName)) {
-          newData.push(value.shopId.shopName)
-        }
-      })
-      return newData
-    })
-   
-  },[listProducts])
-  
-
-  // const [listAddress, setTListAddress] = useState(() => {
-//   const newData = []
-//   listProducts.map(value => {
-//     newData.push(value.shopId.description[0].value)
-//   })
-//   return newData
-// })
-
+  const [check, setCheck] = useState(false);
   useEffect(() => {
     const newData = listAddress.slice(0, 5)
     setData1(newData)
@@ -50,138 +20,137 @@ const [listAddress, setTListAddress] = useState([])
     // setListData(newData1)
     const newData2 = listsupplier.slice(0, 5)
     setSupplier(newData2)
-  },[listsupplier,listAddress])
-
+  },[])
   const handleClick = () => {
-    const hide = document.querySelector(`.${styles.list_products__btn}`)
-    const icon_sidebar = document.querySelector('.icon-sidebar')
-    icon_sidebar.classList.toggle('mystyle1_sidebar')
-   if(check === 0) {
-    setData1(listAddress)
-    setCheck(1)
-      hide.textContent = 'Thu gọn';
+   if(!check) {
+    setData(listAddress)
+    setCheck(true)
    }else {
-    const newData = listAddress.slice(0, 5)
+    const newData = data.slice(0, 5)
     newData.slice(0, 5)
-    setData1(newData)
-    setCheck(0)
-      hide.textContent = 'Xem thêm';
+    setData(newData)
+    setCheck(false)
    }
   }
   
   const handleClick1 = () => {
-  //   const hide1 = document.querySelector('.list_products__btn1')
-  //  if(!check) {
-  //   setListData(listtrademark)
-  //   setCheck(true)
-  //   hide1.textContent = 'Thu gọn';
-  //  }else {
-  //   const newData = listtrademark.slice(0, 5)
-  //   newData.slice(0, 5)
-  //   setListData(newData)
-  //   setCheck(false)
-  //   hide1.textContent = 'Xem thêm';
-  //  }
-  }
-  
-  const handleClick2 = () => {
-    const hide2 = document.querySelector('.list_products__btn2')
-    const icon_sidebar2 = document.querySelector('.icon-sidebar2')
-    icon_sidebar2.classList.toggle('mystyle_sidebar')
-   if(check === 0) {
-    setSupplier(listsupplier)
-    console.log(listsupplier)
-    setCheck(1)
-    hide2.textContent = 'Thu gọn';
+   if(!check) {
+    setListData(trademark)
+    setCheck(true)
    }else {
-    const newData = listsupplier.slice(0, 5)
+    const newData = trademark.slice(0, 5)
     newData.slice(0, 5)
-    setSupplier(newData)
-    setCheck(0)
-    hide2.textContent = 'Xem thêm';
+    setListData(newData)
+    setCheck(false)
    }
   }
+  const handleClick2 = () => {
+   if(!check) {
+    setSupplier(listSupplier)
+    setCheck(true)
+   }else {
+    const newData = listSupplier.slice(0, 5)
+    newData.slice(0, 5)
+    setSupplier(newData)
+    setCheck(false)
+   }
+    
+  }
+  const FiterListData = () => {
 
+  }
+  const SetdataPrice = () => {
 
-  const handleCheck = (val) => {
-    setAddress((perv) => {
-      const ischeck = address.includes(val);
-      if(ischeck) {
-        return address.filter(item => item !== val);
-      }else {
-        return [...perv, val];
-      }
-    })
   }
 
-  const handleCheck1 = (val) => {
-    setBrand((perv) => {
-      const ischeck = brand.includes(val);
-      if(ischeck) {
-        return brand.filter(item => item !== val);
-      }else {
-        return [...perv, val];
-      }
-    })
-  }
+  let checked = document.querySelectorAll(`.${styles.ListCheckbox}`);
+  // console.log(checked);
+  var arr = Array.prototype.slice.call(checked);
+  // function FiterListData() {
+  //   const dataCheck = arr.filter((value) => {
+  //     return value.checked === true;
+  //   })
+  //   if (dataCheck.length === 0) {
+  //     props.setShowListdata(listProducts)
+  //   } else {
+  //     let checkAdress = false;
+  //     let checktrademark = false;
+  //     let checkSupplier = false;
+  //     for (let i = 0; i < dataCheck.length; i++) {
+  //       if (listAddress.includes(dataCheck[i].value)) {
+  //         checkAdress = true;
+  //       }
+  //       if (trademark.includes(dataCheck[i].value)) {
+  //         checktrademark = true;
+  //       }
+  //       if (listSupplier.includes(dataCheck[i].value)) {
+  //         checkSupplier = true;
+  //       }
+  //     }
+  //     const ListRender = [];
+  //     const newListRender = [];
+  //     function testCheck(key) {
+  //       for (let i = 0; i < listProducts.length; i++) {
+  //         for (let j = 0; j < dataCheck.length; j++) {
+  //           if (listProducts[i][`${key}`] == dataCheck[j].value) {
+  //             ListRender.push(listProducts[i])
+  //           }
+  //         }
+  //       }
+  //       return ListRender
+  //     }
+  //     if (checkAdress) {
+  //       testCheck('address')
+  //     } else if (checktrademark) {
+  //       testCheck('trademark')
+  //     } else {
+  //       testCheck('supplier')
+  //     }
+  //     for (let k = 0; k < ListRender.length; k++) {
+  //       if (checktrademark && checkSupplier) {
+  //         for (let l = 0; l < dataCheck.length; l++) {
+  //           if (ListRender[k].trademark === dataCheck[l].value) {
+  //             for (let m = 0; m < dataCheck.length; m++) {
+  //               if (ListRender[k].supplier === dataCheck[m].value) {
+  //                 newListRender.push(ListRender[k])
+  //               }
+  //             }
+  //           }
+  //         }
+  //       } else if (checktrademark) {
+  //         for (let l = 0; l < dataCheck.length; l++) {
+  //           if (ListRender[k].trademark === dataCheck[l].value) {
+  //             newListRender.push(ListRender[k])
+  //           }
+  //         }
+  //       } else if (checkSupplier) {
+  //         for (let l = 0; l < dataCheck.length; l++) {
+  //           if (ListRender[k].supplier === dataCheck[l].value) {
+  //             newListRender.push(ListRender[k])
+  //           }
+  //         }
+  //       } else {
+  //         newListRender.push(ListRender[k])
+  //       }
+  //     }
+  //     setListDataPrice(newListRender)
+  //     props.setShowListdata(newListRender)
+  //   }
+  // }
+  // function SetdataPrice() {
+  //   const newListdataPrice = ListDataPrice.filter((value) => {
+  //     return value.price * 1 <= 200000 * 1;
+  //   }) 
+  //   props.setShowListdata(newListdataPrice)/
+  // }
 
-  const handleCheck2 = (val) => {
-    setProvider((perv) => {
-      const ischeck = provider.includes(val);
-      if(ischeck) {
-        return provider.filter(item => item !== val);
-      }else {
-        return [...perv, val];
-      }
-    })
-  }
-
+  const [address, setAddress] = useState([])
+  const [brand, setBrand] = useState([])
+  const [provider, setProvider] = useState([])
   useEffect(() => {
-      setData({address:address, trademark:brand, shopName:provider })
-  }, [address, brand, provider]);
-  const handleprice = () => {
-      const inp1 = document.querySelector('#min-input')
-      const inp2 = document.querySelector('#max-input')
-      setInp({min:inp1.value, max:inp2.value})
-      inp1.value =''
-      inp2.value= ''
-  }
+    props.setFilter({ address: address, trademark: brand, supplier: provider })
+  }, [address, brand, provider])
 
-  const handle200 = () => {
-    const filter_sidebar200 = document.querySelector('.filter-sidebar200')
-    if(!dem3) {
-      filter_sidebar200.style.backgroundColor = 'rgba(27, 168, 255, 0.1)';
-      setPrice1(200000)
-    }else {
-      filter_sidebar200.style.backgroundColor = 'rgb(238, 238, 238)';
-      setPrice1([])
-    }
-    setDem3(dem3 => !dem3)
-  }
-
-  const handle7500 = () => {
-    const filter_sidebar700 = document.querySelector('.filter-sidebar700')
-    if(!dem2) {
-      filter_sidebar700.style.backgroundColor = 'rgba(27, 168, 255, 0.1)';
-      setInp({min:200000, max:750000})
-    }else {
-      filter_sidebar700.style.backgroundColor = 'rgb(238, 238, 238)';
-      setInp([])
-    }
-    setDem2(dem2 => !dem2)
-  }
-
-  const handle8500 = () => {
-    const filter_sidebar750 = document.querySelector('.filter-sidebar750')
-    if(!dem1) {
-      filter_sidebar750.style.backgroundColor = 'rgba(27, 168, 255, 0.1)';
-      setPrice750(750000)
-    }else {
-      filter_sidebar750.style.backgroundColor = 'rgb(238, 238, 238)';
-      setPrice750([])
-    }
-    setDem1(dem1 => !dem1)
-  }
   return (
     <div className={styles.container}>
     <div className={styles.nav}>
@@ -198,22 +167,19 @@ const [listAddress, setTListAddress] = useState([])
     </div>
     <div className={styles.nav}>
     <div className={styles.list_products}>
-    <h3 className={styles.title}>NƠI BÁN</h3>
+    <h3 className={styles.title}>DANH MỤC SẢN PHẨM</h3>
      <ul className= {styles.nav__list}>
-    {data1.map((val, index) => {
+    {data.map((val, index) => {
       const id1 = uuidv4()
       return (
        <li key = {index} className= {styles.list_products_item}>
-       <input type='checkbox' id= {id1} checked={address.includes(val)} onChange={() => handleCheck(val)}/>
+            <input type='checkbox' id= {id1}/>
             <label className= {styles.list_products__name} htmlFor={id1}>{val}</label>      
         </li>
       )
     })}
     </ul>
-    <div className={styles.btn_box}>
-    <span onClick={handleClick} className= {styles.list_products__btn}>xem thêm</span>
-    <DownOutlined style={{fontSize:'0.6rem', marginLeft:'1px',color:'blue'}} className={[styles.icon, 'icon-sidebar'].join(' ')}/>
-    </div>
+    <span onClick={handleClick} className= {styles.list_products__btn}>xem thêm <DownOutlined style={{fontSize:'0.6rem', marginLeft:'1px'}}/></span>
     </div>
     </div>
     <div className={styles.nav}>
@@ -224,16 +190,16 @@ const [listAddress, setTListAddress] = useState([])
     <div className={styles.nav}>
     <div className={styles.price}>
     <h3 className={styles.title}>GIÁ</h3>
-    <p onClick ={handle200} className = 'filter-sidebar200'>Dưới 200.000</p>
-    <p onClick = {handle7500} className = 'filter-sidebar700'>Từ 200.000 đến 750.000</p>
-    <p onClick={handle8500} className = 'filter-sidebar750' >Trên 750.000</p>
+    <p>Dưới 200.000</p>
+    <p>Từ 200.000 đến 750.000</p>
+    <p>Trên 750.000</p>
     <label>Chọn khoảng giá</label>
     <div className={styles.gourp}>
-      <input type="number" placeholder='0' id='min-input'/>
+      <input type="text" placeholder='' value={0} />
       <span className={styles.seperate}>-</span>
-      <input type="number" placeholder='0'  id='max-input'/>
+      <input type="text" placeholder='' value={0}/>
     </div>
-      <button className={styles.btn} onClick = {handleprice}>Áp dụng</button>
+      <button className={styles.btn}>Áp dụng</button>
           </div>
     </div>
     <div className={styles.nav}>
@@ -244,16 +210,13 @@ const [listAddress, setTListAddress] = useState([])
       const id = uuidv4()
       return (
         <li key = {index} className= {styles.list_products_item}>
-        <input type='checkbox' className={styles.list_products__name} id={id} checked={brand.includes(val)} onChange={() => handleCheck1(val)}/>
+            <input type='checkbox' className={styles.list_products__name} id={id}/>
             <label className= {styles.list_products__name} htmlFor={id}>{val}</label>      
         </li>
       )
     })}
     </ul>
-    <div className={styles.btn_box}>
-    <span onClick={handleClick1} className= {[styles.list_products__btn, 'list_products__btn1'].join(' ')}>xem thêm</span>
-    <DownOutlined style={{fontSize:'0.6rem', marginLeft:'1px',color:'blue'}} className={styles.icon}/>
-    </div>
+    <span onClick={handleClick1} className= {styles.list_products__btn}>xem thêm <DownOutlined style={{fontSize:'0.6rem', marginLeft:'1px'}}/></span>
     </div>
     </div>
     <div className={styles.nav}>
@@ -264,16 +227,13 @@ const [listAddress, setTListAddress] = useState([])
       const id1 = uuidv4()
       return (
         <li key = {index} className= {styles.list_products_item}>
-        <input type='checkbox' id={id1} checked={provider.includes(val)} onChange={() => handleCheck2(val)}/>
+            <input type='checkbox' id={id1}/>
             <label className= {styles.list_products__name} htmlFor={id1}>{val}</label>      
         </li>
       )
     })}
     </ul>
-    <div className={styles.btn_box}>
-    <span onClick={handleClick2} className= {[styles.list_products__btn, 'list_products__btn2'].join(' ')}>xem thêm</span>
-    <DownOutlined style={{fontSize:'0.6rem', marginLeft:'1px',color:'blue'}} className={[styles.icon, 'icon-sidebar2'].join(' ')}/>
-    </div>
+    <span onClick={handleClick2} className= {styles.list_products__btn}>xem thêm <DownOutlined style={{fontSize:'0.6rem', marginLeft:'1px'}}/></span>
     </div>
     </div>
    </div>

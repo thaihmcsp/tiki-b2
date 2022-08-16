@@ -18,10 +18,6 @@ const userSlice = createSlice({
         userLogin: function( state, action) {
             window.localStorage.setItem('tiki-user', JSON.stringify(action.payload));
             return action.payload;
-        },
-        updateInfo: function( state, action) {
-            window.localStorage.setItem('tiki-user', JSON.stringify(action.payload));
-            return action.payload
         }
     }
 })

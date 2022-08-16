@@ -1,352 +1,30 @@
-import  React, { useState,useRef, useEffect } from 'react'
+import  React, { useState,useRef } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import Modall from './Modall';
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Autoplay, Pagination as Pagination2 , Navigation } from "swiper";
+import { Autoplay, Pagination as Pagination2, Navigation } from "swiper";
 import { Rate } from 'antd';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import { listProducts } from './listProducts';
+import {Pagination, Stack} from '@mui/material';
+// import  from '@mui/material/Stack';
 import 'antd/dist/antd.css';
-import  style from './container.module.css'
+import style from './container.module.css'
 import "./styles.css";
 import { VapeFreeOutlined } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 
 
-const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
-  const [listProductss, setListProductss] = useState(listProducts)
-  const [listData1, setListData1] = useState([])
-  const [byprice, setByprice] = useState(0)
-  const [dem, setDem] = useState(0)
-  const [count, setCount] = useState(16)
-  const [list, setList] = useState([])
-  const [current, setCurrent] = useState(3);
-  const [checked, setChecked] = useState(true)
-  const [listnew, setListnew] = useState([])
-  const [dem1, setDem1] = useState(0)
-  const [dem3, setDem3] = useState(0)
 
-  const onChange = (page) => {
-    setCurrent(page);
-  };
-  
-  
-      const pricelow = () => {
-        if(dem === 0) {
-          setListnew(() =>  {
-              const newDatalow = [...listProducts]
-                newDatalow.sort((a, b) => {
-                 return a.productDetailId[0].price - b.productDetailId[0].price;
-                })
-                return newDatalow
-              })
-            }else {
-              setListnew(() =>  {
-                const newDatalow = [...listProductss]
-                  newDatalow.sort((a, b) => {
-                    return a.productDetailId[0].price - b.productDetailId[0].price;
-                  })
-                  return newDatalow
-                })
-            }
-          setChecked(checked => !checked)
-        }
-    
-
-        useEffect(() => {
-          if(typeof price1 === 'number') {
-              if(dem === 0) {    
-                setByprice(() => {
-                  let newData5 = [...listProducts]
-                  const newData3 = newData5.filter(data => data.productDetailId[0].price < price1)
-                  return newData3 
-                })
-             
-              }
-              else {
-                setByprice(() => {
-                  const newData = [...listProductss]
-                  const newData3 = newData.filter(data => data.productDetailId[0].price < price1)
-                  return newData3
-                })
-              }      
-              setDem1(dem1 => ++dem1)
-              }else {
-                setDem1(0)
-            setByprice(0)
-          }
-          },[price1])
-          
-
-        useEffect(() => {
-          if(inp.min !== undefined) {
-              if(dem === 0) {    
-                setByprice(() => {
-                 let newData5 = [...listProducts]
-                  const newData3 = newData5.filter(data => {
-                    if(data.productDetailId[0].price >= inp.min && data.productDetailId[0].price <= inp.max) {
-                      return true
-                    }
-                  })
-                  return newData3 
-                })
-              }
-              else {
-                setDem1(dem1 => ++dem1)
-                setByprice(() => {
-                  const newData = [...listProductss]
-                  const newData3 = newData.filter(data => {
-                    if(data.productDetailId[0].price >= inp.min && data.productDetailId[0].price <= inp.max) {
-                      return true
-                    }
-                  })
-                  return newData3
-                })
-              }      
-          }else {
-            setDem1(0)
-            setByprice(0)
-          }
-          },[inp])  
-
-
-        useEffect(() => {
-          if(typeof price750 === 'number') {
-              if(dem === 0) {    
-                setByprice(() => {
-                  let newData5 = [...listProducts]
-                  const newData3 = newData5.filter(data => data.productDetailId[0].price > price750)
-                  return newData3 
-                })
-             
-              }
-              else {
-                setByprice(() => {
-                  const newData = [...listProductss]
-                  const newData3 = newData.filter(data => data.productDetailId[0].price > price750)
-                  return newData3
-                })
-                setDem1(dem1 => ++dem1)
-              }      
-              }else {
-                setDem1(0)
-            setByprice(0)
-          }
-         
-          },[price750])
-
-
-      const pricehigh = () => {
-        if(dem === 0) {
-          setListnew(() =>  {
-              const newDatalow = [...listProducts]
-                newDatalow.sort((a, b) => {
-                  return b.productDetailId[0].price - a.productDetailId[0].price;
-                })
-                return newDatalow
-              })
-              
-            }else {
-              setListnew(() =>  {
-                const newDatalow = [...listProductss]
-                newDatalow.sort((a, b) => {
-                  return b.productDetailId[0].price - a.productDetailId[0].price;
-                })
-                return newDatalow
-              })
-            }
-            setChecked(checked => !checked)     
-      }
-   
-      const selling = () => {
-        if(dem === 0) {
-          setListnew(() =>  {
-              const newDatalow = [...listProducts]
-                newDatalow.sort((a, b) => {
-                  return b.sold - a.sold;
-                })
-                return newDatalow
-              })
-              
-            }else {
-              setListnew(() =>  {
-                const newDatalow = [...listProductss]
-                newDatalow.sort((a, b) => {
-                  return b.sold - a.sold;
-                })
-                return newDatalow
-              })
-            }
-            setChecked(checked => !checked)     
-      }
-   
-
-      const newproducts = () => {
-        if(dem === 0) {
-          setListnew(() =>  {
-              const newDatalow = [...listProducts]
-                newDatalow.sort((a, b) => {
-                  const a1 = new Date(a.updatedAt)
-                  const b1 = new Date(b.updatedAt)
-                  return a1 - b1
-                })
-                return newDatalow
-              })
-              
-            }else {
-              setListnew(() =>  {
-                const newDatalow = [...listProductss]
-                newDatalow.sort((a, b) => {
-                  const a1 = new Date(a.updatedAt)
-                  const b1 = new Date(b.updatedAt)
-                  return a1 - b1
-                })
-                return newDatalow
-              })
-            }
-            setChecked(checked => !checked)   
-      }
-    
-      useEffect(() => {
-        let Data = byprice.length > 0 ? [...byprice] : []
-        for (let key in data1) {
-          let index = 0
-          for (let key in data1) {
-            if (data1[key].length === 0) {
-              index++
-            }
-          }   
-          if (index === Object.keys(data1).length) { 
-            setDem(0)
-              setListnew([])
-              setListProductss(listProducts)
-              setListData1(() => {
-                const list = [...listProducts].slice(0, 16)
-                return list
-              })
-            
-            } else {
-            if (data1[key].length === 0) {
-              continue
-            } else {
-              if (Data.length === 0) {
-                let NewData = []          
-                if(byprice === 0){
-                  NewData = dem1 === 0 ? [...listProducts] : [...byprice]
-                }
-                else {
-                  NewData = [...byprice]
-                }
-                setDem(dem => ++dem)
-                  data1[key].map(title => {
-                    Data = [...Data, ...NewData.filter(filter => filter.shopId[key] === title)]
-                  })
-              } else {
-                setDem(dem => ++dem)
-                let NewData = []
-                if(byprice === 0 ){
-                  NewData = dem1 === 0 ? [...listProducts] : [...byprice]
-                }
-                else {
-                  NewData = [...byprice]
-                }
-                  let newData2 = []
-                    data1[key].map(title => {
-                      newData2 = [...newData2,...NewData.filter(filter => filter.shopId[key] === title)]
-                      Data = [...newData2]
-                    })       
-                }
-                
-              }
-              if(Data.length === 0) {
-                setDem(dem => ++dem)
-                setListnew([])
-                setListData1(Data)
-                setListProductss(Data)
-                setChecked(checked => !checked) 
-            }
-          }
-        }
-        if(Data.length > 0 || byprice.length === 0) {
-          setDem(dem => ++dem)
-          setListnew([])
-          setListData1(Data)
-          setListProductss(Data)
-          setChecked(checked => !checked)   
-        }
-    
-      }, [data1, byprice, listProducts])
-
-      useEffect(() => {
-        if(dem1 === 1 && data1.address.length === 0 && data1.trademark.length === 0 && data1.shopName.length === 0) {
-          if(inp.min !== undefined) {
-            setByprice(() => {
-              let newData5 = [...listProducts]
-               const newData3 = newData5.filter(data => {
-                 if(data.productDetailId[0].price >= inp.min && data.productDetailId[0].price <= inp.max) {
-                   return true
-                 }
-               })
-               return newData3 
-             }) 
-          }else if(price1 === 200000){
-            setByprice(() => {
-              let newData5 = [...listProducts]
-              const newData3 = newData5.filter(data => data.productDetailId[0].price < price1)
-              return newData3 
-            })
-          }else {
-            setByprice(() => {
-              let newData5 = [...listProducts]
-              const newData3 = newData5.filter(data => data.productDetailId[0].price > price750)
-              return newData3 
-            })
-          }
-          setChecked(checked => !checked)  
-        }
-      },[data1])
-
-   
-      function popular() {
-        setListnew([])
-        setListProductss(listProducts)
-        setListData1(listProducts)
-        setChecked(checked => !checked)
-      }
-
-
-      useEffect(() => {
-          if(listnew.length === 0) {
-            setPage(1)
-            setListData1(() => {
-              const list = [...listData1].slice(0, 16)
-              return list
-            })
-          }else {
-            setPage(1)
-            setListData1(() => {
-              const list = [...listnew].slice(0, 16)
-              return list
-            })
-          } 
-      },[checked])
-
-
-      const [page, setPage] = React.useState(1);
-      const handleChange = (page, pageSize) => {
-        setPage(pageSize);
-        const start = (pageSize - 1) * count;
-        const end = pageSize * count;
-          if(listnew.length === 0) {
-            setListData1(listProductss.slice(start, end));
-          }
-          else {
-            setListData1(listnew.slice(start, end));
-          }
+const Container = () => {
+ 
+    const [current, setCurrent] = useState(3);
+    const onChange = (page) => {
+        console.log(page);
+        setCurrent(page);
       };
-
+    const [show,setShow] = useState(false)
   return (
     <div className={style.container}>
         <h2 className={style.title}>Làm Đẹp - Sức Khỏe</h2>
@@ -355,6 +33,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
+        // centeredSlides={show}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
@@ -368,7 +47,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
         modules={[Autoplay, Pagination2, Navigation]}
         loop={true}
         loopPreventsSlide={true}
-        className="mySwiper"
+        className="mySwiper_fillter"
        
       >
         <SwiperSlide>
@@ -390,50 +69,48 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
         <SwiperSlide>
         <img src='https://salt.tikicdn.com/cache/w1080/ts/banner/06/37/79/6e63d637ff9346f787cc4fa891b77f1b.png.webp' alt='' className={style.img}/>
         </SwiperSlide>
+  
       </Swiper>
     </>
     </div>
     <div className={style.select}>
-        <span className={[style.select_name, style.select_active].join(' ')} onClick={popular}>Phổ Biến</span>
-        <span className={style.select_name} onClick = {selling}>Bán Chạy</span>
-        <span className={style.select_name} onClick={newproducts}>Hàng Mới</span>
-        <span className={style.select_name} onClick= {pricelow}>Giá Thấp</span>
-        <span className={style.select_name} onClick= {pricehigh}>Giá Cao</span>
+        <span className={[style.select_name, style.select_active].join(' ')}>Phổ Biến</span>
+        <span className={style.select_name}>Bán Chạy</span>
+        <span className={style.select_name}>Hàng Mới</span>
+        <span className={style.select_name}>Giá Thấp</span>
+        <span className={style.select_name}>Giá Cao</span>
     </div>
-    <Modall className = 'filter_modal'/>
+    <Modall />
     <div className={style.products}>
-        {listData1.map(val => {
-      
-            return  (
-                <div className={style.products_item} key={val._id}>
+        {listProducts.map(val => {
+            return (
+                <div className={style.products_item} key={val.id}>
                 <div className={style.products_thumbnail}>
-                    {/* <img src={val.categoryId.thump} alt='' className={style.image_img} /> */}
-                    {/* <img src={val.categoryId.thumbnail} alt='' className={style.thumbnail_img} />  */}
+                    <img src={val.image} alt='' className={style.image_img} />
+                    <img src={val.thumbnail} alt='' className={style.thumbnail_img} /> 
                 </div>
                 <div className={style.products_info}>
                     <span className={style.ad}>Ad</span>
-                    <h4 className={style.products_title}>{val.productName}</h4>
+                    <h4 className={style.products_title}>{val.title}</h4>
                     <div className={style.products_rating}>
                     <Rate allowHalf defaultValue={3} style = {{fontSize:'0.7rem'}}/>
                     <span className={style.products_sold}>đã bán {val.sold}</span>
                     </div>
                     <div className={style.products_price_box}>
-                    <span  className={style.products_price}>{val.productDetailId[0].price.toLocaleString().split(',').join('.')} đ</span>
+                    <span  className={style.products_price}>{val.price} đ</span>
                     <span className={style.products_discount}>-14%</span>
                     </div>
                     <div>
-                    {/* <img src={val.categoryId.item} alt='' className={style.badge_under} /> */}
+                    <img src={val.badge_under} alt='' className={style.badge_under} />
                     </div>
                 </div>
                 </div>
             )
-            
-        
         })}
     </div>
    <div style={{float: 'right', margin:'20px 0'}} className={style.Pagination}>
    <Stack spacing={2}>
-      <Pagination count={Math.ceil(listProductss.length / 16)} page={page} onChange={handleChange}/>
+      <Pagination count={10} />
     </Stack>
    </div>
     </div>
