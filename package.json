@@ -10,11 +10,9 @@
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
-<<<<<<< HEAD
+
     "@mui/material": "^5.9.2",
-=======
-    "@mui/material": "^5.8.7",
->>>>>>> d22136af27879ef67dee30f6a2e57a7a2d26ff5f
+
     "@mui/x-data-grid": "^5.13.0",
     "@reduxjs/toolkit": "^1.8.3",
     "@testing-library/jest-dom": "^5.16.4",
@@ -35,11 +33,7 @@
     "react-scripts": "5.0.1",
     "save": "^2.5.0",
     "styled-components": "^5.3.5",
-<<<<<<< HEAD
     "swiper": "^8.3.2",
-=======
-    "swiper": "^8.3.0",
->>>>>>> d22136af27879ef67dee30f6a2e57a7a2d26ff5f
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },

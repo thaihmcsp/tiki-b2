@@ -9,7 +9,7 @@ import Admin from './page/admin/Admin';
 import 'antd/dist/antd.css';
 import ShopDashBoardAll from './page/shop/dashboard/ShopDashBoardAll';
 import Product from './page/shop/productManagement/Product.js';
-import Profile from './page/user/profile/ProfileManu/ProfileMenu';
+// import Profile from './page/user/profile/ProfileManu/ProfileMenu';
 import ProfileList from './page/user/profile/ProfileLeft/ProfileList';
 import ProfileListHeader from './page/user/profile/ProfileLeft/ProfileListHeader';
 import UserInfo from './page/user/profile/UserInfo_data/UserInfo';
@@ -27,7 +27,6 @@ import AddItem from "./page/shop/productManagement/priceItem/addItem_Phu/AddItem
 import PrivateRouter from './components/PrivateRouter';
 
 function App() {
-  const [id, setId] = useState(0)
 
   return (
     <BrowserRouter>
@@ -47,7 +46,7 @@ function App() {
             </Route>
             <Route path='/' element={<Header/>}> 
                 <Route path='/' element={<Home/>} />
-                <Route path='/filter' element={<Filter setId = {setId}/>}/>
+                <Route path='/filter' element={<Filter />}/>
                 <Route path='/shop/dashboard' element={<ShopDashBoardAll/>} />
                 <Route path='/shop/product/manage' element={<Product />} />
                 <Route path='/user' element={<UserInfoMenu/>}> 

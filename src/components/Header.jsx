@@ -91,7 +91,8 @@ function Header(props) {
   // console.log(21, userLogin)
   
 
-  const [DataHeader,setDataHeader] = useState(['Thịt','Rau củ','Nhà cửa','Điện tử','Thiết Bị Số','Điện thoại','Mẹ & Bé'])
+  const [DataHeader,setDataHeader] = useState(['Thịt','Rau củ','Nhà cửa','Điện tử','Thiết Bị Số','Điện thoại','Mẹ & Bé']);
+  
   return (
    <div>
     <div className="Header">

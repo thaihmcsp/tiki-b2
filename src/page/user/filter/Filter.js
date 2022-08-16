@@ -17,7 +17,16 @@ const Filter = ({setId}) => {
   useEffect(() => {
     getAPI("/product/get-all-products")
     .then((data)=> {
-      setListProducts(data.data.listProduct)
+      setListProducts(() => {
+        const newData = [...data.data.listProduct]
+        const listnew = []
+        newData.map(value => {
+           if(value.productDetailId.length > 0) {
+          listnew.push(value)
+          }
+        })
+        return listnew
+      })
     })
     .catch((error) => {
       console.log(error)

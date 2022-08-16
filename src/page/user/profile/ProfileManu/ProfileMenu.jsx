@@ -7,7 +7,7 @@ import {
 import { listIcon } from './listIcon';
 import styles from'./Profile.module.css';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
-import MenuUserIcon from './MenuUserIcon';
+import MenuUserIcon from './MenuUserIcon.js';
 import { Button, Drawer, Radio, Space } from 'antd';
 import 'antd/dist/antd.css';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -51,7 +51,6 @@ function Profile() {
           />
         </div>
         <div className= {styles.account}>
-<<<<<<< HEAD
           <MenuUserIcon icon={listIcon[1]}>
             <div className='info-account'>
               <span>Tài khoản của</span>
@@ -87,10 +86,8 @@ function Profile() {
           />
         </div>
         <div className={styles.account}>
-          <MenuUserIcon icon={listIcon[1]}>
-=======
+          {/* <MenuUserIcon icon={listIcon[1]}> */}
         <Link to='/user/profile'> <MenuUserIcon icon={listIcon[1]}>
->>>>>>> d22136af27879ef67dee30f6a2e57a7a2d26ff5f
             <div>
               <span>Tài khoản của</span>
               <br />
@@ -116,8 +113,8 @@ function Profile() {
             <MenuUserIcon icon={listIcon[7]} title='Quản lý Tiki Xu của tôi' />
             <MenuUserIcon icon={listIcon[10]} title='BookCare của tôi' />
           </div>
-          </Drawer>
-      </div>
+          {/* </Drawer> */}
+
       <div className={styles.manuUserContainer}>
         <div className={styles.header}>
           <MenuUserIcon
@@ -154,7 +151,8 @@ function Profile() {
         </div>
       </div>
     </div>
-  );
+    </div>
+  )
 }
 
 export default Profile;

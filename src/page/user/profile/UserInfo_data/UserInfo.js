@@ -6,12 +6,8 @@ import 'antd/dist/antd.css';
 import { Radio } from 'antd';
 import DataMonth from './DataMonth';
 import Countries from './Countries';
-<<<<<<< HEAD
-import { Link } from 'react-router-dom';
-=======
-import { Link, useNavigate } from 'react-router-dom'
->>>>>>> d22136af27879ef67dee30f6a2e57a7a2d26ff5f
-
+// import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Modal } from 'antd';
 import { useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';

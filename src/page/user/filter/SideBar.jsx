@@ -210,7 +210,7 @@ const [listAddress, setTListAddress] = useState([])
       )
     })}
     </ul>
-    <div style={{display:'flex', alignItems: 'center'}}>
+    <div className={styles.btn_box}>
     <span onClick={handleClick} className= {styles.list_products__btn}>xem thêm</span>
     <DownOutlined style={{fontSize:'0.6rem', marginLeft:'1px',color:'blue'}} className={[styles.icon, 'icon-sidebar'].join(' ')}/>
     </div>
@@ -250,7 +250,7 @@ const [listAddress, setTListAddress] = useState([])
       )
     })}
     </ul>
-    <div style={{display:'flex', alignItems: 'center'}}>
+    <div className={styles.btn_box}>
     <span onClick={handleClick1} className= {[styles.list_products__btn, 'list_products__btn1'].join(' ')}>xem thêm</span>
     <DownOutlined style={{fontSize:'0.6rem', marginLeft:'1px',color:'blue'}} className={styles.icon}/>
     </div>
@@ -270,7 +270,7 @@ const [listAddress, setTListAddress] = useState([])
       )
     })}
     </ul>
-    <div style={{display:'flex', alignItems: 'center'}}>
+    <div className={styles.btn_box}>
     <span onClick={handleClick2} className= {[styles.list_products__btn, 'list_products__btn2'].join(' ')}>xem thêm</span>
     <DownOutlined style={{fontSize:'0.6rem', marginLeft:'1px',color:'blue'}} className={[styles.icon, 'icon-sidebar2'].join(' ')}/>
     </div>

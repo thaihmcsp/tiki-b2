@@ -25,7 +25,6 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
   const [current, setCurrent] = useState(3);
   const [checked, setChecked] = useState(true)
   const [listnew, setListnew] = useState([])
-  const [dataa, setDataa] = useState([])
   const [dem1, setDem1] = useState(0)
   const [dem3, setDem3] = useState(0)
 
@@ -37,7 +36,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
       const pricelow = () => {
         if(dem === 0) {
           setListnew(() =>  {
-              const newDatalow = [...dataa]
+              const newDatalow = [...listProducts]
                 newDatalow.sort((a, b) => {
                  return a.productDetailId[0].price - b.productDetailId[0].price;
                 })
@@ -60,7 +59,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
           if(typeof price1 === 'number') {
               if(dem === 0) {    
                 setByprice(() => {
-                  let newData5 = [...dataa]
+                  let newData5 = [...listProducts]
                   const newData3 = newData5.filter(data => data.productDetailId[0].price < price1)
                   return newData3 
                 })
@@ -85,7 +84,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
           if(inp.min !== undefined) {
               if(dem === 0) {    
                 setByprice(() => {
-                 let newData5 = [...dataa]
+                 let newData5 = [...listProducts]
                   const newData3 = newData5.filter(data => {
                     if(data.productDetailId[0].price >= inp.min && data.productDetailId[0].price <= inp.max) {
                       return true
@@ -117,7 +116,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
           if(typeof price750 === 'number') {
               if(dem === 0) {    
                 setByprice(() => {
-                  let newData5 = [...dataa]
+                  let newData5 = [...listProducts]
                   const newData3 = newData5.filter(data => data.productDetailId[0].price > price750)
                   return newData3 
                 })
@@ -142,7 +141,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
       const pricehigh = () => {
         if(dem === 0) {
           setListnew(() =>  {
-              const newDatalow = [...dataa]
+              const newDatalow = [...listProducts]
                 newDatalow.sort((a, b) => {
                   return b.productDetailId[0].price - a.productDetailId[0].price;
                 })
@@ -164,7 +163,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
       const selling = () => {
         if(dem === 0) {
           setListnew(() =>  {
-              const newDatalow = [...dataa]
+              const newDatalow = [...listProducts]
                 newDatalow.sort((a, b) => {
                   return b.sold - a.sold;
                 })
@@ -187,7 +186,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
       const newproducts = () => {
         if(dem === 0) {
           setListnew(() =>  {
-              const newDatalow = [...dataa]
+              const newDatalow = [...listProducts]
                 newDatalow.sort((a, b) => {
                   const a1 = new Date(a.updatedAt)
                   const b1 = new Date(b.updatedAt)
@@ -209,25 +208,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
             }
             setChecked(checked => !checked)   
       }
-
-
-      useEffect(() => {
-        if(listProducts.length > 0) {
-          setDataa(() => {
-            const list = [...listProducts]
-            const listnew = []
-            list.map(value => {
-              if(value.productDetailId.length > 0) {
-                listnew.push(value)
-              }
-            })
-            return listnew
-
-          })
-        }
-      },[listProducts])
     
-
       useEffect(() => {
         let Data = byprice.length > 0 ? [...byprice] : []
         for (let key in data1) {
@@ -240,9 +221,9 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
           if (index === Object.keys(data1).length) { 
             setDem(0)
               setListnew([])
-              setListProductss(dataa)
+              setListProductss(listProducts)
               setListData1(() => {
-                const list = [...dataa].slice(0, 16)
+                const list = [...listProducts].slice(0, 16)
                 return list
               })
             
@@ -253,7 +234,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
               if (Data.length === 0) {
                 let NewData = []          
                 if(byprice === 0){
-                  NewData = dem1 === 0 ? [...dataa] : [...byprice]
+                  NewData = dem1 === 0 ? [...listProducts] : [...byprice]
                 }
                 else {
                   NewData = [...byprice]
@@ -266,7 +247,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
                 setDem(dem => ++dem)
                 let NewData = []
                 if(byprice === 0 ){
-                  NewData = dem1 === 0 ? [...dataa] : [...byprice]
+                  NewData = dem1 === 0 ? [...listProducts] : [...byprice]
                 }
                 else {
                   NewData = [...byprice]
@@ -296,14 +277,13 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
           setChecked(checked => !checked)   
         }
     
-      }, [data1, byprice, dataa])
-
+      }, [data1, byprice, listProducts])
 
       useEffect(() => {
         if(dem1 === 1 && data1.address.length === 0 && data1.trademark.length === 0 && data1.shopName.length === 0) {
           if(inp.min !== undefined) {
             setByprice(() => {
-              let newData5 = [...dataa]
+              let newData5 = [...listProducts]
                const newData3 = newData5.filter(data => {
                  if(data.productDetailId[0].price >= inp.min && data.productDetailId[0].price <= inp.max) {
                    return true
@@ -313,13 +293,13 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
              }) 
           }else if(price1 === 200000){
             setByprice(() => {
-              let newData5 = [...dataa]
+              let newData5 = [...listProducts]
               const newData3 = newData5.filter(data => data.productDetailId[0].price < price1)
               return newData3 
             })
           }else {
             setByprice(() => {
-              let newData5 = [...dataa]
+              let newData5 = [...listProducts]
               const newData3 = newData5.filter(data => data.productDetailId[0].price > price750)
               return newData3 
             })
@@ -331,8 +311,8 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
    
       function popular() {
         setListnew([])
-        setListProductss(dataa)
-        setListData1(dataa)
+        setListProductss(listProducts)
+        setListData1(listProducts)
         setChecked(checked => !checked)
       }
 
@@ -366,13 +346,6 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
             setListData1(listnew.slice(start, end));
           }
       };
-      const nav = useNavigate()
-
-
-      const handleID = (id) => {
-        nav('/admin/category')
-        setId(id)
-      }
 
   return (
     <div className={style.container}>
@@ -432,7 +405,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
         {listData1.map(val => {
       
             return  (
-                <div className={style.products_item} key={val._id} onClick = {() => handleID(val._id)}>
+                <div className={style.products_item} key={val._id}>
                 <div className={style.products_thumbnail}>
                     {/* <img src={val.categoryId.thump} alt='' className={style.image_img} /> */}
                     {/* <img src={val.categoryId.thumbnail} alt='' className={style.thumbnail_img} />  */}
@@ -449,9 +422,6 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
                     <span className={style.products_discount}>-14%</span>
                     </div>
                     <div>
-                    {
-                      
-                    }
                     {/* <img src={val.categoryId.item} alt='' className={style.badge_under} /> */}
                     </div>
                 </div>

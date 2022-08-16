@@ -73,10 +73,12 @@
     margin-bottom: 3px;
 }
 
-.icon {
-    position: relative;
-    top: 1px;
-}
+/* .icon {
+    /* position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right:-10px;
+} */ 
 
 .gourp {
     display: flex;
@@ -110,6 +112,13 @@
     font-size: 0.8rem;
     border-radius: 5px;
 }
+
+.btn_box {
+    display: flex;
+    align-items: center;
+}
+
+
 
 @media  only screen and (max-width:769px){
  
