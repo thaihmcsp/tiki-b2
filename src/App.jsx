@@ -27,8 +27,7 @@ import Detail from "./page/user/detail/Detail";
 import AddItem from "./page/shop/productManagement/priceItem/addItem_Phu/AddItem";
 import ShopProfile from './page/shop/shopProfile/ShopProfile';
 import ShopMenu from './page/shop/productManagement/Product';
-console.log(30, ShopMenu);
-console.log(31, UserInfoMenu);
+import User from './page/admin/userManagement/User';
 function App() {
     return (
         <BrowserRouter>
@@ -60,6 +59,7 @@ function App() {
                 <Route path='/admin' element={<Admin />} >
                     <Route path='/admin/category' element={<Category />} />
                     <Route path='/admin/shop' element={<Shop></Shop>} ></Route>
+                    <Route path='/admin/user' element={<User></User>} ></Route>
                     <Route path='/admin/dashbosh' element={<Shop></Shop>} ></Route>
                 </Route>
                 <Route path='/shop' element={<ShopMenu />} >

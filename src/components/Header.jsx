@@ -15,6 +15,7 @@ import { userLogin } from '../redux/userSlice';
 import { style } from '@mui/system'
 // import { withCookies, Cookies } from 'react-cookie'
 import './Header.css'
+import logout from './Logout';
 
 function Header(props) {
   const nav = useNavigate()
@@ -31,23 +32,53 @@ function Header(props) {
   const user_information = useSelector(function (state) {
     return state.user
   })
-  function SearchTitle(e) {
+  function removeAccents(str) {
+    var AccentsMap = [
+      "aàảãáạăằẳẵắặâầẩẫấậ",
+      "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
+      "dđ",
+      "DĐ",
+      "eèẻẽéẹêềểễếệ",
+      "EÈẺẼÉẸÊỀỂỄẾỆ",
+      "iìỉĩíị",
+      "IÌỈĨÍỊ",
+      "oòỏõóọôồổỗốộơờởỡớợ",
+      "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
+      "uùủũúụưừửữứự",
+      "UÙỦŨÚỤƯỪỬỮỨỰ",
+      "yỳỷỹýỵ",
+      "YỲỶỸÝỴ",
+    ];
+    for (var i = 0; i < AccentsMap.length; i++) {
+      var re = new RegExp("[" + AccentsMap[i].substr(1) + "]", "g");
+      var char = AccentsMap[i][0];
+      str = str.replace(re, char);
+    }
+    return str;
+  }
+  function SearchTitle(input) {
 
-    let getInputSearch = document.querySelector(".componentHeaderInput").value;
-    setSearch(getInputSearch);
-    // props.getValue(getInputSearch);
+    if (input.trim() != '') {
+      document.querySelector(".CoverInputListItems").setAttribute('style', 'display: none;');
+      document.querySelector(".HistorySeach").setAttribute('style', 'display: block;');
+
+    } else {
+      document.querySelector(".CoverInputListItems").setAttribute('style', 'display: block;');
+      document.querySelector(".HistorySeach").setAttribute('style', 'display: none;');
+    }
+
+    setSearch(input);
     clearTimeout(setTime)
     setTime = setTimeout(() => {
-      const res = getAPI(`/product/find-product-by-name?productName=${e}`)
+      const res = getAPI(`/product/find-product-by-name?productName=${input}`)
         .then((data) => {
-          console.log(36, data.data.product)
-          let dataSearch = data.data.product;
+          let dataSearch = data.data.categories;
           if (dataSearch.length > 0) {
             setWord(dataSearch);
           } else {
             setWord([
               {
-                productName:
+                categoryName:
                   "không có kết quả nào phù hợp, mời bạn nhập lại !!!",
               },
             ]);
@@ -59,7 +90,32 @@ function Header(props) {
           console.log(err);
           clearTimeout(setTime);
         })
+    }, [0])
+
+  }
+  ///
+  function SeachInputData(categoryName) {
+    nav(`/filter?seaarch=${categoryName}`);
+  }
+  function EnterInputSeach(e) {
+    let getInputSearch = document.querySelector(".componentHeaderInput").value;
+    clearTimeout(setTime)
+    setTime = setTimeout(() => {
+      if (e.charCode === 13) {
+        if (removeAccents(getInputSearch).trim() !== '') {
+          nav(`/filter?seaarch=${getInputSearch}`);
+          document.querySelector(".HistorySeach").setAttribute('style', 'display: none;');
+        }
+      }
+      clearTimeout(setTime);
     }, [500])
+  }
+  function SeachInputDataProduct() {
+    let getInputSearch = document.querySelector(".componentHeaderInput").value;
+    if (removeAccents(getInputSearch).trim() !== '') {
+      nav(`/filter?seaarch=${getInputSearch}`);
+      document.querySelector(".HistorySeach").setAttribute('style', 'display: none;');
+    }
 
   }
   function on_mypage() {
@@ -73,6 +129,13 @@ function Header(props) {
 
     nav("/sign-in");
   }
+  window.addEventListener('click', function (e) {
+    if (e.target.closest('.componentHeaderInput')) {
+      document.querySelector('.ShowCoverInput').style.display = 'block';
+    } else {
+      document.querySelector('.ShowCoverInput').style.display = 'none';
+    }
+  })
   ///hiển thị số lượng Sản phâm ở giỏ hàng
   const [numberCart, setNumberCart] = useState(0)
   useEffect(() => {
@@ -84,13 +147,6 @@ function Header(props) {
         console.log(err);
       })
   }, [])
-  // const  userLogin = useSelector(function (state) {
-
-  //   return state.user;
-  // });
-  // console.log(21, userLogin)
-
-
   const [DataHeader, setDataHeader] = useState(['Thịt', 'Rau củ', 'Nhà cửa', 'Điện tử', 'Thiết Bị Số', 'Điện thoại', 'Mẹ & Bé'])
   return (
     <div>
@@ -99,36 +155,34 @@ function Header(props) {
           <div className='HeaderTop'>
             <div className="HeaderTopContainer">
               <div className="HeaderTopLeft">
-                <div className="HeaderTopContainerLogo cursorPoiter">
-                  <img src="https://salt.tikicdn.com/ts/upload/ae/f5/15/2228f38cf84d1b8451bb49e2c4537081.png" alt="" />
-                </div>
+                <Link to='/'>
+                  <div className="HeaderTopContainerLogo cursorPoiter" >
+                    <img src="https://salt.tikicdn.com/ts/upload/ae/f5/15/2228f38cf84d1b8451bb49e2c4537081.png" alt="" />
+                  </div>
+                </Link>
                 <div className="HeaderTopContainerInput">
                   <div className="InputCover">
                     <input type="text" name="" id="" className='componentHeaderInput'
+                      onKeyPress={EnterInputSeach}
                       placeholder='Tìm sản phẩm, danh mục hay thương hiệu mong muốn ...'
                       onChange={(e) => {
-                        document.querySelector('.HeaderCoverInput').setAttribute('style', 'display:none')
                         SearchTitle(e.target.value)
                       }}
-
                     />
-                    <div className="ShowCoverInput">
-                      <a href="" className='HeaderCoverInput'>
-                        <span className='HeaderCoverInputText'>Săn Sale Công Nghệ</span>
-                        <img src
-                          ="https://salt.tikicdn.com/cache/140x28/ts/banner/ec/32/4e/2227fe4869feaf2a75598c0ab0a8cf29.png"
-                          alt="" />
-                      </a>
+                    <div className="ShowCoverInput" >
+
                       <div className="HistorySeach"
                         style={search ? { display: "inline-block" } : { display: "none" }}
 
                       >
                         {
-                          word.slice(0, 5).map(value => {
+                          word.slice(0, 8).map(value => {
                             return (
-                              <div className="SearchWord">
+                              <div className="SearchWord" onClick={() => SeachInputData(value.categoryName)}>
                                 <SearchOutlined className='seach-icon' />
-                                {value.productName}
+                                <p className='SeachInputDataText'>
+                                  {value.categoryName}
+                                </p>
                               </div>
                             )
 
@@ -149,6 +203,12 @@ function Header(props) {
                       </div>
 
                       <div className="CoverInputListItems">
+                        <a href="" className='HeaderCoverInput'>
+                          <span className='HeaderCoverInputText'>Săn Sale Công Nghệ</span>
+                          <img src
+                            ="https://salt.tikicdn.com/cache/140x28/ts/banner/ec/32/4e/2227fe4869feaf2a75598c0ab0a8cf29.png"
+                            alt="" />
+                        </a>
                         <div className="InputCoverItemTop">
                           <img src="https://salt.tikicdn.com/ts/upload/4f/03/a0/2455cd7c0f3aef0c4fd58aa7ff93545a.png" alt="" width='27px' height='25px' />
                           <p >Tìm Kiếm Phổ Biến</p>
@@ -240,7 +300,7 @@ function Header(props) {
                       </div>
                     </div>
                   </div>
-                  <button className='HeaderbuttonSeach cursorPoiter'>
+                  <button className='HeaderbuttonSeach cursorPoiter' onClick={SeachInputDataProduct}>
                     <img src="https://salt.tikicdn.com/ts/upload/ed/5e/b8/8538366274240326978318348ea8af7c.png" className='icon-seach' alt="" />
                     Tìm Kiếm
                   </button>
@@ -251,7 +311,11 @@ function Header(props) {
 
                   (
                     <div className="HeaderTopContainerUser cursorPoiter">
-                      <img src="https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png" alt="" className='HeaderUserImg' />
+                      {/* //hiển thi avartar */}
+                      <img src=
+                        {user_information.avatar.length > 0 ?
+                          user_information.avatar : "https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png"}
+                        alt="" className='HeaderUserImg' />
                       <div className="HeaderUserLoginContainer">
 
                         <span>

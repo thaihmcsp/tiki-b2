@@ -65,7 +65,6 @@ function ShopProfile() {
         }
 
     };
-
     const handleCancel = () => {
         setIsModalVisible(false);
     };

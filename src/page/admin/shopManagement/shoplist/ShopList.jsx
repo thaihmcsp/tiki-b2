@@ -70,27 +70,33 @@ function Block(props) {
     )
 }
 function ShopList(props) {
-    const [data, setData] = useState([])
     const [dataPagination, setdataPagination] = useState([])
 
     useEffect(() => {
-        let newdata = props.newListdata.sort((after, before) => {
-            if (after.status.length < before.status.length) {
-                return 1
+        const newdata = [];
+        for (let i = 0; i < props.newListdata.length; i++) {
+            if (props.newListdata[i].status === 'pending') {
+                newdata.push(props.newListdata[i]);
             }
-            if (after.status.length > before.status.length) {
-                return -1
-            } else {
-                if (new Date(after.timestart) > new Date(before.timestart)) {
-                    return -1
-                }
+        }
+        for (let i = 0; i < props.newListdata.length; i++) {
+            if (props.newListdata[i].status === 'accepted') {
+                newdata.push(props.newListdata[i]);
             }
-        })
+        }
+        for (let i = 0; i < props.newListdata.length; i++) {
+            if (props.newListdata[i].status === 'rejected') {
+                newdata.push(props.newListdata[i]);
+            }
+        }
+        for (let i = 0; i < props.newListdata.length; i++) {
+            if (props.newListdata[i].status === 'closed') {
+                newdata.push(props.newListdata[i]);
+            }
+        }
         if (props.Shopstatus.length === 0) {
-            setData(props.newListdata)
-            setdataPagination(props.newListdata.slice(props.start, props.start + 5))
+            setdataPagination(newdata.slice(props.start, props.start + 5))
         } else {
-            setData(newdata.filter((value) => value.status === props.Shopstatus))
             setdataPagination(newdata.filter((value) => value.status === props.Shopstatus).slice(props.start, props.start + 5))
         }
     }, [props.newListdata, props.start])

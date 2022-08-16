@@ -4,10 +4,7 @@ import style from './Shopmanagement.module.css'
 import clsx from 'clsx';
 import { Pagination } from 'antd';
 import 'antd/dist/antd.css';
-import { listdataShop } from './ShopListdata';
-import { useSelector } from 'react-redux/es/exports';
 import { getAPI } from '../../../config/api';
-// ['accepted', 'pending', 'rejected', 'closed']
 function SetActiveButton(status) {
   let active = document.querySelectorAll(`.${style.Header_ButtonActive}`)
   const arr = Array.prototype.slice.call(active)
