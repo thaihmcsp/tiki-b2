@@ -35,17 +35,12 @@ body {
   align-items: center;
 }
 
-.ant-btn-primary {
-  border: unset !important;
-  background:none !important;
-  display: none !important;
+.filter_modal span {
+  font-size: 1rem;
+  font-weight: 300 !important;
 }
 
-.ant-modal-root{
-  display: none;
-}
-
-.ant-btn {
+.filter_modal {
   display:  none !important;
 }
 .mySwiper_fillter .swiper-button-next:after, .mySwiper_fillter .swiper-button-prev:after {
@@ -78,6 +73,13 @@ body {
     background-color: rgba(24, 158, 255,0.5) !important;
 }
 
+.mystyle_sidebar {
+  transform: rotate(-180deg);
+}
+.mystyle1_sidebar {
+  transform: rotate(-180deg);
+}
+
 @media  only screen and (max-width:769px){
   .swiper {
     height: 100%;
@@ -86,22 +88,27 @@ body {
     height: 100%;
   }
 
-  .ant-modal-root{
+  .filter-modall .ant-modal-root{
     display: block;
   }
-  .btn {
-    font-size: 1.3rem !important;
-    margin: 10px 0;
+  .filter_modal {
+    font-size: 1rem !important;
+    margin: 10px 0 10px 5px;
+    padding-left:10px;
+    padding-right:10px;
+    font-weight: 300;
+    line-height: 15px;
     display: block !important;
   }
-  .ant-modal-body {
+
+  .filter-modall .ant-modal-body {
     height: 100% !important;
   }
   .container_products__EX9Iv {
     margin-top: 0 !important;
   }
 
-  .ant-modal {
+  .filter-modall .ant-modal {
     position: relative !important;
     top: 0 !important;
     right: 0% !important;

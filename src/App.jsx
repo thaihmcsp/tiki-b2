@@ -16,8 +16,11 @@ import UserInfo from './page/user/profile/UserInfo_data/UserInfo';
 import './App.css';
 import UserInfoMenu from './page/user/profile/UserInfoMenu';
 import Category from './page/admin/categoryManagement/Category';
+import { useState } from 'react';
 
 function App() {
+  const [id, setId] = useState(0)
+
   return (
     <BrowserRouter>
         <Routes>
@@ -26,11 +29,11 @@ function App() {
             <Route path='/create-shop' element={<CreateShop/>}/>
             <Route path='/' element={<Header/>}> 
                 <Route path='/' element={<Home/>} />
-                <Route path='/filter' element={<Filter/>}/>
+                <Route path='/filter' element={<Filter setId = {setId}/>}/>
                 <Route path='/shop/dashboard' element={<ShopDashBoardAll/>} />
                 <Route path='/shop/product/manage' element={<Product />} />
                 <Route path='/user' element={<UserInfoMenu/>}> 
-                    <Route path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> } />
+                    <Route path='/user/profile' element={ <div className='profile'><Profile/> <UserInfo /> <ProfileList/> </div> } />
                 </Route>
             </Route>
 

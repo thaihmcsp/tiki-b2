@@ -11,6 +11,7 @@ import MenuUserIcon from './MenuUserIcon';
 import { Button, Drawer, Radio, Space } from 'antd';
 import 'antd/dist/antd.css';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Link } from 'react-router-dom';
 
 function Profile() {
   const [visible, setVisible] = useState(false);
@@ -27,6 +28,7 @@ function Profile() {
   const onChange = (e) => {
     setPlacement(e.target.value);
   };
+
   return (
     <div >
       <div className="manuListSmartPhone">
@@ -63,7 +65,7 @@ function Profile() {
             icon={<PersonRoundedIcon />}
             title='Thông tin tài khoản'
           />
-          <MenuUserIcon icon={<BellFilled />} title='Thông báo của tôi' />
+         <MenuUserIcon icon={<BellFilled />} title='Thông báo của tôi' />
           <MenuUserIcon icon={listIcon[2]} title='Quản lý đơn hàng' />
           <MenuUserIcon icon={listIcon[3]} title='Quản lý đổi trả' />
           <MenuUserIcon icon={<EnvironmentFilled />} title='Sổ địa chỉ' />
