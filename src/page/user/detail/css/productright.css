@@ -46,6 +46,7 @@ a {
 }
 
 .right {
+  width: 40%;
   border-radius: 4px;
   box-shadow: rgb(242 242 242) 1px 1px 0px 0px inset,
     rgb(242 242 242) -1px -1px 0px 0px inset;
@@ -151,8 +152,7 @@ a {
   background-color: rgb(229, 242, 255);
 }
 .left {
-  width: 60%;
-  max-width: 491px;
+  width: 150%;
 }
 .right {
   width: 40%;

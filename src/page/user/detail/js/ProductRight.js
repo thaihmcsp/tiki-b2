@@ -5,10 +5,12 @@ import { color } from "@mui/system";
 import { getAPI } from "../../../../config/api";
 function ProductRight(props) {
   const listProduct = props.Product.product.productDetailId;
+  const thump = props.Product.product.thump;
+
   const [count, setCount] = useState(0);
   const [index, setIndex] = useState(0);
   const [listproduct, setListProducts] = useState([]);
-  console.log(listproduct);
+
   useEffect(() => {
     setCount(0);
     for (let i = 0; i < listProduct.length; i++) {
@@ -21,7 +23,6 @@ function ProductRight(props) {
       }
     }
   }, [props.myColor, props.mySize]);
-  console.log(count, index);
 
   //get Data
   useEffect(() => {
@@ -58,7 +59,7 @@ function ProductRight(props) {
               <a className="number">(Xem 25 đánh giá)</a>
               <div class=" gXZfKO"></div>
             </div>
-            <div className="quantity">Đã bán 147</div>
+            <div className="quantity">Đã bán {props.Product.product.sold}</div>
           </div>
         </div>
       </div>
@@ -68,7 +69,7 @@ function ProductRight(props) {
             <div className="price-discount">
               <div className="current-price">
                 {props.mySize == undefined || props.myColor == undefined ? (
-                  <>{listProduct[0].price}</>
+                  <>{listProduct[0].price.toLocaleString()}₫</>
                 ) : count == 1 ? (
                   <>{listProduct[index].price.toLocaleString()}₫</>
                 ) : (
@@ -91,7 +92,7 @@ function ProductRight(props) {
                 </p>
               </p>
               <div className="product-color">
-                {props.imgproduct.map((item, index) => {
+                {thump.map((item, index) => {
                   return (
                     <div
                       className="option1"
@@ -108,7 +109,7 @@ function ProductRight(props) {
             </div>
             <div className="select-size">
               <p id="detail-size">
-                Size: <span id="size-select">{props.colorDetail.size}</span>
+                Size: <span id="size-select">{props.sizeDetail}</span>
               </p>
               <div className="size">
                 {props.size.map((item, index) => {

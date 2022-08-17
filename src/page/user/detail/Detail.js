@@ -18,8 +18,9 @@ import "./css/productbottom.css";
 import ProductRight from "./js/ProductRight";
 import Productbottom from "./js/Productbottom";
 import { Image } from "antd";
-import Header from "../../../components/Header";
+
 import { Product } from "./data/product";
+import { color } from "@mui/system";
 
 function Detail() {
   const [check, setCheck] = useState();
@@ -30,10 +31,8 @@ function Detail() {
     color:
       "https://salt.tikicdn.com/cache/w1200/ts/product/aa/d6/8b/8cec3f81589ed96f0075d4ecf2d822c5.jpg",
     name: "Black",
-    size: "XL",
-    price: 350000,
   });
-
+  const [sizeDetail, setSizeDetail] = useState("M");
   function AmoutnUp() {
     let soluong = document.getElementById("amoutn-value").innerHTML * 1;
     soluong += 1;
@@ -70,17 +69,14 @@ function Detail() {
       .getElementsByTagName("img")[0]
       .setAttribute("src", getColor);
     document.getElementById("img-small").setAttribute("src", getColor);
-    document.getElementById("color-select").innerHTML = `${getColorName}`;
+
     //preview
+    setcolorDetail({ color: getColor, name: getColorName });
 
-    document
-      .getElementsByClassName("ant-image-preview-img")[0]
-      .setAttribute("src", getColor);
-
-    document.getElementById(color).classList.add("show-border");
     const listColor = Array.prototype.slice.call(
       document.querySelectorAll(".option1")
     );
+
     listColor.map(function (item, index) {
       if (item.id == color) {
         document
@@ -100,7 +96,11 @@ function Detail() {
   };
 
   const hanldeSize = (size) => {
-    let selectSize = document.getElementById(size).innerHTML;
+    const getID = document.getElementById(size);
+    const getSize = getID.getElementsByTagName("span")[0].innerHTML;
+    const selectSize = document.getElementById(size).innerHTML;
+
+    setSizeDetail(getSize);
     const listSize = Array.prototype.slice.call(
       document.querySelectorAll(".option2")
     );
@@ -121,7 +121,6 @@ function Detail() {
         document.getElementById(item.id).classList.remove("show-border");
       }
     });
-
     setMySize(size);
   };
   return (
@@ -137,6 +136,7 @@ function Detail() {
           setcheck={setCheck}
           brand="https://tiki.vn/thuong-hieu/oem.html"
           colorDetail={colorDetail}
+          sizeDetail={sizeDetail}
           bestseller="https://tiki.vn/bestsellers-month/ao-thun-nam-dai-tay/c8336"
           price="39.000đ"
           listprice="78.000đ"

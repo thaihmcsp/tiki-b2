@@ -11,9 +11,7 @@ function ProductLeft(props) {
         <Image
           id="main"
           src={props.colorDetail.color}
-          preview={{
-            src: props.colorDetail.color,
-          }}
+          preview={{ src: props.colorDetail.color }}
         />
 
         <div>
