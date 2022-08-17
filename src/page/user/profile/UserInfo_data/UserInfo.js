@@ -39,7 +39,6 @@ const beforeUpload = (file) => {
 function UserInfo() {
   const dispatch = useDispatch()
   const user = useSelector((state => state.user))
-  console.log(43,user)
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
@@ -54,14 +53,12 @@ function UserInfo() {
       const formData = new FormData();
       formData.append('avatar', imageObject)
       const res = await patchAPI('/user/update-user-info/'+user._id, formData);
-      console.log(58, res);
       const action = updateInfo(res.data.user)
       dispatch(action)
       setIsModalVisible(false);
     } catch (error) {
       console.log(error)
     }
-
   };
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -70,19 +67,6 @@ function UserInfo() {
     let url = URL.createObjectURL(info.file.originFileObj);
     setImageObject(info.file.originFileObj);
     setImageUrl(url)
-
-    // if (info.file.status === 'uploading') {
-    //   setLoading(true);
-    //   return;
-    // }
-
-    // if (info.file.status === 'done') {
-    //   // Get this url from response in real world.
-    //   getBase64(info.file.originFileObj, (url) => {
-    //     setLoading(false);
-    //     setImageUrl(url);
-    //   });
-    // }
   };
 
   const uploadButton = (

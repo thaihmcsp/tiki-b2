@@ -69,6 +69,9 @@ function App() {
             {/* ///private */}
             <Route path='/admin' element={<Admin/>} >
               <Route path='/admin/category' element={ <Category /> } />
+              <Route path='/admin/shop' element={<Shop></Shop>} ></Route>
+              <Route path='/admin/user' element={<User></User>} ></Route>
+              <Route path='/admin/dashbosh' element={<Shop></Shop>} ></Route>
             </Route>
             <Route path='*'
              element={<SignIn/>}/>           
