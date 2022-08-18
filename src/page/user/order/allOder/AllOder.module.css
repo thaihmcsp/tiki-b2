@@ -1,0 +1,102 @@
+.Alloder_Title {
+    margin-top: 15px;
+}
+.OderTitle {
+    margin-top: 15px;
+    background-color: rgb(255, 255,255);
+}
+.Oder_HeaderTitle {
+    font-size: 18px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+   padding: 10px 10px 10px 20px;
+    border-bottom: 1px solid rgb(238, 233, 233);
+    margin-bottom: 0;
+}
+.MidleTitle {
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    padding:10px;
+    width: 100%;
+}
+.MidleTitle_Left {
+    display: flex;
+    
+}
+
+.ImageTitle {
+    width: 60px;
+    border:  1px solid #b0a9ab;
+    height: 60px;
+    margin-right: 10px;
+    border-radius: 4px  ;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.ImageTitleText {
+    display: flex;
+    position: absolute;
+    color: red;
+    top: 5px;
+    right: 15px;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.ImageTitleText p {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    flex: right;
+}
+.OrderBottomTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.OderBottom_Shoplogo {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    font-weight: 550;
+    margin: 0 10px;
+}
+.OderBottom_Shoplogo img {
+    width: 25px;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+.OderBottom_Shoplogo span {
+    font-size: 16px;
+    opacity: 0.7;
+}
+.ImageNumber {
+    display: flex;
+    justify-content: flex-end;
+}
+.EmptyOder {
+    background-color: rgb(255, 255,255);
+    text-align: center;
+    height: 0;
+}
+.EmptyOder img {
+    width: 200px;
+    margin: 30px 0;
+}
+.BottomTitle {
+   padding: 5px 15px 5px 0;
+}  
+
+.BottomTitle_Button:hover{
+    cursor: pointer;
+}
+
+
+.BottomTitle_Button {
+    padding: 3px;
+    background-color: white;
+    border: 1.5px solid rgb(139, 192, 223);
+    margin-left: 10px;
+    border-radius: 4px;
+    outline: none;
+}

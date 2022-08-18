@@ -12,7 +12,7 @@ import 'antd/dist/antd.css';
 import  style from './container.module.css'
 import "./styles.css";
 import { VapeFreeOutlined } from '@mui/icons-material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 
 const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
@@ -28,6 +28,8 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
   const [dataa, setDataa] = useState([])
   const [dem1, setDem1] = useState(0)
   const [dem3, setDem3] = useState(0)
+  const [query] = useSearchParams()
+  const search = query.get('seaarch')
 
   const onChange = (page) => {
     setCurrent(page);
@@ -39,7 +41,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
           setListnew(() =>  {
               const newDatalow = [...dataa]
                 newDatalow.sort((a, b) => {
-                 return a.productDetailId[0].price - b.productDetailId[0].price;
+                 return a.price - b.price;
                 })
                 return newDatalow
               })
@@ -47,7 +49,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
               setListnew(() =>  {
                 const newDatalow = [...listProductss]
                   newDatalow.sort((a, b) => {
-                    return a.productDetailId[0].price - b.productDetailId[0].price;
+                    return a.price - b.price;
                   })
                   return newDatalow
                 })
@@ -61,7 +63,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
               if(dem === 0) {    
                 setByprice(() => {
                   let newData5 = [...dataa]
-                  const newData3 = newData5.filter(data => data.productDetailId[0].price < price1)
+                  const newData3 = newData5.filter(data => data.price < price1)
                   return newData3 
                 })
              
@@ -69,7 +71,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
               else {
                 setByprice(() => {
                   const newData = [...listProductss]
-                  const newData3 = newData.filter(data => data.productDetailId[0].price < price1)
+                  const newData3 = newData.filter(data => data.price < price1)
                   return newData3
                 })
               }      
@@ -87,7 +89,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
                 setByprice(() => {
                  let newData5 = [...dataa]
                   const newData3 = newData5.filter(data => {
-                    if(data.productDetailId[0].price >= inp.min && data.productDetailId[0].price <= inp.max) {
+                    if(data.price >= inp.min && data.price <= inp.max) {
                       return true
                     }
                   })
@@ -99,7 +101,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
                 setByprice(() => {
                   const newData = [...listProductss]
                   const newData3 = newData.filter(data => {
-                    if(data.productDetailId[0].price >= inp.min && data.productDetailId[0].price <= inp.max) {
+                    if(data.price >= inp.min && data.price <= inp.max) {
                       return true
                     }
                   })
@@ -118,7 +120,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
               if(dem === 0) {    
                 setByprice(() => {
                   let newData5 = [...dataa]
-                  const newData3 = newData5.filter(data => data.productDetailId[0].price > price750)
+                  const newData3 = newData5.filter(data => data.price > price750)
                   return newData3 
                 })
              
@@ -126,7 +128,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
               else {
                 setByprice(() => {
                   const newData = [...listProductss]
-                  const newData3 = newData.filter(data => data.productDetailId[0].price > price750)
+                  const newData3 = newData.filter(data => data.price > price750)
                   return newData3
                 })
                 setDem1(dem1 => ++dem1)
@@ -144,7 +146,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
           setListnew(() =>  {
               const newDatalow = [...dataa]
                 newDatalow.sort((a, b) => {
-                  return b.productDetailId[0].price - a.productDetailId[0].price;
+                  return b.price - a.price;
                 })
                 return newDatalow
               })
@@ -153,7 +155,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
               setListnew(() =>  {
                 const newDatalow = [...listProductss]
                 newDatalow.sort((a, b) => {
-                  return b.productDetailId[0].price - a.productDetailId[0].price;
+                  return b.price - a.price;
                 })
                 return newDatalow
               })
@@ -212,19 +214,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
 
 
       useEffect(() => {
-        if(listProducts.length > 0) {
-          setDataa(() => {
-            const list = [...listProducts]
-            const listnew = []
-            list.map(value => {
-              if(value.productDetailId.length > 0) {
-                listnew.push(value)
-              }
-            })
-            return listnew
-
-          })
-        }
+        setDataa(listProducts)
       },[listProducts])
     
 
@@ -259,23 +249,41 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
                   NewData = [...byprice]
                 }
                 setDem(dem => ++dem)
+                if(key === 'brandName'){
                   data1[key].map(title => {
-                    Data = [...Data, ...NewData.filter(filter => filter.shopId[key] === title)]
+                    Data = [...Data, ...NewData.filter(filter => filter.brandId[key] === title)]
                   })
+                  console.log(256, Data)
+                }
+                  else {
+                    data1[key].map(title => {
+                      Data = [...Data, ...NewData.filter(filter => filter.shopId[key] === title)]
+                    })
+                  }
+                  console.log(262, NewData)
               } else {
                 setDem(dem => ++dem)
                 let NewData = []
                 if(byprice === 0 ){
-                  NewData = dem1 === 0 ? [...dataa] : [...byprice]
+                  NewData = dem1 === 0 ? [...Data] : [...byprice]
                 }
                 else {
                   NewData = [...byprice]
                 }
                   let newData2 = []
+                  console.log(274, NewData)
+                  if(key === 'brandName'){
                     data1[key].map(title => {
-                      newData2 = [...newData2,...NewData.filter(filter => filter.shopId[key] === title)]
+                      newData2 = [...newData2, ...NewData.filter(filter => filter.brandId[key] === title)]
                       Data = [...newData2]
-                    })       
+                    })
+                  }
+                    else {
+                      data1[key].map(title => {
+                        newData2 = [...newData2,...NewData.filter(filter => filter.shopId[key] === title)]
+                        Data = [...newData2]
+                      })     
+                    }  
                 }
                 
               }
@@ -288,6 +296,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
             }
           }
         }
+        console.log(297, Data)
         if(Data.length > 0 || byprice.length === 0) {
           setDem(dem => ++dem)
           setListnew([])
@@ -298,14 +307,14 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
     
       }, [data1, byprice, dataa])
 
-
+console.log(307, data1)
       useEffect(() => {
         if(dem1 === 1 && data1.address.length === 0 && data1.trademark.length === 0 && data1.shopName.length === 0) {
           if(inp.min !== undefined) {
             setByprice(() => {
               let newData5 = [...dataa]
                const newData3 = newData5.filter(data => {
-                 if(data.productDetailId[0].price >= inp.min && data.productDetailId[0].price <= inp.max) {
+                 if(data.productDetailId[0].price >= inp.min && data.price <= inp.max) {
                    return true
                  }
                })
@@ -314,13 +323,13 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
           }else if(price1 === 200000){
             setByprice(() => {
               let newData5 = [...dataa]
-              const newData3 = newData5.filter(data => data.productDetailId[0].price < price1)
+              const newData3 = newData5.filter(data => data.price < price1)
               return newData3 
             })
           }else {
             setByprice(() => {
               let newData5 = [...dataa]
-              const newData3 = newData5.filter(data => data.productDetailId[0].price > price750)
+              const newData3 = newData5.filter(data => data.price > price750)
               return newData3 
             })
           }
@@ -370,13 +379,13 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
 
 
       const handleID = (id) => {
-        nav('/admin/category')
+        nav(`/detail?id=${id}`)
         setId(id)
       }
 
   return (
     <div className={style.container}>
-        <h2 className={style.title}>Làm Đẹp - Sức Khỏe</h2>
+        <h2 className={style.title}>{search}</h2>
     <div className={style.slider}>
   <>
       <Swiper
@@ -434,7 +443,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
             return  (
                 <div className={style.products_item} key={val._id} onClick = {() => handleID(val._id)}>
                 <div className={style.products_thumbnail}>
-                    {/* <img src={val.categoryId.thump} alt='' className={style.image_img} /> */}
+                    <img src={val.thump[0]} alt='' className={style.image_img} />
                     {/* <img src={val.categoryId.thumbnail} alt='' className={style.thumbnail_img} />  */}
                 </div>
                 <div className={style.products_info}>
@@ -445,7 +454,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
                     <span className={style.products_sold}>đã bán {val.sold}</span>
                     </div>
                     <div className={style.products_price_box}>
-                    <span  className={style.products_price}>{val.productDetailId[0].price.toLocaleString().split(',').join('.')} đ</span>
+                    <span  className={style.products_price}>{val.price.toLocaleString().split(',').join('.')} đ</span>
                     <span className={style.products_discount}>-14%</span>
                     </div>
                     <div>

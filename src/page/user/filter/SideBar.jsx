@@ -16,11 +16,14 @@ const SideBar = ({setData,setInp,setPrice1,setPrice750, listProducts}) => {
   const [listdata, setListData] = useState([]);
   const [supplier, setSupplier] = useState([]);
   const [check, setCheck] = useState(0);
+  const [check1, setCheck1] = useState(0);
+  const [check2, setCheck2] = useState(0);
   const [dem1, setDem1] = useState(false)
   const [dem2, setDem2] = useState(false)
   const [dem3, setDem3] = useState(false)
 const [listAddress, setTListAddress] = useState([])
   const [listsupplier, setListsupplier] = useState([])
+  const [listtrademark, setListTrademark] = useState([])
   useEffect(() => {
     setListsupplier(() => { 
       const newData = []
@@ -31,35 +34,50 @@ const [listAddress, setTListAddress] = useState([])
       })
       return newData
     })
-   
   },[listProducts])
   
-
-  // const [listAddress, setTListAddress] = useState(() => {
-//   const newData = []
-//   listProducts.map(value => {
-//     newData.push(value.shopId.description[0].value)
-//   })
-//   return newData
-// })
+  useEffect(() => {
+    setListTrademark(() => {
+      const newData1 = []
+      listProducts.map(value => {
+        if(!newData1.includes(value.brandId.brandName)) {
+          newData1.push(value.brandId.brandName)
+        }
+      })
+      return newData1
+    })
+  },[listProducts])
+  
+  useEffect(() => {
+    setTListAddress(() => { 
+      const newData = []
+      listProducts.map(value => {
+        if(!newData.includes(value.shopId.address)) {
+          newData.push(value.shopId.address)
+        }
+      })
+      return newData
+    })
+  },[listProducts])
+  
 
   useEffect(() => {
     const newData = listAddress.slice(0, 5)
     setData1(newData)
-    // const newData1 = listtrademark.slice(0, 5)
-    // setListData(newData1)
+    const newData1 = listtrademark.slice(0, 5)
+    setListData(newData1)
     const newData2 = listsupplier.slice(0, 5)
     setSupplier(newData2)
-  },[listsupplier,listAddress])
+  },[listsupplier,listAddress,listtrademark])
 
   const handleClick = () => {
-    const hide = document.querySelector(`.${styles.list_products__btn}`)
+    const hide = document.querySelector('.list_products__btn3')
     const icon_sidebar = document.querySelector('.icon-sidebar')
     icon_sidebar.classList.toggle('mystyle1_sidebar')
    if(check === 0) {
     setData1(listAddress)
+    hide.textContent = 'Thu gọn';
     setCheck(1)
-      hide.textContent = 'Thu gọn';
    }else {
     const newData = listAddress.slice(0, 5)
     newData.slice(0, 5)
@@ -68,35 +86,39 @@ const [listAddress, setTListAddress] = useState([])
       hide.textContent = 'Xem thêm';
    }
   }
+
+
   
   const handleClick1 = () => {
-  //   const hide1 = document.querySelector('.list_products__btn1')
-  //  if(!check) {
-  //   setListData(listtrademark)
-  //   setCheck(true)
-  //   hide1.textContent = 'Thu gọn';
-  //  }else {
-  //   const newData = listtrademark.slice(0, 5)
-  //   newData.slice(0, 5)
-  //   setListData(newData)
-  //   setCheck(false)
-  //   hide1.textContent = 'Xem thêm';
-  //  }
+    const hide1 = document.querySelector('.list_products__btn1')
+    const icon_sidebar = document.querySelector('.icon-sidebar1')
+    icon_sidebar.classList.toggle('mystyle2_sidebar')
+   if(check1 === 0) {
+    setListData(listtrademark)
+    setCheck1(1)
+    hide1.textContent = 'Thu gọn';
+   }else {
+    const newData = listtrademark.slice(0, 5)
+    newData.slice(0, 5)
+    setListData(newData)
+    setCheck1(0)
+    hide1.textContent = 'Xem thêm';
+   }
   }
   
   const handleClick2 = () => {
     const hide2 = document.querySelector('.list_products__btn2')
     const icon_sidebar2 = document.querySelector('.icon-sidebar2')
     icon_sidebar2.classList.toggle('mystyle_sidebar')
-   if(check === 0) {
+   if(check2 === 0) {
     setSupplier(listsupplier)
-    setCheck(1)
+    setCheck2(1)
     hide2.textContent = 'Thu gọn';
    }else {
     const newData = listsupplier.slice(0, 5)
     newData.slice(0, 5)
     setSupplier(newData)
-    setCheck(0)
+    setCheck2(0)
     hide2.textContent = 'Xem thêm';
    }
   }
@@ -136,8 +158,9 @@ const [listAddress, setTListAddress] = useState([])
   }
 
   useEffect(() => {
-      setData({address:address, trademark:brand, shopName:provider })
+      setData({address:address, brandName:brand, shopName:provider })
   }, [address, brand, provider]);
+
   const handleprice = () => {
       const inp1 = document.querySelector('#min-input')
       const inp2 = document.querySelector('#max-input')
@@ -209,8 +232,8 @@ const [listAddress, setTListAddress] = useState([])
       )
     })}
     </ul>
-    <div style={{display:'flex', alignItems: 'center'}}>
-    <span onClick={handleClick} className= {styles.list_products__btn}>xem thêm</span>
+    <div className= 'btn__box'>
+    <span onClick={handleClick} className= {[styles.list_products__btn, 'list_products__btn3'].join(' ')}>xem thêm</span>
     <DownOutlined style={{fontSize:'0.6rem', marginLeft:'1px',color:'blue'}} className={[styles.icon, 'icon-sidebar'].join(' ')}/>
     </div>
     </div>
@@ -249,9 +272,9 @@ const [listAddress, setTListAddress] = useState([])
       )
     })}
     </ul>
-    <div style={{display:'flex', alignItems: 'center'}}>
+    <div className= 'btn__box'>
     <span onClick={handleClick1} className= {[styles.list_products__btn, 'list_products__btn1'].join(' ')}>xem thêm</span>
-    <DownOutlined style={{fontSize:'0.6rem', marginLeft:'1px',color:'blue'}} className={styles.icon}/>
+    <DownOutlined style={{fontSize:'0.6rem', marginLeft:'1px',color:'blue'}} className={[styles.icon, 'icon-sidebar1'].join(' ')}/>
     </div>
     </div>
     </div>
@@ -269,7 +292,7 @@ const [listAddress, setTListAddress] = useState([])
       )
     })}
     </ul>
-    <div style={{display:'flex', alignItems: 'center'}}>
+    <div className= 'btn__box'>
     <span onClick={handleClick2} className= {[styles.list_products__btn, 'list_products__btn2'].join(' ')}>xem thêm</span>
     <DownOutlined style={{fontSize:'0.6rem', marginLeft:'1px',color:'blue'}} className={[styles.icon, 'icon-sidebar2'].join(' ')}/>
     </div>

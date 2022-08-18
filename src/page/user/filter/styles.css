@@ -2,7 +2,7 @@
 html,
 body {
   position: relative;
-  height: 100%;
+  height: unset !important;
 }
 
 body {
@@ -73,11 +73,30 @@ body {
     background-color: rgba(24, 158, 255,0.5) !important;
 }
 
-.mystyle_sidebar {
-  transform: rotate(-180deg);
+.btn__box {
+  position: relative;
+  display: flex;
+  width: 80px;
+  align-items: center;
 }
-.mystyle1_sidebar {
-  transform: rotate(-180deg);
+
+.btn__box .mystyle_sidebar {
+  position: absolute;
+  top: 50%;
+  right: 19px;
+  transform: rotate(-180deg) translateY(-50%);
+}
+.btn__box .mystyle1_sidebar {
+  position: absolute;
+  top: 50%;
+  right: 19px;
+  transform: rotate(-180deg) translateY(-50%);
+}
+.btn__box .mystyle2_sidebar {
+  position: absolute;
+  top: 50%;
+  right: 19px;
+  transform: rotate(-180deg) translateY(-50%);
 }
 
 @media  only screen and (max-width:769px){

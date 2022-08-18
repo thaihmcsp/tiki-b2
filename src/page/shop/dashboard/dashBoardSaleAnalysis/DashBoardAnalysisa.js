@@ -10,7 +10,7 @@ function DashBoardAnalysisa() {
     <div className={styles.shopDasBoardAnalysis}>
       <div className={styles.shopDasBoardAnalysisHeader}>
         <h1>Phân tích bán hàng</h1>
-        <a href=''>Cập nhật gần nhất <span><ArrowForwardIos /></span> </a>
+        <a href=''>Cập nhật gần nhất <span className = {styles.ArrowForwardIos}><ArrowForwardIos /></span> </a>
       </div>
       <div class={styles.date}>Cập nhật GMT+7 10:30:50</div>
       <div class={styles.titalmoney}>
