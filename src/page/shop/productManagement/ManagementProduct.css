@@ -7,7 +7,6 @@
 .mgm-products-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 12px;
 }
 
 .mgm-products-right select {
@@ -54,7 +53,8 @@
 
 .card-container>.ant-tabs-card .ant-tabs-content>.ant-tabs-tabpane {
   background: #fff;
-  border-radius: 0 12px 12px 12px;
+  border-radius: 12px;
+  margin-top: 18px;
 }
 
 .card-container>.ant-tabs-card>.ant-tabs-nav::before {
@@ -72,6 +72,7 @@
   background: #fff;
   border-color: #fff;
 }
+
 
 #components-tabs-demo-card-top .code-box-demo {
   padding: 24px;
@@ -134,8 +135,10 @@
 }
 
 .mgm-product .card-container>.ant-tabs-card .ant-tabs-tab-active {
-  /* background: unset;
+  background: unset;
   border-color: unset;
+}
+
+.ant-tabs-card>.ant-tabs-nav .ant-tabs-tab {
   border: none;
-  transition: none; */
 }

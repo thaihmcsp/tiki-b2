@@ -10,19 +10,25 @@ const { Search } = Input;
 
 
 function FilterProducts({setValue}) {
- const [val,setVal] = useState('')
+ const [val,setVal] = useState ('')
+ 
   const onSearch = (value) => {
     setValue(value)
-    console.log(value)
   };
   const [Change,setChange] = useState({})
   function onsearch(){
     const inp = document.querySelector(`.${styles.inp_search} .ant-input`).value
     setValue(inp);
   }
+
+  function onChange(){
+    const seachData = document.querySelector(`.${styles.inp_search} .ant-input`).value;
+    setValue(seachData);
+    
+  }
   
   return (
-    <div className={styles.filterProducts}>
+    <div   className={styles.filterProducts}>
       <div>
         <span className={styles.flterSpan}>Lọc sản phẩm:</span>
       </div>
@@ -39,6 +45,7 @@ function FilterProducts({setValue}) {
               allowClear
               placeholder=" Vui lòng nhập "
               onSearch={onSearch}
+              onChange={onChange}
             />
               <SearchIcon onClick={onsearch} className={styles.searchicon} />
               </div>
@@ -71,12 +78,10 @@ function FilterProducts({setValue}) {
                 width: "100%",
               }}
               defaultValue="Sắp xếp"
-              placeholder="sắp xếp"
-              
+              placeholder="sắp xếp"         
             >
               <Option value="Giá">Giá</Option>
               <Option value="Số lượng kho" >Số lượng kho</Option>
-              <Option value="Điểm nội dung ">Điểm nội dung</Option>
             </Select>
           </Input.Group>
         </div>

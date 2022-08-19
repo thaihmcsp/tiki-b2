@@ -1,3 +1,5 @@
+
+
 const data = [
    { img: 'https://salt.tikicdn.com/cache/400x400/ts/product/77/e1/ea/36c51e524d468e3db84a916a474dd350.jpg.webp', name: 'Quần', id: 0, price: 32000, address: 100, contentScore: 'Xuất sắc' },
    { img: 'https://salt.tikicdn.com/cache/400x400/ts/product/12/ee/89/f32398e34bd8d42d9ac845ecbd6a3c1b.png.webp', name: 'Áo', id: 1, price: 32000, address: 100, contentScore: 'Xuất sắc' },

@@ -15,14 +15,14 @@ const { TabPane } = Tabs;
 function ManagementProduct() {
   const nav = useNavigate()
   function handleClick(){
-      nav('/user')
+      nav('/addItem')
   }
   const [value, setValue] = useState('')
   console.log(value)
   function handleClose(){
     const close = document.querySelector(".mgm-product-notification");
-    close.innerHTML= ''
     close.style.backgroundColor = 'unset'
+    close.innerHTML= ''
   }
   return (
     <div className="mgm-product">

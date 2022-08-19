@@ -8,17 +8,17 @@ function CreateShop() {
   const shop = useSelector((state) => state.user);
   const nav = useNavigate()
   console.log(7, shop);
-  async function handleClick() {
-    try {
-      const shopName = document.querySelector("#ShopName").value;
-      const res = await postAPI("/shop/create-shop", { shopName: shopName});
-      console.log(13,res);
-      nav("/user")
-    } catch (err) {
-      window.confirm(err.response.data.message)
-      console.log(15,err.response.data.message);
+    async function handleClick() {
+      try {
+        const shopName = document.querySelector("#ShopName").value;
+        const res = await postAPI("/shop/create-shop", { shopName: shopName});
+        console.log(13,res);
+        nav("/user")
+      } catch (err) {
+        window.confirm(err.response.data.message)
+        console.log(15,err.response.data.message);
+      }
     }
-  }
   return (
     <div className="user-createShop">
       <h1>BẠN CẦN ĐƯỢC TƯ VẤN?</h1>
