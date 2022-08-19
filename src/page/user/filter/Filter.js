@@ -15,6 +15,7 @@ const Filter = ({setId}) => {
   const [query] = useSearchParams()
   const search = query.get('seaarch')
 
+  console.log(18, search)
   function removeAccents(str) {
     var AccentsMap = [
       "aàảãáạăằẳẵắặâầẩẫấậ",
@@ -69,7 +70,7 @@ const Filter = ({setId}) => {
     .catch((error) => {
       console.log(error)
     }) 
-  },[])
+  },[search])
 
 console.log(74, listProducts)
 

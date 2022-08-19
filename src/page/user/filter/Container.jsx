@@ -253,14 +253,13 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
                   data1[key].map(title => {
                     Data = [...Data, ...NewData.filter(filter => filter.brandId[key] === title)]
                   })
-                  console.log(256, Data)
                 }
                   else {
                     data1[key].map(title => {
                       Data = [...Data, ...NewData.filter(filter => filter.shopId[key] === title)]
                     })
                   }
-                  console.log(262, NewData)
+
               } else {
                 setDem(dem => ++dem)
                 let NewData = []
@@ -296,7 +295,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
             }
           }
         }
-        console.log(297, Data)
+
         if(Data.length > 0 || byprice.length === 0) {
           setDem(dem => ++dem)
           setListnew([])
@@ -307,7 +306,7 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
     
       }, [data1, byprice, dataa])
 
-console.log(307, data1)
+
       useEffect(() => {
         if(dem1 === 1 && data1.address.length === 0 && data1.trademark.length === 0 && data1.shopName.length === 0) {
           if(inp.min !== undefined) {
@@ -363,6 +362,7 @@ console.log(307, data1)
       },[checked])
 
 
+
       const [page, setPage] = React.useState(1);
       const handleChange = (page, pageSize) => {
         setPage(pageSize);
@@ -382,6 +382,14 @@ console.log(307, data1)
         nav(`/detail?id=${id}`)
         setId(id)
       }
+
+      useEffect(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      },[page])
+  
 
   return (
     <div className={style.container}>
