@@ -108,7 +108,10 @@ function Header(props) {
     let linkProduct = document.querySelector('.componentHeaderInput').value;
     let linkProductModify = removeAccents(linkProduct);
     console.log(linkProductModify)
-    nav(`/filter?seaarch=${linkProductModify}`);
+    if(linkProduct !== ''){
+      nav(`/filter?seaarch=${linkProductModify}`);
+    }
+   
   }
   // const  userLogin = useSelector(function (state) {
     
@@ -146,7 +149,9 @@ function Header(props) {
                             </a>
                             <div className="HistorySeach"
                                style={search ? { display: "inline-block" } : { display: "none" }}
-                              
+                               onClick={(e) => {
+                                filterProduct(e);
+                              }}
                               >
                                 {  
                                       word.slice(0,5).map(value=>{
@@ -337,7 +342,7 @@ function Header(props) {
                 <img src="https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png" alt="" className = 'HeaderUserImg' />
                 <div className="HeaderUserLoginContainer">
                 <span className="HeaderUserLogin">
-                  <Link to='/sign-in'>  <span >Đăng Nhập</span></Link>
+                  <Link to='/sign-in'>  <span >Đăng Nhập</span></Link> 
                 
                   
                    / <Link to='/sign-up'><span >Đăng kí</span></Link>

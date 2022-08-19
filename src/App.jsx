@@ -30,7 +30,7 @@ function App() {
             <Route path='/sign-in-admin' element={<AdminLogin/>} />
             <Route path='/sign-in-shop' element={<ShopLogin/>} />
             <Route path='/create-shop' element={<CreateShop/>}/>
-            <Route path='/order' element={<Order/>}/>
+            <Route path='/creat-order' element={<Order/>}/>
             <Route path='/' element={<Header/>}> 
                 <Route path='/' element={<Home/>} />
                 <Route path='/filter' element={<Filter/>}/>

@@ -1,21 +1,54 @@
-import React from 'react'
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { Button, Modal, Space } from 'antd';
+import React, { useState } from 'react';
 
-function test() {
+const LocalizedModal = () => {
+  const [visible, setVisible] = useState(false);
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const hideModal = () => {
+    setVisible(false);
+  };
+
   return (
-    <div className="HeMLl">
-        <div className="list-container">
-            <div class="bSkntM">
-                <div class="item-info">
-                    <div class="item-info__qty">
-                        1 x
-                    </div>
-                    <div class="item-info__name">Kem rửa mặt dưỡng ẩm Hada Labo Advanced Nourish Hyaluronic Acid Cleanser (80g)</div>
-                </div>
-                    <div class="item-price">65.000 ₫</div>
-            </div>
-        </div>
-    </div>
-  )
-}
+    <>
+      <Button type="primary" onClick={showModal}>
+        Modal
+      </Button>
+      <Modal
+        title="Modal"
+        visible={visible}
+        onOk={hideModal}
+        onCancel={hideModal}
+        okText="确认"
+        cancelText="取消"
+      >
+        <p>Bla bla ...</p>
+        <p>Bla bla ...</p>
+        <p>Bla bla ...</p>
+      </Modal>
+    </>
+  );
+};
 
-export default test
+const confirm = () => {
+  Modal.confirm({
+    title: 'Confirm',
+    icon: <ExclamationCircleOutlined />,
+    content: 'Bla bla ...',
+    okText: '确认',
+    cancelText: '取消',
+  });
+};
+
+const App = () => (
+  <Space>
+    <LocalizedModal />
+    <Button onClick={confirm}>Confirm</Button>
+  </Space>
+);
+
+export default App;

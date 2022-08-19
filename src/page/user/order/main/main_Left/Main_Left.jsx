@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Data } from './Data';
 import { listBank } from './ListBank';
 import { ListCard } from './ListCard';
 import { ListPay } from './ListPay';
 import { ListProduct } from './ListProduct';
- 
+import { postAPI,getApi, getAPI } from '../../../../../config/api';
 import './StyleLeft.css'
 function Main_Left({data}) {
-    // console.log(2,props.data)
+    
+
   
     return (
         
@@ -39,7 +40,7 @@ function Main_Left({data}) {
                     </div>
                     
  
-                                    {data.listOrder.map((item,index)=>{
+                                    {data.map((item,index)=>{
                                         return(
                                             <>
                     <div className="cjoJkw">
@@ -64,27 +65,17 @@ function Main_Left({data}) {
                                             <div className="package-item-list">
                                                 <div>
 
-                                                {item.listProduct.map(subItem=>{
-                                                      console.log(11,subItem.productDetailId.productId.thump)
- 
-                                                    
+                                                {item.listProduct.map(subItem=>{ 
+                                                
                                                     return(
                                                         <>
                                                         <div className="HEIyE">
                                                         <div className="item-icon">
                                                             <picture className="webpimg-container">
                                                                
-                                                                {
-                                                                    subItem.productDetailId.productId.thump.map(value=>{
-                                                                     return(
-                                                                        <img src={value}
-                                                                        alt="icon" width="48" height="48" className="fWjUGo" />
-                                                                   
-                                                                         )       
-                                                                    
-                                                                    })
-                                                                }
-                                                               
+                                                                <img src=                                                               {subItem.productDetailId.productId.thump[0].startsWith('http')?subItem.productDetailId.productId.thump[0]:'https://tiki.thaihm.site/'+subItem.productDetailId.productId.thump[0]}
+
+                                                                alt="icon" width="48" height="48" className="fWjUGo" />
                                                                 
                                                             </picture>
                                                             
