@@ -14,6 +14,7 @@ import styles from "./banner.module.css";
 
 
 function Banner() {
+  
   return (
     <div className={clsx(styles.slide)}>
       <Swiper
