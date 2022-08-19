@@ -74,7 +74,7 @@ function Header(props) {
         .then((data) => {
           let dataSearch = data.data.categories;
           if (dataSearch.length > 0) {
-            setWord(dataSearch);
+            setWord(dataSearch.slice(0, 8));
           } else {
             setWord([
               {
@@ -99,8 +99,10 @@ function Header(props) {
   }
   function EnterInputSeach(e) {
     let getInputSearch = document.querySelector(".componentHeaderInput").value;
+
     clearTimeout(setTime)
     setTime = setTimeout(() => {
+
       if (e.charCode === 13) {
         if (removeAccents(getInputSearch).trim() !== '') {
           nav(`/filter?seaarch=${getInputSearch}`);
@@ -176,7 +178,7 @@ function Header(props) {
 
                       >
                         {
-                          word.slice(0, 8).map(value => {
+                          word.map((value, index) => {
                             return (
                               <div className="SearchWord" onClick={() => SeachInputData(value.categoryName)}>
                                 <SearchOutlined className='seach-icon' />

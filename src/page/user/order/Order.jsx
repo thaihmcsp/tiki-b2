@@ -5,54 +5,65 @@ import { useState } from 'react'
 import AllOder from './allOder/AllOder'
 import { Pagination } from 'antd';
 import { data } from './Orderdata';
-
+import { useSelector } from 'react-redux';
+import { getAPI } from '../../../config/api'
 function Order() {
-  const newdata = []
-  function DATA() {
-    data.listOrder.map((value, index) => {
-      let valueStatus = '';
-      if (value.status === 'pending') {
-        valueStatus = 'Đang xử lí'
-      } else if (value.status === 'shipping') {
-        valueStatus = 'Đang vận chuyển'
-      } else if (value.status === 'waitpayment') {
-        valueStatus = 'Chờ thanh toán'
-      } else if (value.status === 'cancel') {
-        valueStatus = 'Đã Hủy'
-      } else if (value.status === 'complete') {
-        valueStatus = 'Đã Giao'
-      };
-      value.listProduct.map((val, i) => {
-        newdata.push(
-          {
-            name: `${val.productDetailId.productId.productName}`,
-            sold: `${val.quantity}`,
-            shopId: {
-              shopname: `${value.shopId.shopName}`,
-              shoplogo: `${value.shopId.logo}`
-            },
-            status: `${valueStatus}`,
-            price: `${val.productDetailId.price}`,
-            img: ``
-
-          }
-        )
-      })
-      console.log(41, newdata)
-    })
-    return newdata
-  }
-  const [dataOderTitle, setdataOderTitle] = useState(DATA());
-
-  console.log(19, newdata)
-  console.log(dataOderTitle)
-
-
-
+  const user = useSelector(state => state.user)
+  console.log(user._id)
+  const [dataOderTitle, setdataOderTitle] = useState([]);
   const [status, setstatus] = useState('none')
   const [dataInputSeach, setdataInputSeach] = useState([...dataOderTitle])
   const [emptyOder, setemptyOder] = useState('')
   const [newListdata, setnewListdata] = useState([...dataOderTitle])
+  useEffect(() => {
+    getAllUserOrder()
+  }, [])
+
+  async function getAllUserOrder() {
+    try {
+      const data = await getAPI('/user-order/get-order-by-userId/' + user._id);
+      console.log(58, data.data.listOrder)
+      setdataOderTitle(() => {
+        const newdata = [];
+        data.data.listOrder.map((value, index) => {
+          let valueStatus = '';
+          if (value.status === 'pending') {
+            valueStatus = 'Đang xử lí'
+          } else if (value.status === 'shipping') {
+            valueStatus = 'Đang vận chuyển'
+          } else if (value.status === 'waitpayment') {
+            valueStatus = 'Chờ thanh toán'
+          } else if (value.status === 'cancel') {
+            valueStatus = 'Đã Hủy'
+          } else if (value.status === 'complete') {
+            valueStatus = 'Đã Giao'
+          };
+          value.listProduct.map((val, i) => {
+            newdata.push(
+              {
+                name: `${val.productDetailId.productId.productName}`,
+                sold: `${val.quantity}`,
+                shopId: {
+                  shopname: `${value.shopId.shopName}`,
+                  shoplogo: `${value.shopId.logo}`
+                },
+                status: `${valueStatus}`,
+                price: `${val.productDetailId.price}`,
+                img: ``
+
+              }
+            )
+          })
+        })
+
+        return newdata
+      })
+
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
   const itemRender = (_, type, originalElement) => {
     if (type === 'prev') {
       return <a>Previous</a>;

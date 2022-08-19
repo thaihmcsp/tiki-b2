@@ -18,6 +18,7 @@ import './App.css';
 import UserInfoMenu from './page/user/profile/UserInfoMenu';
 import Category from './page/admin/categoryManagement/Category';
 import AdminLogin from './page/admin/login/Login';
+import OrderUser from './page/user/order/Order'
 import ShopLogin from './page/shop/login/Login';
 import Order from './page/user/order/maintotal/Main';
 import ShopHome from './page/shop/shopHome/ShopHome';
@@ -46,7 +47,7 @@ function App() {
                     <Route path='/shop/dashboard' element={<ShopDashBoardAll />} />
                     {/* <Route path='/shop/product/manage' element={<Product />} /> */}
                     <Route path='/user' element={<UserInfoMenu />}>
-
+                        <Route path='/user/order' element={<OrderUser />} />
                         <Route path='/user' element={<div className='profile'> <UserInfo /><ProfileList /> </div>} />
                     </Route>
 
