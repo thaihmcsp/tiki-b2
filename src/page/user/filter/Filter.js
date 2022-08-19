@@ -8,14 +8,12 @@ import { useSearchParams } from 'react-router-dom';
 
 const Filter = ({setId}) => {
   const [inp, setInp] = useState([])
-  const [price1, setPrice1] = useState([])
   const [price750, setPrice750] = useState([])
   const [data1, setData] = useState([])
  const [listProducts,setListProducts]= useState([])
   const [query] = useSearchParams()
   const search = query.get('seaarch')
 
-  console.log(18, search)
   function removeAccents(str) {
     var AccentsMap = [
       "aàảãáạăằẳẵắặâầẩẫấậ",
@@ -46,7 +44,6 @@ const Filter = ({setId}) => {
     .then((data)=> {
       setListProducts(() => {
         const newData = []
-        
         for(let value of data.data.listProduct) {
           const newName = value.productName.toLowerCase()
           if(value.price){
@@ -72,7 +69,6 @@ const Filter = ({setId}) => {
     }) 
   },[search])
 
-console.log(74, listProducts)
 
   return (
     <div className='App'>
@@ -80,9 +76,9 @@ console.log(74, listProducts)
             <Breadcrumb />
             <div className = {styles.container}>
                 <div className = {styles.container_box} >
-                    <SideBar setData= {setData} setInp={setInp} setPrice1= {setPrice1} setPrice750 = {setPrice750} listProducts = {listProducts} />
+                    <SideBar setData= {setData} listProducts = {listProducts} />
                 </div>
-                <Container data1={data1} inp={inp} price1 = {price1} price750 = {price750} listProducts = {listProducts} setId = {setId}/>
+                <Container data1={data1} listProducts = {listProducts} setId = {setId}/>
             </div>
         </div>
     </div>

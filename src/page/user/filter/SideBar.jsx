@@ -8,8 +8,9 @@ import { DownOutlined } from '@ant-design/icons';
 import { v4 as uuidv4 } from 'uuid';
 import './styles.css'
 
-const SideBar = ({setData,setInp,setPrice1,setPrice750, listProducts}) => {
+const SideBar = ({setData,setInp, listProducts}) => {
   const [address, setAddress] = useState([])
+  const [price200, setPrice200] = useState(0)
   const [brand, setBrand] = useState([])
   const [provider, setProvider] = useState([])
   const [data1, setData1] = useState([]);
@@ -158,8 +159,8 @@ const [listAddress, setTListAddress] = useState([])
   }
 
   useEffect(() => {
-      setData({address:address, brandName:brand, shopName:provider })
-  }, [address, brand, provider]);
+      setData({address:address, brandName:brand, shopName:provider, price: price200})
+  }, [address, brand, provider, price200]);
 
   const handleprice = () => {
       const inp1 = document.querySelector('#min-input')
@@ -173,10 +174,10 @@ const [listAddress, setTListAddress] = useState([])
     const filter_sidebar200 = document.querySelector('.filter-sidebar200')
     if(!dem3) {
       filter_sidebar200.style.backgroundColor = 'rgba(27, 168, 255, 0.1)';
-      setPrice1(200000)
+      setPrice200([200000])
     }else {
       filter_sidebar200.style.backgroundColor = 'rgb(238, 238, 238)';
-      setPrice1([])
+      setPrice200([])
     }
     setDem3(dem3 => !dem3)
   }
@@ -185,10 +186,10 @@ const [listAddress, setTListAddress] = useState([])
     const filter_sidebar700 = document.querySelector('.filter-sidebar700')
     if(!dem2) {
       filter_sidebar700.style.backgroundColor = 'rgba(27, 168, 255, 0.1)';
-      setInp({min:200000, max:750000})
+      setPrice200([{min:200000, max:750000}])
     }else {
       filter_sidebar700.style.backgroundColor = 'rgb(238, 238, 238)';
-      setInp([])
+      setPrice200([])
     }
     setDem2(dem2 => !dem2)
   }
@@ -197,13 +198,14 @@ const [listAddress, setTListAddress] = useState([])
     const filter_sidebar750 = document.querySelector('.filter-sidebar750')
     if(!dem1) {
       filter_sidebar750.style.backgroundColor = 'rgba(27, 168, 255, 0.1)';
-      setPrice750(750000)
+      setPrice200([750000])
     }else {
       filter_sidebar750.style.backgroundColor = 'rgb(238, 238, 238)';
-      setPrice750([])
+      setPrice200([])
     }
     setDem1(dem1 => !dem1)
   }
+
   return (
     <div className={styles.container}>
     <div className={styles.nav}>
