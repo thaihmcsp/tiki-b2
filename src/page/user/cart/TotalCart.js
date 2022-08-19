@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
-import data from "./CartData";
 import "./Cart.css";
 import ClosingCart from "./ClosingCart";
 import style from "./TotalCart.module.css";
-import { axios } from "axios";
 import { getAPI } from "../../../config/api";
 
 function TotalCart() {
+  const [listProduct, setListProduct] = React.useState([]);
   useEffect(() => {
-    getAPI("/cart/get-loged-in-cart").then((data) => {
-      console.log(13, data.data.listProduct);
-      setListProduct(data.data.listProduct);
-    });
+    getCart();
   }, []);
+  async function getCart() {
+    try {
+      const data = await getAPI("/cart/get-loged-in-cart");
+      setListProduct(data.data.cart.listProduct);
+      console.log(data.data.cart.listProduct);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   window.addEventListener("scroll", () => {
     if (window.scrollY >= 180) {
       document.querySelector(".total-cart").style.position = "sticky";
@@ -24,34 +29,35 @@ function TotalCart() {
   });
 
   const [newData, setNewData] = useState([]);
-  const [listProduct, setListProduct] = React.useState([]);
-  console.log(data.listProduct);
-  useEffect(function () {
-    setNewData(() => {
-      let Obj = {};
-      let DATA = [];
-      listProduct.map((item) => {
-        const newDATA = listProduct.filter((item2) => {
-          return item2.productDetailId.productId.shopId.shopName == item.productDetailId.productId.shopId.shopName;
+
+  useEffect(
+    function () {
+      setNewData(() => {
+        let Obj = {};
+        let DATA = [];
+        listProduct.map((item) => {
+          const newDATA = listProduct.filter((item2) => {
+            return item2.productDetailId.productId.shopId.shopName == item.productDetailId.productId.shopId.shopName;
+          });
+          if (!Obj[item.productDetailId.productId.shopId.shopName]) {
+            const Element = {
+              checked: false,
+              shopName: item.productDetailId.productId.shopId.shopName,
+              listProduct: [...newDATA],
+            };
+            DATA.push(Element);
+          }
+          Obj[item.productDetailId.productId.shopId.shopName] = Obj[item.productDetailId.productId.shopId.shopName] ? Obj[item.productDetailId.productId.shopId.shopName] : newDATA;
         });
-        if (!Obj[item.productDetailId.productId.shopId.shopName]) {
-          const Element = {
-            checked: false,
-            shopName: item.productDetailId.productId.shopId.shopName,
-            listProduct: [...newDATA],
-          };
-          DATA.push(Element);
-        }
-        Obj[item.productDetailId.productId.shopId.shopName] = Obj[item.productDetailId.productId.shopId.shopName] ? Obj[item.productDetailId.productId.shopId.shopName] : newDATA;
+        return DATA;
       });
-      return DATA;
-    });
-  }, []);
-  console.log(6, newData);
+    },
+    [listProduct]
+  );
+  console.log("newData", newData);
 
   const [total, setTotal] = React.useState(0);
   const [finalTotal, setFinalTotal] = useState([]);
-  console.log(13, finalTotal);
   useEffect(() => {
     let total = 0;
     finalTotal.map((item) => {
@@ -67,11 +73,11 @@ function TotalCart() {
 
   const onRemove = (e, id, index, index1) => {
     setNewData(() => {
-      const potitions = finalTotal.findIndex((item) => {
-        return item.productDetailId._id === id;
-      });
-      const Quanlity = newData[index].listProduct[index1].quantity;
-      console.log(77, potitions, Quanlity);
+      // const potitions = finalTotal.findIndex((item) => {
+      //   return item.productDetailId._id === id;
+      // });
+      // const Quanlity = newData[index].listProduct[index1].quantity;
+      // console.log(77, potitions, Quanlity);
       const newListData1 = [...newData];
 
       console.log(68, newListData1, index, index1);
@@ -127,7 +133,6 @@ function TotalCart() {
       const newElement = listProduct.filter((item) => {
         return item.productDetailId._id == id;
       });
-      console.log(newElement);
       const newFinalTotal = [...finalTotal];
       newFinalTotal.map((item) => {
         if (item.productDetailId._id == id) {
@@ -149,7 +154,6 @@ function TotalCart() {
   };
 
   const onDelete = (id, index, index1) => {
-    console.log(120, id, index, index1);
     setNewData(() => {
       const newListData = [...newData];
       console.log(134, newListData);
@@ -169,7 +173,6 @@ function TotalCart() {
       }
     });
   };
-  console.log(119, listProduct);
   const handleCheckItem = (e, index, index1) => {
     if (e.target.checked == true) {
       setFinalTotal(() => {
@@ -219,7 +222,6 @@ function TotalCart() {
       });
     }
   };
-  console.log(82, finalTotal);
   const [product, setProduct] = useState([]);
   useEffect(
     function () {
@@ -231,7 +233,6 @@ function TotalCart() {
         return total;
       });
       const ListallCheckItem = document.querySelectorAll(".checkItem");
-      console.log(192, ListallCheckItem);
       if (
         [...ListallCheckItem].filter((item) => {
           return item.checked == false;
@@ -266,7 +267,6 @@ function TotalCart() {
       return newListData;
     });
   };
-
   const handleTotalCheckItemStore = (e) => {
     if (e.target.checked == true) {
       setNewData(() => {
@@ -356,7 +356,7 @@ function TotalCart() {
                           onChange={(e) => handleCheckItem(e, index, index1)}
                         />
                         <div className={style.tradingCart_img}>
-                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSELUkg7DtRsZ_hC_VtfMbhFYI5vUFitAtJxB9hce_5&s" alt="" />
+                          <img src={item.productDetailId.listImg[0].startsWith("http") ? item.productDetailId.listImg[0] : "https://tiki.thaihm.site/" + item.productDetailId.listImg[0]} alt="" />
                         </div>
                         <div className={style.tradingCart_content}>
                           <a>{item.productDetailId.productId.productName}</a>

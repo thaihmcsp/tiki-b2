@@ -4,7 +4,6 @@ import { Button, Modal } from "antd";
 import style from "./ClosingCart.module.css";
 import "./ClosingCart.css";
 function ClosingCart({ total, finalTotal }) {
-  console.log(4, { total, finalTotal });
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("Content of the modal");

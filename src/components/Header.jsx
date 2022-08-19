@@ -283,11 +283,12 @@ function Header(props) {
 
                 <div className="HeaderTopContainerCart">
                   <div className="HeaderTopContainerCartWallet cursorPoiter">
-                    <div className="HeaderWalletCart">
-                      <img src="https://salt.tikicdn.com/ts/upload/40/44/6c/b80ad73e5e84aeb71c08e5d8d438eaa1.png" alt="" className="HeaderCart" />
-                      <span className="HeaderCartTitle"> {numberCart}</span>
-                    </div>
                     <Link to="/user/cart">
+                      <div className="HeaderWalletCart">
+                        <img src="https://salt.tikicdn.com/ts/upload/40/44/6c/b80ad73e5e84aeb71c08e5d8d438eaa1.png" alt="" className="HeaderCart" />
+                        <span className="HeaderCartTitle"> {numberCart}</span>
+                      </div>
+
                       <span className="HeaderCartText">Giỏ Hàng</span>
                     </Link>
                   </div>
