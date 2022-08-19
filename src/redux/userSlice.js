@@ -10,13 +10,17 @@ if(!string) {
 }else{
     init = JSON.parse(string);
 }
-
+console.log(13, init);
 const userSlice = createSlice({
     name: 'user',
     initialState: init,
     reducers: {
+
         userLogin: function(state, action) {
             window.localStorage.getItem('tiki-user', JSON.stringify(action.payload))
+        },
+        userLogin: function( state, action) {
+            window.localStorage.setItem('tiki-user', JSON.stringify(action.payload));
             return action.payload;
         },
         adminChangShopstatus: function(state, action) {
@@ -25,5 +29,5 @@ const userSlice = createSlice({
     }
 })
 
-export const {userLogin} = userSlice.actions;
+export const {userLogin, updateInfo} = userSlice.actions;
 export const userReducer = userSlice.reducer;

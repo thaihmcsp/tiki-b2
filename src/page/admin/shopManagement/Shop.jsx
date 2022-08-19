@@ -39,7 +39,7 @@ function Shop() {
         data.data.listShop.map((value, index) => {
           newdata.push({
             name: `${value.shopName}`,
-            timestart: `${value.createdAt.slice(0, 10)}`,
+            timestart: `${value.createdAt}`.slice(0, 10),
             Shopid: `${value._id}`,
             avatar: `${value.logo}`,
             status: `${value.status}`

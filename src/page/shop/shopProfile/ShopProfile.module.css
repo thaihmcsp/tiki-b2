@@ -1,5 +1,7 @@
 .shopProfile {
     display: flex;
+    width: 100%;
+    position: relative;
     background-color: rgb(255, 255, 255);
     flex-direction: column;
     margin:15px 15px 15px 0px;
@@ -82,3 +84,13 @@ width: 100%;
     padding-left: 15px;
 }
 .SetPhone {}
+.Profileshop_Img {
+  position: absolute;
+  top: 40px;
+  right: 30px;
+}
+.Profileshop_Img img{
+ width: 200px;
+ height: 200px;
+ border-radius: 50%;
+}
