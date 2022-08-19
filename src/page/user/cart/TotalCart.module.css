@@ -33,7 +33,7 @@
 }
 
 .tradingCart_content {
-  width: calc(100% - 100px);
+  width: calc(86% - 100px);
   padding-left: 10px;
   position: relative;
 }

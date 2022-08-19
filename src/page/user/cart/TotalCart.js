@@ -12,8 +12,25 @@ function TotalCart() {
   async function getCart() {
     try {
       const data = await getAPI("/cart/get-loged-in-cart");
-      setListProduct(data.data.cart.listProduct);
-      console.log(data.data.cart.listProduct);
+      const listProductdetail = data.data.cart.listProduct;
+      console.log(listProductdetail);
+      console.log(16, data.data.cart.product);
+      const newData = data.data.cart.product;
+      const NEWDATA = newData.map((item) => {
+        return {
+          haveProductID: true,
+          productDetailId: {
+            _id: item.productId._id,
+            productId: item.productId,
+            price: item.productId.price,
+          },
+          quantity: item.quantity,
+          selected: item.selected,
+          _id: item.productId._id,
+        };
+      });
+
+      setListProduct([...NEWDATA, ...listProductdetail]);
     } catch (error) {
       console.log(error);
     }
@@ -356,7 +373,14 @@ function TotalCart() {
                           onChange={(e) => handleCheckItem(e, index, index1)}
                         />
                         <div className={style.tradingCart_img}>
-                          <img src={item.productDetailId.listImg[0].startsWith("http") ? item.productDetailId.listImg[0] : "https://tiki.thaihm.site/" + item.productDetailId.listImg[0]} alt="" />
+                          <img
+                            src={
+                              item.productDetailId.productId.thump[0].startsWith("http")
+                                ? item.productDetailId.productId.thump[0]
+                                : "https://tiki.thaihm.site/" + item.productDetailId.productId.thump[0]
+                            }
+                            alt=""
+                          />
                         </div>
                         <div className={style.tradingCart_content}>
                           <a>{item.productDetailId.productId.productName}</a>
