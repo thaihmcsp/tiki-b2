@@ -18,21 +18,23 @@ import "./css/productbottom.css";
 import ProductRight from "./js/ProductRight";
 import Productbottom from "./js/Productbottom";
 import { Image } from "antd";
-
-import { Product } from "./data/product";
+import { Product } from "./data/test";
 import { color } from "@mui/system";
 
 function Detail() {
+  const [listImg, setListImg] = useState([]);
   const [check, setCheck] = useState();
   const [myColor, setMycolor] = useState();
   const [mySize, setMySize] = useState();
   const [isDisabled, setIsDisable] = useState(true);
   const [colorDetail, setcolorDetail] = useState({
-    color:
-      "https://salt.tikicdn.com/cache/w1200/ts/product/aa/d6/8b/8cec3f81589ed96f0075d4ecf2d822c5.jpg",
-    name: "Black",
+    color: Product.product.thump[0],
+    name: Product.product.productDetailId[0].option[0].value,
   });
-  const [sizeDetail, setSizeDetail] = useState("M");
+  const [sizeDetail, setSizeDetail] = useState(
+    Product.product.productDetailId[0].option[1].value
+  );
+
   function AmoutnUp() {
     let soluong = document.getElementById("amoutn-value").innerHTML * 1;
     soluong += 1;
@@ -68,10 +70,14 @@ function Detail() {
       .getElementById("main")
       .getElementsByTagName("img")[0]
       .setAttribute("src", getColor);
-    document.getElementById("img-small").setAttribute("src", getColor);
-
     //preview
     setcolorDetail({ color: getColor, name: getColorName });
+    //imgextend
+    Product.product.productDetailId.map((item) => {
+      if (item.option[0].value == color) {
+        setListImg(item.listImg);
+      }
+    });
 
     const listColor = Array.prototype.slice.call(
       document.querySelectorAll(".option1")
@@ -127,6 +133,9 @@ function Detail() {
     <div className="Detai">
       <div className="product-content">
         <ProductLeft
+          listImg={listImg}
+          setcolorDetail={setcolorDetail}
+          product={Product}
           colorDetail={colorDetail}
           icon={listcontact}
           banner="https://salt.tikicdn.com/cache/w1080/ts/tka/1d/8f/00/d8d6ff67e8c1eed442001b4827297e5f.jpg"

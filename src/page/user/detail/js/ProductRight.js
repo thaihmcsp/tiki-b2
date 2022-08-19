@@ -69,7 +69,7 @@ function ProductRight(props) {
             <div className="price-discount">
               <div className="current-price">
                 {props.mySize == undefined || props.myColor == undefined ? (
-                  <>{listProduct[0].price.toLocaleString()}₫</>
+                  <>{props.Product.product.price.toLocaleString()}₫</>
                 ) : count == 1 ? (
                   <>{listProduct[index].price.toLocaleString()}₫</>
                 ) : (
@@ -92,15 +92,15 @@ function ProductRight(props) {
                 </p>
               </p>
               <div className="product-color">
-                {thump.map((item, index) => {
+                {listProduct.map((item, index) => {
                   return (
                     <div
                       className="option1"
-                      id={item.name}
-                      onClick={() => props.hanldeColor(item.name)}
+                      id={item.option[0].value}
+                      onClick={() => props.hanldeColor(item.option[0].value)}
                     >
-                      <img src={item.img} width={50} height={50}></img>
-                      <span>{item.name}</span>
+                      <img src={item.listImg[0]} width={55} height={55}></img>
+                      <span>{item.option[0].value}</span>
                       {props.tich}
                     </div>
                   );
@@ -112,15 +112,15 @@ function ProductRight(props) {
                 Size: <span id="size-select">{props.sizeDetail}</span>
               </p>
               <div className="size">
-                {props.size.map((item, index) => {
+                {listProduct.map((item, index) => {
                   return (
                     <button
                       className="option2"
-                      id={item}
+                      id={item.option[1].value}
                       key={index}
-                      onClick={() => props.hanldeSize(item)}
+                      onClick={() => props.hanldeSize(item.option[1].value)}
                     >
-                      <span>{item}</span>
+                      <span>{item.option[1].value}</span>
                       {props.tich}
                     </button>
                   );

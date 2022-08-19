@@ -26,13 +26,12 @@
   width: 444px;
   height: 444px;
 }
-#img-small {
+.img-small {
   border-radius: 4px;
   cursor: pointer;
-  border: 1px solid blue;
   width: 62px;
   height: 62px;
-  margin-top: 16px;
+  margin: 16px 0 0 16px;
 }
 #banner {
   margin: 32px 0 0 12px;
