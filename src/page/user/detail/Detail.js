@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { listcontact } from "./listdata/listcontact";
 import {
   rate,
@@ -19,15 +19,29 @@ import "./css/productbottom.css";
 import ProductRight from "./js/ProductRight";
 import Productbottom from "./js/Productbottom";
 import { Image } from "antd";
-
+import { Routes, Route, useParams } from 'react-router-dom';
+import { getAPI } from "../../../config/api";
 function Detail() {
+  let { productId } = useParams();
+  console.log(26,productId)
   const [isDisabled, setIsDisable] = useState(true);
   const [colorDetail, setcolorDetail] = useState({
     color:
       "https://salt.tikicdn.com/cache/w1200/ts/product/aa/d6/8b/8cec3f81589ed96f0075d4ecf2d822c5.jpg",
     name: "Đen",
   });
+  useEffect(function(){
+    getData()
+  }, [])
 
+  async function getData () {
+    try {
+      const product = await getAPI('/product/get-one-product/' + productId);
+      console.log(40, product)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   function changecolor(id) {
     const getID = document.getElementById(id);
     const getColor = getID.getElementsByClassName("fWjUGo");

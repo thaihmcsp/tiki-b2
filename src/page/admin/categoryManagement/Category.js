@@ -256,7 +256,8 @@ function Category() {
             return (
               <div className={styles.listCategory}>
                   <div className={styles.imageName}>
-                      <img onClick={()=>showModal2(value._id)} className={styles.img} src={value.thump.startsWith('http') ? value.thump : 'https://tiki.thaihm.site/'+value.thump} alt='' />
+                      <img onClick={()=>showModal2(value._id)} className={styles.img} 
+                      src={value.thump.startsWith('http') ? value.thump : 'https://tiki.thaihm.site/'+value.thump} alt='' />
                       <p className={styles.name}>{value.categoryName}</p>
                   </div>
                   <div>                    

@@ -26,13 +26,6 @@ function SuggestProduct() {
     }
   });   
 
-  window.addEventListener('resize', (event)=>{
-    if(window.innerWidth <= 768){
-      setMobile(true)
-    }else{
-      setMobile(false)
-    }
-  })
   return (  
     <div className={style.SuggestProduct}>
         <div className={style.sugguest}>

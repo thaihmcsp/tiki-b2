@@ -23,7 +23,7 @@ import ShopLogin from './page/shop/login/Login';
 // import Order from './page/user/order/maintotal/Main';
 // import ShopHome from './page/shop/shopHome/ShopHome';
 // import Shop from './page/admin/shopManagement/Shop';
-// import Detail from "./page/user/detail/Detail";
+import Detail from "./page/user/detail/Detail";
 // import AddItem from "./page/shop/productManagement/priceItem/addItem_Phu/AddItem";
 // import Odertotal from './page/user/order/ordertotal/Odertotal';
 import PrivateRouter from './components/PrivateRouter';
@@ -53,6 +53,7 @@ function App() {
             </Route>
             <Route path='/' element={<Header/>}> 
                 <Route path='/' element={<Home/>} />
+                <Route path='/detail/:productId' element={<Detail/>} />
                 <Route path='/filter' element={<Filter/>}/>
                 <Route path='/shop/dashboard' element={<ShopDashBoardAll/>} />
                 {/* <Route path='/shop/product/manage' element={<Product />} /> */}
