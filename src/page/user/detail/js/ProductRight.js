@@ -26,14 +26,32 @@ function ProductRight(props) {
 
   //get Data
   useEffect(() => {
-    getAPI("/product/get-all-products")
+    getAPI("/product/get-one-product/62da5f60bc070a53bcbc3220")
       .then((data) => {
-        setListProducts(data.data.listProduct);
+        setListProducts(data);
+        console.log(data.data.product.productDetailId);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+
+  // useEffect(() => {
+  const optionTotal = [[], [], []];
+
+  listProduct.map((item, index) => {
+    optionTotal[0].push(item.option[0].value);
+    optionTotal[1].push(item.listImg[0]);
+    optionTotal[2].push(item.option[1].value);
+  });
+
+  const option = optionTotal.map((item, index) => {
+    return item.filter((item1, index1) => {
+      return item.indexOf(item1) === index1;
+    });
+  });
+
+  console.log(51, option);
 
   return (
     <div className="productright">
@@ -92,15 +110,15 @@ function ProductRight(props) {
                 </p>
               </p>
               <div className="product-color">
-                {listProduct.map((item, index) => {
+                {option[0].map((item, index) => {
                   return (
                     <div
                       className="option1"
-                      id={item.option[0].value}
-                      onClick={() => props.hanldeColor(item.option[0].value)}
+                      id={item}
+                      onClick={() => props.hanldeColor(item)}
                     >
-                      <img src={item.listImg[0]} width={55} height={55}></img>
-                      <span>{item.option[0].value}</span>
+                      <img src={option[1][index]} width={55} height={55}></img>
+                      <span>{item}</span>
                       {props.tich}
                     </div>
                   );
@@ -112,15 +130,15 @@ function ProductRight(props) {
                 Size: <span id="size-select">{props.sizeDetail}</span>
               </p>
               <div className="size">
-                {listProduct.map((item, index) => {
+                {option[2].map((item, index) => {
                   return (
                     <button
                       className="option2"
-                      id={item.option[1].value}
+                      id={item}
                       key={index}
-                      onClick={() => props.hanldeSize(item.option[1].value)}
+                      onClick={() => props.hanldeSize(item)}
                     >
-                      <span>{item.option[1].value}</span>
+                      <span>{item}</span>
                       {props.tich}
                     </button>
                   );
