@@ -1,0 +1,38 @@
+.products img{
+    width: 20%;
+    margin-right: 8px;
+}
+.contentScore{
+    display: flex;
+    margin-right: 8px;
+    justify-content: space-around;
+    position: relative;
+}
+.checkbox{
+    background: rgb(31, 183, 56);
+    width: 8px;
+    height: 8px;
+    border-radius:50%;
+    position: absolute;
+    transform: translate(-1500%, 0);
+    bottom: 14px;
+}
+.endProduct{
+    color: red;
+    font-weight: 600;
+}
+.modalUpdate{
+    display: flex;
+}
+.modalUpdate p{
+    margin-right: 6px;
+}
+.modalInput{
+    width: 100%;
+    padding: 4px;
+    outline: none;
+    border: 1px solid #ccc;
+}
+.container {
+    width: 20% !important;
+}
