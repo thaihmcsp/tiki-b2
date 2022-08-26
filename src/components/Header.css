@@ -62,6 +62,7 @@
     border: 0px;
 }
 .componentHeaderInput:focus + .ShowCoverInput{
+    z-index: 10000000000000000000;
     display: block;
     z-index: 1000000;
 }
