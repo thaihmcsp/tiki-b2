@@ -13,7 +13,6 @@ function SuggestProduct() {
   },[mobile])
 
   window.addEventListener('scroll', (event) => {
-    console.log(15,distance,window.scrollY)
     const header = document.querySelector(`.${style.sugguest}`)
     const productList = document.querySelector(`.${style.product_list}`)
   
@@ -27,7 +26,6 @@ function SuggestProduct() {
   });   
 
   window.addEventListener('resize', (event)=>{
-    console.log('resize')
     if(window.innerWidth <= 768){
       setMobile(true)
     }else{

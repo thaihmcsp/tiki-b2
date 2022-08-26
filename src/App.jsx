@@ -76,24 +76,20 @@ function App() {
 
         <Route path="/admin" element={<Admin />}>
           <Route path="/admin/category" element={<Category />} />
+          <Route path="/admin/shop" element={<Shop></Shop>}></Route>
+          <Route path="/admin/user" element={<User></User>}></Route>
+          <Route path="/admin/dashbosh" element={<Shop></Shop>}></Route>
         </Route>
-
+        <Route path="/shop" element={<ShopMenu />}>
+          <Route path="/shop/profile" element={<ShopProfile />} />
+        </Route>
         <Route path="*" element={<SignIn />} />
 
-        <Route path="/user" element={<UserInfoMenu />}>
-          <Route exact path="/user/profile" element={<PrivateRouter />}>
-            <Route
-              exact
-              path="/user/profile"
-              element={
-                <div className="profile">
-                  {" "}
-                  <UserInfo /> <ProfileList />{" "}
-                </div>
-              }
-            />
-          </Route>
-        </Route>
+        {/* <Route path='/user' element={<UserInfoMenu />}>
+                    <Route exact path='/user/profile' element={<PrivateRouter />}>
+                        <Route exact path='/user/profile' element={<div className='profile'> <UserInfo /> <ProfileList /> </div>} />
+                    </Route>
+                </Route> */}
       </Routes>
     </BrowserRouter>
   );
