@@ -25,6 +25,8 @@ import Order from './page/user/order/maintotal/Main';
 import ShopHome from './page/shop/shopHome/ShopHome';
 import Oder from './page/user/order/Order';
 import ShopProfile from './page/shop/shopProfile/ShopProfile';
+import ShopMenu from './page/shop/productManagement/ShopMenu';
+import ManagementProduct from './page/shop/productManagement/ManagementProduct ';
 // import Shop from './page/admin/shopManagement/Shop';
 // import Detail from "./page/user/detail/Detail";
 // import AddItem from "./page/shop/productManagement/priceItem/addItem_Phu/AddItem";
@@ -35,8 +37,11 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-
                 <Route path='/sign-up' element={<SignUp />} />
+                <Route path='/shop/products' element={<ShopMenu />} >
+                    <Route path='/shop/products/list' element={< ManagementProduct />} >
+                    </Route>
+                </Route>
 
                 <Route path='/sign-in' element={<SignIn />} />
                 <Route path='/sign-in-admin' element={<AdminLogin />} />
@@ -45,8 +50,12 @@ function App() {
                 <Route path='/order' element={<Order />} />
                 <Route path='/' element={<Header />}>
                     <Route path='/' element={<Home />} />
-                    <Route path='/shop' element={<ShopProfile />} />
+                    <Route path='/shop' element={<ShopProfile />} >
+
+                    </Route>
+
                     <Route path='/filter' element={<Filter />} />
+
                     <Route path='/shop/dashboard' element={<ShopDashBoardAll />} />
                     {/* <Route path='/shop/product/manage' element={<Product />} /> */}
                     <Route path='/user' element={<UserInfoMenu />}>

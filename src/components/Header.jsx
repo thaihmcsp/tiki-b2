@@ -95,8 +95,9 @@ function Header(props) {
 
   }
   ///
-  function SeachInputData(categoryName) {
-    nav(`/filter?seaarch=${categoryName}`);
+  function seachInputData(categoryName) {
+    console.log(99, categoryName)
+    nav(`/filter?search=${categoryName}`);
   }
   function EnterInputSeach(e) {
     let getInputSearch = document.querySelector(".componentHeaderInput").value;
@@ -173,15 +174,13 @@ function Header(props) {
                       }}
                     />
                     <div className="ShowCoverInput" >
-
                       <div className="HistorySeach"
                         style={search ? { display: "inline-block" } : { display: "none" }}
-
                       >
                         {
                           word.map((value, index) => {
                             return (
-                              <div className="SearchWord" onClick={() => SeachInputData(value.categoryName)}>
+                              <div className="SearchWord" onClick={() => seachInputData(value.categoryName)}>
                                 <SearchOutlined className='seach-icon' />
                                 <p className='SeachInputDataText'>
                                   {value.categoryName}
