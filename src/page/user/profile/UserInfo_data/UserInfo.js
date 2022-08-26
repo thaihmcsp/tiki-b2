@@ -102,7 +102,7 @@ function UserInfo() {
       const action = updateInfo(name.data.user)
       dispatch(action)
     }catch (error){
-      console.log(97,error)
+      console.log(error)
     }
   }
 
