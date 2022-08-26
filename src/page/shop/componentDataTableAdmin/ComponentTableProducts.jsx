@@ -126,7 +126,7 @@ const ComponentTableProducts = ({value}) => {
         ),
         contentScore: (
           <div className={styles.contentScore}>
-            <p className={ele.public = 'true' ? styles.checkboxGreen : styles.checkboxRed }></p>
+            <p className={ele.public ? 'checkboxGreen' : 'checkboxRed '}></p>
             <p><InfoCircleOutlined /></p>
             <p><DeleteOutlineIcon onClick={()=>handleCancel(ele._id)}/></p>
           </div>

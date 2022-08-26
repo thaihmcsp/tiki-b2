@@ -25,6 +25,7 @@ function FilterProducts({setValue}) {
     const seachData = document.querySelector(`.${styles.inp_search} .ant-input`).value;
     setValue(seachData);
     
+    
   }
   
   return (

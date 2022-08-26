@@ -51,3 +51,23 @@
     top: 0;
     z-index: 1;
 }
+
+.checkboxGreen {
+    background: rgb(31, 183, 56);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-1500%, 0);
+    bottom: 14px;
+}
+
+.checkboxRed {
+    background: red;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-1500%, 0);
+    bottom: 14px;
+}
