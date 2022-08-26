@@ -2,31 +2,63 @@ import React, { useEffect, useState } from 'react';
 import OrderHeader from '../header/OrderHeader';
 import Main_Left from '../main/main_Left/Main_Left';
 import Main_Right from '../main/main_Right/Main_Right';
+
 import './StyleMain.css'
 import { Data } from './Data';
 import { Routes, Route, useParams } from 'react-router-dom';
-import { getAPI } from '../../../../config/api';
+import { Link, useNavigate } from 'react-router-dom'
+import { getAPI, postAPI } from '../../../../config/api';
+import ModalAddAdress from '../main/main_Right/modalAddAdress/Modal';
 function Main() {
+   
+    const nav = useNavigate()
         ///////////////////
         const [order, setOrder] = useState([])
+        console.log(setOrder);
 
         let { orderId } = useParams();  
         //gộp data cũ thành data mới      
         useEffect(()=>{
-           async function  temps (){
+              temps();  
+            }
+        ,[])
+        const [cartId,setCartId]=useState('')
+        async function  temps (){
             try {
                 const cart = await getAPI('/cart/get-loged-in-cart')
-                const Cart = cart.data.cart.listProduct
-                console.log(19,Cart)
+                console.log(29,cart)
+                console.log(19,cart.data.cart.userId._id)
+                setCartId(cart.data.cart.userId._id)
+                const Cart = cart.data.cart
+                console.log(21,cartId)
+                const listProductdetail = cart.data.cart.listProduct
+                console.log(listProductdetail);
+                const newData = cart.data.cart.product
+                console.log(cart.data.cart)
+                const NEWDATA = newData.map((item) => {
+                    return {
+                      productDetailId: {
+                        _id: item.productId._id,
+                        productId: item.productId,
+                        price: item.productId.price,
+                      },
+                      quantity: item.quantity,
+                      selected: item.selected,
+                      _id: item.productId._id,
+                    };
+                  });
+                  Cart.listProduct = [...NEWDATA, ...listProductdetail]
+                //   setOrder([...NEWDATA, ...listProductdetail]);
+            
                 const orderList=[]
                 const shopName=[]
-                Cart.map((value) => {
+                Cart.listProduct.map((value) => {
                     const shopname = value.productDetailId.productId.shopId.shopName
                     //lọc tránh trùng shop,nếu shop nào trùng nó k lọc qua nữa
                     if(!shopName.includes(shopname)){
                         shopName.push(shopname);
                         //tifm những shopName trùng nhau gộp vào 1 mảng
-                        const data = Cart.filter(item=>{
+                        const data = Cart.listProduct.filter(item=>{
                             return item.productDetailId.productId.shopId.shopName === shopname
                         })
                         const element = {
@@ -36,7 +68,8 @@ function Main() {
                         orderList.push(element);
                     }
                 })
-               
+
+                console.log(69,cartId)
                 console.log(46,orderList)
                 setOrder(orderList)
                     
@@ -44,11 +77,8 @@ function Main() {
                 console.log(error)
             }        
             }
-              temps();  
-            }
-            
-            
-        ,[])
+
+
       
     
         const [money,setMoney] = useState(0)
@@ -74,7 +104,7 @@ function Main() {
                     <div className="hfMLFx elPTRG">
                             <Main_Left  data={order}
                              />
-                            <Main_Right data={order} money={money}/>
+                            <Main_Right data={order} money={money}  cartId={cartId} />
                     </div>
             </main>
         </div>

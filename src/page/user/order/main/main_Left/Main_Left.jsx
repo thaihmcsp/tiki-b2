@@ -60,7 +60,7 @@ function Main_Left({data}) {
                                                     alt="delivery-method" width="48" height="14" /><span className="method-text"
                                                         style={{ fontSize: '12px', lineHeight: '16px' }}>
                                                         Giao Tiết Kiệm</span></div>
-                                                <div className="XUTGR"><span className="current-fee"></span>18000đ</div>
+                                                <div className="XUTGR"><span className="current-fee"></span></div>
                                             </div>
                                             <div className="package-item-list">
                                                 <div>

@@ -11,10 +11,10 @@ import 'antd/dist/antd.css';
 import { postAPI, getAPI } from '../../../../../config/api';
 import ModalAddAdress from './modalAddAdress/Modal';
 
-function Main_Right({ data, money }) {
+function Main_Right({ data, money,cartId }) {
     const [addAllress,setAllAddress] = useState(false)
     const [userInfo, setUserInfo] = useState();
-
+   console.log(17,cartId);
     useEffect(() => {
         setUserInfo(data)
     },[data])
@@ -83,7 +83,7 @@ function Main_Right({ data, money }) {
         useEffect(() => {
             async function temps() {
                 try {
-                    const orderList = await getAPI('/auth/me')
+                    await getAPI('/auth/me')
                         .then((data) => {
                             // console.log(102,data)
                             setInfor(data.data.address)
@@ -96,8 +96,23 @@ function Main_Right({ data, money }) {
             temps();
             }
         , [])
+        /////////////////////////////////
+        async function  postOrder (){
+            try {
+                 await postAPI('/user-order/user-create-order',{cartId:cartId,
+                   phone:infor.phone,
+                   address:infor.address
 
-        // console.log(107, infor)
+                })
+           
+            } catch (error) {
+                console.log(error)
+            }   
+
+            }
+            
+
+        console.log(107, infor)
         /////////////
         const [defaultAddress, setDefaultAddress] = useState([]);
         const [indexAddress,setIndexAddress]=useState(0)
@@ -108,11 +123,13 @@ function Main_Right({ data, money }) {
             
         },[indexAddress,infor]);
         // console.log(129,defaultAddress)
+        console.log( 111,defaultAddress[0]);
         return (
 
             <div className="right">
                 <ModalAddAdress 
                 setIndexAddress={setIndexAddress}
+        cartId = {cartId}
                 showModal={showModal} 
                 isModalVisible={isModalVisible} 
                 setIsModalVisible={setIsModalVisible} 
@@ -134,8 +151,9 @@ function Main_Right({ data, money }) {
                                     onClick={showModal}>Thay
                                     đổi</a>
                             </div>
+
                            {
-                            defaultAddress[0]&&defaultAddress.length == 0 ? 
+                            !defaultAddress[0] ? 
                             <p className='warning_add__address'>Vui lòng thêm địa chỉ !</p>
                             :defaultAddress[0]?
                             <div >
@@ -294,7 +312,7 @@ function Main_Right({ data, money }) {
                             <div className="order-total__additional-text">(Đã bao gồm VAT nếu có)</div>
                         </div>
                     </div>
-                    <div className="bSkntM"><button className="OMovB hHWBHK">Đặt
+                    <div className="bSkntM"><button className="OMovB hHWBHK" onClick={postOrder}>Đặt
                         hàng</button></div>
                 </div>
             </div>

@@ -14,7 +14,7 @@ import { patchAPI } from '../../../../../../config/api';
 
 
 
-function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAddress,setAllAddress,setIndexAddress}) {
+function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAddress,setAllAddress,setIndexAddress,cartId}) {
     const [value, setValue] = useState(0);
  ///tạo cảnh báo ở ô textfiled
     const [textInput, setTextInput] = useState('');
@@ -84,7 +84,7 @@ function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAdd
         const warname = document.querySelector('#warname')
         warname.style.display = 'none'
     }
-    const handleOk1 =  async() => {
+    const handleOk1 =  async(id) => {
     try{
             const phonenumbers = document.querySelector('#phones').value
         const usernames = document.querySelector('#names').value
@@ -116,7 +116,7 @@ function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAdd
         }
         // console.log(102,usernames , phonenumbers , textInput)
         if(usernames && phonenumbers && textInput){
-            var resp = await patchAPI('/user/update-user-info/62fa015087b7d61c5c2f3b57', {address:{
+            var resp = await patchAPI(`/user/update-user-info/${cartId}`, {address:{
                 name:usernames,
                 phone:phonenumbers,
                 address:textInput
@@ -134,8 +134,9 @@ function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAdd
 
        
     };
+    console.log(137,cartId);
     // handok2
-    const handleOk2 =  async() => {
+    const handleOk2 =  async(id) => {
         try{
             const phonenumbers = document.querySelector('#phones').value
             const usernames = document.querySelector('#names').value
@@ -167,7 +168,7 @@ function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAdd
             }
             console.log(102,usernames , phonenumbers , textInput)
             if(usernames && phonenumbers && textInput){
-                var resp = await patchAPI('/user/update-user-info/62fa015087b7d61c5c2f3b57', {address:{
+                var resp = await patchAPI(`/user/update-user-info/${ cartId}`, {address:{
                     name:usernames,
                     phone:phonenumbers,
                     address:textInput
