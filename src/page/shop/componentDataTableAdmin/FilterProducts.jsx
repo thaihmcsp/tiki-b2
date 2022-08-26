@@ -43,6 +43,7 @@ function FilterProducts({ setValue, setselectSort, setCount, count }) {
   }
   const onSearch = (value) => {
     const seachData = document.querySelector(`.${styles.inp_search} .ant-input`).value;
+    console.log(1)
     if (seachData.trim().length > 0) {
       setValue(removeAccents(seachData.toLowerCase()))
     } else {

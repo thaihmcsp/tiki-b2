@@ -34,7 +34,6 @@ const beforeUpload = (file) => {
 function ShopProfile() {
     const data = useSelector((state) => state.user);
     const dispatch = useDispatch()
-    console.log(8, data.shop.logo)
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState();
     const [imageObject, setImageObject] = useState({});

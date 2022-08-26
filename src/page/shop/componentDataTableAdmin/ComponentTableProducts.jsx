@@ -71,7 +71,6 @@ const ComponentTableProducts = ({ value, selectSort, count }) => {
   useEffect(() => {
     getAPI("/product/get-product-by-shopId/62da5cccbc070a53bcbc31b8")
       .then((res) => {
-        console.log(74, res.data.product)
         if (selectSort == 'Giá') {
           res.data.product.sort((a, b) => {
             return a.price - b.price
