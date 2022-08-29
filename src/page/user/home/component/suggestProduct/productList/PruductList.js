@@ -3,6 +3,7 @@ import 'antd/dist/antd.css';
 import style from '../suggesstProduct.module.css'
 import clsx from 'clsx'
 import { Rate } from 'antd';
+import { Navigate } from 'react-router-dom';
 function PruductList({listProduct}) {
   const [data,setDatas] = useState([])
   const [pageSize,setPageSize] = useState(18)
@@ -18,13 +19,17 @@ function PruductList({listProduct}) {
         setPageSize(pageSize => (pageSize +18))
     }
   }
+  const nav = Navigate()
+  const handleToDetailITem=(id)=>{
+    nav(`/detail?id=${id}`)
+  }
   console.log(498,listProduct)
   return (  
     <div className={style.PruductList}>
          {
             data.map(function(item){
                 return(
-                    <div className={style.Card} key={item._id}>
+                    <div className={style.Card} key={item._id} onClick={()=>handleToDetailITem(item._id)}>
                         <img src={item.thump} />
                         <div className={style.content}>
                             <div className={style.info}>

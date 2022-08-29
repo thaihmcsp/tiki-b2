@@ -2,14 +2,16 @@ import React from 'react'
 import { Button } from 'antd';
 import style from './footerAdd.module.css'
 import { useSelector } from 'react-redux';
+import { getAPI } from '../../../../../../config/api';
 function FooterAdd() {
   const varient = useSelector(state=>state.addItemReducerSlice)
 
   const handleCreatorProduct = ()=>{
     const listOption = document.querySelectorAll('.DetailListItem')
     const newList  =  [...listOption]
-    const productName = document.querySelector('.input_additem').value
-    const CatagoryName = document.querySelector('.ant-select-selection-search-input').value
+    const productName = document.querySelector('.ant-input.input_additem').value
+    const CatagoryName = document.querySelector('.ant-select-selection-search-input')
+    console.log(productName,CatagoryName)
     const BrandID = document.querySelector('#Brand_brandIDName').value
     const Origin = document.querySelector('#Brand_Origin').value
     const Material = document.querySelector('#Brand_material').value
@@ -40,6 +42,13 @@ function FooterAdd() {
             "value":Detail
         })
       }
+    getAPI('/category/get-all-categories')
+      .then(data=>{
+        console.log(47,data)
+      })
+      .catch(error=>{
+        console.log(50,error)
+      })
     if(varient[0]&&varient[0].option.length==0){
       const priceMain = newList[0].querySelector('.Add_price__varient .hello_ant-input-number-input').value
       const totalStorege = newList[0].querySelector('.Add_storege-btn .hello_ant-input-number-input').value
@@ -47,7 +56,7 @@ function FooterAdd() {
       
       const product = {
         about:about,
-        categoryId:CatagoryName,
+        // categoryId:CatagoryName,
         productDetailId:[],
         productName: productName,
         totalStorage:totalStorege,
