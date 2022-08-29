@@ -3,12 +3,10 @@ import styles from './UserInfor.module.css';
 import data from './data';
 import DataDay from './DataDay';
 import 'antd/dist/antd.css';
-import { Radio } from 'antd';
+import { Radio, Modal } from 'antd';
 import DataMonth from './DataMonth';
 import Countries from './Countries';
 import { Link, useNavigate } from 'react-router-dom'
-
-import { Button, Modal } from 'antd';
 import { useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
@@ -41,7 +39,6 @@ const beforeUpload = (file) => {
 function UserInfo() {
   const dispatch = useDispatch()
   const user = useSelector((state => state.user))
-  console.log(43,user)
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
@@ -56,38 +53,20 @@ function UserInfo() {
       const formData = new FormData();
       formData.append('avatar', imageObject)
       const res = await patchAPI('/user/update-user-info/'+user._id, formData);
-      console.log(58, res);
       const action = updateInfo(res.data.user)
       dispatch(action)
       setIsModalVisible(false);
     } catch (error) {
       console.log(error)
     }
-
   };
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
-
-
   const handleChange = (info) => {
     let url = URL.createObjectURL(info.file.originFileObj);
     setImageObject(info.file.originFileObj);
     setImageUrl(url)
-
-    // if (info.file.status === 'uploading') {
-    //   setLoading(true);
-    //   return;
-    // }
-
-    // if (info.file.status === 'done') {
-    //   // Get this url from response in real world.
-    //   getBase64(info.file.originFileObj, (url) => {
-    //     setLoading(false);
-    //     setImageUrl(url);
-    //   });
-    // }
   };
 
   const uploadButton = (

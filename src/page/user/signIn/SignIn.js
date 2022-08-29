@@ -35,7 +35,7 @@ function setCookie(cname, cvalue, exdays) {
       }
     }
     return "";
-  }
+}
 
   console.log(39, getCookie('tiki-user'))
 

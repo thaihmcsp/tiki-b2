@@ -47,7 +47,7 @@
 }
 .Search_Right {
     position: absolute;
-    top: 30px;
+    top: 20px;
     transform: translate(0%, -50%);
     right: 20px;
     padding-left: 16px;

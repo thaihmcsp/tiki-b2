@@ -45,8 +45,8 @@
     transition: all 0.5s ease-out 0s;
 }
 .user-createShop-select{
-    width: 100%;
-    padding: 12px;
+    width: 100% !important;
+    padding: 12px !important;
     outline:none;
     border: 1px solid #ccc;
     border-radius:6px ;

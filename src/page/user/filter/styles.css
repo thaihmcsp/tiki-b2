@@ -1,4 +1,7 @@
-#app { height: 100% }
+#app {
+  height: 100%
+}
+
 html,
 body {
   position: relative;
@@ -36,7 +39,7 @@ body {
 }
 
 
-.filter .ant-modal-root{
+/* .ant-modal-root{
   display: none;
 } 
 
@@ -105,4 +108,4 @@ body {
     transform-origin: top right !important;
   } 
 
-}
+}*/

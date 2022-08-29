@@ -5,17 +5,21 @@ import {
   EnvironmentFilled,
 } from '@ant-design/icons';
 import { listIcon } from './listIcon';
-import styles from'./Profile.module.css';
+import styles from './Profile.module.css';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import MenuUserIcon from './MenuUserIcon';
 import { Button, Drawer, Radio, Space } from 'antd';
 import 'antd/dist/antd.css';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
+import { useSelector } from 'react-redux';
 
 function Profile() {
   const [visible, setVisible] = useState(false);
   const [placement, setPlacement] = useState('left');
+  const user = useSelector(state=>state.user)
+  const navigate = useNavigate();
   const showDrawer = () => {
     setVisible(true);
   };
@@ -54,7 +58,7 @@ function Profile() {
             <div>
               <span>Tài khoản của</span>
               <br />
-              <strong>Trung Thành</strong>
+              <strong>{user.username}</strong>
             </div>
           </MenuUserIcon></Link>
         </div>
@@ -92,10 +96,11 @@ function Profile() {
             <div>
               <span>Tài khoản của</span>
               <br />
-              <strong>Trung Thành</strong>
+              <strong>{user.username}</strong>
             </div>
           </MenuUserIcon></Link>
         </div>
+
         <div className={styles.headerList}>
           <Link to='/user/profile'><MenuUserIcon
             icon={<PersonRoundedIcon />}
@@ -113,7 +118,7 @@ function Profile() {
           <MenuUserIcon icon={listIcon[10]} title='BookCare của tôi' />
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
