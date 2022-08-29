@@ -251,6 +251,7 @@
     left: 50%;
 }
 .InputCoverItemTop {
+    margin-top: 8px;
     display: flex;
     align-items: center;
     padding: 0 10px;
@@ -267,6 +268,10 @@
 }
 .InputCoverItemTop p {
  margin-left: 10px;
+ margin-bottom: 0;
+}
+.InputCoverItemTop img{
+    width: 25px;
 }
 .HistorySeach {
   border-bottom:  1px solid rgb(225, 225, 225);
@@ -277,14 +282,13 @@
     justify-content: space-between;
     height: 35px;
     align-items: center;
-    padding: 0 10px;
+    padding: 0 24px;
 }
 .HeaderCoverInputText {
     text-decoration: none;
-    font-size: 15px;
+    font-size: 14px;
     color: black;
     font-weight: 500;
-   
 }
 .SearchWord {
     padding-left: 20px;
@@ -299,17 +303,21 @@
     letter-spacing: 1.5px;
 }
 .ListHistorySeach {
+    cursor: pointer;
     display: flex;
-
     font-size: 13px;
     font-weight: 500;
     align-items: center;
+    padding: 0 24px;
+    margin: 4px 0;
 }
 .ListHistorySeach:hover {
     background-color: rgba(27, 168, 255, 0.1);
 }
 .ListHistorySeach img {
     margin-right: 12px;
+    width: 30px;
+    height: 30px;
 }
 .ShowCoverInputListItem,.CatogoryAttenion {
     display: flex;
@@ -318,8 +326,6 @@
     justify-content: space-evenly;
     border-bottom: 1px solid rgb(242, 242, 242);
     padding: 12px 8px;
-   
-
 }
 .InputCoverLists {
     width: 32%;
@@ -341,11 +347,27 @@
 .CatogoryList {
     width: 24%;
     text-decoration: none;
+   
     
+}
+.CatogoryListTitle{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 4px;
+}
+.CatogoryListTitle img{
+    width: 50px;
+    height: 50px;
+}
+.CatogoryListTitle p{
+   text-align: center;
+   margin: 0;
 }
 .CatogoryList:hover {
     box-shadow: rgb(0 0 0 / 10%) 0px 0px 20px;
-    
+    z-index: 1;
 }
 .CatogoryList p {
     text-decoration: none;

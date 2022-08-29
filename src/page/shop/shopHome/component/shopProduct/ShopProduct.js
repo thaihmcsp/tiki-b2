@@ -3,11 +3,11 @@ import AllProduct from './allProduct/AllProduct'
 import ProductBanner from './productBanner/ProductBanner'
 import style from './shopHome.module.css'
 
-function ShopProduct() {
+function ShopProduct({allProduct,shopInfor}) {
   return (
     <div className={style.ShopProduct}>
-        <ProductBanner/>
-        <AllProduct activeKey1={'1'}/>
+        <ProductBanner shopInfor={shopInfor}/>
+        <AllProduct activeKey1={'1'} allProduct={allProduct}/>
     </div>
   )
 }

@@ -89,7 +89,7 @@ function BasicInfo() {
       </div>
     );
   return (
-    <div className={style.BasicInfo}>
+    <div className={style.BasicInfo} id='Basic_infomation'>
         <h2 className={style.title}>
             Thông tin cơ bản
         </h2>

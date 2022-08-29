@@ -10,12 +10,13 @@ function ListDataColection({data}) {
         {data.map(item=>{
             return(
                 <Card1 
-                img={item.avatar}
-                title={item.title}
+                key={item._id}
+                img={item.thump}
+                title={item.productName}
                 sold={item.sold}
                 price={item.price}
-                discount = {item.discount}
-                />
+                discount = {10+Math.round(10*Math.random())}
+              />
             )
         })}
     </div>

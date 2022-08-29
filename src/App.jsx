@@ -8,7 +8,6 @@ import Home from './page/user/home/Home';
 import Admin from './page/admin/Admin';
 import 'antd/dist/antd.css';
 import ShopDashBoardAll from './page/shop/dashboard/ShopDashBoardAll';
-import Product1 from './page/shop/productManagement/Product1.js';
 import Profile from './page/user/profile/ProfileManu/ProfileMenu';
 import ProfileList from './page/user/profile/ProfileLeft/ProfileList';
 import ProfileListHeader from './page/user/profile/ProfileLeft/ProfileListHeader';
@@ -34,41 +33,36 @@ import ManagementProduct from './page/shop/productManagement/ManagementProduct '
 // import ShopMenu from './page/shop/productManagement/Product';
 // import User from './page/admin/userManagement/User';
 function App() {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path='/sign-up' element={<SignUp />} />
-                <Route path='/shop/products' element={<ShopMenu />} >
-                    <Route path='/shop/products/list' element={< ManagementProduct />} >
-                    </Route>
+  return (
+    <BrowserRouter>
+        <Routes>
+          
+            <Route path='/sign-up' element={<SignUp/>} />
+     
+            <Route path='/sign-in' element={<SignIn/>} />
+            <Route path='/sign-in-admin' element={<AdminLogin/>} />
+            <Route path='/sign-in-shop' element={<ShopLogin/>} />
+            <Route path='/create-shop' element={<CreateShop/>}/>
+            <Route path='/admin' element={<Admin/>} >
+                <Route path='category' element={<Category/>} />
+                <Route path='shop' element={<Shop/>}></Route>
+                <Route path='user' element={<User/>}></Route>
+
+            </Route>
+            <Route path='/' element={<Header/>}> 
+                <Route path='/' element={<Home/>} />
+                <Route path='/filter' element={<Filter/>}/>
+                <Route path='/shop/dashboard' element={<ShopDashBoardAll/>} />
+                <Route path='/user' element={<UserInfoMenu/>}> 
+                    <Route path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> }/>
+                    <Route path='/user/order' element={ <div className='order'><Order/></div> } />
                 </Route>
-
-                <Route path='/sign-in' element={<SignIn />} />
-                <Route path='/sign-in-admin' element={<AdminLogin />} />
-                <Route path='/sign-in-shop' element={<ShopLogin />} />
-                <Route path='/create-shop' element={<CreateShop />} />
-                <Route path='/order' element={<Order />} />
-                <Route path='/' element={<Header />}>
-                    <Route path='/' element={<Home />} />
-                    <Route path='/shop' element={<ShopProfile />} >
-
-                    </Route>
-
-                    <Route path='/filter' element={<Filter />} />
-
-                    <Route path='/shop/dashboard' element={<ShopDashBoardAll />} />
-                    {/* <Route path='/shop/product/manage' element={<Product />} /> */}
-                    <Route path='/user' element={<UserInfoMenu />}>
-                        <Route path='/user/order' element={<OrderUser />} />
-                        <Route path='/user' element={<div className='profile'> <UserInfo /><ProfileList /> </div>} />
-                    </Route>
-
-                    <Route path='/shop/ShopHome' element={<ShopHome />} />
-                    <Route path='/shop/ShopHome' element={<ShopHome />} />
-                    {/* <Route path="/addItem" element={<AddItem />} />
-                    <Route path='/detail' element={<Detail />} /> */}
-                </Route>
-                {/* ///private */}
+                <Route path='/ShopHome' element={<ShopHome/>}/>
+                <Route path='/shop' element={<Shop></Shop>}/>
+                <Route path="/addItem" element={<AddItem/>}/>
+                <Route path='/detail' element={<Detail />}/>
+            </Route>
+            {/* ///private */}
 
                 <Route path='/admin' element={<Admin />} >
                     <Route path='/admin/category' element={<Category />} />

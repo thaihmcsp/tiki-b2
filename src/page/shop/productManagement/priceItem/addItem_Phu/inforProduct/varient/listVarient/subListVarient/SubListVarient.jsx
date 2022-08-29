@@ -5,57 +5,68 @@ import { InputNumber } from 'antd';
 import style from './submitVarient.module.css'
 import './subList.css'
 import TdList from './TdList'
+import InputNumberPhu from './library/InputNumber';
+import InputLimeted from './library/InputLimeted';
 const onChange = (value) => {
     console.log('changed', value);
   };
-  const onChange1 = (e) => {
-    console.log('Change:', e.target.value);
-  };
+ 
   const onChange2 = (checked) => {
     console.log(`switch to ${checked}`);
   };
 function SubListVarient({varient,mainInfo}) {
-  console.log(18,mainInfo)
+    const [click,setClick] = useState(true)
+    const [sku,setSku] = useState(true)
+    const onChange1 = (e) => {
+        console.log('Change:', e.target.value);
+      };
   useEffect(() => {
-    const addPrice = document.querySelectorAll('.Add_price__input-varient .ant-input-number-input')
-    const addSpecialPrice = document.querySelectorAll('.Input_special__price .ant-input-number-input')
-    const addQuantity = document.querySelectorAll('.Input_add__storage .ant-input-number-input')
-    const addSKU = document.querySelectorAll('.Input_Seller_sku .ant-input')
+    const addPrice = document.querySelectorAll('.Add_price__varient .hello_ant-input-number-input')
+    const addSpecialPrice = document.querySelectorAll('.Add_special__price .hello_ant-input-number-input')
+    const addQuantity = document.querySelectorAll('.Add_storege-btn .hello_ant-input-number-input')
+    const addSKU = document.querySelectorAll('.Add_Sku .Input_MaxLength__Phu')
+
     const firstOption = document.querySelectorAll('.firstOption')
     const secondOption = document.querySelectorAll('.secondOption')
-    console.log(26,firstOption,secondOption)
-
-    // console.log(28,[...firstOption][0].innerHTML,addSKU)
+    setClick(!click)
     if(firstOption.length > 0){
         if(secondOption.length > 0){
             const numberScale = secondOption.length/firstOption.length
-            console.log(32, numberScale)
             if(numberScale == 1){
                 {[...addSKU].map((item, index) =>{
                     return item.value = `${mainInfo.mainSKU}-${[...firstOption][index].innerHTML}-${[...secondOption][index].innerHTML}`
                 })}
             }else{
                 {[...addSKU].map((item, index) =>{
-                    const indexFirst = Math.floor((index)/numberScale)
-                    console.log(40,indexFirst)
-                    
+                    const indexFirst = Math.floor((index)/numberScale)                   
                     return item.value = `${mainInfo.mainSKU}-${[...firstOption][indexFirst].innerHTML}-${[...secondOption][index].innerHTML}`
                 })}
             }
         }else{
             {[...addSKU].map((item, index) =>{
+                
                 return item.value = `${mainInfo.mainSKU}-${[...firstOption][index].innerHTML}`
             })}
         }
+    }else{
+        // setSku(mainInfo.mainSKU)
+        {[...addSKU].map((item, index) =>{
+            
+            item.value = mainInfo.mainSKU
+            return item
+        })}
     }
     {[...addPrice].map((item, index) =>{
         return item.value = mainInfo.mainPrice*1
     })}
     {[...addSpecialPrice].map((item, index) =>{
-        return item.value = mainInfo.mainSpecialPrice*1
+        if(mainInfo.mainSpecialPrice*1 <= mainInfo.mainPrice*1){
+            return item.value = mainInfo.mainSpecialPrice*1
+        }
     })}
     {[...addQuantity].map((item, index) =>{
-        return item.value = mainInfo.mainStorage*1
+        console.log(item)
+        item.value = mainInfo.mainStorage*1
     })}
    
 
@@ -73,7 +84,7 @@ function SubListVarient({varient,mainInfo}) {
                 <th className={style.productSKU}>SellerSKU</th>
                 <th className={style.sell}>Mở bán</th>
             </tr>
-            {varient[0].option.length>0 &&  varient[0].option.map(option1=>{
+            {varient[0].option.length>0 &&  varient[0].option.map((option1,index)=>{
                 if(varient[1].option.length>0){
                     if(varient[1].option.length == 1){
                         return(
@@ -90,39 +101,36 @@ function SubListVarient({varient,mainInfo}) {
                             </td>
                            
                             <td>
-                                <div className='Add_price__varient'>
-                                        <button>
-                                            <span className='Add_Money'>
-                                                VND
-                                            </span>
-                                            
-                                            <InputNumber min={0}onChange={onChange} placeholder='Giá' className='Add_price__input-varient'/>
-                                        </button>
-                                </div>
+                            <div className='Add_price__varient'>
+                                    <span className='Add_Money'>
+                                        VND
+                                    </span>   
+                                    <InputNumberPhu placeholder='Giá'/>
+                            </div>
                             </td>
                             <td>
                                 <div className='Add_special__price'>
-                                    <InputNumber min={0}onChange={onChange} className='Input_special__price'/>
+                                    <InputNumberPhu  placeholder='ADD'/>
                                 </div>
                             </td>
                             <td>
                                 <div className='Add_storege-btn'>
-                                    <InputNumber min={0}onChange={onChange} className='Input_add__storage'/>
+                                    <InputNumberPhu  placeholder='kho'/>
                                 </div>
                             </td>
                             <td>
                                 <div className='Add_Sku'>
-                                    <Input showCount maxLength={200} onChange={onChange1} placeholder='Seller SKU' className='Input_Seller_sku'/>
+                                    <InputLimeted click={click} index={index}/>
                                 </div>
                             </td>
                             <td>
-                                <Switch defaultChecked onChange={onChange2} className={[style.sellUp, 'sellUp'].join(' ')}/>
+                                <Switch defaultChecked onChange={onChange2} className={[style.sellUp, 'sellUp'].join(' ')} />
                             </td>
                         </tr>
                         )
                     }else{
                         return(
-                            <TdList option1={option1} data={varient[1].option}/>
+                            <TdList option1={option1} data={varient[1].option} click={click}/>
                         )
                        
                     }
@@ -135,36 +143,31 @@ function SubListVarient({varient,mainInfo}) {
                                     {option1}
                                 </div>
                             </td>
-                           
-                            <td>
-                                <div className='Add_price__varient'>
-                                        <button>
-                                            <span className='Add_Money'>
-                                                VND
-                                            </span>
-                                            
-                                            <InputNumber min={0}onChange={onChange} placeholder='Giá' className='Add_price__input-varient'
-                                            />
-                                        </button>
-                                </div>
+                           <td>
+                            <div className='Add_price__varient'>
+                                    <span className='Add_Money'>
+                                        VND
+                                    </span>   
+                                    <InputNumberPhu placeholder='Giá'/>
+                            </div>
                             </td>
                             <td>
                                 <div className='Add_special__price'>
-                                    <InputNumber min={0}onChange={onChange} className='Input_special__price'/>
+                                    <InputNumberPhu  placeholder='ADD'/>
                                 </div>
                             </td>
                             <td>
                                 <div className='Add_storege-btn'>
-                                    <InputNumber min={0}onChange={onChange} className='Input_add__storage'/>
+                                    <InputNumberPhu  placeholder='kho'/>
                                 </div>
                             </td>
                             <td>
                                 <div className='Add_Sku'>
-                                    <Input showCount maxLength={200} onChange={onChange1} placeholder='Seller SKU' className='Input_Seller_sku'/>
+                                    <InputLimeted click={click} index={index}/>
                                 </div>
                             </td>
                             <td>
-                                <Switch defaultChecked onChange={onChange2} className={[style.sellUp, 'sellUp'].join(' ')}/>
+                                <Switch defaultChecked onChange={onChange2} className={[style.sellUp, 'sellUp'].join(' ')} />
                             </td>
                         </tr>
                     )
@@ -175,36 +178,29 @@ function SubListVarient({varient,mainInfo}) {
                 <tr className={style.tr_varient}>
                     <td>
                         <div className='Add_price__varient'>
-                                <button>
-                                    <span className='Add_Money'>
-                                        VND
-                                    </span>
-                                    
-                                    <InputNumber min={0}onChange={onChange} 
-                                    placeholder='Giá' 
-                                    className='Add_price__input-varient'
-                                   
-                                    />
-                                </button>   
+                                <span className='Add_Money'>
+                                    VND
+                                </span>   
+                                <InputNumberPhu placeholder='Giá'/>
                         </div>
                     </td>
                     <td>
                         <div className='Add_special__price'>
-                            <InputNumber min={0}onChange={onChange} className='Input_special__price'/>
+                            <InputNumberPhu  placeholder='ADD'/>
                         </div>
                     </td>
                     <td>
                         <div className='Add_storege-btn'>
-                            <InputNumber min={0}onChange={onChange} className='Input_add__storage'/>
+                            <InputNumberPhu  placeholder='kho'/>
                         </div>
                     </td>
                     <td>
                         <div className='Add_Sku'>
-                            <Input showCount maxLength={200} onChange={onChange1} placeholder='Seller SKU' className='Input_Seller_sku'/>
+                            <InputLimeted click={click} index={1}/>
                         </div>
                     </td>
                     <td>
-                        <Switch defaultChecked onChange={onChange2} className={[style.sellUp, 'sellUp'].join(' ')}/>
+                        <Switch defaultChecked onChange={onChange2} className={[style.sellUp, 'sellUp'].join(' ')} />
                     </td>
                 </tr>
             )}
