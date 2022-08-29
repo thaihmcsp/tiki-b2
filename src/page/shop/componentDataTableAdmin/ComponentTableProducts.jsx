@@ -108,8 +108,8 @@ const ComponentTableProducts = ({ value, selectSort, count }) => {
 
 
   const nav = useNavigate()
-  const handleUpdate = () => {
-    nav(`/addItem`)
+  const handleUpdate = (id) => {
+    nav(`/editItem?id=${id}`)
   }
   let dataTest = listData.map((ele, index) => {
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
