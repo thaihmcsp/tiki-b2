@@ -89,7 +89,7 @@ function Tranform() {
                 width: '100%',
               }}
               placeholder="Hình thức bảo hành"
-              defaultValue={[]}
+              defaultValue={['Bằng hoá đơn mua hàng']}
               onChange={handleChange}
             >
               {children}
@@ -151,21 +151,21 @@ function Tranform() {
           <div className={style.allPolicy}>
               <label>
               <span>*</span>Khối lượng kiện hàng sau khi đóng gói (đơn vị: kilogram). VD: Nếu gói hàng cân nặng 200 gram thì vui lòng điền 0.2 vào ô bên dưới
-              <InputNumber min={0} max={100}  onChange={onChange1}  className='input_number_hev' step={0.01}/>
+              <InputNumber min={0} max={100} defaultValue={0.5}  onChange={onChange1}  className='input_number_hev' step={0.01}/>
               </label>
           </div>
           <span>*</span>Kích thước hàng (cm)
           <div className={style.sizeInfo}>
             <label>
-              <InputNumber min={0} max={100}  onChange={onChange1}  className='input_number_he' step={0.01} placeholder='Chiều dài (cm)'/>
+              <InputNumber min={0} max={100}  onChange={onChange1}  className='input_number_he' step={0.01} placeholder='Chiều dài (cm)' defaultValue={Math.round(Math.random()*30)+30} />
             </label>
             x
             <label>
-              <InputNumber min={0} max={100} onChange={onChange1}  className='input_number_he' step={0.01} placeholder='Chiều rộng (cm)'/>
+              <InputNumber min={0} max={100} onChange={onChange1}  className='input_number_he' step={0.01} placeholder='Chiều rộng (cm)' defaultValue={Math.round(Math.random()*30)+30}/>
             </label>
             x
             <label>
-              <InputNumber min={0} max={100} onChange={onChange1}  className='input_number_he' step={0.01} placeholder='Chiều cao (cm)'/>
+              <InputNumber min={0} max={100} onChange={onChange1}  className='input_number_he' step={0.01} placeholder='Chiều cao (cm)' defaultValue={Math.round(Math.random()*30)+30}/>
             </label>
           </div>
         </div>}
@@ -174,7 +174,7 @@ function Tranform() {
               Chất liệu nguy hiểm
             </p>
             <>
-            <Checkbox.Group options={plainOptions} defaultValue={['']} onChange={onChange3} />
+            <Checkbox.Group options={plainOptions} defaultValue={['Không']} onChange={onChange3} />
             </>
           </div>
       </div>

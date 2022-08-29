@@ -15,7 +15,7 @@ const onChange = (e) => {
     console.log(`checked = ${e.target.checked}`);
   };
 
-function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,option2,setOption2,Key2}) {
+function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,option2,setOption2,Key2,varient,setKey2}) {
     const [items, setItems] = useState(['Nhóm màu', 'Biến thể']);
     const [name, setName] = useState('');
     const inputRef = useRef(null);
@@ -46,9 +46,14 @@ function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,
   const handleDeleteVarient =(index)=>{
     if(window.confirm('Bạn có thực sự muốn xoá Biến thể này?')){
         if(index==0){
-            setKey(Key2)
-            setOption(option2)
-            setOption2([])
+            if(option2.length>0){
+                setKey(Key2)
+                setKey2(Key)
+                setOption(option2)
+                setOption2([])
+            }else{
+                setOption([])
+            }
         }
         if(index==1){
             setKey('Biến thể')
@@ -85,6 +90,7 @@ function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,
         <label>
             <span>*</span> Tên biến thể:
             <Select
+                value={Key}
                 onChange={handleSelectedChange1}
                 className='Varient_Add'
                 style={{
@@ -121,26 +127,6 @@ function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,
                     <Option key={item}>{item}</Option>
                 ))}
             </Select>
-
-            {/* <Select
-                className='Varient_Add'
-                showSearch
-                style={{
-                width: 200,
-                }}
-                placeholder="Chọn biến thể"
-                optionFilterProp="children"
-                filterOption={(input, option) => option.children.includes(input)}
-                filterSort={(optionA, optionB) =>
-                optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-
-                }
-                value={newKey}
-                onChange={handleSelectedChange}
-            >
-                <Option value="Nhóm màu">Nhóm màu</Option>
-                <Option value="Biến Thể">Biến Thể</Option>
-            </Select> */}
         </label>
         <div className={style.all_varient}>
             <p>Tổng số biến thể</p>
@@ -150,12 +136,12 @@ function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,
                 {
                     option.map((option1,index)=>{
                         return(
-                            <Optional option={option1} index={index}
+                            <Optional 
+                            option={option1} 
+                            index={index}
                             key={index} 
                             setOption={setOption} optionAll={option} 
                             id = {index==option.length-1? 'Option_last-focus':'none'}
-                            // {{index == option.length-1} && ref={inputRef}}
-
                             />
                         )
                     })

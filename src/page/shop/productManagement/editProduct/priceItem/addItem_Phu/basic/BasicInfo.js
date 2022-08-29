@@ -1,59 +1,58 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './basicInfo.module.css'
 import { Input } from 'antd'
 import { Cascader } from 'antd';
 import './basicInfor.css'
-const options = [
-    {
-      value: 'zhejiang',
-      label: 'Zhejiang',
-      children: [
-        {
-          value: 'hangzhou',
-          label: 'Hangzhou',
-          children: [
-            {
-              value: 'xihu',
-              label: 'West Lake',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      value: 'jiangsu',
-      label: 'Jiangsu',
-      children: [
-        {
-          value: 'nanjing',
-          label: 'Nanjing',
-          children: [
-            {
-              value: 'zhonghuamen',
-              label: 'Zhong Hua Men',
-            },
-          ],
-        },
-      ],
-    },
-  ];
+import { getAPI } from '../../../../../../../config/api';
+import { useSelector,useDispatch } from 'react-redux'
+import { ChangeProductName,ChangeCatagoryName } from '../../../EditProductSlice';
+
+
+const getBase64 = (file) => {
   
-  const onChange = (value) => {
-    console.log(value);
+  console.log(13,file)
+  return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = () => resolve(reader.result);
+
+        reader.onerror = (error) => reject(error);
+      })
   };
-
-const getBase64 = (file) =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onload = () => resolve(reader.result);
-
-    reader.onerror = (error) => reject(error);
-  });
 function BasicInfo() {
+    const dispatch = useDispatch()
+    const newData = useSelector(state=>{
+      return state.eidtProduct
+    })
+
+    const [listCatagory,setListCatagory] = useState([])
+    useEffect(function(){
+      getAPI('/category/get-all-categories')
+        .then(data=>{
+          const catagory = data.data.listCategories
+          setListCatagory(()=>{
+            return catagory.map(item=>{
+              return {
+                Name:item.categoryName,
+                id: item._id
+              }
+            })
+          })
+        })
+        .catch(error=>{ 
+          console.log(error)
+        })
+    },[])
+    const options = listCatagory.map(item=>{
+      return {
+        value : item.Name,
+        label: item.Name,
+        id:item.id
+      }
+    })
     const [previewVisible, setPreviewVisible] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
@@ -62,9 +61,18 @@ function BasicInfo() {
     const { TextArea } = Input;
 
     const onChange = (e) => {
-    console.log('Change:', e.target.value);
+      dispatch(ChangeProductName(e.target.value))
     };
+      
+  const onChange1 = (value,label) => {
+    console.log(67,label)
+    dispatch(ChangeCatagoryName({
+      category: value[0],
+      id: label[0].id
+    }))
+  };
     const handlePreview = async (file) => {
+
       if (!file.url && !file.preview) {
         file.preview = await getBase64(file.originFileObj);
       }
@@ -74,8 +82,17 @@ function BasicInfo() {
       setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
     };
   
-    const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
-  
+    const handleChange = ({ fileList: newFileList }) => {
+      const formData = new FormData()
+      console.log(87, newFileList);
+      formData.append('thump', newFileList.originFileObj)
+      
+      for (const pair of formData.entries()) {
+        console.log(90, pair[0], pair[1]);
+      }
+
+      return setFileList(newFileList)
+    };
     const uploadButton = (
       <div>
         <PlusOutlined />
@@ -101,15 +118,18 @@ function BasicInfo() {
         </p>
         <div className={style.upload}>
             <div>
-                <Upload
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                    listType="picture-card"
-                    fileList={fileList}
-                    onPreview={handlePreview}
-                    onChange={handleChange}
-                >
-                    {fileList.length >= 8 ? null : uploadButton}
-                </Upload>
+                <form id='thump-form'>
+                  <Upload
+                      name='thump'
+                      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                      listType="picture-card"
+                      fileList={fileList}
+                      onPreview={handlePreview}
+                      onChange={handleChange}
+                  >
+                      {fileList.length >= 8 ? null : uploadButton}
+                  </Upload>
+                </form>
                 <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
                     <img
                     alt="example"
@@ -133,7 +153,7 @@ function BasicInfo() {
                     <>
                         <Input showCount maxLength={255} onChange={onChange}
                         placeholder='Ex. Nikon Coolpix A300 Máy Ảnh Kĩ Thuật Số'
-                        className='input_additem'
+                        className='input_additem' value={newData.productName}
                         />
                         
                     </>
@@ -145,7 +165,9 @@ function BasicInfo() {
             <label>
                 <span className={style.star}>*</span> Danh Mục Ngành Hàng:
                 <div className={style.Input}>
-                    <Cascader options={options} onChange={onChange} placeholder="Lựa chọng nghành hàng" className='selected_product'/>
+                    <Cascader options={options} onChange={onChange1} placeholder="Lựa chọng nghành hàng" className='selected_product' 
+                    value={newData.categoryId?newData.categoryId.categoryName:''}
+                    />
                 </div>
             </label>
         </div>

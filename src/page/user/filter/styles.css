@@ -35,15 +35,15 @@ body {
   align-items: center;
 }
 
-.ant-btn-primary {
+/* .ant-btn-primary {
   border: unset !important;
   background:none !important;
   display: none !important;
-}
+} */
 
-.ant-modal-root{
+/* .ant-modal-root{
   display: none;
-}
+} */
 
 .ant-btn {
   /* display:  none !important; */

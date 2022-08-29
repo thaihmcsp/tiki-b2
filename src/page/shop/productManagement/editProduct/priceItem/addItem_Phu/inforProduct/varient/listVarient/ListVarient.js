@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { InputNumber } from 'antd';
 import { Input } from 'antd';
 import style from './listVarient.module.css'
 import './listVarient.css'
 import SubListVarient from './subListVarient/SubListVarient';
 import { dblClick } from '@testing-library/user-event/dist/click';
+import { useSelector } from 'react-redux'
 const onChange = (value) => {
     // console.log('changed', value);
   };
@@ -15,6 +16,12 @@ const onChange = (value) => {
   };
   
 function ListVarient({varient}) {
+  const data = useSelector((state)=>{
+    return state.eidtProduct
+  })
+//   console.log(21,data)
+ 
+
   const [mainInfo,setMainInfo] = useState({})
   const handleAddProperties=()=>{
     const mainPrice = document.querySelector('#Input_price_first').value
@@ -73,7 +80,7 @@ function ListVarient({varient}) {
                 </button>
             </div>
         </div>
-        <SubListVarient varient={varient} mainInfo={mainInfo}  />
+        <SubListVarient varient={varient} mainInfo={mainInfo} data={data} />
     </div>
   )
 }

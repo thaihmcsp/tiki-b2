@@ -5,24 +5,26 @@ import BasicInfo from './basic/BasicInfo'
 import FooterAdd from './footerAdditem/FooterAdd'
 import ProductInfor from './inforProduct/ProductInfor'
 import RightAddItem from './rightAddItem/RightAddItem'
-
+import { useDispatch,useSelector} from 'react-redux'
+import { loadDefault } from '../../EditProductSlice'
 
 function EditItem() {
-  const [product,setProduct]= useState([])
+  const dispatch = useDispatch()
+  
   useEffect(function(){
     getAPI('/product/get-one-product/62da5f60bc070a53bcbc3220')
       .then((data=>{
-        setProduct(data.data.product)
-      }))
+        dispatch(loadDefault(data.data.product))
+      })) 
       .catch((error=>{
         console.log(error)
       }))
   },[])
-  console.log(product)
+  
   return (
       <div className={style.AddItem}>
         <div className={style.AddItem_left}>
-          <BasicInfo/>
+          <BasicInfo />
           <ProductInfor/>
           <FooterAdd/>
         </div>

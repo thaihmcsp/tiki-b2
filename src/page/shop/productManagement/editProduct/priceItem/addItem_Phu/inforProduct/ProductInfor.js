@@ -8,7 +8,7 @@ import Varient from './varient/Varient'
 function ProductInfor() {
   return (
     <div className={style.ProductInfor}>
-        <Brand/>
+        <Brand />
         <Varient/>
         <Description/>
         <Tranform/>

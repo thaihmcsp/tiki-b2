@@ -7,6 +7,10 @@ import './subList.css'
 import TdList from './TdList'
 import InputNumberPhu from './library/InputNumber';
 import InputLimeted from './library/InputLimeted';
+import {v4 as uuidv4} from 'uuid';
+import { useDispatch } from 'react-redux/es/exports';
+import { loadDetailChange } from './library/SubitemSlice';
+
 const onChange = (value) => {
     console.log('changed', value);
   };
@@ -14,7 +18,171 @@ const onChange = (value) => {
   const onChange2 = (checked) => {
     console.log(`switch to ${checked}`);
   };
-function SubListVarient({varient,mainInfo}) {
+function SubListVarient({varient,mainInfo,data}) {    
+    console.log(22,data)      
+    const dispatch = useDispatch()
+    const [show,setShow] = useState(false) 
+    const [defaultDetail,setDefaultDetail] = useState([])
+    useEffect(function(){
+        if(data.defaultData){
+            setDefaultDetail(data.defaultData.productDetailId)
+        }
+    },[data])
+    console.log(23,varient,defaultDetail)
+    const [detail,setDetail] = useState([])
+    useEffect(function(){
+        if(data.productDetailId&&show==false){
+            setShow(true);
+        }else{
+            if(defaultDetail[0] && ((varient[0].option.length > 0 && varient[1].option.length == 0&&defaultDetail[0].option.length == 1) || (varient[1].option.length > 0 &&defaultDetail[0].option.length == 2))){
+                if(varient[0].option.length > 0 && varient[1].option.length == 0){
+                    const listDetails = varient[0].option.map(item=>{
+                        const id = uuidv4().toString()
+                        const index = defaultDetail.findIndex(subitem=>{
+                            return subitem.option[0].optionName==varient[0].key&&subitem.option[0].value == item
+                        })
+                        if(index>=0){
+                            return defaultDetail[index]
+                        }else{
+                            return{
+                                "_id": id,
+                                "productId": "62da5f60bc070a53bcbc3220",
+                                "option": [
+                                    {
+                                        "optionName": varient[0].key,
+                                        "value": item,
+                                    }
+                                ],
+                                "listImg": [],
+                                "publish": true,
+                                "description": [],
+                                "createdAt": new Date(),
+                                "updatedAt": new Date(),
+                                "__v": 0
+                            }
+                        }
+                    })
+                    setDetail(listDetails.flat())
+                }
+                if(varient[1].option.length > 0){
+                    const listDetails = varient[0].option.map(item=>{
+                    return varient[1].option.map(subitem=>{
+                                const id = uuidv4().toString()
+                                const index = defaultDetail.findIndex(ITEM=>{
+                                    return (ITEM.option[0].optionName == varient[0].key&&ITEM.option[0].value == item&&ITEM.option[1].optionName==varient[1].key&&ITEM.option[1].value == subitem)
+                                })
+
+                                console.log(index)
+                                if(index>=0){
+                                    return defaultDetail[index]
+                                }else{
+                                    return{
+                                        "_id": id,
+                                        "productId": "62da5f60bc070a53bcbc3220",
+                                        "option": [
+                                            {
+                                                "optionName": varient[0].key,
+                                                "value": item,
+                                            },
+                                            {
+                                                "optionName": varient[1].key,
+                                                "value": subitem,
+                                            }
+                                        ],
+                                        "listImg": [],
+                                        "publish": true,
+                                        "description": [],
+                                        "createdAt": new Date(),
+                                        "updatedAt": new Date(),
+                                        "__v": 0
+                                    }
+                                }
+                            })
+                    })
+                    setDetail(listDetails.flat())
+                }
+            }else{
+                if(varient[0].option.length > 0 && varient[1].option.length == 0){
+                    const listDetails = varient[0].option.map(item=>{
+                    const id = uuidv4().toString()
+                    return  {
+                                "_id": id,
+                                "productId": "62da5f60bc070a53bcbc3220",
+                                "option": [
+                                    {
+                                        "optionName": varient[0].key,
+                                        "value": item,
+                                    }
+                                ],
+                                "listImg": [],
+                                "publish": true,
+                                "description": [],
+                                "createdAt": new Date(),
+                                "updatedAt": new Date(),
+                                "__v": 0
+                            }
+                    })
+                    setDetail(listDetails.flat())
+                }
+                if(varient[1].option.length > 0){
+                    const listDetails = varient[0].option.map(item=>{
+                        return varient[1].option.map(subitem=>{
+                                const id = uuidv4().toString()
+                                return{
+                                    "_id": id,
+                                    "productId": "62da5f60bc070a53bcbc3220",
+                                    "option": [
+                                        {
+                                            "optionName": varient[0].key,
+                                            "value": item,
+                                        },
+                                        {
+                                            "optionName": varient[1].key,
+                                            "value": subitem,
+                                        }
+                                    ],
+                                    "listImg": [],
+                                    "publish": true,
+                                    "description": [],
+                                    "createdAt": new Date(),
+                                    "updatedAt": new Date(),
+                                    "__v": 0
+                                }
+                            })
+                    })
+                    setDetail(listDetails.flat())
+                }
+            }
+        }
+    },[varient])
+    useEffect(function(){
+        if(detail.length > 0){
+            dispatch(loadDetailChange({
+                detail:detail,
+                varient:varient
+            }))
+        }
+    },[detail,varient])
+    useEffect(function(){
+        const listOption = document.querySelectorAll('.optionVarientALL')
+        const newList  =  [...listOption]
+        newList.map((item,index)=>{  
+            if(data.productDetailId){
+                const priceMain = item.querySelector('.Add_price__varient .hello_ant-input-number-input')
+                const totalStorege = item.querySelector('.Add_storege-btn .hello_ant-input-number-input')
+                const pubLic = item.querySelector('#SellupPulish')
+                pubLic.checked = data.productDetailId[index].publish
+                priceMain.value = data.productDetailId[index].price
+                totalStorege.value = data.productDetailId[index].storage
+                
+            }
+        })
+        dispatch(loadDetailChange({
+            detail:data.productDetailId,
+            varient:varient
+        }))
+      },[show])
+    
     const [click,setClick] = useState(true)
     const [sku,setSku] = useState(true)
     const onChange1 = (e) => {
@@ -60,12 +228,12 @@ function SubListVarient({varient,mainInfo}) {
         return item.value = mainInfo.mainPrice*1
     })}
     {[...addSpecialPrice].map((item, index) =>{
-        if(mainInfo.mainSpecialPrice*1 <= mainInfo.mainPrice*1){
+        if(mainInfo.mainSpecialPrice*1 <= mainInfo.mainPrice*1&&mainInfo.mainSpecialPrice>0){
             return item.value = mainInfo.mainSpecialPrice*1
         }
     })}
     {[...addQuantity].map((item, index) =>{
-        console.log(item)
+        // console.log(item)
         item.value = mainInfo.mainStorage*1
     })}
    
@@ -88,7 +256,7 @@ function SubListVarient({varient,mainInfo}) {
                 if(varient[1].option.length>0){
                     if(varient[1].option.length == 1){
                         return(
-                        <tr className={style.tr_varient}>
+                        <tr dataset={detail.length>0?detail[index]._id:defaultDetail[index]._id} className={`${style.tr_varient} optionVarientALL`} key={index}>
                             <td>
                                 <div className={[style.Varient_option,'firstOption'].join(' ')}>
                                     {option1}
@@ -124,20 +292,20 @@ function SubListVarient({varient,mainInfo}) {
                                 </div>
                             </td>
                             <td>
-                                <Switch defaultChecked onChange={onChange2} className={[style.sellUp, 'sellUp'].join(' ')} />
+                                <Switch  onChange={onChange2} className={[style.sellUp, 'sellUp'].join(' ')} id='SellupPulish'/>
                             </td>
                         </tr>
                         )
                     }else{
                         return(
-                            <TdList option1={option1} data={varient[1].option} click={click}/>
+                            <TdList option1={option1} data={varient[1].option} Index={index} click={click} detail={detail} defaultDetail={defaultDetail}/>
                         )
                        
                     }
                     
                 }else{
                     return(
-                        <tr className={style.tr_varient}>
+                        <tr dataset={detail.length>0?detail[index]._id:defaultDetail[index]._id} className={`${style.tr_varient} optionVarientALL`}  key={index}>
                             <td>
                                 <div className={[style.Varient_option,'firstOption'].join(' ')}>
                                     {option1}
@@ -167,7 +335,7 @@ function SubListVarient({varient,mainInfo}) {
                                 </div>
                             </td>
                             <td>
-                                <Switch defaultChecked onChange={onChange2} className={[style.sellUp, 'sellUp'].join(' ')} />
+                                <Switch defaultChecked onChange={onChange2} className={[style.sellUp, 'sellUp'].join(' ')}  id='SellupPulish'/>
                             </td>
                         </tr>
                     )
@@ -175,7 +343,7 @@ function SubListVarient({varient,mainInfo}) {
                 
             })}
             {varient[0].option.length == 0 && (
-                <tr className={style.tr_varient}>
+                <tr className={`${style.tr_varient} optionVarientALL`} >
                     <td>
                         <div className='Add_price__varient'>
                                 <span className='Add_Money'>
@@ -200,7 +368,7 @@ function SubListVarient({varient,mainInfo}) {
                         </div>
                     </td>
                     <td>
-                        <Switch defaultChecked onChange={onChange2} className={[style.sellUp, 'sellUp'].join(' ')} />
+                        <Switch defaultChecked onChange={onChange2} className={[style.sellUp, 'sellUp'].join(' ')}  id='SellupPulish'/>
                     </td>
                 </tr>
             )}

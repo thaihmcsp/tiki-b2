@@ -14,13 +14,13 @@ const onChange1 = (e) => {
   const onChange = (value) => {
     // console.log('changed', value);
   };
-function TdList({data,option1,click}) {
+function TdList({data,option1,click,Index,defaultDetail,detail}) {
   return (
     <>
     {data.map((item,index)=>{
         if(index==0){
             return(
-                <tr className={style.tr_varient} id={`TR_option${index}`}>
+                <tr dataset={detail.length>0?detail[index]._id:defaultDetail[index]._id} className={`${style.tr_varient} optionVarientALL`} id={`TR_option${index}`}  key={index}>
                     <td rowSpan={data.length} >
                         <div className={[style.Varient_option,'firstOption'].join(' ')} >
                             {option1}
@@ -55,14 +55,14 @@ function TdList({data,option1,click}) {
                         </div>
                     </td>
                     <td>
-                        <Switch defaultChecked onChange={onChange2} className={[style.sellUp, 'sellUp'].join(' ')} />
+                        <Switch defaultChecked onChange={onChange2} className={[style.sellUp, 'sellUp'].join(' ')}  id='SellupPulish'/>
                     </td>
                 </tr>
             )
         }else{
 
             return(
-                <tr className={style.tr_varient}>
+                <tr dataset={detail.length>0?detail[index]._id:defaultDetail[index]._id} className={`${style.tr_varient} optionVarientALL`}  key={index}>
                     <td>
                         <div className={[style.Varient_option,'secondOption'].join(' ')}>
                             {item}
@@ -92,7 +92,7 @@ function TdList({data,option1,click}) {
                         </div>
                     </td>
                     <td>
-                        <Switch defaultChecked onChange={onChange2} className={[style.sellUp, 'sellUp'].join(' ')} />
+                        <Switch defaultChecked onChange={onChange2} className={[style.sellUp, 'sellUp'].join(' ')}  id='SellupPulish'/>
                     </td>
                 </tr>
             )

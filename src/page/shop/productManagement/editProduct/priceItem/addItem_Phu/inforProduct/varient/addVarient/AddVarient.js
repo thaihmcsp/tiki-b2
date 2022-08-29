@@ -1,13 +1,74 @@
 import React, { useEffect, useState } from 'react'
 import style from './addVarient.module.css'
 import SubVarient from './varient/Varient'
-function AddVarient({setVarient}) {
-    
+import {useSelector} from 'react-redux'
+function AddVarient({setVarient,varient}) {
+    // console.log(5,data.productDetailId[0].option.length)
+    const data = useSelector(state=>{
+        return state.eidtProduct
+      })
+    // console.log(data)
     const [option1,setOption1] = useState([])
     const [option2,setOption2] = useState([])
-    const [key1,setKey1] = useState('Nhóm Màu')
+    // const [key1,setKey1] = useState(data.productDetailId.length==0?'Nhóm Màu':data.productDetailId[0].option[0].optionName)
+    const [key1,setKey1] = useState('Nhóm màu')
     const [key2,setKey2] = useState('Biến Thể')
     const [addVarient,setAddVarient] = useState([])
+    useEffect(function(){
+       if(data){
+        setAddVarient((addVarient)=>{
+            if(data.productDetailId&&data.productDetailId.length>0){
+                if(data.productDetailId[0].option[0].length==1){
+                    return [1]
+                }else{
+                    return [1,1]
+                }
+             }else{
+                 return addVarient
+             }
+        })
+        setKey1((key1)=>{
+            if(data.productDetailId&&data.productDetailId.length>0){
+               return data.productDetailId[0].option[0].optionName
+            }else{
+                return key1
+            }
+        })
+        setKey2((key2)=>{
+            if(data.productDetailId&&data.productDetailId.length>0&&data.productDetailId[0].option.length>1){
+               return data.productDetailId[0].option[1].optionName
+            }else{
+                return key2
+            }
+        })
+        setOption1((option1)=>{
+            if(data.productDetailId&&data.productDetailId.length>0){
+                const Data = []
+                const newData = data.productDetailId.map(item=>{
+                   if(!Data.includes(item.option[0].value)){
+                       Data.push(item.option[0].value)
+                   }
+                })
+                return Data
+             }else{
+                 return option1
+             }
+        })
+        setOption2((option2)=>{
+            if(data.productDetailId&&data.productDetailId.length>0&&data.productDetailId[0].option.length>1){
+                const Data = []
+                const newData = data.productDetailId.map(item=>{
+                   if(!Data.includes(item.option[1].value)){
+                       Data.push(item.option[1].value)
+                   }
+                })
+                return Data
+             }else{
+                 return option2
+             }
+        })
+       }
+    },[data.productDetailId])
     useEffect(function(){
         setVarient([
             {
@@ -20,6 +81,8 @@ function AddVarient({setVarient}) {
             }
         ])
     },[option1,option2,key1,key2])
+
+
   const handleAddVarient =()=>{
     setAddVarient(()=>{
         const newVarient = [...addVarient,1]
@@ -39,6 +102,7 @@ function AddVarient({setVarient}) {
                     Key2={key2}
                     option2={option2}
                     setOption2={setOption2}
+                    Key1={key1}
                 />
             )
         })}
