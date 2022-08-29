@@ -12,8 +12,6 @@ body {
   max-width: 100%;
   margin: 0 auto;
 }
-
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -43,6 +41,8 @@ body {
 .userInformation {
   display: flex;
   background-color: rgb(245, 245, 250);
+  width: 100%;
+  margin-bottom: 40px;
 }
 .profile{
   display: flex;
@@ -51,4 +51,14 @@ body {
 body {
   background-color:  #e5e7ea;
   padding: 20px;
+}
+
+@media screen and (max-width: 768px){
+  .profile{
+    display: flex ;
+    flex-direction: column;
+  }
+  .userInformation {
+    flex-direction: column;
+  }
 }

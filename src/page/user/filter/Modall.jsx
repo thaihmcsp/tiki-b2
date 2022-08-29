@@ -19,14 +19,14 @@ const Modall = () => {
     };
   
   return (
-    <>
+    <div className="filter">
       <Button type="primary" className='btn'>
       <FilterOutlined style={{color: 'black'}} onClick={showModal} /><span style={{color: 'black', marginLeft: '2px', fontSize: '20px', }}>Lọc</span>
       </Button>
       <Modal title="Basic Modal" visible={isModalVisible} onCancel={handleCancel}>
       <SideBar />
       </Modal>
-    </>
+    </div>
   )
 }
 

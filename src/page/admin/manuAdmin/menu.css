@@ -1,0 +1,7 @@
+.menu_admin .ant-menu-vertical .ant-menu-item::after, .menu_admin .ant-menu-vertical-left .ant-menu-item::after, .menu_admin .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after {
+    border-right: 0;
+}
+.menu_admin .ant-menu-item {
+    padding-left: 14px !important;
+}
+
