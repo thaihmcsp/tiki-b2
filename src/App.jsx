@@ -52,9 +52,9 @@ function App() {
                 </Route>
                 <Route path='/ShopHome' element={<ShopHome/>}/>
                 <Route path='/shop' element={<Shop></Shop>}/>
-                <Route path="/addItem" element={<AddItem/>}/>
                 <Route path='/detail' element={<Detail />}/>
             </Route>
+            <Route path="/addItem" element={<AddItem/>}/>
             {/* ///private */}
 
             <Route path='/admin' element={<Admin/>} >
