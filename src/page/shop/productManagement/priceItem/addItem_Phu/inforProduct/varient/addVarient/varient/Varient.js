@@ -1,5 +1,6 @@
-import React, { useState, Component,useRef,useEffect } from 'react'
-import { Select } from 'antd';
+import React, { useState, useEffect,useRef } from 'react'
+import { PlusOutlined } from '@ant-design/icons';
+import { Divider, Input, Select, Space, Button } from 'antd';
 import { Checkbox } from 'antd';
 import * as React1 from 'react';
 import Stack from '@mui/material/Stack';
@@ -9,12 +10,33 @@ import style from './varient.module.css'
 import './varient.css'
 import Optional from './optional/Optional';
 const { Option } = Select;
+let index = 0;
 const onChange = (e) => {
     console.log(`checked = ${e.target.checked}`);
   };
 
 function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,option2,setOption2,Key2}) {
+    const [items, setItems] = useState(['Nhóm màu', 'Biến thể']);
+    const [name, setName] = useState('');
+    const inputRef = useRef(null);
+  
+    const onNameChange = (event) => {
+      setName(event.target.value);
+      console.log(25,event.target.value)
+    };
+  
+    const addItem = (e) => {
+      e.preventDefault();
+      setItems([...items, name || `New item ${index++}`]);
+      setName('');
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 0);
+    };
 
+    const handleSelectedChange1 =(value,option)=>{
+        setKey(value)
+    }
   const [newKey,setNewKey] = useState(Key)
 
   useEffect(function(){
@@ -63,6 +85,44 @@ function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,
         <label>
             <span>*</span> Tên biến thể:
             <Select
+                onChange={handleSelectedChange1}
+                className='Varient_Add'
+                style={{
+                    width: 300,
+                }}
+                placeholder="Vui lòng chọn biến thể hoặc tạo biến thể"
+                dropdownRender={(menu) => (
+                    <>
+                    {menu}
+                    <Divider
+                        style={{
+                        margin: '8px 0',
+                        }}
+                    />
+                    <Space
+                        style={{
+                        padding: '0 8px 4px',
+                        }}
+                    >
+                        <Input
+                        placeholder="Please enter item"
+                        ref={inputRef}
+                        value={name}
+                        onChange={onNameChange}
+                        />
+                        <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
+                        Add item
+                        </Button>
+                    </Space>
+                    </>
+                )}
+                >
+                {items.map((item) => (
+                    <Option key={item}>{item}</Option>
+                ))}
+            </Select>
+
+            {/* <Select
                 className='Varient_Add'
                 showSearch
                 style={{
@@ -80,7 +140,7 @@ function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,
             >
                 <Option value="Nhóm màu">Nhóm màu</Option>
                 <Option value="Biến Thể">Biến Thể</Option>
-            </Select>
+            </Select> */}
         </label>
         <div className={style.all_varient}>
             <p>Tổng số biến thể</p>

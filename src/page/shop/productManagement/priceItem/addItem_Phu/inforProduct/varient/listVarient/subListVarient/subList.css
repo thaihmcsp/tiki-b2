@@ -43,31 +43,21 @@
 }
 .Add_price__varient{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 0 8px;
-}
-.Add_price__varient button{
-    background: #f2f3f7;
-    padding: 0;
-    border:0;
-    height: 36px;
-    width: 100%;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    
 }
 .Add_Money{
     padding: 0 8px;
     display: inline-block;
     height: 36px;
     line-height: 36px;
-    color:rgb(136, 136, 136);
+    color:black;
     flex-shrink: 0;
     border:1px solid rgb(216, 216, 216);
     border-right: 0;
     border-radius: 8px 0 0 8px;
+    background: #f2f3f7;
 }
 .Add_price__input-varient{
     flex:1;
@@ -83,4 +73,18 @@
 .Input_add__storage .ant-input-number-input
 {
     text-align: center;
+}
+.Add_price__varient .hello_ant-input-number-input{
+    border-radius: 0 8px 8px 0;
+}
+.Add_special__price .hello_ant-input-number-input{
+    border: 0;
+}
+.Add_special__price .hello_ant-input-number-input::placeholder{
+    opacity: 1;
+    color:#1a71ff;
+}
+.Add_special__price .quantity:hover .btn_spin__imputNumber{
+    visibility: hidden;
+
 }

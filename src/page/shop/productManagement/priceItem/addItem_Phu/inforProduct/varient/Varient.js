@@ -17,7 +17,7 @@ function Varient() {
     }
 ])
   return (
-    <div className={style.Varient}>
+    <div className={style.Varient} id='Varient_step__scroll'>
         <h2>
           Giá bán, Kho hàng và Biến thể
         </h2>
