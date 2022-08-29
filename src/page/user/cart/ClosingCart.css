@@ -153,6 +153,15 @@
   text-align: right;
 }
 
+.box-3 .prices__value--final {
+  color: rgb(254, 56, 52);
+  font-size: 22px;
+  font-weight: 400;
+  text-align: right;
+}
+.prices__value {
+  font-size: 14px;
+}
 .box-3 .prices__value--noted {
   font-weight: 300;
   font-style: normal;
@@ -292,4 +301,19 @@
 .ant-modal-footer {
   border: none;
   border-radius: 8px;
+}
+
+.address__type--home {
+  color: rgb(0, 171, 86);
+  background-color: rgb(239, 255, 244);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 0px 6px;
+  border-radius: 100px;
+  margin-right: 4px;
+  height: 18px;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
 }

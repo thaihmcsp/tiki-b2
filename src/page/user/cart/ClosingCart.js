@@ -4,6 +4,7 @@ import { Button, Modal } from "antd";
 import style from "./ClosingCart.module.css";
 import "./ClosingCart.css";
 function ClosingCart({ total, finalTotal }) {
+  console.log(total);
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("Content of the modal");
@@ -41,7 +42,11 @@ function ClosingCart({ total, finalTotal }) {
                 <i></i>
                 <p class="customer_info__phone">0936518028</p>
               </div>
-              <div class="address">141/22a Hoài Thanh, Phường 14, Quận 8, Hồ Chí Minh</div>
+
+              <div class="address">
+                {" "}
+                <span class="address__type address__type--home">Nhà</span> 141/22a Hoài Thanh, Phường 14, Quận 8, Hồ Chí Minh
+              </div>
             </div>
           </div>
           <div className="box-2">
@@ -243,17 +248,17 @@ function ClosingCart({ total, finalTotal }) {
               <ul class="prices__items">
                 <li class="prices__item">
                   <div class="prices__text">Tạm tính</div>
-                  <div class="prices__value">{total.toLocaleString()}đ</div>
+                  <div class="prices__value">{total.toLocaleString()} ₫</div>
                 </li>
                 <li class="prices__item">
                   <div class="prices__text">Giảm giá</div>
-                  <div class="prices__value">0đ</div>
+                  <div class="prices__value">0 ₫</div>
                 </li>
               </ul>
               <div class="prices__total">
                 <span class="prices__text">Tổng tiền</span>
                 <div class="prices__content">
-                  <div class={"prices__value prices__value--empty"}>{total.toLocaleString() < 1 ? "Vui lòng chọn sản phẩm" : total.toLocaleString() + "đ"}</div>
+                  <div class={total > 0 ? "prices__value--final" : "prices__value--empty"}>{total.toLocaleString() < 1 ? "Vui lòng chọn sản phẩm" : total.toLocaleString() + " ₫"}</div>
                   <span class="prices__value--noted">(Đã bao gồm VAT nếu có)</span>
                 </div>
               </div>

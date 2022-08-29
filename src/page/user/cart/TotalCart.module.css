@@ -33,9 +33,19 @@
 }
 
 .tradingCart_content {
-  width: calc(86% - 100px);
+  width: calc(90% - 100px);
   padding-left: 10px;
   position: relative;
+}
+.tradingCart_content a:hover {
+  color: rgb(11, 116, 229);
+}
+.tradingCart_content a img {
+  width: 56px;
+  display: inline-block;
+  margin-right: 5px;
+  max-width: 100%;
+  margin-bottom: 8px;
 }
 .tradingCart_content a {
   display: -webkit-box;
@@ -51,7 +61,7 @@
 
 .tradingCart_price {
   width: 190px;
-  padding: 0px 20px;
+  padding: 0px 4px;
   font-weight: 500;
   color: rgb(36, 36, 36);
   font-size: 13px;
@@ -98,7 +108,7 @@
 .tradingCart_finalPrice {
   width: 120px;
   padding: 0px 15px;
-  margin-left: 48px;
+  margin-left: 37px;
   color: rgb(255, 66, 78);
   font-size: 13px;
   font-weight: 500;
@@ -106,8 +116,7 @@
   display: block;
 }
 .tradingCart_delete {
-  width: 50px;
-  margin-left: 20px;
+  margin-left: 31px;
   display: inline-block;
   cursor: pointer;
   position: relative;
@@ -149,4 +158,13 @@
 }
 .totalcart-right {
   position: sticky;
+}
+.sellers__icon_arrow {
+  width: 6px;
+  height: 10px;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.footerTotalCart {
 }

@@ -75,6 +75,7 @@ function Header(props) {
     getAPI("/cart/get-loged-in-cart")
       .then((data) => {
         setNumberCart(data.data.cart.listProduct.length);
+        console.log(78, data.data.cart.listProduct);
       })
       .catch((err) => {
         console.log(err);

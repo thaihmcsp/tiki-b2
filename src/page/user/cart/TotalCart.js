@@ -6,19 +6,20 @@ import { getAPI } from "../../../config/api";
 
 function TotalCart() {
   const [listProduct, setListProduct] = React.useState([]);
+  console.log(9, listProduct);
   useEffect(() => {
     getCart();
   }, []);
   async function getCart() {
     try {
       const data = await getAPI("/cart/get-loged-in-cart");
+      console.log(data);
       const listProductdetail = data.data.cart.listProduct;
       console.log(listProductdetail);
-      console.log(16, data.data.cart.product);
+      console.log(19, data.data.cart.product);
       const newData = data.data.cart.product;
       const NEWDATA = newData.map((item) => {
         return {
-          haveProductID: true,
           productDetailId: {
             _id: item.productId._id,
             productId: item.productId,
@@ -71,10 +72,11 @@ function TotalCart() {
     },
     [listProduct]
   );
-  console.log("newData", newData);
 
   const [total, setTotal] = React.useState(0);
   const [finalTotal, setFinalTotal] = useState([]);
+
+  console.log(77, finalTotal);
   useEffect(() => {
     let total = 0;
     finalTotal.map((item) => {
@@ -87,6 +89,17 @@ function TotalCart() {
       item.checked = false;
     });
   }, []);
+  useEffect(() => {
+    if (finalTotal.length > 0) {
+      finalTotal.map((item) => {
+        item.selected = true;
+      });
+    } else {
+      listProduct.map((item) => {
+        item.selected = false;
+      });
+    }
+  }, [finalTotal]);
 
   const onRemove = (e, id, index, index1) => {
     setNewData(() => {
@@ -131,6 +144,7 @@ function TotalCart() {
                 return subItem.checked == false;
               }).length == 0
             ) {
+              //!Có thể đang sai
               newListData1[index].checked = true;
             }
             return newListData1;
@@ -184,7 +198,7 @@ function TotalCart() {
             return subItem.checked == false;
           }).length == 0
         ) {
-          newListData[index].checked = true;
+          newListData[index].checked = false;
         }
         return newListData;
       }
@@ -339,7 +353,7 @@ function TotalCart() {
         <div className="total-cart">
           <label>
             <input type="checkbox" onChange={handleTotalCheckItemStore} className={style.TotalCheckItemStore} /> <span className="checkboxStore"></span>{" "}
-            <span className={style.text_TotalCheckItemStore}>Tất cả({product} sản phẩm)</span>
+            <span className={style.text_TotalCheckItemStore}>Tất cả ({product} sản phẩm)</span>
           </label>
           <span>Đơn giá</span>
           <span>Số lượng</span>
@@ -355,7 +369,10 @@ function TotalCart() {
                 <div className={style.tradingCart_header}>
                   <input type="checkbox" checked={item1.checked} onChange={(e) => handleCheckStore(e, index)} className={style.storeCart} />
                   <img src="https://salt.tikicdn.com/ts/upload/30/24/79/8317b36e87e7c0920e33de0ab5c21b62.png" alt="#" className={style.tradingCart_sellers__icon_home}></img>
-                  <div className={style.tradingCart_shopName}>{item1.shopName}</div>
+                  <div className={style.tradingCart_shopName}>
+                    {item1.shopName}
+                    <img src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/Path.svg" alt="seller-link" className={style.sellers__icon_arrow}></img>
+                  </div>
                 </div>
 
                 {item1.listProduct.map((item, index1) => {
@@ -383,10 +400,22 @@ function TotalCart() {
                           />
                         </div>
                         <div className={style.tradingCart_content}>
-                          <a>{item.productDetailId.productId.productName}</a>
+                          <a>
+                            {" "}
+                            <img
+                              src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/tikinow/tiki-now-15@2x.png"
+                              alt="tiki-icon"
+                              className={style.product__icon__fast}
+                              width="64"
+                              height="16"
+                            ></img>
+                            {item.productDetailId.productId.productName}
+                          </a>
                         </div>
                       </div>
-                      <div className={style.tradingCart_price}>{item.productDetailId.price.toLocaleString()}</div>
+                      <div className={style.tradingCart_price}>
+                        <span>{item.productDetailId.price.toLocaleString()} ₫</span>
+                      </div>
                       <div className={style.tradingCart_qty}>
                         <button className={style.decrease} onClick={(e) => onRemove(e, item.productDetailId._id, index, index1)}>
                           -
@@ -397,7 +426,7 @@ function TotalCart() {
                         </button>
                       </div>
                       <div className={style.tradingCart_finalPrice} index={item.productDetailId._id}>
-                        {(item.productDetailId.price * item.quantity).toLocaleString()}
+                        <span>{(item.productDetailId.price * item.quantity).toLocaleString()} ₫</span>
                       </div>
                       <div className={style.tradingCart_delete} onClick={() => onDelete(item.productDetailId._id, index, index1)}>
                         <img src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/trash.svg" alt="deleted" />
@@ -405,6 +434,9 @@ function TotalCart() {
                     </div>
                   );
                 })}
+                {/* <div>
+                  <h1>footer</h1>
+                </div> */}
               </div>
             );
           })}
