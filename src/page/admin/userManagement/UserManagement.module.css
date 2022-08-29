@@ -3,6 +3,13 @@
     padding: 0;
     box-sizing: border-box;
 }
+.User {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    background-color: white;
+}
 .UserManageHeader {
     display: flex;
     margin: 0 50px;
@@ -18,7 +25,8 @@
 }
 .UserManage {
     margin-right: 50px;
-    background-color: #f4f7f6;
+    /* background-color: #f4f7f6; */
+    background-color: white;
     margin-left: 270px;
 }
 .Header_ButtonActive {

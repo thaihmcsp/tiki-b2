@@ -50,7 +50,7 @@ function ShopMenu() {
   return (
     <div className="db-Product">
       <div className="db-Product-left">
-  
+
         <Button type="HomeOutlined" style={{ width: 80 }}>
           <HomeOutlined />
         </Button>

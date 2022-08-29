@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import styles from './ManuAdmin.module.css'
 import clsx from 'clsx';
 import './menu.css'
+import { Link } from 'react-router-dom';
 
 function getItem(label, key, icon, children) {
   return {
@@ -19,10 +20,10 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem(' Dashboard', '1',<DashboardIcon/>),
+  getItem(<Link to='/admin/dashbosh'> Dashboard</Link>, '1',<DashboardIcon/>),
   getItem('User management', '2',<AccountCircleIcon/>),
   getItem('Shop management', 'sub1',<ShopIcon/>),
-  getItem('Categories', 'sub2',<CategoryIcon/>),
+  getItem(<Link to='/admin/category'>Categories</Link>, 'sub2',<CategoryIcon/>),
   getItem('Profile','3',<ContactMailIcon/>),
 ];
 function ManuAdmin(props) {
@@ -39,6 +40,7 @@ function ManuAdmin(props) {
   function fitter(data) {
     props.setData(data)   
   }
+
   return (
     <div className ={styles.ManuAdmin} >
       <div className ={styles.manuAll_input}>

@@ -9,20 +9,21 @@ import ComponentTableProducts from "../componentDataTableAdmin/ComponentTablePro
 import "./ManagementProduct.css";
 import { Tabs } from "antd";
 import FilterProducts from "../componentDataTableAdmin/FilterProducts";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const { TabPane } = Tabs;
 function ManagementProduct() {
   const nav = useNavigate()
-  function handleClick(){
-      nav('/addItem')
+  function handleClick() {
+    nav('/addItem')
   }
   const [value, setValue] = useState('')
-  console.log(value)
-  function handleClose(){
+  const [selectSort, setselectSort] = useState('')
+  const [count, setCount] = useState(0)
+  function handleClose() {
     const close = document.querySelector(".mgm-product-notification");
     close.style.backgroundColor = 'unset'
-    close.innerHTML= ''
+    close.innerHTML = ''
   }
   return (
     <div className="mgm-product">
@@ -49,14 +50,14 @@ function ManagementProduct() {
           phẩm. <a href="">Tìm hiểu thêm</a>
         </span>
         <span>
-          <CloseOutlined onClick={handleClose}/>
+          <CloseOutlined onClick={handleClose} />
         </span>
       </div>
       <div className="" style={{ width: "100%", margin: "24px 0" }}>
         <div className="card-container">
           <Tabs type="card">
             <TabPane tab="Tất cả" key="1">
-              <FilterProducts setValue = {setValue}/>,
+              <FilterProducts setValue={setValue} setselectSort={setselectSort} setCount={setCount} count={count} />,
             </TabPane>
             <TabPane tab="Đang hoạt động" key="2">
               <FilterProducts />
@@ -81,7 +82,7 @@ function ManagementProduct() {
         </div>
       </div>
       <div>
-        <ComponentTableProducts value = {value}/>
+        <ComponentTableProducts value={value} selectSort={selectSort} count={count} />
       </div>
     </div>
   );

@@ -7,29 +7,44 @@ import "./FilterProducts.css";
 import { listBranch } from "../../user/createShop/listBranch";
 import SearchIcon from '@mui/icons-material/Search';
 const { Search } = Input;
+function removeAccents(str) {
+  var AccentsMap = [
 
-
-function FilterProducts({setValue}) {
- const [val,setVal] = useState ('')
- 
-  const onSearch = (value) => {
-    setValue(value)
-  };
-  const [Change,setChange] = useState({})
-  function onsearch(){
-    const inp = document.querySelector(`.${styles.inp_search} .ant-input`).value
-    setValue(inp);
+  ];
+  for (var i = 0; i < AccentsMap.length; i++) {
+    var re = new RegExp('[' + AccentsMap[i].substr(1) + ']', 'g');
+    var char = AccentsMap[i][0];
+    str = str.replace(re, char);
   }
+  return str;
+}
 
-  function onChange(){
+function FilterProducts({ setValue, setselectSort, setCount, count }) {
+  const [val, setVal] = useState('')
+  function onChange() {
     const seachData = document.querySelector(`.${styles.inp_search} .ant-input`).value;
     setValue(seachData);
     
     
+    setValue(removeAccents(seachData.toLowerCase()))
+
   }
-  
+  function handleChange(value) {
+    setselectSort(value)
+  }
+  const onSearch = (value) => {
+    const seachData = document.querySelector(`.${styles.inp_search} .ant-input`).value;
+    if (seachData.trim().length > 0) {
+      setValue(removeAccents(seachData.toLowerCase()))
+    } else {
+      setValue('');
+      setCount(count + 1);
+    }
+
+
+  };
   return (
-    <div   className={styles.filterProducts}>
+    <div className={styles.filterProducts}>
       <div>
         <span className={styles.flterSpan}>Lọc sản phẩm:</span>
       </div>
@@ -42,15 +57,15 @@ function FilterProducts({setValue}) {
               <Option value="PSKU">PSKU</Option>
             </Select>
             <div className={styles.inp_search}>
-            <Search
-              allowClear
-              placeholder=" Vui lòng nhập "
-              onSearch={onSearch}
-              onChange={onChange}
-            />
-              <SearchIcon onClick={onsearch} className={styles.searchicon} />
-              </div>
-            
+              <Search
+                allowClear
+                placeholder=" Vui lòng nhập "
+                onSearch={onSearch}
+                onChange={onChange}
+              />
+              <SearchIcon className={styles.searchicon} />
+            </div>
+
           </Input.Group>
         </div>
         <div className={[styles.width33].join(" ")}>
@@ -78,8 +93,9 @@ function FilterProducts({setValue}) {
               style={{
                 width: "100%",
               }}
+              onChange={handleChange}
               defaultValue="Sắp xếp"
-              placeholder="sắp xếp"         
+              placeholder="sắp xếp"
             >
               <Option value="Giá">Giá</Option>
               <Option value="Số lượng kho" >Số lượng kho</Option>

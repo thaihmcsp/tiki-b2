@@ -1,11 +1,16 @@
 import React from 'react';
+import { Data } from './Data';
 import { listBank } from './ListBank';
 import { ListCard } from './ListCard';
 import { ListPay } from './ListPay';
 import { ListProduct } from './ListProduct';
+ 
 import './StyleLeft.css'
-function Main_Left() {
+function Main_Left({data}) {
+    // console.log(2,props.data)
+  
     return (
+        
         <div>
             <div className="left">
                 <div className="bVA-DDf guqnAw">
@@ -32,16 +37,21 @@ function Main_Left() {
                             src="https://salt.tikicdn.com/ts/upload/05/9e/d8/f13e86df128f19d197397e44924f9616.png"
                             width="32" />
                     </div>
+                    
+ 
+                                    {data.listOrder.map((item,index)=>{
+                                        return(
+                                            <>
                     <div className="cjoJkw">
                         <div className="fyhLrw">
                             <div className="giCRPo">
                                 <div className="package-title"><img width="24" height="24" alt="icon"
-                                    src="https://salt.tikicdn.com/ts/upload/ad/b7/93/7094a85d0b6d299f30ed89b03511deb9.png" />Gói
-                                </div><span className="package-leadTime">Giao vào Chủ Nhật, 17/07</span>
+                                    src="https://salt.tikicdn.com/ts/upload/ad/b7/93/7094a85d0b6d299f30ed89b03511deb9.png" />
+                                    Gói {index+1}
+                                </div><span className="package-leadTime">Giao hàng 24h</span>
                             </div>
-                            {
-                                ListProduct.map((value, index) => {
-                                    return (
+                            
+                            
                                         <div className="left-content">
                                             <div className="package-summary">
                                                 <div className="iSXbdM"><img className="method-logo"
@@ -49,59 +59,63 @@ function Main_Left() {
                                                     alt="delivery-method" width="48" height="14" /><span className="method-text"
                                                         style={{ fontSize: '12px', lineHeight: '16px' }}>
                                                         Giao Tiết Kiệm</span></div>
-                                                <div className="XUTGR"><span className="current-fee">{value.fee}</span></div>
+                                                <div className="XUTGR"><span className="current-fee"></span>18000đ</div>
                                             </div>
-
                                             <div className="package-item-list">
                                                 <div>
-                                                    <div className="HEIyE">
+
+                                                {item.listProduct.map(subItem=>{
+                                                      console.log(11,subItem.productDetailId.productId.thump)
+ 
+                                                    
+                                                    return(
+                                                        <>
+                                                        <div className="HEIyE">
                                                         <div className="item-icon">
                                                             <picture className="webpimg-container">
-                                                                <source type="image/webp"
-                                                                    srcSet={value.img} />
-                                                                <img src={value.thumb}
-                                                                    alt="icon" width="48" height="48" className="fWjUGo" />
+                                                               
+                                                                {
+                                                                    subItem.productDetailId.productId.thump.map(value=>{
+                                                                     return(
+                                                                        <img src={value}
+                                                                        alt="icon" width="48" height="48" className="fWjUGo" />
+                                                                   
+                                                                         )       
+                                                                    
+                                                                    })
+                                                                }
+                                                               
+                                                                
                                                             </picture>
+                                                            
                                                         </div>
                                                         <div className="item-info">
                                                             <div className="item-info__first-line"><span className="item-info__product-name"
-                                                                title="">{value.title}</span></div>
+                                                                title="">{subItem.productDetailId.productId.productName}</span></div>
                                                             <div className="item-info__second-line">
-                                                                <div className="item-info__qty">{value.qty}</div>
-                                                                <div className="item-info__price">{value.price}</div>
+                                                                <div className="item-info__qty"> SL:x {subItem.quantity}</div>
+                                                                <div className="item-info__price">
+                                                                {String(subItem.productDetailId.price.toLocaleString())}
+                                                                     đ</div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div className="jsqWuZ">
-                                                        <div className="item-icon">
-                                                            <picture className="webpimg-container">
-                                                                <source type="image/webp"
-                                                                    srcSet={value.img1} />
-                                                                <img src={value.thumb1}
-                                                                    alt="icon" width="32" height="32" className="fWjUGo" />
-                                                            </picture>
                                                         </div>
-                                                        <div className="item-info">
-                                                            <div className="item-info__first-line">
-                                                                <div type="gift" className="fMUbeS">{value.gift}
-                                                                </div><span className="item-info__product-name"
-                                                                    title="[Gift] Lưới tạo bọt Senka">{value.title1}</span>
-                                                            </div>
-                                                            <div className="item-info__second-line">
-                                                                <div className="item-info__qty">{value.qty1}</div>
-                                                                <div className="item-info__price">{value.price1}</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                        </>
+                                                    )
+                                                })}
                                                 </div>
+                                                
                                             </div>
-                                        </div>
+                                            </div>
+                                            
+                                        
+                                            
+                    
+                                    
+                                       
+                                        
+                                <div className="right-content">
 
-                                    )
-                                })
-                            }
-
-                            <div className="right-content">
                                 <div className="gEhjmR"><svg className="fulfillment-icon" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fillRule="evenodd" clipRule="evenodd"
@@ -109,14 +123,22 @@ function Main_Left() {
                                         fill="#38383D"></path>
                                 </svg>
                                     <div>
-                                        <p className="fulfillment-text">Được giao bởi TikiNOW Smart Logistics (giao
+                                        <p className="fulfillment-text">Được giao bởi TikiNOW Smart <br/>
+                                         Logistics (giao
                                             từ Hồ Chí Minh)</p>
                                         <p className="fulfillment-text fulfillment-text--warning"></p>
                                     </div>
                                 </div>
                             </div>
+                            </div>
                         </div>
-                    </div>
+                    
+
+                                     </>   )
+                                                            })
+                                                        }
+
+                    </div>        
                     <div className="fttPna">
                         <div className="seller-coupons-heading"><span className="seller-coupons-heading__title">Shop
                             khuyến mãi</span>
@@ -329,7 +351,7 @@ function Main_Left() {
 
 
             </div>
-        </div >
+        
     );
 }
 
