@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { listcontact } from "./listdata/listcontact";
 import {
   size,
@@ -20,7 +20,8 @@ import Productbottom from "./js/Productbottom";
 import { Image } from "antd";
 import { Product } from "./data/test";
 import { color } from "@mui/system";
-
+import { useSearchParams } from "react-router-dom";
+import { getAPI } from "../../../config/api";
 function Detail() {
   const [listImg, setListImg] = useState([]);
   const [check, setCheck] = useState();
@@ -34,6 +35,21 @@ function Detail() {
   const [sizeDetail, setSizeDetail] = useState(
     Product.product.productDetailId[0].option[1].value
   );
+  const [detail, setDetail] = useState(null);
+  const [query] = useSearchParams();
+  const id = query.get("id");
+  console.log("detail", detail);
+  //get Data
+  useEffect(() => {
+    getAPI(`/product/get-one-product/${id}`)
+      .then((data) => {
+        setDetail(data.data.product);
+        console.log(data.data.product);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [id]);
 
   function AmoutnUp() {
     let soluong = document.getElementById("amoutn-value").innerHTML * 1;
@@ -132,45 +148,51 @@ function Detail() {
   return (
     <div className="Detai">
       <div className="product-content">
-        <ProductLeft
-          listImg={listImg}
-          setcolorDetail={setcolorDetail}
-          product={Product}
-          colorDetail={colorDetail}
-          icon={listcontact}
-          banner="https://salt.tikicdn.com/cache/w1080/ts/tka/1d/8f/00/d8d6ff67e8c1eed442001b4827297e5f.jpg"
-        />
-        <ProductRight
-          check={check}
-          setcheck={setCheck}
-          brand="https://tiki.vn/thuong-hieu/oem.html"
-          colorDetail={colorDetail}
-          sizeDetail={sizeDetail}
-          bestseller="https://tiki.vn/bestsellers-month/ao-thun-nam-dai-tay/c8336"
-          price="39.000đ"
-          listprice="78.000đ"
-          discount="50%"
-          icon="https://salt.tikicdn.com/ts/upload/2e/da/c9/4b9c0150392c753ccb65b2595500e9d6.png"
-          imgproduct={imgproduct}
-          size={size}
-          tich={tich}
-          amoutn={amoutn}
-          refund={refund}
-          logo={logo}
-          action={action}
-          rateshop={rateshop}
-          AmoutnUp={AmoutnUp}
-          AmoutnDown={AmoutnDown}
-          buyProduct={buyProduct}
-          isDisabled={isDisabled}
-          Product={Product}
-          hanldeColor={hanldeColor}
-          hanldeSize={hanldeSize}
-          myColor={myColor}
-          mySize={mySize}
-        />
+        {detail ? (
+          <ProductLeft
+            detail={detail}
+            listImg={listImg}
+            setcolorDetail={setcolorDetail}
+            product={Product}
+            colorDetail={colorDetail}
+            icon={listcontact}
+            banner="https://salt.tikicdn.com/cache/w1080/ts/tka/1d/8f/00/d8d6ff67e8c1eed442001b4827297e5f.jpg"
+          />
+        ) : null}
+        {detail ? (
+          <ProductRight
+            productDetail={detail}
+            check={check}
+            setcheck={setCheck}
+            brand="https://tiki.vn/thuong-hieu/oem.html"
+            colorDetail={colorDetail}
+            sizeDetail={sizeDetail}
+            bestseller="https://tiki.vn/bestsellers-month/ao-thun-nam-dai-tay/c8336"
+            price="39.000đ"
+            listprice="78.000đ"
+            discount="50%"
+            icon="https://salt.tikicdn.com/ts/upload/2e/da/c9/4b9c0150392c753ccb65b2595500e9d6.png"
+            imgproduct={imgproduct}
+            size={size}
+            tich={tich}
+            amoutn={amoutn}
+            refund={refund}
+            logo={logo}
+            action={action}
+            rateshop={rateshop}
+            AmoutnUp={AmoutnUp}
+            AmoutnDown={AmoutnDown}
+            buyProduct={buyProduct}
+            isDisabled={isDisabled}
+            Product={Product}
+            hanldeColor={hanldeColor}
+            hanldeSize={hanldeSize}
+            myColor={myColor}
+            mySize={mySize}
+          />
+        ) : null}
       </div>
-      <Productbottom />
+      {/* <Productbottom /> */}
     </div>
   );
 }

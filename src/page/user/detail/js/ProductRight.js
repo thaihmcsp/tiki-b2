@@ -2,15 +2,14 @@ import React, { useEffect, useState } from "react";
 import { StarOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { color } from "@mui/system";
-import { getAPI } from "../../../../config/api";
+
 function ProductRight(props) {
+  console.log(props.productDetail);
   const listProduct = props.Product.product.productDetailId;
   const thump = props.Product.product.thump;
-
   const [count, setCount] = useState(0);
   const [index, setIndex] = useState(0);
-  const [listproduct, setListProducts] = useState([]);
-
+  const brand = props.productDetail.brandId;
   useEffect(() => {
     setCount(0);
     for (let i = 0; i < listProduct.length; i++) {
@@ -23,18 +22,6 @@ function ProductRight(props) {
       }
     }
   }, [props.myColor, props.mySize]);
-
-  //get Data
-  useEffect(() => {
-    getAPI("/product/get-one-product/62da5f60bc070a53bcbc3220")
-      .then((data) => {
-        setListProducts(data);
-        console.log(data.data.product.productDetailId);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
   // useEffect(() => {
   const optionTotal = [[], [], []];
@@ -51,14 +38,12 @@ function ProductRight(props) {
     });
   });
 
-  console.log(51, option);
-
   return (
     <div className="productright">
       <div className="header">
         <div className="brand">
           <span className="brand-and-author ">
-            Thương hiệu : <a href={props.brand}>OEM &nbsp;</a>
+            Thương hiệu : {props.productDetail.brandId.brandName}
           </span>
           <div class=" gXZfKO"></div>
           <div className="bestseller">
@@ -70,14 +55,14 @@ function ProductRight(props) {
             </p>
           </div>
         </div>
-        <h1 className="title">{props.Product.product.productName}</h1>
+        <h1 className="title">{props.productDetail.productName}</h1>
         <div className="below-title">
           <div>
             <div className="rate">
               <a className="number">(Xem 25 đánh giá)</a>
               <div class=" gXZfKO"></div>
             </div>
-            <div className="quantity">Đã bán {props.Product.product.sold}</div>
+            <div className="quantity">Đã bán {props.productDetail.sold}</div>
           </div>
         </div>
       </div>
@@ -86,23 +71,24 @@ function ProductRight(props) {
           <div className="price-and-icon">
             <div className="price-discount">
               <div className="current-price">
-                {props.mySize == undefined || props.myColor == undefined ? (
+                {/* {props.mySize == undefined || props.myColor == undefined ? (
                   <>{props.Product.product.price.toLocaleString()}₫</>
                 ) : count == 1 ? (
                   <>{listProduct[index].price.toLocaleString()}₫</>
                 ) : (
                   "Hết hàng"
-                )}
+                )} */}
+                <>{props.productDetail.price.toLocaleString()}₫</>
               </div>
-              <div className="list-price">{props.listprice}</div>
-              <div className="discount">{props.discount}</div>
+              {/* <div className="list-price">{props.listprice}</div>
+              <div className="discount">{props.discount}</div> */}
             </div>
             <div className="item">
               <img src={props.icon}></img>
             </div>
           </div>
 
-          <div className="selectproduct">
+          {/* <div className="selectproduct">
             <div className="select-color">
               <p className="detail-color">
                 <p id="detail-color">
@@ -145,7 +131,7 @@ function ProductRight(props) {
                 })}
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="delivery">
             <div>
               <span>Giao đến</span>
@@ -186,11 +172,11 @@ function ProductRight(props) {
                 <picture className="overview-left">
                   <img
                     className="logo"
-                    src={props.Product.product.shopId.logo}
+                    src={props.productDetail.shopId.logo}
                   ></img>
                 </picture>
                 <div className="overview-right">
-                  <span>{props.Product.product.shopId.shopName}</span>
+                  <span>{props.productDetail.shopId.shopName}</span>
                 </div>
               </a>
             </div>

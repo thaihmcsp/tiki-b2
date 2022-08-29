@@ -14,8 +14,8 @@ function ProductLeft(props) {
       <div>
         <Image
           id="main"
-          src={props.colorDetail.color}
-          preview={{ src: props.colorDetail.color }}
+          src={props.detail.thump}
+          preview={{ src: props.detail.thump }}
         />
 
         <div className="img-extend">

@@ -8,7 +8,7 @@ import Home from "./page/user/home/Home";
 import Admin from "./page/admin/Admin";
 import "antd/dist/antd.css";
 import ShopDashBoardAll from "./page/shop/dashboard/ShopDashBoardAll";
-import Product from "./page/shop/productManagement/Product.js";
+import Product from "./page/shop/productManagement/Product";
 import Profile from "./page/user/profile/ProfileManu/ProfileMenu";
 import ProfileList from "./page/user/profile/ProfileLeft/ProfileList";
 import ProfileListHeader from "./page/user/profile/ProfileLeft/ProfileListHeader";
@@ -80,9 +80,9 @@ function App() {
           <Route path="/admin/user" element={<User></User>}></Route>
           <Route path="/admin/dashbosh" element={<Shop></Shop>}></Route>
         </Route>
-        <Route path="/shop" element={<ShopMenu />}>
+        {/* <Route path="/shop" element={<ShopMenu />}>
           <Route path="/shop/profile" element={<ShopProfile />} />
-        </Route>
+        </Route> */}
         <Route path="*" element={<SignIn />} />
 
         {/* <Route path='/user' element={<UserInfoMenu />}>
