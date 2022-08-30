@@ -35,10 +35,12 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
       let newData = listProducts
       setPage(1)
       for(let key in data1){
-        if(data1[key].length>0){
+        if(data1[key].length > 0){
           newData = newData.filter(item=>{
             if(key == 'brandName'){
-              return data1[key].includes(item.brandId[key])            
+              if(item.brandId) {
+                return data1[key].includes(item.brandId[key])           
+              }
             }else if(key == 'price'){
               if(data1[key][0] === 200000){
                 return data1[key] > item.price

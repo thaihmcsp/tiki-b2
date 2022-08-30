@@ -7,7 +7,7 @@ import { getAPI } from '../../../config/api'
 import { useSearchParams } from 'react-router-dom';
 
 const Filter = ({setId}) => {
-  const [inp, setInp] = useState([])
+  // const [inp, setInp] = useState([])
   const [price750, setPrice750] = useState([])
   const [data1, setData] = useState([])
  const [listProducts,setListProducts]= useState([])
@@ -43,32 +43,44 @@ const Filter = ({setId}) => {
     getAPI("/product/get-all-products")
     .then((data)=> {
       setListProducts(() => {
+        setData([])
         const newData = []
         for(let value of data.data.listProduct) {
-          const newName = value.productName.toLowerCase()
-          if(value.price){
-            if(search){
-              if(newName.includes(search.toLowerCase())){
-                newData.push(value)
-              }else {
-                if(removeAccents(newName).includes(search.toLowerCase())){
-                  newData.push(value)
+          if(search){
+            if(value.price){
+              if(value.categoryId){
+                const newName = value.categoryId.categoryName.toLowerCase()
+                if(search){
+                  if(newName.includes(search.toLowerCase())){
+                    newData.push(value)
+                  }else {
+                    if(removeAccents(newName).includes(search.toLowerCase())){
+                      newData.push(value)
+                    }
+                  }
                 }
               }
-            }else {
+              // else {
+              //   newData.push(value)
+              // }
+            }
+          }else {
+            if(value.price) {
               newData.push(value)
             }
           }
         }
+
         return newData
       })
-      // setListProducts(data.data.listProduct)
     })
     .catch((error) => {
       console.log(error)
     }) 
   },[search])
 
+
+console.log(73, listProducts)
 
   return (
     <div className='App'>
