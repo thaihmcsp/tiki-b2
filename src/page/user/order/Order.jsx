@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 import { getAPI } from '../../../config/api'
 function Order() {
   const user = useSelector(state => state.user)
-  console.log(user._id)
   const [dataOderTitle, setdataOderTitle] = useState([]);
   const [status, setstatus] = useState('none')
   const [dataInputSeach, setdataInputSeach] = useState([...dataOderTitle])
@@ -22,7 +21,7 @@ function Order() {
   async function getAllUserOrder() {
     try {
       const data = await getAPI('/user-order/get-order-by-userId/' + user._id);
-      console.log(58, data.data.listOrder)
+
       setdataOderTitle(() => {
         const newdata = [];
         data.data.listOrder.map((value, index) => {
@@ -76,7 +75,7 @@ function Order() {
     return originalElement;
   };
   function Search_Datatitle() {
-    console.log(dataInputSeach)
+
     const seachInput = removeAccents(document.querySelector(`.${styles.TitleInput}`).value).toLocaleLowerCase();
     if (seachInput) {
       const newdata = dataInputSeach.filter(function (value) {
@@ -85,7 +84,6 @@ function Order() {
       })
       if (newdata.length === 0) {
         setemptyOder('https://frontend.tikicdn.com/_desktop-next/static/img/account/empty-order.png')
-
       }
       setnewListdata(newdata)
     }
