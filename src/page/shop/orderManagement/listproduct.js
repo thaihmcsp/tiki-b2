@@ -1,59 +1,247 @@
 import Title from "antd/lib/skeleton/Title";
 
-export const listproduct = [
-    {
-        id:1,
-        image:'https://salt.tikicdn.com/cache/100x100/media/catalog/producttmp/fb/77/f6/2e17b27f0faacb892bb7f0450606ecb6.jpg.webp',
-        title:'[Tặng 4 Quạt,Đèn]Máy Phun Sương Quạt Điều Hòa Đặt Bàn Làm Việc',
-        color:'Blue',
-        code:'SKU CHUX00002',
-        amount:2,
-        price:'123.100',
-        delivery: 'COD',
-        sdh:359339481020963
-    },
-    {
-        id:2,
-        image:'https://salt.tikicdn.com/cache/100x100/media/catalog/producttmp/3d/d8/06/07b04db15e7fcf49c8d86b1083920e0b.png.webp',
-        title:'[Tặng 4 Quạt,Đèn]Máy Phun Sương Quạt Điều Hòa Đặt Bàn Làm Việc',
-        color:'Red',
-        code:'SKU CHUX00002',
-        amount:2,
-        price:'123.100',
-        delivery: 'COD',
-        sdh:360975358990068
-    },
-    {
-        id:3,
-        image:'https://salt.tikicdn.com/cache/100x100/media/catalog/producttmp/83/72/fd/f55f9189989bb6a29165b73868a24d1f.png.webp',
-        title:'[Tặng 4 Quạt,Đèn]Máy Phun Sương Quạt Điều Hòa Đặt Bàn Làm Việc',
-        color:'Black',
-        code:'SKU CHUX00002',
-        amount:2,
-        price:'123.100',
-        delivery: 'COD',
-        sdh:359413205556356
-    },
-    {
-        id:4,
-        image:'https://salt.tikicdn.com/cache/100x100/ts/product/ea/29/b9/1cbc3721aabf575e9406234fafd3b050.png.webp',
-        title:'[Tặng 4 Quạt,Đèn]Máy Phun Sương Quạt Điều Hòa Đặt Bàn Làm Việc',
-        color:'Blue',
-        code:'SKU CHUX00002',
-        amount:2,
-        price:'123.100',
-        delivery: 'COD',
-        sdh:359413205556357
-    },
-    {
-        id:5,
-        image:'https://salt.tikicdn.com/cache/100x100/ts/product/d1/44/95/1c86351431908f4b7da0f7dbed0e497b.png.webp',
-        title:'[Tặng 4 Quạt,Đèn]Máy Phun Sương Quạt Điều Hòa Đặt Bàn Làm Việc 111111111',
-        color:'Blue',
-        code:'SKU CHUX00002',
-        amount:2,
-        price:'123.100',
-        delivery: 'COD',
-        sdh:359413205556358
-    },
-]
+export const listproduct = {
+    "order": {
+        "_id": "62e38d917423aafb73cba103",
+        "userId": "62dcb23e516d7147c5876e12",
+        "phone": "321321",
+        "address": "test address",
+        "status": "pending",
+        "isOrderModified": false,
+        "listOrder": [
+            {
+                "_id": "62e38d917423aafb73cba107",
+                "userId": "62dcb23e516d7147c5876e12",
+                "listProduct": [
+                    {
+                        "productDetailId": {
+                            "_id": "62e38d507423aafb73cba0e2",
+                            "productId": {
+                                "_id": "62e38cf77423aafb73cba0df",
+                                "productName": "desktop",
+                                "shopId": "62dcffa3215b606f03fa2976",
+                                "categoryId": "62d7c487208fdc71b8f94a78",
+                                "thump": ['https://cdn.shopify.com/s/files/1/0566/1795/9593/products/1069698_1517452916878_31612_1.png?v=1655453032&width=600'],
+                                "sold": 0,
+                                "public": true,
+                                "productDetailId": [
+                                    "62e38d507423aafb73cba0e2",
+                                    "62e38d547423aafb73cba0e8",
+                                    "62e38d597423aafb73cba0ee"
+                                ],
+                                "createdAt": "2022-07-29T07:32:07.715Z",
+                                "updatedAt": "2022-07-29T07:33:45.953Z",
+                                "__v": 0
+                            },
+                            "price": 10000000,
+                            "option": [
+                                {
+                                    "optionName": "color",
+                                    "value": "white",
+                                    "_id": "62e38d507423aafb73cba0e3"
+                                },
+                                {
+                                    "optionName": "size",
+                                    "value": "40 inch",
+                                    "_id": "62e38d507423aafb73cba0e4"
+                                }
+                            ],
+                            "storage": 199,
+                            "listImg": [],
+                            "publish": false,
+                            "description": [],
+                            "createdAt": "2022-07-29T07:33:36.657Z",
+                            "updatedAt": "2022-07-29T07:34:41.258Z",
+                            "__v": 0
+                        },
+                        "quantity": 1,
+                        "_id": "62e38d917423aafb73cba108"
+                    },
+                    {
+                        "productDetailId": {
+                            "_id": "62e0ecfd9f07ecdd2c98348a",
+                            "productId": {
+                                "_id": "62dcffc6215b606f03fa297d",
+                                "productName": "mouse",
+                                "shopId": "62dcffa3215b606f03fa2976",
+                                "categoryId": "62d7c487208fdc71b8f94a78",
+                                "thump": ['https://cdn.shopify.com/s/files/1/0566/1795/9593/products/1069698_1517452916878_31612_1.png?v=1655453032&width=600'],
+                                "sold": 0,
+                                "public": true,
+                                "createdAt": "2022-07-24T08:16:06.471Z",
+                                "updatedAt": "2022-07-29T03:17:38.836Z",
+                                "__v": 0,
+                                "productDetailId": [
+                                    "62e0ec72774783c7914d39f3",
+                                    "62e0ecfd9f07ecdd2c98348a",
+                                    "62e34416623fe4bf48a5c512",
+                                    "62e3441e623fe4bf48a5c518",
+                                    "62e35152970e51a926bfe604"
+                                ]
+                            },
+                            "price": 100000,
+                            "option": [
+                                {
+                                    "optionName": "color",
+                                    "value": "black",
+                                    "_id": "62e0ecfd9f07ecdd2c98348b"
+                                },
+                                {
+                                    "optionName": "size",
+                                    "value": "XL",
+                                    "_id": "62e0ecfd9f07ecdd2c98348c"
+                                }
+                            ],
+                            "storage": 189,
+                            "listImg": [],
+                            "publish": false,
+                            "description": [],
+                            "createdAt": "2022-07-27T07:45:01.679Z",
+                            "updatedAt": "2022-07-29T07:34:41.266Z",
+                            "__v": 0
+                        },
+                        "quantity": 1,
+                        "_id": "62e38d917423aafb73cba109"
+                    }
+                ],
+                "total": 10100000,
+                "phone": "321321",
+                "address": "test address",
+                "status": "pending",
+                "shopId": {
+                    "_id": "62dcffa3215b606f03fa2976",
+                    "userId": "62dcb23e516d7147c5876e12",
+                    "shopName": "test cart shop",
+                    "logo": "https://gigr.com/images/png/default_logo.png",
+                    "status": "pending",
+                    "description": [],
+                    "createdAt": "2022-07-24T08:15:31.637Z",
+                    "updatedAt": "2022-07-24T08:15:31.637Z",
+                    "__v": 0
+                },
+                "userOrderId": "62e38d917423aafb73cba103",
+                "createdAt": "2022-07-29T07:34:41.258Z",
+                "updatedAt": "2022-07-31T07:34:41.258Z",
+                "__v": 0
+            },
+            {
+                "_id": "62e38d917423aafb73cba108",
+                "userId": "62dcb23e516d7147c5876e12",
+                "listProduct": [
+                    {
+                        "productDetailId": {
+                            "_id": "62e38d507423aafb73cba0e2",
+                            "productId": {
+                                "_id": "62e38cf77423aafb73cba0df",
+                                "productName": "desktop",
+                                "shopId": "62dcffa3215b606f03fa2976",
+                                "categoryId": "62d7c487208fdc71b8f94a78",
+                                "thump": ['https://cdn.shopify.com/s/files/1/0566/1795/9593/products/1069698_1517452916878_31612_1.png?v=1655453032&width=600'],
+                                "sold": 0,
+                                "public": true,
+                                "productDetailId": [
+                                    "62e38d507423aafb73cba0e2",
+                                    "62e38d547423aafb73cba0e8",
+                                    "62e38d597423aafb73cba0ee"
+                                ],
+                                "createdAt": "2022-07-29T07:32:07.715Z",
+                                "updatedAt": "2022-07-29T07:33:45.953Z",
+                                "__v": 0
+                            },
+                            "price": 10000000,
+                            "option": [
+                                {
+                                    "optionName": "color",
+                                    "value": "white",
+                                    "_id": "62e38d507423aafb73cba0e3"
+                                },
+                                {
+                                    "optionName": "size",
+                                    "value": "40 inch",
+                                    "_id": "62e38d507423aafb73cba0e4"
+                                }
+                            ],
+                            "storage": 199,
+                            "listImg": [],
+                            "publish": false,
+                            "description": [],
+                            "createdAt": "2022-07-29T07:33:36.657Z",
+                            "updatedAt": "2022-07-29T07:34:41.258Z",
+                            "__v": 0
+                        },
+                        "quantity": 1,
+                        "_id": "62e38d917423aafb73cba108"
+                    },
+                    {
+                        "productDetailId": {
+                            "_id": "62e0ecfd9f07ecdd2c98348a",
+                            "productId": {
+                                "_id": "62dcffc6215b606f03fa297d",
+                                "productName": "mouse",
+                                "shopId": "62dcffa3215b606f03fa2976",
+                                "categoryId": "62d7c487208fdc71b8f94a78",
+                                "thump": ['https://cdn.shopify.com/s/files/1/0566/1795/9593/products/1069698_1517452916878_31612_1.png?v=1655453032&width=600'],
+                                "sold": 0,
+                                "public": true,
+                                "createdAt": "2022-07-24T08:16:06.471Z",
+                                "updatedAt": "2022-07-29T03:17:38.836Z",
+                                "__v": 0,
+                                "productDetailId": [
+                                    "62e0ec72774783c7914d39f3",
+                                    "62e0ecfd9f07ecdd2c98348a",
+                                    "62e34416623fe4bf48a5c512",
+                                    "62e3441e623fe4bf48a5c518",
+                                    "62e35152970e51a926bfe604"
+                                ]
+                            },
+                            "price": 100000,
+                            "option": [
+                                {
+                                    "optionName": "color",
+                                    "value": "black",
+                                    "_id": "62e0ecfd9f07ecdd2c98348b"
+                                },
+                                {
+                                    "optionName": "size",
+                                    "value": "XL",
+                                    "_id": "62e0ecfd9f07ecdd2c98348c"
+                                }
+                            ],
+                            "storage": 189,
+                            "listImg": [],
+                            "publish": false,
+                            "description": [],
+                            "createdAt": "2022-07-27T07:45:01.679Z",
+                            "updatedAt": "2022-07-29T07:34:41.266Z",
+                            "__v": 0
+                        },
+                        "quantity": 1,
+                        "_id": "62e38d917423aafb73cba109"
+                    }
+                ],
+                "total": 10100000,
+                "phone": "321321",
+                "address": "test address",
+                "status": "pending",
+                "shopId": {
+                    "_id": "62dcffa3215b606f03fa2976",
+                    "userId": "62dcb23e516d7147c5876e12",
+                    "shopName": "test cart shop",
+                    "logo": "https://gigr.com/images/png/default_logo.png",
+                    "status": "pending",
+                    "description": [],
+                    "createdAt": "2022-07-24T08:15:31.637Z",
+                    "updatedAt": "2022-07-24T08:15:31.637Z",
+                    "__v": 0
+                },
+                "userOrderId": "62e38d917423aafb73cba103",
+                "createdAt": "2022-07-29T07:34:41.258Z",
+                "updatedAt": "2022-08-30T07:34:41.258Z",
+                "__v": 0
+            }
+        ],
+        "createdAt": "2022-07-29T07:34:41.249Z",
+        "updatedAt": "2022-07-30T07:34:41.267Z",
+        "__v": 0
+    }
+}
