@@ -123,10 +123,8 @@ function Header(props) {
   }
   //đăng xuất xóa cookie và local
   function logout() {
-
     window.localStorage.removeItem("tiki-user");
     document.cookie = 'tiki-user' + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-
     nav("/sign-in");
   }
   window.addEventListener('click', function (e) {

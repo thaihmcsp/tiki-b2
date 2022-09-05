@@ -50,3 +50,17 @@ body {
   background-color:  #e5e7ea;
   padding: 20px;
 }
+
+
+#filter_checked {
+  color: blue;
+  font-weight: 700;
+  border-bottom: 4px solid blue;
+}
+
+.filter_checked {
+  color: blue;
+  font-weight: 700 ;
+  border-bottom: 4px solid blue;
+}
+

@@ -80,8 +80,6 @@ const Filter = ({setId}) => {
   },[search])
 
 
-console.log(73, listProducts)
-
   return (
     <div className='App'>
         <div  className = {styles.slider}>

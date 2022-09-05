@@ -13,6 +13,8 @@
 
 .image_img {
     width: 100%;
+    height: 200px;
+    object-fit: cover;
 }
 
 .slider {
@@ -36,17 +38,7 @@
     margin: 0px 16px;
     cursor: pointer;
     padding: 8px;
-    transition: all 0.3s;
-}
-
-.select_name:hover {
-    border-bottom: 4px solid blue;
-}
-
-.select_active {
-    color: blue;
-    font-weight: 500;
-    border-bottom: 4px solid blue;
+    transition: all 0.1s;
 }
 
 .products {
@@ -91,6 +83,7 @@
     font-size: 0.9rem;
     line-height: 20px;
     font-weight: 400;
+    height: 40px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -162,7 +155,6 @@
 
 }
 
-.modall {}
 
 @media  only screen and (max-width:769px){
     .container {
