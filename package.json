@@ -10,7 +10,9 @@
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.8.7",
+
+    "@mui/material": "^5.9.2",
+
     "@mui/x-data-grid": "^5.13.0",
     "@reduxjs/toolkit": "^1.8.3",
     "@testing-library/jest-dom": "^5.16.4",
@@ -32,7 +34,7 @@
     "react-scripts": "5.0.1",
     "save": "^2.5.0",
     "styled-components": "^5.3.5",
-    "swiper": "^8.3.0",
+    "swiper": "^8.3.2",
     "use-query-params": "^2.0.0",
     "util": "^0.12.4",
     "uuid": "^8.3.2",

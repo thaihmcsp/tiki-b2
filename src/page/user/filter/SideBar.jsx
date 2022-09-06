@@ -1,63 +1,60 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { List1 } from './List1'
-import { trademark } from './Trademark'
-import { listAddress } from './listAddress'
-import { listSupplier } from './listSupplier'
+// import { listAddress } from './listAddress'
+// import { listSupplier } from './listSupplier'
 import styles from './SideBar.module.css'
 import { DownOutlined } from '@ant-design/icons';
 import { v4 as uuidv4 } from 'uuid';
+import './styles.css'
 
-import { listProducts } from './listProducts'
-
-const SideBar = (props) => {
-  const [data, setData] = useState([...listAddress.slice(0, 5)]);
-  const [listdata, setListData] = useState([...trademark.slice(0, 5)]);
-  const [supplier, setSupplier] = useState([...listSupplier.slice(0, 5)]);
+const SideBar = () => {
+  
+  const [data, setData] = useState([]);
+  const [listdata, setListData] = useState([]);
+  const [supplier, setSupplier] = useState([]);
   const [check, setCheck] = useState(false);
-  const [ListDataPrice, setListDataPrice] = useState([...listProducts]);
-
   useEffect(() => {
     const newData = listAddress.slice(0, 5)
-    setData(newData)
-    const newData1 = trademark.slice(0, 5)
-    setListData(newData1)
-    const newData2 = listSupplier.slice(0, 5)
+    setData1(newData)
+    // const newData1 = listtrademark.slice(0, 5)
+    // setListData(newData1)
+    const newData2 = listsupplier.slice(0, 5)
     setSupplier(newData2)
-
-  }, [])
+  },[])
   const handleClick = () => {
-    if (!check) {
-      setData(listAddress)
-      setCheck(true)
-    } else {
-      const newData = data.slice(0, 5)
-      newData.slice(0, 5)
-      setData(newData)
-      setCheck(false)
-    }
+   if(!check) {
+    setData(listAddress)
+    setCheck(true)
+   }else {
+    const newData = data.slice(0, 5)
+    newData.slice(0, 5)
+    setData(newData)
+    setCheck(false)
+   }
   }
+  
   const handleClick1 = () => {
-    if (!check) {
-      setListData(trademark)
-      setCheck(true)
-    } else {
-      const newData = trademark.slice(0, 5)
-      newData.slice(0, 5)
-      setListData(newData)
-      setCheck(false)
-    }
+   if(!check) {
+    setListData(trademark)
+    setCheck(true)
+   }else {
+    const newData = trademark.slice(0, 5)
+    newData.slice(0, 5)
+    setListData(newData)
+    setCheck(false)
+   }
   }
   const handleClick2 = () => {
-    if (!check) {
-      setSupplier(listSupplier)
-      setCheck(true)
-    } else {
-      const newData = listSupplier.slice(0, 5)
-      newData.slice(0, 5)
-      setSupplier(newData)
-      setCheck(false)
-    }
-
+   if(!check) {
+    setSupplier(listSupplier)
+    setCheck(true)
+   }else {
+    const newData = listSupplier.slice(0, 5)
+    newData.slice(0, 5)
+    setSupplier(newData)
+    setCheck(false)
+   }
+    
   }
   const FiterListData = () => {
 
@@ -156,121 +153,90 @@ const SideBar = (props) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.nav}>
-        <h3 className={styles.title}>DANH MỤC SẢN PHẨM</h3>
-        <ul className={styles.nav__list}>
-          {List1.map((val, index) => {
-            return (
-              <li key={index}>
-                <a href='#' className={styles.nav__link}>{val}</a>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
-      <div className={styles.nav}>
-        <div className={styles.list_products}>
-          <h3 className={styles.title}>Xuat Su</h3>
-          <ul className={styles.nav__list}>
-            {data.map((val, index) => {
-              const id1 = uuidv4()
-              return (
-                <li key={index} className={styles.list_products_item} onClick={(e) => {
-                  const input = document.getElementById(id1)
-                  if (input.checked === true && (!address.includes(input.value))) {
-                    setAddress(() => [...address, val])
-                  } else {
-                    setAddress(() => {
-                      const newAddress = [...address].filter(address => address != input.value)
-                      return newAddress
-                    })
-                  }
-                }}>
-                  <input type='checkbox' className={styles.ListCheckbox} onClick={FiterListData} value={val} id={id1} />
-                  <label className={styles.list_products__name} htmlFor={id1}>{val}</label>
-
-                </li>
-              )
-            })}
-          </ul>
-          <span onClick={handleClick} className={styles.list_products__btn}>xem thêm <DownOutlined style={{ fontSize: '0.6rem', marginLeft: '1px' }} /></span>
-        </div>
-      </div>
-      <div className={styles.nav}>
-      </div>
-      <div className={styles.nav}>
-        <h3 className={styles.title}>ĐÁNH GIÁ</h3>
-      </div>
-      <div className={styles.nav}>
-        <div className={styles.price}>
-          <h3 className={styles.title}>GIÁ</h3>
-          <p onClick={SetdataPrice}>Dưới 200.000</p>
-          <p onClick={SetdataPrice}> Từ 200.000 đến 750.000</p>
-          <p onClick={SetdataPrice}>Trên 750.000</p>
-          <label>Chọn khoảng giá</label>
-          <div className={styles.gourp}>
-            <input type="text" placeholder='' value={0} />
-            <span className={styles.seperate}>-</span>
-            <input type="text" placeholder='' value={0} />
-          </div>
-          <button className={styles.btn}>Áp dụng</button>
-        </div>
-      </div>
-      <div className={styles.nav}>
-        <div className={styles.trademark}>
-          <h3 className={styles.title}>THƯƠNG HIỆU</h3>
-          <ul className={styles.nav__list}>
-            {listdata.map((val, index) => {
-              const id = uuidv4()
-              return (
-                <li key={index} className={styles.list_products_item} onClick={(e) => {
-                  const input = document.getElementById(id)
-                  if (input.checked === true && (!brand.includes(input.value))) {
-                    setBrand(() => [...brand, val])
-                  } else {
-                    setBrand(() => {
-                      const newBrand = [...brand].filter(brand => brand != input.value)
-                      return newBrand
-                    })
-                  }
-                }}>
-                  <input type='checkbox' className={styles.ListCheckbox} onClick={FiterListData} value={val} id={id} />
-                  <label className={styles.list_products__name} htmlFor={id}>{val}</label>
-                </li>
-              )
-            })}
-          </ul>
-          <span onClick={handleClick1} className={styles.list_products__btn}>xem thêm <DownOutlined style={{ fontSize: '0.6rem', marginLeft: '1px' }} /></span>
-        </div>
-      </div>
-      <div className={styles.nav}>
-        <div className={styles.supplier}>
-          <h3 className={styles.title}>NHÀ CUNG CẤP</h3>
-          <ul className={styles.nav__list}>
-            {supplier.map((val, index) => {
-              const id1 = uuidv4()
-              return (
-                <li key={index} className={styles.list_products_item} onClick={(e) => {
-                  const input = document.getElementById(id1)
-                  if (input.checked === true && (!provider.includes(input.value))) {
-                    setProvider(() => [...provider, val])
-                  } else {
-                    setProvider(() => {
-                      const newBrand = [...provider].filter(provider => provider != input.value)
-                      return newBrand
-                    })
-                  }
-                }}>
-                  <input type='checkbox' className={styles.ListCheckbox} onClick={FiterListData} value={val} id={id1} />
-                  <label className={styles.list_products__name} htmlFor={id1}>{val}</label>
-                </li>
-              )
-            })}
-          </ul>
-          <span onClick={handleClick2} className={styles.list_products__btn}>xem thêm <DownOutlined style={{ fontSize: '0.6rem', marginLeft: '1px' }} /></span>
-        </div>
-      </div>
+    <div className={styles.nav}>
+    <h3 className={styles.title}>DANH MỤC SẢN PHẨM</h3>
+     <ul className= {styles.nav__list}>
+    {List1.map((val, index) => {
+      return (
+       <li key = {index}>
+            <a href='#' className = {styles.nav__link}>{val}</a>
+        </li>
+      )
+    })}
+    </ul>
     </div>
+    <div className={styles.nav}>
+    <div className={styles.list_products}>
+    <h3 className={styles.title}>DANH MỤC SẢN PHẨM</h3>
+     <ul className= {styles.nav__list}>
+    {data.map((val, index) => {
+      const id1 = uuidv4()
+      return (
+       <li key = {index} className= {styles.list_products_item}>
+            <input type='checkbox' id= {id1}/>
+            <label className= {styles.list_products__name} htmlFor={id1}>{val}</label>      
+        </li>
+      )
+    })}
+    </ul>
+    <span onClick={handleClick} className= {styles.list_products__btn}>xem thêm <DownOutlined style={{fontSize:'0.6rem', marginLeft:'1px'}}/></span>
+    </div>
+    </div>
+    <div className={styles.nav}>
+    </div>
+    <div className={styles.nav}>
+    <h3 className={styles.title}>ĐÁNH GIÁ</h3>
+    </div>
+    <div className={styles.nav}>
+    <div className={styles.price}>
+    <h3 className={styles.title}>GIÁ</h3>
+    <p>Dưới 200.000</p>
+    <p>Từ 200.000 đến 750.000</p>
+    <p>Trên 750.000</p>
+    <label>Chọn khoảng giá</label>
+    <div className={styles.gourp}>
+      <input type="text" placeholder='' value={0} />
+      <span className={styles.seperate}>-</span>
+      <input type="text" placeholder='' value={0}/>
+    </div>
+      <button className={styles.btn}>Áp dụng</button>
+          </div>
+    </div>
+    <div className={styles.nav}>
+    <div className={styles.trademark}>
+    <h3 className={styles.title}>THƯƠNG HIỆU</h3>
+    <ul className= {styles.nav__list}>
+    {listdata.map((val, index) => {
+      const id = uuidv4()
+      return (
+        <li key = {index} className= {styles.list_products_item}>
+            <input type='checkbox' className={styles.list_products__name} id={id}/>
+            <label className= {styles.list_products__name} htmlFor={id}>{val}</label>      
+        </li>
+      )
+    })}
+    </ul>
+    <span onClick={handleClick1} className= {styles.list_products__btn}>xem thêm <DownOutlined style={{fontSize:'0.6rem', marginLeft:'1px'}}/></span>
+    </div>
+    </div>
+    <div className={styles.nav}>
+    <div className={styles.supplier}>
+    <h3 className={styles.title}>NHÀ CUNG CẤP</h3>
+    <ul className= {styles.nav__list}>
+    {supplier.map((val, index) => {
+      const id1 = uuidv4()
+      return (
+        <li key = {index} className= {styles.list_products_item}>
+            <input type='checkbox' id={id1}/>
+            <label className= {styles.list_products__name} htmlFor={id1}>{val}</label>      
+        </li>
+      )
+    })}
+    </ul>
+    <span onClick={handleClick2} className= {styles.list_products__btn}>xem thêm <DownOutlined style={{fontSize:'0.6rem', marginLeft:'1px'}}/></span>
+    </div>
+    </div>
+   </div>
   )
 }
 

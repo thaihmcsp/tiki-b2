@@ -32,65 +32,73 @@ import EditItem from './page/shop/productManagement/editProduct/priceItem/addIte
 import PrivateRouteShop from './page/shop/componentDataTableAdmin/PrivateRouter';
 
 function App() {
-  return (
-    <BrowserRouter>
-        <Routes>
-            
-            <Route path='/sign-up' element={<SignUp/>} />
-     
-            <Route path='/sign-in' element={<SignIn/>} />
-            <Route path='/sign-in-admin' element={<AdminLogin/>} />
-            <Route path='/sign-in-shop' element={<ShopLogin/>} />
-            <Route path='/adminShop' 
-                element={<PrivateRouteShop>
-                             <ShopMenu/>
-                        </PrivateRouteShop>}>   
-            </Route>
-            <Route path='/adminShop' 
-                element={<PrivateRouteShop>
-                             <ShopMenu/>
-                        </PrivateRouteShop>}>   
-                        <Route path='/adminShop/Product' element={<ManagementProduct/>}/>
-            </Route>
-            <Route path='/addItem' 
-                element={<PrivateRouteShop>
-                             <AddItem/>
-                        </PrivateRouteShop>}>   
-            </Route>
-            <Route path='/editItem' 
-                element={<PrivateRouteShop>
-                             <EditItem/>
-                        </PrivateRouteShop>}>   
-            </Route>
-            {/* <Route path='/create-shop' element={<CreateShop/>}/> */}
-            <Route path='/admin' element={<Admin/>} >
-                <Route path='category' element={<Category/>} />
-                <Route path='shop' element={<Shop/>}></Route>
-                <Route path='user' element={<User/>}></Route>
 
-            </Route>
-            <Route path='/' element={<Header/>}> 
-                <Route path='/' element={<Home/>} />
-                <Route path='/filter' element={<Filter/>}/>
-                <Route path='/shop/dashboard' element={<ShopDashBoardAll/>} />
-                <Route path='/user' element={<UserInfoMenu/>}> 
-                    <Route path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> }/>
-                    <Route path='/user/order' element={ <div className='order'><Order/></div> } />
+    return (
+        <BrowserRouter>
+            <Routes>
+
+                <Route path='/sign-up' element={<SignUp />} />
+
+                <Route path='/sign-in' element={<SignIn />} />
+                <Route path='/sign-in-admin' element={<AdminLogin />} />
+                <Route path='/sign-in-shop' element={<ShopLogin />} />
+                <Route path='/adminShop'
+                    element={<PrivateRouteShop>
+                        <ShopMenu />
+                    </PrivateRouteShop>}>
                 </Route>
-                <Route path='/ShopHome' element={<ShopHome/>}/>
-                <Route path='/shop' element={<Shop></Shop>}/>
-                <Route path='/detail' element={<Detail />}/>
-            </Route>
+                <Route path='/adminShop'
+                    element={<PrivateRouteShop>
+                        <ShopMenu />
+                    </PrivateRouteShop>}>
+                    <Route path='/adminShop/Product' element={<ManagementProduct />} />
+                </Route>
+                <Route path='/addItem'
+                    element={<PrivateRouteShop>
+                        <AddItem />
+                    </PrivateRouteShop>}>
+                </Route>
+                <Route path='/editItem'
+                    element={<PrivateRouteShop>
+                        <EditItem />
+                    </PrivateRouteShop>}>
+                </Route>
+                {/* <Route path='/create-shop' element={<CreateShop/>}/> */}
+                <Route path='/admin' element={<Admin />} >
+                    <Route path='category' element={<Category />} />
+                    <Route path='shop' element={<Shop />}></Route>
+                    <Route path='user' element={<User />}></Route>
 
-            
+                </Route>
+
+                <Route path='/order' element={<Order />} />
+
+                <Route path='/' element={<Header />}>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/filter' element={<Filter />} />
+                    <Route path='/shop/dashboard' element={<ShopDashBoardAll />} />
+                    <Route path='/user' element={<UserInfoMenu />}>
+
+                        <Route path='/user/profile' element={<div className='profile'> <UserInfo /> <ProfileList /> </div>} />
+                        <Route path='/user/order' element={<div className='order'><Order /></div>} />
+
+                        <Route path='/user' element={<div className='profile'> <UserInfo /> <ProfileList /> </div>} />
+
+                    </Route>
+                    <Route path='/ShopHome' element={<ShopHome />} />
+                    <Route path='/shop' element={<Shop></Shop>} />
+                    <Route path='/detail' element={<Detail />} />
+                </Route>
+
+
                 <Route path='/admin' element={<Admin />} >
                     <Route path='/admin/category' element={<Category />} />
                     <Route path='/admin/shop' element={<Shop></Shop>} ></Route>
                     <Route path='/admin/user' element={<User></User>} ></Route>
                     <Route path='/admin/dashbosh' element={<Shop></Shop>} ></Route>
                 </Route>
-                    <Route path='*' element={<SignIn />} /><Route/>
-            <Route/>
+                <Route path='*' element={<SignIn />} /><Route />
+                <Route />
 
             </Routes>
         </BrowserRouter>

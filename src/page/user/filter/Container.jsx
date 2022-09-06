@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import Modall from './Modall';
 import "swiper/css";
@@ -6,52 +6,18 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination as Pagination2, Navigation } from "swiper";
 import { Rate } from 'antd';
-import { listProducts } from './listProducts';
+import { List1 } from './List1';
 import { Pagination, Stack } from '@mui/material';
 // import  from '@mui/material/Stack';
 import 'antd/dist/antd.css';
 import style from './container.module.css'
 import "./styles.css";
-
-
-
-const Container = (props) => {
-  const [data, setData] = useState([])
-  useEffect(() => {
-    let Data = []
-    for (let key in props.filter) {
-      let index = 0
-      for (let key in props.filter) {
-        if (props.filter[key].length === 0) {
-          index++
-        }
-      }
-      if (index === 3) {
-        Data = [...listProducts]
-      } else {
-        if (props.filter[key].length === 0) {
-          continue
-        } else {
-          if (Data.length === 0) {
-            let NewData = [...listProducts]
-            props.filter[key].map(title => {
-              Data = [...Data, ...NewData.filter(filter => filter[key] === title)]
-            })
-          } else {
-            let NewData = [...Data]
-            let newData2 = []
-            props.filter[key].map(title => {
-              newData2 = [...newData2, ...NewData.filter(filter => filter[key] === title)]
-              Data = [...newData2]
-            })
-          }
-        }
-      }
-      setData(Data)
-    }
-  }, [props.filter])
+import { VapeFreeOutlined } from '@mui/icons-material';
+import { Link, useNavigate } from 'react-router-dom';
+const Container = () => {
   const [current, setCurrent] = useState(3);
   const onChange = (page) => {
+    console.log(page);
     setCurrent(page);
   };
   const [show, setShow] = useState(false)
@@ -112,7 +78,7 @@ const Container = (props) => {
       </div>
       <Modall />
       <div className={style.products}>
-        {data.map(val => {
+        {List1.map(val => {
           return (
             <div className={style.products_item} key={val.id}>
               <div className={style.products_thumbnail}>

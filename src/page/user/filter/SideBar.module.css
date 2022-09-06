@@ -12,7 +12,8 @@
     margin: 0;
     padding: 14px 0px;
     font-size: 0.8rem;
-    font-weight: 500;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.93);
 }
 .ListCheckbox {
     
@@ -26,7 +27,7 @@
 .nav__link {
     text-decoration: none;
     font-size: 0.9rem;
-    color: rgb(36, 36, 36);
+    color: rgba(36, 36, 36, 0.849);
     display: block;
     font-weight: 400;
     line-height: 20px;
@@ -39,18 +40,19 @@
 }
 
 .list_products__name {
+    cursor: pointer;
     font-size: 0.9rem;
     margin-left: 5px;
 }
 
 .list_products__btn {
+    cursor: pointer;
     display: flex;
     align-items: center;
     text-transform: capitalize;
     font-size: 0.8rem;
     font-weight: 500;
     line-height: 20px;
-    margin-top: 14px;
     color: rgb(13, 92, 182);
     cursor: pointer;
 }
@@ -72,6 +74,13 @@
     opacity: 0.8;
     margin-bottom: 3px;
 }
+
+/* .icon {
+    /* position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right:-10px;
+} */ 
 
 .gourp {
     display: flex;
@@ -96,6 +105,7 @@
 }
 
 .btn {
+    cursor: pointer;
     background: none;
     outline: none;
     padding: 5px 20px;
@@ -104,6 +114,13 @@
     font-size: 0.8rem;
     border-radius: 5px;
 }
+
+.btn_box {
+    display: flex;
+    align-items: center;
+}
+
+
 
 @media  only screen and (max-width:769px){
  

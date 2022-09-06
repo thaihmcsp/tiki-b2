@@ -5,11 +5,11 @@
 html,
 body {
   position: relative;
-  height: 100%;
+  height: unset !important;
 }
 
+
 body {
-  background: #eee;
   font-size: 14px;
   margin: 0;
   padding: 0;
@@ -38,12 +38,19 @@ body {
   align-items: center;
 }
 
+.ant-btn-primary {
+  border: unset !important;
+  background:none !important;
+  display: none !important;
+} */
 
-/* .ant-modal-root{
+.ant-modal-root{
   display: none;
 } 
 
-
+.ant-btn {
+  display:  none !important;
+}
 .mySwiper_fillter .swiper-button-next:after, .mySwiper_fillter .swiper-button-prev:after {
   font-size: 1rem !important;
   padding: 10px;
@@ -73,6 +80,27 @@ body {
 .css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root:hover {
     background-color: rgba(24, 158, 255,0.5) !important;
 }
+.SideBar_btn_box__sWy0Z {
+  position: relative;
+  width: 70px;
+  /* display: inline-block; */
+}
+
+.SideBar_btn_box__sWy0Z .mystyle_sidebar {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: rotate(-180deg) translateY(-50%);
+ 
+}
+.SideBar_btn_box__sWy0Z .mystyle1_sidebar {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: rotate(-180deg) translateY(-50%);
+ 
+}
+
 
 @media  only screen and (max-width:769px){
   .swiper {
@@ -82,22 +110,27 @@ body {
     height: 100%;
   }
 
-  .ant-modal-root{
+  .filter-modall .ant-modal-root{
     display: block;
   }
-  .btn {
-    font-size: 1.3rem !important;
-    margin: 10px 0;
+  .filter_modal {
+    font-size: 1rem !important;
+    margin: 10px 0 10px 5px;
+    padding-left:10px;
+    padding-right:10px;
+    font-weight: 300;
+    line-height: 15px;
     display: block !important;
   }
-  .ant-modal-body {
+
+  .filter-modall .ant-modal-body {
     height: 100% !important;
   }
   .container_products__EX9Iv {
     margin-top: 0 !important;
   }
 
-  .ant-modal {
+  .filter-modall .ant-modal {
     position: relative !important;
     top: 0 !important;
     right: 0% !important;
@@ -108,4 +141,4 @@ body {
     transform-origin: top right !important;
   } 
 
-}*/
+}
