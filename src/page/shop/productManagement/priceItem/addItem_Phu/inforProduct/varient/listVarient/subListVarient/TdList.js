@@ -20,7 +20,7 @@ function TdList({data,option1,click}) {
     {data.map((item,index)=>{
         if(index==0){
             return(
-                <tr className={style.tr_varient} id={`TR_option${index}`}>
+                <tr className={`${style.tr_varient} DetailListItem`} id={`TR_option${index}`}>
                     <td rowSpan={data.length} >
                         <div className={[style.Varient_option,'firstOption'].join(' ')} >
                             {option1}
@@ -62,7 +62,7 @@ function TdList({data,option1,click}) {
         }else{
 
             return(
-                <tr className={style.tr_varient}>
+                <tr className={`${style.tr_varient} DetailListItem`}>
                     <td>
                         <div className={[style.Varient_option,'secondOption'].join(' ')}>
                             {item}

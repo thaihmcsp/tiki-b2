@@ -9,10 +9,27 @@ import "swiper/css/pagination";
 import "./styles.css";
 import style from './productbanner.module.css'
 import { Pagination,Autoplay,Navigation } from "swiper";
-import data from "../../../shopProductData/data";
 
-function ProductBanner() {
+function ProductBanner({shopInfor}) {
   const [space,setSpace] = useState(20)
+  const [baner,setBaner] = useState([])
+  console.log(17,shopInfor)
+  useEffect(function(){
+    if(shopInfor.description){
+      setBaner(()=>{
+        let newData
+        shopInfor.description.map(item=>{
+          if(item.key=='banner'){
+            console.log('hello')
+             newData = item.value.split(',')
+            }
+          })
+          return newData
+      })
+    }
+  },[shopInfor])
+
+
   useEffect(function(){
     console.log(window.innerWidth)
     if(window.innerWidth <= 768){
@@ -45,13 +62,17 @@ function ProductBanner() {
           className="mySwiper_productBanner"
         >
           {
-            data.banner.map(image=>{
+            baner.length>=1?
+            baner.map((image,index)=>{
               return(
-                <SwiperSlide>
+                <SwiperSlide key={index}>
                    <img src={image} />
                 </SwiperSlide>
               )
-            })
+            }):
+            <SwiperSlide >
+           
+          </SwiperSlide>
           }
         </Swiper>
       </>

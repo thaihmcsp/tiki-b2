@@ -37,14 +37,10 @@ body {
   align-items: center;
 }
 
-.filter_modal span {
-  font-size: 1rem;
-  font-weight: 300 !important;
+.filter .ant-modal-root {
+  display: none;
 }
 
-.filter_modal {
-  display: none !important;
-}
 .mySwiper_fillter .swiper-button-next:after,
 .mySwiper_fillter .swiper-button-prev:after {
   font-size: 1rem !important;

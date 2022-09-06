@@ -4,12 +4,14 @@ import "antd/dist/antd.css";
 import { color } from "@mui/system";
 
 function ProductRight(props) {
-  console.log(props.productDetail);
-  const listProduct = props.Product.product.productDetailId;
-  const thump = props.Product.product.thump;
+  
+  const listProduct = props.productDetail.productDetailId;
+
   const [count, setCount] = useState(0);
   const [index, setIndex] = useState(0);
-  const brand = props.productDetail.brandId;
+  
+ 
+
   useEffect(() => {
     setCount(0);
     for (let i = 0; i < listProduct.length; i++) {
@@ -22,8 +24,7 @@ function ProductRight(props) {
       }
     }
   }, [props.myColor, props.mySize]);
-
-  // useEffect(() => {
+  
   const optionTotal = [[], [], []];
 
   listProduct.map((item, index) => {
@@ -48,10 +49,10 @@ function ProductRight(props) {
           <div class=" gXZfKO"></div>
           <div className="bestseller">
             <p>
-              <span>Đứng thứ 3 trong </span>
+              {/* <span>Đứng thứ 3 trong </span>
               <a href={props.bestseller}>
                 Top 1000 Áo thun nam dài tay bán chạy tháng này
-              </a>
+              </a> */}
             </p>
           </div>
         </div>
@@ -71,14 +72,14 @@ function ProductRight(props) {
           <div className="price-and-icon">
             <div className="price-discount">
               <div className="current-price">
-                {/* {props.mySize == undefined || props.myColor == undefined ? (
-                  <>{props.Product.product.price.toLocaleString()}₫</>
+                {props.mySize == undefined || props.myColor == undefined ? (
+                  <>{props.productDetail.price.toLocaleString()}₫</>
                 ) : count == 1 ? (
                   <>{listProduct[index].price.toLocaleString()}₫</>
                 ) : (
                   "Hết hàng"
-                )} */}
-                <>{props.productDetail.price.toLocaleString()}₫</>
+                )}
+
               </div>
               {/* <div className="list-price">{props.listprice}</div>
               <div className="discount">{props.discount}</div> */}
@@ -87,12 +88,11 @@ function ProductRight(props) {
               <img src={props.icon}></img>
             </div>
           </div>
-
-          {/* <div className="selectproduct">
+              {props.productDetail.productDetailId.length>0? <div className="selectproduct">
             <div className="select-color">
               <p className="detail-color">
                 <p id="detail-color">
-                  Màu: <span id="color-select">{props.colorDetail.name}</span>
+                  Màu: <span id="color-select" >{props.colorDetail.name}</span>
                 </p>
               </p>
               <div className="product-color">
@@ -113,7 +113,7 @@ function ProductRight(props) {
             </div>
             <div className="select-size">
               <p id="detail-size">
-                Size: <span id="size-select">{props.sizeDetail}</span>
+                Size: <span id="size-select" >{props.sizeDetail}</span>
               </p>
               <div className="size">
                 {option[2].map((item, index) => {
@@ -131,7 +131,8 @@ function ProductRight(props) {
                 })}
               </div>
             </div>
-          </div> */}
+          </div>: null}
+          
           <div className="delivery">
             <div>
               <span>Giao đến</span>
@@ -153,14 +154,14 @@ function ProductRight(props) {
                   {props.amoutn[0]}
                 </button>
                 <div className="amoutn-value">
-                  <span id="amoutn-value">1</span>
+                  <span id="amoutn-value" >1</span>
                 </div>
                 <button id="amoutn-up" onClick={() => props.AmoutnUp()}>
                   {props.amoutn[1]}
                 </button>
               </div>
               <div className="group-button">
-                <button onClick={() => props.buyProduct()}>Chọn mua</button>
+                <button onClick={() => props.handleBuy()}>Chọn mua</button>
               </div>
             </div>
           </div>

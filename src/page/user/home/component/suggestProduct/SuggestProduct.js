@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navigation from "./navigation/Navigation";
 import PruductList from "./productList/PruductList";
 import style from "./suggesstProduct.module.css";
-function SuggestProduct() {
+function SuggestProduct({ data }) {
   window.addEventListener("scroll", (event) => {
     const header = document.querySelector(`.${style.sugguest}`);
     const Addvetisement_Shop__Home = document.querySelector(
@@ -29,7 +29,7 @@ function SuggestProduct() {
         <Navigation />
       </div>
       <div className={style.product_list}>
-        <PruductList />
+        <PruductList listProduct={data} />
       </div>
     </div>
   );

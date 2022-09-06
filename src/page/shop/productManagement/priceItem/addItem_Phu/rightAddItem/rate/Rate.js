@@ -33,7 +33,7 @@ function Rate() {
     const VarientElement = document.querySelector('#Varient_step__scroll')
     const DescriptionElement = document.querySelector('#Description_step__scroll')
     const TransformElement = document.querySelector('#Transform_Step__scroll')
-    console.log('onChange:', current,value);
+    // console.log('onChange:', current,value);
     if(value==0){
       basicInfor.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
     }
@@ -52,7 +52,6 @@ function Rate() {
    
     setCurrent(value);
   };
-  console.log(current)
   return (
     <div className={style.rate}>
         <Steps size='small' current={current} onChange={onChange} direction="vertical" className='rate'>

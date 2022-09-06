@@ -5,8 +5,9 @@ import ProductRight from "./ProductRight";
 
 function ProductLeft(props) {
   const hanldeImg = (id) => {
+   
     const getImg = document.getElementById(id).getAttribute("src");
-    props.setcolorDetail({ color: getImg });
+    props.setcolorDetail({color: getImg });
   };
 
   return (
@@ -14,8 +15,8 @@ function ProductLeft(props) {
       <div>
         <Image
           id="main"
-          src={props.detail.thump}
-          preview={{ src: props.detail.thump }}
+          src={props.colorDetail.color}
+          preview={{ src: props.colorDetail.color }}
         />
 
         <div className="img-extend">

@@ -8,7 +8,6 @@ import Home from "./page/user/home/Home";
 import Admin from "./page/admin/Admin";
 import "antd/dist/antd.css";
 import ShopDashBoardAll from "./page/shop/dashboard/ShopDashBoardAll";
-import Product from "./page/shop/productManagement/Product";
 import Profile from "./page/user/profile/ProfileManu/ProfileMenu";
 import ProfileList from "./page/user/profile/ProfileLeft/ProfileList";
 import ProfileListHeader from "./page/user/profile/ProfileLeft/ProfileListHeader";
@@ -16,6 +15,12 @@ import UserInfo from "./page/user/profile/UserInfo_data/UserInfo";
 import "./App.css";
 import UserInfoMenu from "./page/user/profile/UserInfoMenu";
 import Category from "./page/admin/categoryManagement/Category";
+// import User from "./page/admin/userManagement/User";
+// import AdminLogin from "./page/admin/login/Login";
+// import ShopLogin from "./page/shop/login/Login";
+// import Order from "./page/user/order/maintotal/Main";
+// import ShopHome from "./page/shop/shopHome/ShopHome";
+// import Shop from "./page/admin/shopManagement/Shop";
 import Detail from "./page/user/detail/Detail";
 import "antd/dist/antd.css";
 import "./App.css";
@@ -47,7 +52,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/filter" element={<Filter />} />
           <Route path="/shop/dashboard" element={<ShopDashBoardAll />} />
-          <Route path="/shop/product/manage" element={<Product />} />
           <Route path="/user" element={<UserInfoMenu />}>
             <Route
               path="/user/profile"

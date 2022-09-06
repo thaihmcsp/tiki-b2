@@ -14,14 +14,13 @@ import ProductLeft from "./js/ProductLeft";
 import "./css/Detail.css";
 import "./css/productleft.css";
 import "./css/productright.css";
-import "./css/productbottom.css";
 import ProductRight from "./js/ProductRight";
 import Productbottom from "./js/Productbottom";
 import { Image } from "antd";
 import { Product } from "./data/test";
 import { color } from "@mui/system";
 import { useSearchParams } from "react-router-dom";
-import { getAPI } from "../../../config/api";
+import { getAPI,patchAPI } from "../../../config/api";
 function Detail() {
   const [listImg, setListImg] = useState([]);
   const [check, setCheck] = useState();
@@ -29,28 +28,99 @@ function Detail() {
   const [mySize, setMySize] = useState();
   const [isDisabled, setIsDisable] = useState(true);
   const [colorDetail, setcolorDetail] = useState({
-    color: Product.product.thump[0],
-    name: Product.product.productDetailId[0].option[0].value,
+    color: '',
+    name: '',
   });
+
+  
   const [sizeDetail, setSizeDetail] = useState(
     Product.product.productDetailId[0].option[1].value
   );
   const [detail, setDetail] = useState(null);
   const [query] = useSearchParams();
   const id = query.get("id");
-  console.log("detail", detail);
+  
+  
   //get Data
   useEffect(() => {
     getAPI(`/product/get-one-product/${id}`)
       .then((data) => {
         setDetail(data.data.product);
-        console.log(data.data.product);
+        setcolorDetail({color:data.data.product.thump[0], name:""})
       })
       .catch((error) => {
         console.log(error);
       });
   }, [id]);
+  //get cart id
+  const [cartid, setCartid] = useState()
+  useEffect(() => {
+    getAPI("/cart/get-loged-in-cart")
+    .then((data)=>{
+      setCartid(data.data.cart._id)
+    }).catch((err)=>{
+      console.log(err);
+    })
+    
+  }, [])
+  
+  //id-user
+  const idUser = JSON.parse(localStorage.getItem('tiki-user'))
+ 
 
+  //get productdetailID
+  const [option,  setOption] = useState({option1:"",option2:""})
+  
+
+  //id-cart
+  const [iddetail,setIddetail] = useState()
+  console.log(iddetail);
+  useEffect(() => {
+    if(myColor && mySize){
+      for(let i = 0; i <detail.productDetailId.length;i++){
+        if(myColor==detail.productDetailId[i].option[0].value && mySize==detail.productDetailId[i].option[1].value){
+          setIddetail (detail.productDetailId[i]._id)  
+        }
+      }
+    }
+  }, [myColor,mySize])
+  
+  
+  //path-quantity
+  console.log();
+  const handleBuy = ()=>{
+  let slBuy = document.querySelector('#amoutn-value').innerHTML
+  if(detail.productDetailId.length>0){  
+    patchAPI(`/cart/add-to-cart/${cartid}`,{
+      productDetailId: iddetail,
+      quantity:slBuy 
+    })
+      .then((data)=>{
+        console.log(data.data)
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
+  }else{
+    patchAPI(`/cart/add-to-cart/${cartid}`,{
+      productId:id,
+      quantity:slBuy 
+    })
+      .then((data)=>{
+        console.log(data.data)
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
+  }
+    let cart =
+    document.getElementsByClassName("HeaderCartTitle")[0].innerHTML * 1;
+    cart += 1;
+    document.getElementsByClassName(
+    "HeaderCartTitle"
+    )[0].innerHTML = `${cart}`;
+    
+  }
   function AmoutnUp() {
     let soluong = document.getElementById("amoutn-value").innerHTML * 1;
     soluong += 1;
@@ -70,12 +140,13 @@ function Detail() {
   }
 
   function buyProduct() {
-    let soluong =
+    let cart =
       document.getElementsByClassName("HeaderCartTitle")[0].innerHTML * 1;
-    soluong += 1;
-    document.getElementsByClassName(
+      cart += 1;
+      document.getElementsByClassName(
       "HeaderCartTitle"
-    )[0].innerHTML = `${soluong}`;
+      )[0].innerHTML = `${cart}`;
+    
   }
 
   const hanldeColor = (color) => {
@@ -89,7 +160,7 @@ function Detail() {
     //preview
     setcolorDetail({ color: getColor, name: getColorName });
     //imgextend
-    Product.product.productDetailId.map((item) => {
+    detail.productDetailId.map((item) => {
       if (item.option[0].value == color) {
         setListImg(item.listImg);
       }
@@ -183,6 +254,7 @@ function Detail() {
             AmoutnUp={AmoutnUp}
             AmoutnDown={AmoutnDown}
             buyProduct={buyProduct}
+            handleBuy={handleBuy}
             isDisabled={isDisabled}
             Product={Product}
             hanldeColor={hanldeColor}
