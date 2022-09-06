@@ -8,6 +8,7 @@ import './basicInfor.css'
 import { getAPI } from '../../../../../../../config/api';
 import { useSelector,useDispatch } from 'react-redux'
 import { ChangeProductName,ChangeCatagoryName } from '../../../EditProductSlice';
+import { loadImages } from './ImageSliceReducer';
 
 
 const getBase64 = (file) => {
@@ -27,7 +28,6 @@ function BasicInfo() {
     const newData = useSelector(state=>{
       return state.eidtProduct
     })
-
     const [listCatagory,setListCatagory] = useState([])
     useEffect(function(){
       getAPI('/category/get-all-categories')
@@ -83,14 +83,11 @@ function BasicInfo() {
     };
   
     const handleChange = ({ fileList: newFileList }) => {
-      const formData = new FormData()
       console.log(87, newFileList);
-      formData.append('thump', newFileList.originFileObj)
-      
-      for (const pair of formData.entries()) {
-        console.log(90, pair[0], pair[1]);
-      }
-
+      const newData = newFileList.map(item=>{
+        return JSON.stringify(item.originFileObj)
+      })
+      dispatch(loadImages(newData))
       return setFileList(newFileList)
     };
     const uploadButton = (

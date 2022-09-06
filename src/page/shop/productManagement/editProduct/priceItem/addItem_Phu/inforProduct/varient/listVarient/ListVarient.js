@@ -23,12 +23,14 @@ function ListVarient({varient}) {
  
 
   const [mainInfo,setMainInfo] = useState({})
+  const [clicked,setClicked] = useState(false)
   const handleAddProperties=()=>{
     const mainPrice = document.querySelector('#Input_price_first').value
     const mainSpecialPrice = document.querySelector('#Input_price_special').value
     const mainStorage = document.querySelector('#Input_price_storage').value
     const mainSKU = document.querySelector('#Main_seller__Sku').value
     setMainInfo({mainPrice,mainSpecialPrice,mainStorage,mainSKU})
+    setClicked(!clicked)
   }
   
   return (
@@ -80,7 +82,7 @@ function ListVarient({varient}) {
                 </button>
             </div>
         </div>
-        <SubListVarient varient={varient} mainInfo={mainInfo} data={data} />
+        <SubListVarient varient={varient} clicked={clicked} mainInfo={mainInfo} data={data} />
     </div>
   )
 }

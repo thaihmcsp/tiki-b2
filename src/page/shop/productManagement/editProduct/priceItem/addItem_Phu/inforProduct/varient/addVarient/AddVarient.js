@@ -14,17 +14,19 @@ function AddVarient({setVarient,varient}) {
     const [key1,setKey1] = useState('Nhóm màu')
     const [key2,setKey2] = useState('Biến Thể')
     const [addVarient,setAddVarient] = useState([])
+    // console.log(17,)
     useEffect(function(){
        if(data){
+        // console.log('setAddvarient')
         setAddVarient((addVarient)=>{
-            if(data.productDetailId&&data.productDetailId.length>0){
-                if(data.productDetailId[0].option[0].length==1){
+            if(data.productDetailId && data.productDetailId.length>0){
+                if(data.productDetailId[0].option.length==1){
                     return [1]
                 }else{
                     return [1,1]
                 }
              }else{
-                 return addVarient
+                 return []
              }
         })
         setKey1((key1)=>{
@@ -68,7 +70,7 @@ function AddVarient({setVarient,varient}) {
              }
         })
        }
-    },[data.productDetailId])
+    },[data.productDetailId,data])
     useEffect(function(){
         setVarient([
             {
@@ -89,6 +91,7 @@ function AddVarient({setVarient,varient}) {
         return newVarient
     })
   }
+//   console.log(92,data,addVarient)
   return (
     <div className={style.AddVarient}>
         {addVarient.map((varient,index)=>{

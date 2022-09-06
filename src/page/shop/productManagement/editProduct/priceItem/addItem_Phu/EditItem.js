@@ -7,12 +7,14 @@ import ProductInfor from './inforProduct/ProductInfor'
 import RightAddItem from './rightAddItem/RightAddItem'
 import { useDispatch,useSelector} from 'react-redux'
 import { loadDefault } from '../../EditProductSlice'
+import { useLocation } from 'react-router-dom'
 
 function EditItem() {
   const dispatch = useDispatch()
-  
+  const link = useLocation()
+  const Id = link.search.split('=')[1]
   useEffect(function(){
-    getAPI('/product/get-one-product/62da5f60bc070a53bcbc3220')
+    getAPI(`/product/get-one-product/${Id}`)
       .then((data=>{
         dispatch(loadDefault(data.data.product))
       })) 

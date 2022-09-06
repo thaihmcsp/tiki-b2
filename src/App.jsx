@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Router } from 'react-router-dom';
-import CreateShop from './page/user/createShop/CreateShop'
+// import CreateShop from './page/user/createShop/CreateShop'`
 import SignUp from './page/user/signUp/SignUp';
 import SignIn from './page/user/signIn/SignIn';
 import Header from './components/Header';
@@ -26,14 +26,11 @@ import Oder from './page/user/order/Order';
 import ShopProfile from './page/shop/shopProfile/ShopProfile';
 import ShopMenu from './page/shop/productManagement/ShopMenu';
 import ManagementProduct from './page/shop/productManagement/ManagementProduct ';
-// import Shop from './page/admin/shopManagement/Shop';
 import Detail from "./page/user/detail/Detail";
 import AddItem from "./page/shop/productManagement/priceItem/addItem_Phu/AddItem";
 import EditItem from './page/shop/productManagement/editProduct/priceItem/addItem_Phu/EditItem';
 import PrivateRouteShop from './page/shop/componentDataTableAdmin/PrivateRouter';
-// import ShopProfile from './page/shop/shopProfile/ShopProfile';
-// import ShopMenu from './page/shop/productManagement/Product';
-// import User from './page/admin/userManagement/User';
+
 function App() {
   return (
     <BrowserRouter>
@@ -55,7 +52,17 @@ function App() {
                         </PrivateRouteShop>}>   
                         <Route path='/adminShop/Product' element={<ManagementProduct/>}/>
             </Route>
-            <Route path='/create-shop' element={<CreateShop/>}/>
+            <Route path='/addItem' 
+                element={<PrivateRouteShop>
+                             <AddItem/>
+                        </PrivateRouteShop>}>   
+            </Route>
+            <Route path='/editItem' 
+                element={<PrivateRouteShop>
+                             <EditItem/>
+                        </PrivateRouteShop>}>   
+            </Route>
+            {/* <Route path='/create-shop' element={<CreateShop/>}/> */}
             <Route path='/admin' element={<Admin/>} >
                 <Route path='category' element={<Category/>} />
                 <Route path='shop' element={<Shop/>}></Route>
@@ -74,26 +81,15 @@ function App() {
                 <Route path='/shop' element={<Shop></Shop>}/>
                 <Route path='/detail' element={<Detail />}/>
             </Route>
-            <Route path="/addItem" element={<AddItem/>}/>
-            {/* ///private */}
-            <Route path="/addItem" element={<AddItem/>}/>
-            <Route path="/editItem" element={<EditItem/>}/>
+
+            
                 <Route path='/admin' element={<Admin />} >
                     <Route path='/admin/category' element={<Category />} />
                     <Route path='/admin/shop' element={<Shop></Shop>} ></Route>
                     <Route path='/admin/user' element={<User></User>} ></Route>
                     <Route path='/admin/dashbosh' element={<Shop></Shop>} ></Route>
                 </Route>
-                    {/* <Route path='/shop' element={<ShopMenu />} >
-                        <Route path='/shop/profile' element={<ShopProfile />} />
-                    </Route> */}
                     <Route path='*' element={<SignIn />} /><Route/>
-
-                    {/* <Route path='/user' element={<UserInfoMenu />}>
-                        <Route exact path='/user/profile' element={<PrivateRouter />}>
-                            <Route exact path='/user/profile' element={<div className='profile'> <UserInfo /> <ProfileList /> </div>} />
-                        </Route>
-                    </Route> */}
             <Route/>
 
             </Routes>

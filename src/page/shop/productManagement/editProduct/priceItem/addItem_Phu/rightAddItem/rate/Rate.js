@@ -1,12 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Divider, Steps } from 'antd';
 import style from './rate.module.css'
 import './rate.css'
+import { useLocation } from 'react-router-dom';
 const { Step } = Steps;
 
 function Rate() {
+  const link = useLocation()
   const [current, setCurrent] = useState(0);
-  window.addEventListener('scroll',function(e){
+  useEffect(function(){
+    window.addEventListener('scroll',scrollFunction)
+    return ()=>{
+      window.removeEventListener('scroll',scrollFunction,false)
+    }
+  },[link])
+  const scrollFunction = function(e){
     const basicInfor = document.querySelector('#Basic_infomation')
     const brandElement = document.querySelector('#Brand_Step__allInfor')
     const VarientElement = document.querySelector('#Varient_step__scroll')
@@ -26,7 +34,8 @@ function Rate() {
     if(this.window.scrollY >= 490 + brandElement.offsetHeight + VarientElement.offsetHeight + DescriptionElement.offsetHeight){
       setCurrent(4)
     }
-  })
+  }
+ 
   const onChange = (value) => {
     const basicInfor = document.querySelector('#Basic_infomation')
     const brandElement = document.querySelector('#Brand_Step__allInfor')
