@@ -10,7 +10,7 @@ function Description() {
     setValue(e.target.value);
   };
   return (
-    <div className={style.Description}>
+    <div className={style.Description} id='Description_step__scroll'>
       <h2>
         Mô tả sản phẩm
       </h2>

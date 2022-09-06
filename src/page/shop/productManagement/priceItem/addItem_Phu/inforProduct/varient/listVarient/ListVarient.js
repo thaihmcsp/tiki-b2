@@ -4,6 +4,7 @@ import { Input } from 'antd';
 import style from './listVarient.module.css'
 import './listVarient.css'
 import SubListVarient from './subListVarient/SubListVarient';
+import { dblClick } from '@testing-library/user-event/dist/click';
 const onChange = (value) => {
     // console.log('changed', value);
   };
@@ -20,8 +21,6 @@ function ListVarient({varient}) {
     const mainSpecialPrice = document.querySelector('#Input_price_special').value
     const mainStorage = document.querySelector('#Input_price_storage').value
     const mainSKU = document.querySelector('#Main_seller__Sku').value
-    console.log(23,mainSpecialPrice)
-    
     setMainInfo({mainPrice,mainSpecialPrice,mainStorage,mainSKU})
   }
   
@@ -74,7 +73,7 @@ function ListVarient({varient}) {
                 </button>
             </div>
         </div>
-        <SubListVarient varient={varient} mainInfo={mainInfo}/>
+        <SubListVarient varient={varient} mainInfo={mainInfo}  />
     </div>
   )
 }

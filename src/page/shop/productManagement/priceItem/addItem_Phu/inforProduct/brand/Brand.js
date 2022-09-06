@@ -3,7 +3,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import style from './brand.module.css'
 function Brand() {
   return (
-    <div className={style.Brand}>
+    <div className={style.Brand} id='Brand_Step__allInfor'>
         <h2>
             Thông số sản phẩm
         </h2>
