@@ -21,8 +21,8 @@ function getItem(label, key, icon, children) {
 
 const items = [
   getItem(<Link to='/admin/dashbosh'> Dashboard</Link>, '1',<DashboardIcon/>),
-  getItem('User management', '2',<AccountCircleIcon/>),
-  getItem('Shop management', 'sub1',<ShopIcon/>),
+  getItem(<Link to='/admin/user'> User management</Link>, '2',<AccountCircleIcon/>),
+  getItem(<Link to='/admin/shop'> Shop management</Link>, 'sub1',<ShopIcon/>),
   getItem(<Link to='/admin/category'>Categories</Link>, 'sub2',<CategoryIcon/>),
   getItem('Profile','3',<ContactMailIcon/>),
 ];
