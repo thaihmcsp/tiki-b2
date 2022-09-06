@@ -51,7 +51,8 @@
     top: 0;
     z-index: 1;
 }
-.checkboxGreen{
+
+.checkboxGreen {
     background: rgb(31, 183, 56);
     width: 8px;
     height: 8px;
@@ -60,7 +61,8 @@
     transform: translate(-1500%, 0);
     bottom: 14px;
 }
-.checkboxRed{
+
+.checkboxRed {
     background: red;
     width: 8px;
     height: 8px;

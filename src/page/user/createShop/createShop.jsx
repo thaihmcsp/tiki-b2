@@ -1,6 +1,6 @@
 import React from "react";
 import { listBranch } from "./listBranch";
-import "./createShop.css";
+import "./CreateShop.css";
 import { useSelector } from "react-redux";
 import { postAPI } from "../../../config/api";
 import { useNavigate } from "react-router-dom";

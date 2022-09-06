@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import style from './style/home.module.css'
 import clsx from 'clsx'; 
@@ -12,9 +12,24 @@ import Brand from './component/brand/Brand';
 import HotItem from './component/hotItem/HotItem';
 import BannerAdd2 from './component/banneradd2/BannerAdd2';
 import SuggestProduct from './component/suggestProduct/SuggestProduct';
+import { getAPI } from '../../../config/api';
 
 function Home() {
-  return (
+    const [listProduct,setListProduct] = useState([])
+    useEffect(function(){
+        getAPI('/product/get-all-products')
+        .then((data) => {
+            setListProduct(()=>{
+                const newdata = data.data.listProduct
+                return newdata.sort((a,b)=>b.sold-a.sold)
+            })
+        })
+        .catch((error) =>{
+            console.log(error)
+        })
+    },[])
+    console.log(listProduct)
+    return (
     <div className={style.HomePage}>
         <div className={style.container}>
            <div id='Addvetisement_Shop__Home'>
@@ -35,7 +50,7 @@ function Home() {
                 <HotItem />
                 <BannerAdd2/>
            </div>
-            <SuggestProduct/>
+            <SuggestProduct data={listProduct}/>
         </div>
         
     </div>

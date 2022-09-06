@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import {  Table } from "antd";
 import React, { useEffect, useState } from "react";
 import styles from "./ComponentTableProducts.module.css";
 import { EditOutlined, InfoCircleOutlined } from "@ant-design/icons";
@@ -7,9 +7,10 @@ import "./FilterProducts.css";
 // import array from "./data.js";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { handleBreakpoints } from "@mui/system";
-import { getAPI } from "../../../config/api";
+import { getAPI, patchAPI } from "../../../config/api";
 import { useNavigate } from "react-router-dom";
-
+import Switch from '@mui/material/Switch';
+ 
 const columns = [
   {
     title: "Thông tin sản phẩm",
@@ -40,19 +41,6 @@ const rowSelection = {
 };
 function removeAccents(str) {
   var AccentsMap = [
-    "aàảãáạăằẳẵắặâầẩẫấậ",
-    "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
-    "dđ", "DĐ",
-    "eèẻẽéẹêềểễếệ",
-    "EÈẺẼÉẸÊỀỂỄẾỆ",
-    "iìỉĩíị",
-    "IÌỈĨÍỊ",
-    "oòỏõóọôồổỗốộơờởỡớợ",
-    "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
-    "uùủũúụưừửữứự",
-    "UÙỦŨÚỤƯỪỬỮỨỰ",
-    "yỳỷỹýỵ",
-    "YỲỶỸÝỴ"
   ];
   for (var i = 0; i < AccentsMap.length; i++) {
     var re = new RegExp('[' + AccentsMap[i].substr(1) + ']', 'g');
@@ -65,9 +53,10 @@ const ComponentTableProducts = ({ value, selectSort, count }) => {
   const [selectionType, setSelectionType] = useState("checkbox");
   const [listData, setListData] = useState([])
   const [listData1, setListData1] = useState([]);
-  const handleCancel = (id) => {
-    console.log(id)
-  }
+  
+  // const handleCancel = (id) => {
+  //   console.log(id)
+  // }
   useEffect(() => {
     getAPI("/product/get-product-by-shopId/62da5cccbc070a53bcbc31b8")
       .then((res) => {
@@ -119,36 +108,52 @@ const ComponentTableProducts = ({ value, selectSort, count }) => {
 
   const nav = useNavigate()
   const handleUpdate = (id) => {
-    nav(`/addItem`)
+    nav(`/editItem?id=${id}`)
   }
   let dataTest = listData.map((ele, index) => {
-    return {
-      key: index + 1,
-      name: (
-        <div className={styles.products}>
-          <img src={ele.thump[0]} alt="img" />
-          <span>{ele.productName}</span>
-        </div>
-      ),
-      price: (
-        <div className={styles.modalUpdate}>
-          <p>{ele.price ? ele.price.toLocaleString() : ''} đ</p>
-        </div>
-      ),
-      address: (
-        <div className={styles.modalUpdate}>
-          <p className={ele.totalStorage > 0 ? ele.totalStorage : 'red'}> {ele.totalStorage ? ele.totalStorage : 'Hết Hàng'} </p>
-          <EditOutlined onClick={() => handleUpdate(ele._id)} />
-        </div>
-      ),
-      contentScore: (
-        <div className={styles.contentScore}>
-          <p className={ele.public ? 'checkboxGreen' : 'checkboxRed'}></p>
-          <p><InfoCircleOutlined /></p>
-          <p><DeleteOutlineIcon onClick={() => handleCancel(ele._id)} /></p>
-        </div>
-      ),
-    };
+    const label = { inputProps: { 'aria-label': 'Switch demo' } };
+   
+    function handleChange (e){
+    // console.log(118,id)
+    console.log(117,e)
+    console.log(117,e.target.checked)
+  //   if(e.target.checked == true ){
+  //     try {
+  //       await patchAPI('/product/change-product-publish/'+ id)
+        
+  //     }catch (error) {
+  //       console.log(error)
+  //   }
+  //  }
+  }
+      return {
+        key: index + 1,
+        name: (
+          <div className={styles.products}>
+            <img src={ele.thump[0]} alt="img" />
+            <span>{ele.productName}</span>
+          </div>
+        ),
+        price: (
+          <div className={styles.modalUpdate}>
+            <p>{ele.price ? ele.price.toLocaleString() : '' } đ</p>
+          </div>
+        ),
+        address: (
+          <div  className={styles.modalUpdate}>
+            <p className={ele.totalStorage > 0 ? ele.totalStorage :'red'}> {ele.totalStorage ? ele.totalStorage : 'Hết Hàng'} </p>
+            <EditOutlined onClick={()=>handleUpdate(ele._id)} />
+          </div>
+        ),
+        contentScore: (
+          <div className={styles.contentScore}>
+            <p className={ele.public ? 'checkboxGreen' : 'checkboxRed '}></p>
+            <p className={styles.status}> {ele.public = 'true' ? 'Đang hoạt động' : 'Tạm khoá'}</p>
+            <p><Switch {...label} defaultChecked  onChange={handleChange} /></p>
+          </div>
+        ),
+      };
+   
   });
 
   return (

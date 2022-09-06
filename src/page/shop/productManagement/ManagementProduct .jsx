@@ -61,6 +61,7 @@ function ManagementProduct() {
             </TabPane>
             <TabPane tab="Đang hoạt động" key="2">
               <FilterProducts />
+              
             </TabPane>
             <TabPane tab="Hết hàng" key="3">
               <FilterProducts />

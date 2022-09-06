@@ -49,7 +49,6 @@ function SubListVarient({varient,mainInfo}) {
             })}
         }
     }else{
-        // setSku(mainInfo.mainSKU)
         {[...addSKU].map((item, index) =>{
             
             item.value = mainInfo.mainSKU
@@ -88,7 +87,7 @@ function SubListVarient({varient,mainInfo}) {
                 if(varient[1].option.length>0){
                     if(varient[1].option.length == 1){
                         return(
-                        <tr className={style.tr_varient}>
+                        <tr className={`${style.tr_varient} DetailListItem`}>
                             <td>
                                 <div className={[style.Varient_option,'firstOption'].join(' ')}>
                                     {option1}
@@ -137,7 +136,7 @@ function SubListVarient({varient,mainInfo}) {
                     
                 }else{
                     return(
-                        <tr className={style.tr_varient}>
+                        <tr className={`${style.tr_varient} DetailListItem`}>
                             <td>
                                 <div className={[style.Varient_option,'firstOption'].join(' ')}>
                                     {option1}
@@ -175,7 +174,7 @@ function SubListVarient({varient,mainInfo}) {
                 
             })}
             {varient[0].option.length == 0 && (
-                <tr className={style.tr_varient}>
+                <tr className={`${style.tr_varient} DetailListItem`}>
                     <td>
                         <div className='Add_price__varient'>
                                 <span className='Add_Money'>
