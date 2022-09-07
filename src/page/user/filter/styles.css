@@ -40,10 +40,10 @@ body {
   border: unset !important;
   background:none !important;
   display: none !important;
-} */
+} 
 
-/* .ant-modal-root{
-
+.ant-modal-root{
+}
 
 .filter .ant-modal-root{
   display: none;
@@ -149,4 +149,4 @@ body {
     transform-origin: top right !important;
   } 
 
-}
+} */

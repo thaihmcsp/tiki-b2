@@ -3,7 +3,9 @@ import Navigation from './navigation/Navigation'
 import PruductList from './productList/PruductList'
 import style from './suggesstProduct.module.css'
 function SuggestProduct({ data }) {
-  window.addEventListener('scroll', (event) => {
+  const [link,setLink] = ('')
+  
+  const windowScroll = (e)=>{
     const header = document.querySelector(`.${style.sugguest}`)
     const Addvetisement_Shop__Home = document.querySelector('#Addvetisement_Shop__Home').offsetHeight
     const HeaderShopHome = document.querySelector('#Header_Shop__Home').offsetHeight
@@ -15,7 +17,13 @@ function SuggestProduct({ data }) {
       header.classList.remove(style.active)
       productList.classList.remove(style.active)
     }
-  });
+  }
+  useEffect(function(){
+    window.addEventListener('scroll', windowScroll);
+    return ()=>{
+      window.removeEventListener('scroll', windowScroll,false)
+    }
+  },[])
 
   return (
     <div className={style.SuggestProduct}>
