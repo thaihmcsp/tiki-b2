@@ -144,8 +144,9 @@ function Header(props) {
   const [numberCart, setNumberCart] = useState(0)
   useEffect(() => {
     getAPI("/cart/get-loged-in-cart")
-      .then((data) => {
-        setNumberCart(data.data.cart.listProduct.length)
+      .then((data)=>{
+        setNumberCart(data.data.cart.listProduct.length+data.data.cart.product.length)
+      console.log(77,data.data.cart)
       })
       .catch((err) => {
         console.log(err);
