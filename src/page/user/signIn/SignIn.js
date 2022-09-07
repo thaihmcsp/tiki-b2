@@ -37,14 +37,12 @@ function setCookie(cname, cvalue, exdays) {
     return "";
 }
 
-  console.log(39, getCookie('tiki-user'))
 
 function SignIn({setUsers}) {
     const user = useSelector(state => state.user)
-    console.log(user)
+    const dispatch = useDispatch();
     const { Option } = Select;
     const nav = useNavigate()
-    const dispatch = useDispatch();
     
     
     function checkMail() {
@@ -86,18 +84,14 @@ function SignIn({setUsers}) {
              else {
                
 
-                var resp = await postAPI('/auth/login', { email, password})
-                
+                var resp = await postAPI('/auth/login', { email, password}) 
                 setCookie('tiki-user', resp.data.token,30);
                 const res = await getAPI('/auth/me');
                 const action = userLogin(res.data);
-
                 dispatch(action);
-                window.localStorage.setItem('tiki-user',JSON.stringify(res.data))
-                      
+                window.localStorage.setItem('tiki-user',JSON.stringify(res.data))       
                   nav('/')
 
-                // console.log(99,localStorage.getItem('tiki-user'))
              }
 
            

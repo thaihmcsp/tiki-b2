@@ -8,10 +8,11 @@ import { DownOutlined } from '@ant-design/icons';
 import { v4 as uuidv4 } from 'uuid';
 import './styles.css'
 
-const SideBar = ({setData,setInp, listProducts}) => {
+const SideBar = ({setData, listProducts}) => {
   const [address, setAddress] = useState([])
   const [price200, setPrice200] = useState(0)
   const [brand, setBrand] = useState([])
+  const [count,setCount] = useState('')
   const [provider, setProvider] = useState([])
   const [data1, setData1] = useState([]);
   const [listdata, setListData] = useState([]);
@@ -19,9 +20,11 @@ const SideBar = ({setData,setInp, listProducts}) => {
   const [check, setCheck] = useState(0);
   const [check1, setCheck1] = useState(0);
   const [check2, setCheck2] = useState(0);
-  const [dem1, setDem1] = useState(false)
-  const [dem2, setDem2] = useState(false)
-  const [dem3, setDem3] = useState(false)
+  const [dem1, setDem1] = useState(0)
+  const [dem2, setDem2] = useState(0)
+  const [value, setValue] = useState('')
+  const [value1, setValue1] = useState('')
+  const [dem3, setDem3] = useState(0)
 const [listAddress, setTListAddress] = useState([])
   const [listsupplier, setListsupplier] = useState([])
   const [listtrademark, setListTrademark] = useState([])
@@ -41,8 +44,10 @@ const [listAddress, setTListAddress] = useState([])
     setListTrademark(() => {
       const newData1 = []
       listProducts.map(value => {
-        if(!newData1.includes(value.brandId.brandName)) {
-          newData1.push(value.brandId.brandName)
+        if(value.brandId){
+          if(!newData1.includes(value.brandId.brandName)) {
+            newData1.push(value.brandId.brandName)
+          }
         }
       })
       return newData1
@@ -70,6 +75,16 @@ const [listAddress, setTListAddress] = useState([])
     const newData2 = listsupplier.slice(0, 5)
     setSupplier(newData2)
   },[listsupplier,listAddress,listtrademark])
+
+  useEffect(() => {
+    setAddress([])
+    setBrand([])
+    setProvider([])
+    setPrice200([])
+    setDem2(0)
+    setDem1(0)
+    setDem3(0)
+  },[listProducts])
 
   const handleClick = () => {
     const hide = document.querySelector('.list_products__btn3')
@@ -163,48 +178,75 @@ const [listAddress, setTListAddress] = useState([])
   }, [address, brand, provider, price200]);
 
   const handleprice = () => {
-      const inp1 = document.querySelector('#min-input')
-      const inp2 = document.querySelector('#max-input')
-      setInp({min:inp1.value, max:inp2.value})
+      const inp1 = document.querySelector('#min-input').value
+      const inp2 = document.querySelector('#max-input').value
+      setPrice200([{min:value.split('.').join(''), max:value1.split('.').join('') }])
       inp1.value =''
       inp2.value= ''
   }
 
-  const handle200 = () => {
-    const filter_sidebar200 = document.querySelector('.filter-sidebar200')
-    if(!dem3) {
-      filter_sidebar200.style.backgroundColor = 'rgba(27, 168, 255, 0.1)';
+  const handle200 = (e) => {
+    if(dem3 === 0) {
       setPrice200([200000])
+      setDem3(dem3 => ++dem3)
     }else {
-      filter_sidebar200.style.backgroundColor = 'rgb(238, 238, 238)';
       setPrice200([])
+      setDem3(0)
     }
-    setDem3(dem3 => !dem3)
   }
 
   const handle7500 = () => {
-    const filter_sidebar700 = document.querySelector('.filter-sidebar700')
-    if(!dem2) {
-      filter_sidebar700.style.backgroundColor = 'rgba(27, 168, 255, 0.1)';
+    if(dem2 === 0) {
       setPrice200([{min:200000, max:750000}])
+      setDem2(dem2 => ++dem2)
     }else {
-      filter_sidebar700.style.backgroundColor = 'rgb(238, 238, 238)';
       setPrice200([])
+      setDem2(0)
     }
-    setDem2(dem2 => !dem2)
   }
 
   const handle8500 = () => {
-    const filter_sidebar750 = document.querySelector('.filter-sidebar750')
-    if(!dem1) {
-      filter_sidebar750.style.backgroundColor = 'rgba(27, 168, 255, 0.1)';
+    if(dem1 === 0) {
       setPrice200([750000])
+      setDem1(dem1 => ++dem1)
     }else {
-      filter_sidebar750.style.backgroundColor = 'rgb(238, 238, 238)';
       setPrice200([])
+      setDem1(0)
     }
-    setDem1(dem1 => !dem1)
+   
   }
+  const toNumber = number=>{
+    const newNumber = number.split('.').join('')
+    const number1 = (newNumber*1).toLocaleString()
+    return number1.toString().split(',').join('.')
+  }
+  
+
+ const them = e => {
+  setValue(()=>{
+    return toNumber(e.target.value)
+  })
+ }
+
+ const them1 = e => {
+  setValue1(()=>{
+    return toNumber(e.target.value)
+  })
+ }
+
+
+ useEffect(() => { 
+  const btn = document.querySelectorAll('#filter-sidebar-1')
+    btn.forEach(iten => {
+      iten.addEventListener('click', function(e) {
+        
+        btn.forEach(item => {
+              item.classList.remove('filter-sidebar_active');
+        })
+        iten.classList.toggle('filter-sidebar_active');
+      })
+    })
+ },[])
 
   return (
     <div className={styles.container}>
@@ -248,14 +290,14 @@ const [listAddress, setTListAddress] = useState([])
     <div className={styles.nav}>
     <div className={styles.price}>
     <h3 className={styles.title}>GIÁ</h3>
-    <p onClick ={handle200} className = 'filter-sidebar200'>Dưới 200.000</p>
-    <p onClick = {handle7500} className = 'filter-sidebar700'>Từ 200.000 đến 750.000</p>
-    <p onClick={handle8500} className = 'filter-sidebar750' >Trên 750.000</p>
+    <p onClick ={handle200} className = 'filter-sidebar200' id = 'filter-sidebar-1'>Dưới 200.000</p>
+    <p onClick = {() => {handle7500()}} className = 'filter-sidebar700' id ='filter-sidebar-1'>Từ 200.000 đến 750.000</p>
+    <p onClick={() => {handle8500()}} className = 'filter-sidebar750' id =  'filter-sidebar-1'>Trên 750.000</p>
     <label>Chọn khoảng giá</label>
     <div className={styles.gourp}>
-      <input type="number" placeholder='0' id='min-input'/>
+      <input type="text" placeholder='0' id='min-input' value = {value} onChange={them}/>
       <span className={styles.seperate}>-</span>
-      <input type="number" placeholder='0'  id='max-input'/>
+      <input type="text" placeholder='0'  id='max-input' value = {value1} onChange={them1}/>
     </div>
       <button className={styles.btn} onClick = {handleprice}>Áp dụng</button>
           </div>

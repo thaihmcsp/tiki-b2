@@ -15,17 +15,17 @@ import { VapeFreeOutlined } from '@mui/icons-material';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 
-const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
+const Container = ({data1, listProducts ,setId}) => {
   const [current, setCurrent] = useState(3);
   const  [pageSize, setPageSize] = useState(16)
+  const [check, setCheck] = useState('')
   const [listData, setListData] = useState([])
   const [listProductss, setListProductss] = useState([])
   const [page, setPage] = React.useState(1);
-  const [count, setCount] = useState(0)
-
   const nav = useNavigate()
   const [query] = useSearchParams()
   const search = query.get('seaarch')
+
   const onChange = (page) => {
     setCurrent(page);
   };
@@ -35,10 +35,12 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
       let newData = listProducts
       setPage(1)
       for(let key in data1){
-        if(data1[key].length>0){
+        if(data1[key].length > 0){
           newData = newData.filter(item=>{
             if(key == 'brandName'){
-              return data1[key].includes(item.brandId[key])            
+              if(item.brandId) {
+                return data1[key].includes(item.brandId[key])           
+              }
             }else if(key == 'price'){
               if(data1[key][0] === 200000){
                 return data1[key] > item.price
@@ -48,7 +50,6 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
                 if(data1[key][0].min < item.price && data1[key][0].max > item.price){
                   return true
                 }
-               
               }
             }
             else{ 
@@ -63,25 +64,22 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
 
     const highprice = () => {
       setListData((listData) => {
-        return listData.sort((a, b) => b.price - a.price)
+        return [...listData.sort((a, b) => b.price - a.price)]
       })
-      setCount(count + 1)
     }
 
     const lowprice = () => {
       setListData((listData) => {
-        return listData.sort((a, b) => a.price - b.price)
+        return [...listData.sort((a, b) => a.price - b.price)]
       })
-      setCount(count + 1)
     }
 
 
     useEffect(function(){
-      setCount(0)
       const start = (page - 1) * pageSize;
       const end = page * pageSize;
       setListProductss(listData.slice(start, end));
-    },[page, listData, count])
+    },[page, listData])
 
 
       const handleChange = (page, pageSize) => {
@@ -90,20 +88,20 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
 
       const newgoods = () => {
         setListData((listData) => {
-          return listData.sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt))
+          return [...listData.sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt))]
         })
-        setCount(count + 1)
       }
 
       const selling = () => {
         setListData((listData) => {
-          return listData.sort((a, b) => b.sold - a.sold)
+          return [...listData.sort((a, b) => b.sold - a.sold)]
         })
-        setCount(count + 1)
       }
 
       const popular = () => {
-
+        setListData((listData) => {
+          return [...listData.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))]
+        })
       }
 
       const handleID = (id) => {
@@ -113,11 +111,19 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
 
       useEffect(() => {
         window.scrollTo({
-          top: 450,
+          top: 435,
           behavior: 'smooth',
         });
       },[page])
   
+      useEffect(() => {
+        const id = document.querySelector(`.${style.select_name}`)
+        if(check.length === 0) {
+          id.classList.add('filter_checked')
+        }else {
+          id.classList.remove('filter_checked')
+        }
+      },[check])
 
 
   return (
@@ -167,11 +173,16 @@ const Container = ({data1, inp,price1, price750, listProducts ,setId}) => {
     </>
     </div>
     <div className={style.select}>
-        <span className={[style.select_name, style.select_active].join(' ')} onClick = {popular}>Phổ Biến</span>
-        <span className={style.select_name} onClick = {selling}>Bán Chạy</span>
-        <span className={style.select_name} onClick = {newgoods}>Hàng Mới</span>
-        <span className={style.select_name} onClick = {lowprice}>Giá Thấp</span>
-        <span className={style.select_name} onClick = {highprice}>Giá Cao</span>
+        <span className={[style.select_name].join(' ')} onClick = {() => {popular()
+        setCheck(0)}} id = {check === 0 ? 'filter_checked' : undefined}>Phổ Biến</span>
+        <span className={style.select_name} onClick = {() => {selling()
+                     setCheck(1)}} id = {check === 1 ? 'filter_checked' : undefined} >Bán Chạy</span>
+        <span className={style.select_name} onClick = {() => {newgoods()
+        setCheck(2)}} id = {check === 2 ? 'filter_checked' : undefined} >Hàng Mới</span>
+        <span className={style.select_name} onClick = {() => {lowprice()
+         setCheck(3)}} id = {check === 3 ? 'filter_checked' : undefined}>Giá Thấp</span>
+        <span className={style.select_name} onClick = {() => {highprice()
+         setCheck(4)}} id = {check === 4 ? 'filter_checked' : undefined}>Giá Cao</span>
     </div>
     <Modall className = 'filter_modal'/>
     <div className={style.products}>
