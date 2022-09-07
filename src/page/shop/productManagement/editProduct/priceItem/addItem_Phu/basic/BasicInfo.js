@@ -28,7 +28,7 @@ function BasicInfo() {
     const newData = useSelector(state=>{
       return state.eidtProduct
     })
-    console.log(31,newData)
+    console.log(31,newData.thump)
     const [listCatagory,setListCatagory] = useState([])
     useEffect(function(){
       getAPI('/category/get-all-categories')
