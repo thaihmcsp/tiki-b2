@@ -83,18 +83,18 @@ function UserInfo() {
   );
   async function handleUpdate () {
     try {
-      const adusername = document.querySelector('#adusername').value;
-      const adFirstName = document.querySelector('#first_last_name').value;
-      const dateTime = document.querySelector('#datetime').value;
-      const dataMother = document.querySelector('#dataMonth').value;
-      const dataDay = document.querySelector('#dataDay').value;
-      const nationality = document.querySelector('#formCountriesInput').value;
-      const male = document.querySelector('#male');
-      const female = document.querySelector('#female');
-      const other = document.querySelector('#other');
-      let dateOfBirth
-      if(dateTime * 1 && dataMother * 1 && dataDay * 1){
-        dateOfBirth = dateTime+'/'+dataMother+'/'+dataDay
+      const adusername = document.querySelector("#adusername").value;
+      const adFirstName = document.querySelector("#first_last_name").value;
+      const dateTime = document.querySelector("#datetime").value;
+      const dataMother = document.querySelector("#dataMonth").value;
+      const dataDay = document.querySelector("#dataDay").value;
+      const nationality = document.querySelector("#formCountriesInput").value;
+      const male = document.querySelector("#male");
+      const female = document.querySelector("#female");
+      const other = document.querySelector("#other");
+      let dateOfBirth;
+      if (dateTime * 1 && dataMother * 1 && dataDay * 1) {
+        dateOfBirth = dateTime + "/" + dataMother + "/" + dataDay;
       }
       const name = await patchAPI('/user/update-user-info/'+user._id, {username: adusername, fullname:adFirstName,
       dateOfBirth,
@@ -135,41 +135,46 @@ function UserInfo() {
     </>
       <div className= {styles.acountForm}>
         <div>Thông tin cá nhân</div>
-        <div className= {styles.formInfor}>
-          <div className= {styles.formAvatar}>
-            <div className= {styles.avatarView}>
+        <div className={styles.formInfor}>
+          <div className={styles.formAvatar}>
+            <div className={styles.avatarView}>
               <img
-              className={styles.avatar}
-                src={user.avatar.startsWith('http') ? user.avatar : 'https://tiki.thaihm.site/'+user.avatar}
-                alt='avatar'
+                className={styles.avatar}
+                src={
+                  user.avatar.startsWith("http")
+                    ? user.avatar
+                    : "https://tiki.thaihm.site/" + user.avatar
+                }
+                alt="avatar"
               />
             </div>
             <div className={styles.edit}>
-              <img onClick={showModal}
-                src='https://frontend.tikicdn.com/_desktop-next/static/img/account/edit.png'
-                class='edit_img'
-                alt=''
+              <img
+                onClick={showModal}
+                src="https://frontend.tikicdn.com/_desktop-next/static/img/account/edit.png"
+                class="edit_img"
+                alt=""
               />
             </div>
           </div>
-          <div className= {styles.formName}>
-            <div className=  {styles.formControl}>
-              <p className= {styles.formP}> Họ Và tên</p>
+          <div className={styles.formName}>
+            <div className={styles.formControl}>
+              <p className={styles.formP}> Họ Và tên</p>
               <input
-                type='text'
-                className= {styles.formInput}
+                type="text"
+                className={styles.formInput}
                 defaultValue={user.fullname}
-                placeholder='Thêm họ tên'
-                id='first_last_name'
+                placeholder="Thêm họ tên"
+                id="first_last_name"
               />
             </div>
-            <div className= {styles.formControl}>
+            <div className={styles.formControl}>
               <p className={styles.formP}> Nickname</p>
               <input
-                type='text'
-                className= {styles.formInput}
+                type="text"
+                className={styles.formInput}
                 defaultValue={user.username}
-                id='adusername'
+                id="adusername"
               />
             </div>
           </div>

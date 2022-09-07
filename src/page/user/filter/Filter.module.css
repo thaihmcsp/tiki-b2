@@ -5,13 +5,14 @@
 }
 
 .slider {
-    width: 1240px;
-    max-width: 100%;
-    margin: 0 auto;
-    box-sizing: border-box;
+    margin-bottom: 20px;
 }
+
 @media  only screen and (max-width:769px){
     .container_box {
         display: none;
+    }
+    .slider {
+        margin-top: 10px;
     }
 }

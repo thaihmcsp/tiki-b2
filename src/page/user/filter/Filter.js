@@ -1,22 +1,84 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SideBar from './SideBar'
 import Breadcrumb from './Breadcrumb'
 import styles from './Filter.module.css'
 import Container from './Container'
-import { listProducts } from './listProducts'
-const Filter = () => {
-  const [ShowListdata, setShowListdata] = useState([...listProducts]);
-  const [filter,setFilter] = useState([])
-  console.log(10,filter)
+import { getAPI } from '../../../config/api'
+import { useSearchParams } from 'react-router-dom';
+
+const Filter = ({setId}) => {
+  const [inp, setInp] = useState([])
+  const [price750, setPrice750] = useState([])
+  const [data1, setData] = useState([])
+ const [listProducts,setListProducts]= useState([])
+  const [query] = useSearchParams()
+  const search = query.get('seaarch')
+
+  function removeAccents(str) {
+    var AccentsMap = [
+      "aàảãáạăằẳẵắặâầẩẫấậ",
+      "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
+      "dđ",
+      "DĐ",
+      "eèẻẽéẹêềểễếệ",
+      "EÈẺẼÉẸÊỀỂỄẾỆ",
+      "iìỉĩíị",
+      "IÌỈĨÍỊ",
+      "oòỏõóọôồổỗốộơờởỡớợ",
+      "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
+      "uùủũúụưừửữứự",
+      "UÙỦŨÚỤƯỪỬỮỨỰ",
+      "yỳỷỹýỵ",
+      "YỲỶỸÝỴ",
+    ];
+    for (var i = 0; i < AccentsMap.length; i++) {
+      var re = new RegExp("[" + AccentsMap[i].substr(1) + "]", "g");
+      var char = AccentsMap[i][0];
+      str = str.replace(re, char);
+    }
+    return str;
+  }
+
+  useEffect(() => {
+    getAPI("/product/get-all-products")
+    .then((data)=> {
+      setListProducts(() => {
+        const newData = []
+        for(let value of data.data.listProduct) {
+          const newName = value.productName.toLowerCase()
+          if(value.price){
+            if(search){
+              if(newName.includes(search.toLowerCase())){
+                newData.push(value)
+              }else {
+                if(removeAccents(newName).includes(search.toLowerCase())){
+                  newData.push(value)
+                }
+              }
+            }else {
+              newData.push(value)
+            }
+          }
+        }
+        return newData
+      })
+      // setListProducts(data.data.listProduct)
+    })
+    .catch((error) => {
+      console.log(error)
+    }) 
+  },[search])
+
+
   return (
     <div className='App'>
         <div  className = {styles.slider}>
             <Breadcrumb />
             <div className = {styles.container}>
                 <div className = {styles.container_box} >
-                    <SideBar setShowListdata = {setShowListdata} setFilter={setFilter}/>
+                    <SideBar setData= {setData} listProducts = {listProducts} />
                 </div>
-                <Container ShowListdata = {ShowListdata} filter={filter}/>
+                <Container data1={data1} listProducts = {listProducts} setId = {setId}/>
             </div>
         </div>
     </div>
