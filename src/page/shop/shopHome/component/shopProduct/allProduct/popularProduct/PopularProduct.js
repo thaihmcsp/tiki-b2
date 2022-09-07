@@ -23,6 +23,7 @@ function PopularProduct({listProduct}) {
       })
     }
   }
+  // console.log(26,listShow)
   return (
     <>
     <div className={style.product}>
@@ -31,6 +32,7 @@ function PopularProduct({listProduct}) {
               return(
                   <Card1 
                       key={item._id}
+                      id={item._id}
                       img={item.thump}
                       title={item.productName}
                       sold={item.sold}

@@ -60,7 +60,6 @@ function FooterAdd() {
               about:Detail.data.about,
               categoryId:Detail.data.categoryId,
               // productDetailId:[],
-              thump:[],
               productName: Detail.data.productName,
               public:Detail.data.public,
               shopId:Detail.data.shopId,
@@ -95,19 +94,22 @@ function FooterAdd() {
                     }
                   }))
                   await Promise.all(data.map(async(item)=>{
-                    const newDetail = {
-                      price: item.price,
-                      storage: item.storage,
-                      option: item.option
-                    }
-                    console.log(newDetail,item._id,ID)
                     const index = defaultDetail.findIndex(subitem=>subitem._id== item._id)
                     if(index == -1){
+                      const newDetail = {
+                        price: item.price,
+                        storage: item.storage,
+                        option: item.option
+                      }
                       console.log('Thêm biến thể')
                       await postAPI(`/product-detail/add-product-detail/product/${ID}`,newDetail)
                               .then(data=>console.log('add detail ok'))
                               .catch(error=>console.log(error))
                     }else{
+                      const newDetail = {
+                        price: item.price,
+                        storage: item.storage
+                      }
                       console.log('Update biến thể')
                       await patchAPI(`/product-detail/update-product-detail-info/${item._id}/product/${ID}`,newDetail)
                               .then(data=>console.log('update detail ok'))
@@ -132,6 +134,20 @@ function FooterAdd() {
                         .catch(error=>console.log(error))
                 }))
               }
+              if(image.length>0){
+                await patchAPI(`/product/update-product-info/${ID}`,{
+                  thump:[]
+                })
+                await Promise.all(image.map(async(item,index)=>{
+                  const formData = new FormData();
+                  formData.append('thump', JSON.parse(item))
+                  await patchAPI(`/product/add-product-thump/${ID}`,formData)
+                  .then(data=>{
+                    console.log('up ảnh ok');
+                  })
+                  .catch(error=>console.log(error))
+                }))
+              }
               nav('/adminShop/Product')
             }
            
@@ -142,9 +158,7 @@ function FooterAdd() {
           if(priceMain&&totalStorege){
             const newProduct = {
               about:Detail.data.about,
-              categoryId:Detail.data.categoryId,  
-              productDetailId:[],
-              thump:[],
+              categoryId:Detail.data.categoryId,
               productName: Detail.data.productName,
               public:Detail.data.public,
               shopId:Detail.data.shopId,
@@ -156,6 +170,9 @@ function FooterAdd() {
 
             await patchAPI(`/product/update-product-info/${ID}`,newProduct)
             if(image.length>0){
+              await patchAPI(`/product/update-product-info/${ID}`,{
+                thump:[]
+              })
               await Promise.all(image.map(async(item,index)=>{
                 const formData = new FormData();
                 formData.append('thump', JSON.parse(item))
@@ -164,6 +181,13 @@ function FooterAdd() {
                   console.log('up ảnh ok');
                 })
                 .catch(error=>console.log(error))
+              }))
+            }
+            if(defaultDetail.length>0){
+              await Promise.all(defaultDetail.map(async(item)=>{
+                await deleteAPI(`/product-detail/delete-one-detail/${item._id}`)
+                      .then(data=>console.log('delete ok'))
+                      .catch(error=>console.log(error))
               }))
             }
             dispatch(loadDefault({}))
