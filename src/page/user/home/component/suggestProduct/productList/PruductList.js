@@ -28,9 +28,20 @@ function PruductList({listProduct}) {
     <div className={style.PruductList}>
          {
             data.map(function(item){
+                let linkImg = item.thump
+                if(linkImg.length > 0){
+                    const newLink = linkImg[0]
+                    if(newLink.startsWith('https')){
+                        linkImg = newLink
+                    }else{
+                        linkImg = `https://tiki.thaihm.site/${newLink}`
+                    }
+                  }else{
+                    linkImg = 'https://roofequipmentllc.com/wp-content/uploads/2019/01/noimage.png'
+                  }
                 return(
                     <div className={style.Card} key={item._id} onClick={()=>handleToDetailITem(item._id)}>
-                        <img src={item.thump} />
+                        <img src={linkImg} />
                         <div className={style.content}>
                             <div className={style.info}>
                                 <h3>
