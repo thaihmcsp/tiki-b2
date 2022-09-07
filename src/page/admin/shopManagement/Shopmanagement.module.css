@@ -46,6 +46,8 @@
     cursor: pointer;
     margin-bottom: 0;
     color: #206a9d;
+    margin-top: 0px;
+    margin-right: 20px;
 }
 .HeaderRight {
     border:  1px solid blue;

@@ -68,7 +68,7 @@ function Login() {
                 const action = userLogin(res.data);
                     dispatch(action);
                       
-                  nav('/')          
+                  nav('/adminShop')          
                 
         }
     }

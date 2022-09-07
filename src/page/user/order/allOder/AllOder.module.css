@@ -49,6 +49,27 @@
     margin-bottom: 6px;
     flex: right;
 }
+.OrderBottomTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.OderBottom_Shoplogo {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    font-weight: 550;
+    margin: 0 10px;
+}
+.OderBottom_Shoplogo img {
+    width: 25px;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+.OderBottom_Shoplogo span {
+    font-size: 16px;
+    opacity: 0.7;
+}
 .ImageNumber {
     display: flex;
     justify-content: flex-end;

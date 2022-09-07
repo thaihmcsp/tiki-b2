@@ -14,6 +14,7 @@ import styles from "./banner.module.css";
 
 
 function Banner() {
+  
   return (
     <div className={clsx(styles.slide)}>
       <Swiper
@@ -35,7 +36,7 @@ function Banner() {
             <img src="https://salt.tikicdn.com/cache/w1080/ts/banner/a5/5f/e4/7273649a375faad4c277c42ed880b1f3.png.webp"></img>
         </SwiperSlide>
         <SwiperSlide>
-            <img src="https://salt.tikicdn.com/cache/w1080/ts/banner/ff/3d/e6/b1951b6d91a360bd878391f02554811a.png.webp"></img>
+            <img src="https://salt.tikicdn.com/cache/w1080/ts/banner/73/08/3d/1488428567d7a11b4a99fc88871597ea.png.webp"></img>
         </SwiperSlide>
         <SwiperSlide>
             <img src="https://salt.tikicdn.com/cache/w1080/ts/banner/37/f8/19/d45d821c319edb96a5ba12db67c69c24.png.webp"></img>
@@ -56,7 +57,7 @@ function Banner() {
             <img src="https://salt.tikicdn.com/cache/w1080/ts/banner/06/03/99/6838f8ffdac19c5a889454fc3173e33a.png.webp"></img>
         </SwiperSlide>
         <SwiperSlide>
-            <img src="https://salt.tikicdn.com/cache/w1080/ts/banner/a1/b1/c6/ba4a068ec5a45b51de6e329d4720668e.png.webp"></img>
+            <img src="https://salt.tikicdn.com/cache/w1080/ts/banner/e6/8e/8a/a88981cf26e59e135545573cb6ac5a30.png.webp"></img>
         </SwiperSlide>
         <SwiperSlide>
             <img src="https://salt.tikicdn.com/cache/w1080/ts/banner/06/a3/54/00a33486e8d5696bc1ebcb3c979571b0.png.webp"></img>

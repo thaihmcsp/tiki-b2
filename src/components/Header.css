@@ -38,6 +38,20 @@
     justify-content: center;
     
 }
+.HistorySeach {
+    height: 400px;
+    width: 100%;
+}
+.SearchWord:hover {
+    cursor: pointer;
+    background-color: rgba(27, 168, 255, 0.1);
+}
+.SearchWord {
+    width: 100%;
+}
+.ShowCoverInput:hover{
+    display: block;
+}
 .componentHeaderInput {
     width: 680px;
     padding: 0 12px;
@@ -48,12 +62,13 @@
     border: 0px;
 }
 .componentHeaderInput:focus + .ShowCoverInput{
+    z-index: 10000000000000000000;
     display: block;
     z-index: 1000000;
 }
-.componentHeaderInput:focus + .HeaderMiddleListData {
-    display: none;
-}
+
+/* .componentHeaderInput:focus ~ .HeaderMiddleListData {
+    display: none; */
 
 .HeaderbuttonSeach {
     background-color: rgb(13, 92, 182);
@@ -102,8 +117,15 @@
 .HeaderTopContainerUser {
     display: flex;
     color: white;
+    margin: 5px 0 0 0;
+    position: relative;
+    
+}
+.HeaderTopContainerUser img {
+    border-radius: 50%;
 }
 .HeaderUserLoginContainer {
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start
@@ -115,6 +137,7 @@
 .HeaderUserLogin{
     font-size: 11px;
 }
+
 .HeaderUserLogin span{
     color: white;
 }
@@ -238,6 +261,7 @@
     box-shadow: rgb(0 0 0 / 28%) 0px 6px 12px 0px;
     background-color: rgb(255, 255, 255);
     position: absolute;
+    z-index: 100;
     z-index: 1;
     width: calc(100% - 120px);
     display: none;
@@ -251,7 +275,6 @@
 }
 .HistorySeach {
   border-bottom:  1px solid rgb(225, 225, 225);
-   
 }
 .HeaderCoverInput {
     display: flex;
@@ -266,6 +289,18 @@
     font-size: 14px;
     color: black;
     font-weight: 500;
+}
+.SearchWord {
+    padding-left: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+.seach-icon {
+    margin-right: 15px;
+}
+.SeachInputDataText {
+    letter-spacing: 1.5px;
 }
 .ListHistorySeach {
     cursor: pointer;
@@ -308,8 +343,6 @@
 }
 .InputCoverLists:hover {
     box-shadow: rgb(0 0 0 / 10%) 0px 1px 2px 0px;
-   
-    
 }
 .CatogoryList {
     width: 24%;
@@ -341,6 +374,7 @@
     color: black;
     font-size: 13px;
 }
+
 .HeaderTopContainerUser:hover .header_navbar_iteam_mypage_selec {
     display: block;
   }
@@ -361,6 +395,7 @@
     z-index: 999;
     cursor: pointer;
     padding: 20px;
+    /* margin-top: 12px; */
   }
   
   /* .header_navbar_iteam_mypage_selec-item:hover {
@@ -392,6 +427,8 @@
         display: none;
     }
 }
+
+
 @media  only screen and (min-width:769px) and (max-width:992px){
     .HeaderBody {
         display: none;
@@ -404,8 +441,7 @@
     .HeaderBody{
         display: none;
     }
-  }
-
+}
 @media only screen and (max-width: 600px){
     .HeaderMobieBottom {
         width: 100vw;
@@ -440,6 +476,6 @@
     }
     .Header{
         background: rgba(0 ,92, 214,1);
-        margin-bottom: -10px;
+        margin-bottom: -10px
     }
 }

@@ -6,7 +6,6 @@ body {
 }
 
 body {
-  background: #eee;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 14px;
   color: #000;
@@ -22,7 +21,6 @@ body {
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  background: #fff;
 
   /* Center slide text vertically */
   display: -webkit-box;
@@ -50,6 +48,12 @@ body {
 }
 .mySwiper_productBanner .swiper-slide:nth-child(2n+1){
   width: 65%;
+}
+.mySwiper_productBanner .swiper-slide:nth-child(2n) img{
+  width: 415px;
+  height: 415px;
+  object-fit: cover;
+  margin-right: 20px;
 }
 .mySwiper_productBanner .swiper-slide:nth-child(2n) {
   width: 35%;
