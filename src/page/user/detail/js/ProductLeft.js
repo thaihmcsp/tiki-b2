@@ -35,9 +35,9 @@ function ProductLeft(props) {
           <div>Chia sẻ</div>
           {props.icon}
         </div>
-        <div>
+        {/* <div>
           <img id="banner" src={props.banner} />
-        </div>
+        </div> */}
       </div>
       <div className="kfTKQv"></div>
     </div>

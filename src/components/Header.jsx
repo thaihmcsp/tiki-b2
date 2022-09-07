@@ -140,17 +140,21 @@ function Header(props) {
   })
   ///hiển thị số lượng Sản phâm ở giỏ hàng
   const [numberCart, setNumberCart] = useState(0)
+  const [cartId,setCartId] = useState('')
   useEffect(() => {
     getAPI("/cart/get-loged-in-cart")
       .then((data)=>{
         setNumberCart(data.data.cart.listProduct.length+data.data.cart.product.length)
-      console.log(77,data.data.cart)
+        setCartId(data.data.cart._id)
       })
       .catch((err) => {
         console.log(err);
       })
   }, [])
   const [DataHeader, setDataHeader] = useState(['Thịt', 'Rau củ', 'Nhà cửa', 'Điện tử', 'Thiết Bị Số', 'Điện thoại', 'Mẹ & Bé'])
+  const handlegotoCart = ()=>{
+    nav(`/cart?userID=${cartId}`)
+  }
   return (
    <div>
     <div className="Header" id='Header_Shop__Home'>
@@ -385,7 +389,7 @@ function Header(props) {
                   )}
 
                 <div className="HeaderTopContainerCart">
-                  <div className="HeaderTopContainerCartWallet cursorPoiter">
+                  <div className="HeaderTopContainerCartWallet cursorPoiter" onClick={handlegotoCart}>
                     <div className="HeaderWalletCart">
                       <img src="https://salt.tikicdn.com/ts/upload/40/44/6c/b80ad73e5e84aeb71c08e5d8d438eaa1.png" alt="" className='HeaderCart' />
                       <span className='HeaderCartTitle'> {numberCart}</span>

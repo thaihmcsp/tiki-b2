@@ -40,18 +40,20 @@ function Detail() {
   const [query] = useSearchParams();
   const id = query.get("id");
   
-  
+  const [shopId,setShopId] = useState('')
   //get Data
   useEffect(() => {
     getAPI(`/product/get-one-product/${id}`)
       .then((data) => {
         setDetail(data.data.product);
+        setShopId(data.data.product.shopId._id)
         setcolorDetail({color:data.data.product.thump[0], name:""})
       })
       .catch((error) => {
         console.log(error);
       });
   }, [id]);
+  console.log(56,shopId)
   //get cart id
   const [cartid, setCartid] = useState()
   useEffect(() => {
@@ -232,6 +234,7 @@ function Detail() {
         ) : null}
         {detail ? (
           <ProductRight
+            shopId={shopId}
             productDetail={detail}
             check={check}
             setcheck={setCheck}

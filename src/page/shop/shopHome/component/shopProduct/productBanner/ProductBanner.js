@@ -62,7 +62,7 @@ function ProductBanner({shopInfor}) {
           className="mySwiper_productBanner"
         >
           {
-            baner.length>=1?
+            baner&&baner.length>=1?
             baner.map((image,index)=>{
               return(
                 <SwiperSlide key={index}>
@@ -70,9 +70,33 @@ function ProductBanner({shopInfor}) {
                 </SwiperSlide>
               )
             }):
-            <SwiperSlide >
-           
-          </SwiperSlide>
+            <>
+              <SwiperSlide >
+                <img src='https://img.freepik.com/premium-psd/sport-sneakers-shoes-sale-social-media-instagram-post-facebook-web-banner-template_70055-1445.jpg?w=996' />
+              </SwiperSlide>
+              <SwiperSlide >
+                <img src='https://i.pinimg.com/564x/d5/62/e8/d562e8f513ed0f4468a8f884e21e6a53.jpg' />
+              </SwiperSlide>
+              <SwiperSlide >
+                <img src='https://img.freepik.com/premium-psd/sport-sneakers-shoes-sale-social-media-instagram-post-facebook-web-banner-template_70055-1538.jpg?w=996' />
+              </SwiperSlide>
+              <SwiperSlide >
+                <img src='https://img.freepik.com/premium-psd/sport-shoes-sale-social-media-instagram-post-square-banner-template-design_70055-1355.jpg' />
+              </SwiperSlide>
+              <SwiperSlide >
+                <img src='https://img.freepik.com/premium-psd/banner-sport-shoes-sale-social-media-post-facebook-web-banner-template_70055-854.jpg?w=996' />
+              </SwiperSlide>
+              <SwiperSlide >
+                <img src='https://i.pinimg.com/564x/38/b7/0f/38b70f674ea6dd7cfd216f587333d5a7.jpg' />
+              </SwiperSlide>
+              <SwiperSlide >
+                <img src='https://img.freepik.com/premium-psd/sport-sneakers-shoes-sale-social-media-facebook-web-banner-template_70055-1102.jpg?w=996' />
+              </SwiperSlide>
+              <SwiperSlide >
+                <img src='https://i.pinimg.com/564x/1e/d8/d6/1ed8d6d3f6fb821e1daf9a2c4b460dcc.jpg' />
+              </SwiperSlide>
+            </>
+            
           }
         </Swiper>
       </>

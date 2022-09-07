@@ -187,12 +187,22 @@ const Container = ({data1, listProducts ,setId}) => {
     <Modall className = 'filter_modal'/>
     <div className={style.products}>
         {listProductss.map(val => {
-      
+            let linkImg = val.thump
+            if(linkImg.length > 0){
+                const newLink = linkImg[0]
+                if(newLink.startsWith('https')){
+                    linkImg = newLink
+                }else{
+                    linkImg = `https://tiki.thaihm.site/${newLink}`
+                }
+              }else{
+                linkImg = 'https://roofequipmentllc.com/wp-content/uploads/2019/01/noimage.png'
+              }
             return  (
                 <div className={style.products_item} key={val._id} onClick = {() => handleID(val._id)}>
                 <div className={style.products_thumbnail}>
-                    <img src={val.thump[0]} alt='' className={style.image_img} />
-                    {/* <img src={val.categoryId.thumbnail} alt='' className={style.thumbnail_img} />  */}
+                    <img src={linkImg} alt='Product-image' className={style.image_img} />
+
                 </div>
                 <div className={style.products_info}>
                     <span className={style.ad}>Ad</span>
@@ -206,10 +216,6 @@ const Container = ({data1, listProducts ,setId}) => {
                     <span className={style.products_discount}>-14%</span>
                     </div>
                     <div>
-                    {
-                      
-                    }
-                    {/* <img src={val.categoryId.item} alt='' className={style.badge_under} /> */}
                     </div>
                 </div>
                 </div>

@@ -29,15 +29,10 @@ import ManagementProduct from './page/shop/productManagement/ManagementProduct '
 import Detail from "./page/user/detail/Detail";
 import "antd/dist/antd.css";
 import "./App.css";
-// import User from "./page/admin/userManagement/User";
-// import AdminLogin from "./page/admin/login/Login";
-// import ShopLogin from "./page/shop/login/Login";
-// import Order from "./page/user/order/maintotal/Main";
-// import ShopHome from "./page/shop/shopHome/ShopHome";
-// import Shop from "./page/admin/shopManagement/Shop";
 import AddItem from "./page/shop/productManagement/priceItem/addItem_Phu/AddItem";
 import EditItem from './page/shop/productManagement/editProduct/priceItem/addItem_Phu/EditItem';
 import PrivateRouteShop from './page/shop/componentDataTableAdmin/PrivateRouter';
+import TotalCart from './page/user/cart/cart/TotalCart';
 
 function App() {
   function getCookie(cname) {
@@ -60,6 +55,7 @@ function App() {
   return (
     <BrowserRouter>
         <Routes>
+            
             
             <Route path='/sign-up' element={<SignUp/>} />
      
@@ -105,6 +101,7 @@ function App() {
                 <Route path='/ShopHome' element={<ShopHome/>}/>
                 <Route path='/shop' element={<Shop></Shop>}/>
                 <Route path='/detail' element={<Detail />}/>
+                <Route path='/cart' element={<TotalCart/>} />
             </Route>
 
             

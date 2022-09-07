@@ -27,7 +27,17 @@ a {
   flex-wrap: wrap;
 }
 .productright {
-  width: 60%;
+  width: 770px;
+  position: relative;
+}
+.productright::before{
+  content: '';
+  width: 1px;
+  height: calc(100% - 16px);
+  background: rgb(228, 228, 228);
+  position: absolute;
+  top: 0;
+  left: -13px;
 }
 .header,
 .body {
@@ -154,9 +164,16 @@ a {
 .left {
   width: 150%;
 }
+.amoutn>p{
+  margin: 0;
+}
 .right {
-  width: 40%;
+  width: 240px;
   margin: 16px;
+  flex-shrink: 0;
+  border: solid 1px rgb(235, 235, 235);
+  overflow: hidden;
+  margin-right: 0;
 }
 .size button {
   cursor: pointer;
@@ -393,6 +410,7 @@ a {
 .addtocard,
 .delivery {
   padding: 15px 0 15px 15px;
+  border: solid 1px rgb(235, 235, 235);
 }
 
 .info-shop,

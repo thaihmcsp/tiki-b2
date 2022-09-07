@@ -36,14 +36,12 @@ body {
 }
 
 
-/* .ant-btn-primary {
+.ant-btn-primary {
   border: unset !important;
   background:none !important;
   display: none !important;
 } 
 
-.ant-modal-root{
-}
 
 .filter .ant-modal-root{
   display: none;
@@ -149,4 +147,4 @@ body {
     transform-origin: top right !important;
   } 
 
-} */
+}
