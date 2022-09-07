@@ -435,8 +435,7 @@ function Header(props) {
           <div className="HeaderMobieMidle">
             <input type="text" name="" id="" placeholder="Bạn tìm gì hôm nay ?" className='HeaderMobieText'
               onChange={(e) => SearchTitle(e.target.value)}
-            /
-            >
+            />
           </div>
           <div className="HeaderMobieBottom">
             <a href="">nhà cửa</a>
