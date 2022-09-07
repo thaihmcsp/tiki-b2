@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   RightOutlined,
   BellFilled,
@@ -31,12 +31,13 @@ function Profile() {
   const onChange = (e) => {
     setPlacement(e.target.value);
   };
+
   return (
-    <div >
-      <div className={styles.manuListSmartPhone}>
+    <div>
+      <div className="manuListSmartPhone">
         <Space>
           <Radio.Group value={placement} onChange={onChange}></Radio.Group>
-          <MenuIcon type='primary' onClick={showDrawer}></MenuIcon>
+          <MenuIcon type="primary" onClick={showDrawer}></MenuIcon>
         </Space>
         <Drawer
           // title='Basic Drawer'
@@ -60,7 +61,7 @@ function Profile() {
               <br />
               <strong>{user.username}</strong>
             </div>
-          </MenuUserIcon></Link>
+          </MenuUserIcon>
         </div>
         <div className= {styles.headerList}>
           <Link to='/user/profile'>

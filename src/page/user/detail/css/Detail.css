@@ -1,10 +1,10 @@
 .product-content {
   display: flex;
   margin-top: 24px;
-  padding: 0 16px;
+  padding: 16px;
 }
 .Detai {
-  width: 1450px;
+  width: 100%;
   padding-left: 15px;
   padding-right: 15px;
   margin-right: auto;

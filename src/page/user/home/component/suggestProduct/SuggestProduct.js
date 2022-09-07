@@ -29,7 +29,7 @@ function SuggestProduct({ data }) {
         <PruductList listProduct={data} />
       </div>
     </div>
-  )
+  );
 }
 
-export default SuggestProduct
+export default SuggestProduct;

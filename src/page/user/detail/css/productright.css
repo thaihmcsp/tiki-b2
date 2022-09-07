@@ -39,25 +39,27 @@ a {
 .addtocard,
 .selectproduct,
 .price-and-icon {
-  margin-top: 18px;
+  margin-top: 12px;
   padding-top: 18px;
   background-color: rgb(255, 255, 255);
   border-top: 1px solid rgb(242, 242, 242);
 }
 
 .right {
+  width: 40%;
   border-radius: 4px;
   box-shadow: rgb(242 242 242) 1px 1px 0px 0px inset,
     rgb(242 242 242) -1px -1px 0px 0px inset;
 }
 
-.title {
+.header .title {
   margin: 0px 0px 4px;
   color: rgb(36, 36, 36);
   font-size: 24px;
   font-weight: 300;
   line-height: 32px;
   word-break: break-word;
+  text-align: start;
 }
 .price-and-icon {
   display: flex;
@@ -121,7 +123,7 @@ a {
 .WebpImg__StyledImg-sc-h3ozu8-0 {
   height: 100%;
 }
-.color {
+.option1 {
   cursor: pointer;
   height: 60px;
   margin: 8px 10px 0px 0px;
@@ -138,11 +140,11 @@ a {
   outline: 0px;
   border-radius: 4px;
 }
-.color:hover {
+.option1:hover {
   border: 1px solid rgb(13, 92, 182);
   background-color: rgb(229, 242, 255);
 }
-.color:hover .selected-indicator {
+.option1:hover .selected-indicator {
   display: block;
 }
 .size button:hover {
@@ -150,8 +152,7 @@ a {
   background-color: rgb(229, 242, 255);
 }
 .left {
-  width: 60%;
-  max-width: 491px;
+  width: 150%;
 }
 .right {
   width: 40%;
@@ -185,7 +186,7 @@ a {
 #detail-size,
 #detail-color {
   font-weight: 900;
-  text-transform: uppercase;
+ 
 }
 .group-input {
   display: flex;
@@ -387,4 +388,22 @@ a {
   width: 40px;
   padding: 3px;
   border: 1px solid rgb(236, 236, 236);
+}
+.selectproduct,
+.addtocard,
+.delivery {
+  padding: 15px 0 15px 15px;
+}
+
+.info-shop,
+.insurance,
+.refund {
+  background-color: white;
+}
+.show-select {
+  display: block;
+}
+.show-border {
+  border: 1px solid rgb(13, 92, 182) !important;
+  background-color: rgb(229, 242, 255) !important;
 }
