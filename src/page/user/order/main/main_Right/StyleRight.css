@@ -437,3 +437,10 @@ flex-shrink: 0;
     display: flex;
     align-items: center;
 } */
+.warning_add__address{
+    color: red;
+    
+}
+.cTGPxG .customer_info p:not(:first-child){
+    margin-left: 1rem;
+}
