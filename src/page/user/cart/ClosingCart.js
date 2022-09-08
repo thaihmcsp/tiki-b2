@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button, Modal } from "antd";
 import style from "./ClosingCart.module.css";
 import "./ClosingCart.css";
+import { useNavigate } from "react-router-dom";
 function ClosingCart({ total, finalTotal }) {
   console.log(total);
   const [visible, setVisible] = useState(false);
@@ -12,7 +13,10 @@ function ClosingCart({ total, finalTotal }) {
   const showModal = () => {
     setVisible(true);
   };
-
+  const nav = useNavigate()
+  const handlegotoByNow =()=>{
+    nav('/order')
+  }
   const handleOk = () => {
     setModalText("The modal will be closed after two seconds");
     setConfirmLoading(true);
@@ -28,7 +32,7 @@ function ClosingCart({ total, finalTotal }) {
   };
 
   return (
-    <div>
+    <div className="total_closing__cart">
       <div className="right-cart">
         <div>
           <div className="box-1">
@@ -264,7 +268,7 @@ function ClosingCart({ total, finalTotal }) {
               </div>
             </div>
           </div>
-          <button class="btn-closingCart">Mua Hàng {`(${finalTotal.length})`}</button>
+          <button class="btn-closingCart" onClick={handlegotoByNow}>Mua Hàng {`(${finalTotal.length})`}</button>
         </div>
       </div>
     </div>

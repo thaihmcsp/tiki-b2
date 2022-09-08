@@ -22,7 +22,7 @@ import OrderUser from './page/user/order/Order'
 import ShopLogin from './page/shop/login/Login';
 import Order from './page/user/order/maintotal/Main';
 import ShopHome from './page/shop/shopHome/ShopHome';
-import Oder from './page/user/order/Order';
+import  OderHistory from './page/user/order/Order';
 import ShopProfile from './page/shop/shopProfile/ShopProfile';
 import ShopMenu from './page/shop/productManagement/ShopMenu';
 import ManagementProduct from './page/shop/productManagement/ManagementProduct ';
@@ -96,13 +96,14 @@ function App() {
                 <Route path='/shop/dashboard' element={<ShopDashBoardAll/>} />
                 <Route path='/user' element={<UserInfoMenu/>}> 
                     <Route path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> }/>
-                    <Route path='/user/order' element={ <div className='order'><Order/></div> } />
+                    <Route path='/user/order' element={ <div className='order'><OderHistory/></div> } />
                 </Route>
                 <Route path='/ShopHome' element={<ShopHome/>}/>
                 <Route path='/shop' element={<Shop></Shop>}/>
                 <Route path='/detail' element={<Detail />}/>
                 <Route path='/cart' element={<TotalCart/>} />
             </Route>
+            <Route path='/order' element={ <div className='order'><Order/></div> } />
 
             
                 <Route path='/admin' element={<Admin />} >
