@@ -28,7 +28,7 @@ function Main() {
                 const cart = await getAPI('/cart/get-loged-in-cart')
                 console.log(29,cart)
                 console.log(19,cart.data.cart.userId._id)
-                setCartId(cart.data.cart.userId._id)
+                setCartId(cart.data.cart._id)
                 const Cart = cart.data.cart
                 console.log(21,cartId)
                 const listProductdetail = cart.data.cart.listProduct
@@ -47,9 +47,16 @@ function Main() {
                       _id: item.productId._id,
                     };
                   });
-                  Cart.listProduct = [...NEWDATA, ...listProductdetail]
+                  const newDATA = [...NEWDATA, ...listProductdetail]
+                  const EndData = []
+                  newDATA.map(item =>{
+                    if(item.selected){
+                        EndData.push(item)
+                    }
+                  })
+                  Cart.listProduct = EndData
                 //   setOrder([...NEWDATA, ...listProductdetail]);
-            
+                console.log(52,Cart.listProduct)
                 const orderList=[]
                 const shopName=[]
                 Cart.listProduct.map((value) => {
@@ -96,7 +103,7 @@ function Main() {
         }
         setMoney(total)
     },[order])
-   
+   console.log(99,order)
     return (
         <div className='main'>
             <OrderHeader/>
