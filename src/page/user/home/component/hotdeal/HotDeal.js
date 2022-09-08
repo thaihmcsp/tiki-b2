@@ -25,10 +25,10 @@ function HotDeal() {
 
     const m = Math.floor((distance % hours)/munite)
     const s = Math.floor((distance % munite)/second)
-    document.querySelector('#count_down_hour').innerHTML=`0${h}`
-    document.querySelector('#count_down_second').innerHTML=(m<=9? `0${m}`:m)
+    // document.querySelector('#count_down_hour').innerHTML=`0${h}`
+    // document.querySelector('#count_down_second').innerHTML=(m<=9? `0${m}`:m)
 
-    document.querySelector('#count_down_munite').innerHTML=(s<=9? `0${s}`:s)
+    // document.querySelector('#count_down_munite').innerHTML=(s<=9? `0${s}`:s)
 
 
   }

@@ -1,18 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import { Input, Space } from 'antd';
-import 'antd/dist/antd.css';
-import { Select } from 'antd';
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
-import { Link, useNavigate } from 'react-router-dom'
-import {postAPI,getAPI} from '../../../config/api'
-import { useDispatch, useSelector } from 'react-redux';
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { Input, Space } from "antd";
+import "antd/dist/antd.css";
+import { Select } from "antd";
+import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
+import { Link, useNavigate } from "react-router-dom";
+import { postAPI, getAPI } from "../../../config/api";
+import { useDispatch, useSelector } from "react-redux";
 
-import { userLogin } from '../../../redux/userSlice';
+import { userLogin } from "../../../redux/userSlice";
 
-
-import "./StyleIn.css"
+import "./StyleIn.css";
 
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();

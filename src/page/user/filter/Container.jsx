@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import Modall from './Modall';
 import "swiper/css";
@@ -6,30 +6,128 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination as Pagination2, Navigation } from "swiper";
 import { Rate } from 'antd';
-import { List1 } from './List1';
-import { Pagination, Stack } from '@mui/material';
-// import  from '@mui/material/Stack';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import 'antd/dist/antd.css';
 import style from './container.module.css'
 import "./styles.css";
 import { VapeFreeOutlined } from '@mui/icons-material';
-import { Link, useNavigate } from 'react-router-dom';
-const Container = () => {
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+
+
+const Container = ({ data1, inp, price1, price750, listProducts, setId }) => {
   const [current, setCurrent] = useState(3);
+  const [pageSize, setPageSize] = useState(16)
+  const [listData, setListData] = useState([])
+  const [listProductss, setListProductss] = useState([])
+  const [page, setPage] = React.useState(1);
+  const [count, setCount] = useState(0)
+
+  const nav = useNavigate()
+  const [query] = useSearchParams()
+  const search = query.get('seaarch')
   const onChange = (page) => {
-    console.log(page);
     setCurrent(page);
   };
-  const [show, setShow] = useState(false)
+
+
+  useEffect(() => {
+    let newData = listProducts
+    setPage(1)
+    for (let key in data1) {
+      if (data1[key].length > 0) {
+        newData = newData.filter(item => {
+          if (key == 'brandName') {
+            return data1[key].includes(item.brandId[key])
+          } else if (key == 'price') {
+            if (data1[key][0] === 200000) {
+              return data1[key] > item.price
+            } else if (data1[key][0] === 750000) {
+              return data1[key] < item.price
+            } else {
+              if (data1[key][0].min < item.price && data1[key][0].max > item.price) {
+                return true
+              }
+
+            }
+          }
+          else {
+            return data1[key].includes(item.shopId[key])
+          }
+        })
+      }
+    }
+    setListData(newData)
+  }, [data1, listProducts])
+
+
+  const highprice = () => {
+    setListData((listData) => {
+      return listData.sort((a, b) => b.price - a.price)
+    })
+    setCount(count + 1)
+  }
+
+  const lowprice = () => {
+    setListData((listData) => {
+      return listData.sort((a, b) => a.price - b.price)
+    })
+    setCount(count + 1)
+  }
+
+
+  useEffect(function () {
+    setCount(0)
+    const start = (page - 1) * pageSize;
+    const end = page * pageSize;
+    setListProductss(listData.slice(start, end));
+  }, [page, listData, count])
+
+
+  const handleChange = (page, pageSize) => {
+    setPage(pageSize);
+  };
+
+  const newgoods = () => {
+    setListData((listData) => {
+      return listData.sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt))
+    })
+    setCount(count + 1)
+  }
+
+  const selling = () => {
+    setListData((listData) => {
+      return listData.sort((a, b) => b.sold - a.sold)
+    })
+    setCount(count + 1)
+  }
+
+  const popular = () => {
+
+  }
+
+  const handleID = (id) => {
+    nav(`/detail?id=${id}`)
+    setId(id)
+  }
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 450,
+      behavior: 'smooth',
+    });
+  }, [page])
+
+
+
   return (
     <div className={style.container}>
-      <h2 className={style.title}>Làm Đẹp - Sức Khỏe</h2>
+      <h2 className={style.title}>{search}</h2>
       <div className={style.slider}>
         <>
           <Swiper
             spaceBetween={30}
             centeredSlides={true}
-            // centeredSlides={show}
             autoplay={{
               delay: 2500,
               disableOnInteraction: false,
@@ -43,7 +141,7 @@ const Container = () => {
             modules={[Autoplay, Pagination2, Navigation]}
             loop={true}
             loopPreventsSlide={true}
-            className="mySwiper_fillter"
+            className="mySwiper"
 
           >
             <SwiperSlide>
@@ -65,48 +163,53 @@ const Container = () => {
             <SwiperSlide>
               <img src='https://salt.tikicdn.com/cache/w1080/ts/banner/06/37/79/6e63d637ff9346f787cc4fa891b77f1b.png.webp' alt='' className={style.img} />
             </SwiperSlide>
-
           </Swiper>
         </>
       </div>
       <div className={style.select}>
-        <span className={[style.select_name, style.select_active].join(' ')}>Phổ Biến</span>
-        <span className={style.select_name}>Bán Chạy</span>
-        <span className={style.select_name}>Hàng Mới</span>
-        <span className={style.select_name}>Giá Thấp</span>
-        <span className={style.select_name}>Giá Cao</span>
+        <span className={[style.select_name, style.select_active].join(' ')} onClick={popular}>Phổ Biến</span>
+        <span className={style.select_name} onClick={selling}>Bán Chạy</span>
+        <span className={style.select_name} onClick={newgoods}>Hàng Mới</span>
+        <span className={style.select_name} onClick={lowprice}>Giá Thấp</span>
+        <span className={style.select_name} onClick={highprice}>Giá Cao</span>
       </div>
-      <Modall />
+      <Modall className='filter_modal' />
       <div className={style.products}>
-        {List1.map(val => {
+        {listProductss.map(val => {
+
           return (
-            <div className={style.products_item} key={val.id}>
+            <div className={style.products_item} key={val._id} onClick={() => handleID(val._id)}>
               <div className={style.products_thumbnail}>
-                <img src={val.image} alt='' className={style.image_img} />
-                <img src={val.thumbnail} alt='' className={style.thumbnail_img} />
+                <img src={val.thump[0]} alt='' className={style.image_img} />
+                {/* <img src={val.categoryId.thumbnail} alt='' className={style.thumbnail_img} />  */}
               </div>
               <div className={style.products_info}>
                 <span className={style.ad}>Ad</span>
-                <h4 className={style.products_title}>{val.title}</h4>
+                <h4 className={style.products_title}>{val.productName}</h4>
                 <div className={style.products_rating}>
                   <Rate allowHalf defaultValue={3} style={{ fontSize: '0.7rem' }} />
                   <span className={style.products_sold}>đã bán {val.sold}</span>
                 </div>
                 <div className={style.products_price_box}>
-                  <span className={style.products_price}>{val.price} đ</span>
+                  <span className={style.products_price}>{val.price.toLocaleString().split(',').join('.')} đ</span>
                   <span className={style.products_discount}>-14%</span>
                 </div>
                 <div>
-                  <img src={val.badge_under} alt='' className={style.badge_under} />
+                  {
+
+                  }
+                  {/* <img src={val.categoryId.item} alt='' className={style.badge_under} /> */}
                 </div>
               </div>
             </div>
           )
+
+
         })}
       </div>
       <div style={{ float: 'right', margin: '20px 0' }} className={style.Pagination}>
         <Stack spacing={2}>
-          <Pagination count={10} />
+          {listData.length > 16 ? <Pagination count={Math.ceil(listData.length / 16)} page={page} onChange={handleChange} /> : <></>}
         </Stack>
       </div>
     </div>

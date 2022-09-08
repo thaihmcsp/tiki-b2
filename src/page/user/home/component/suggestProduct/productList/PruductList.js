@@ -65,7 +65,7 @@ function PruductList({listProduct}) {
          } 
          <button className={style.loadMore} onClick={handleClick}>Xem Thêm</button>  
     </div>
-  )
+  );
 }
 
-export default PruductList
+export default PruductList;
