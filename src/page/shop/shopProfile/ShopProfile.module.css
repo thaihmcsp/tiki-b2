@@ -23,7 +23,9 @@
     font-size: 9px;
     margin-bottom: 2px;
 }
-
+.email{
+    margin-bottom: 0;
+}
 .Profile_Text {
     margin: 10px 0;
 }
@@ -42,8 +44,7 @@
     margin-right: 10px;
     opacity: 0.8;
 }
-.Profile_needchange span {
-
+.change{
     color: rgb(28, 17, 192);
 }
 .Profileshop_bottom {
@@ -93,4 +94,8 @@ width: 100%;
  width: 200px;
  height: 200px;
  border-radius: 50%;
+}
+.spanrofileshop_data{
+    margin-right: 10px;
+    opacity: 0.8;
 }

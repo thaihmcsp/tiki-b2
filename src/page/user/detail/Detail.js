@@ -31,6 +31,9 @@ function Detail() {
     color: '',
     name: '',
   });
+  // useEffect(function(){
+  //   getData()
+  // }, [])
 
   
   const [sizeDetail, setSizeDetail] = useState(

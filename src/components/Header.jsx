@@ -101,10 +101,8 @@ function Header(props) {
   }
   function EnterInputSeach(e) {
     let getInputSearch = document.querySelector(".componentHeaderInput").value;
-
     clearTimeout(setTime)
     setTime = setTimeout(() => {
-
       if (e.charCode === 13) {
         if (removeAccents(getInputSearch).trim() !== '') {
           nav(`/filter?seaarch=${getInputSearch}`);

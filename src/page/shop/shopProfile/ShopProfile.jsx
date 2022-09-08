@@ -210,28 +210,28 @@ function ShopProfile() {
                 </div>
                 <div className={styles.Profile_Text} >
                     <p style={{ margin: '0 0 8px 0', fontSize: '16px' }} >Họ Và Tên <InfoCircleOutlined  ></InfoCircleOutlined></p>
-                    <p className={styles.profileshop_data} >{data.fullname}</p>
-                    <span id='Changefullname' onClick={showModal} >Sửa đổi</span>
+                    <span className={styles.spanrofileshop_data} >{data.fullname}</span>
+                    <span className={styles.change} id='Changefullname' onClick={showModal} >Sửa đổi</span>
                 </div>
                 <div className={styles.Profile_Text}>
                     <p style={{ margin: '0 0 8px 0', fontSize: '16px' }}>Email liên hệ <InfoCircleOutlined /></p>
                     <div className={styles.Profile_needchange}>
-                        <p>{data.email}</p>
+                        <p className={styles.email}>{data.email}</p>
                         {/* <span id='ChangeEmail' onClick={showModal} >Sửa đổi</span> */}
                     </div>
                 </div>
                 <div className={styles.Profile_Text}>
                     <p style={{ margin: '0 0 8px 0', fontSize: '16px' }}>Số điện thoại liên hệ <InfoCircleOutlined /></p>
                     <div className={styles.Profile_needchange}>
-                        <p>{data.phone}</p>
-                        <span onClick={showModal} id='ChangePhone'> Sửa đổi   </span>
+                        <span className={styles.spanrofileshop_data}>{data.phone}</span>
+                        <span className={styles.change} onClick={showModal} id='ChangePhone'> Sửa đổi   </span>
                     </div>
                 </div>
                 <div className={styles.Profile_Text} style={{ marginBottom: '25px' }}>
                     <p style={{ margin: '0 0 8px 0', fontSize: '16px' }}>Tên hiển thi <InfoCircleOutlined onClick={showModal} /></p>
                     <div className={styles.Profile_needchange}>
-                        <p>{data.username}</p>
-                        <span onClick={showModal} id='ChangeName'>Sửa đổi</span>
+                        <span className={styles.spanrofileshop_data}>{data.username}</span>
+                        <span className={styles.change} onClick={showModal} id='ChangeName'>Sửa đổi</span>
                     </div>
                 </div>
                 <div className={styles.Profileshop_Img}>
@@ -240,7 +240,7 @@ function ShopProfile() {
 
             </div>
             <div className={styles.Profileshop_bottom}>
-                <button>Sửa đổi</button>
+                <button className={styles.change}>Sửa đổi</button>
             </div>
 
 
