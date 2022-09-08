@@ -42,7 +42,7 @@ function Order() {
               {
                 name: `${val.productDetailId.productId.productName}`,
                 sold: `${val.quantity}`,
-                shopId: {
+                shopId: { 
                   shopname: `${value.shopId.shopName}`,
                   shoplogo: `${value.shopId.logo}`
                 },

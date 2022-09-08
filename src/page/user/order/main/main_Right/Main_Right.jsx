@@ -10,8 +10,10 @@ import './StyleRight.css'
 import 'antd/dist/antd.css';
 import { postAPI, getAPI } from '../../../../../config/api';
 import ModalAddAdress from './modalAddAdress/Modal';
+import { useNavigate } from 'react-router-dom';
 
 function Main_Right({ data, money,cartId }) {
+    const nav = useNavigate()
     const [addAllress,setAllAddress] = useState(false)
     const [userInfo, setUserInfo] = useState();
    console.log(17,cartId);
@@ -97,13 +99,17 @@ function Main_Right({ data, money,cartId }) {
             }
         , [])
         /////////////////////////////////
+        const [defaultAddress, setDefaultAddress] = useState([]);
         async function  postOrder (){
+            const obj = {
+                cartId:cartId,
+               phone:infor[0].phone,
+               address:infor[0].address
+            }
+            console.log(obj)
             try {
-                 await postAPI('/user-order/user-create-order',{cartId:cartId,
-                   phone:infor.phone,
-                   address:infor.address
-
-                })
+                 await postAPI('/user-order/user-create-order',obj)
+                nav('/user/order')
            
             } catch (error) {
                 console.log(error)
@@ -114,7 +120,6 @@ function Main_Right({ data, money,cartId }) {
 
         console.log(107, infor)
         /////////////
-        const [defaultAddress, setDefaultAddress] = useState([]);
         const [indexAddress,setIndexAddress]=useState(0)
         useEffect(function(){
             if(infor.length>=1){
@@ -123,13 +128,13 @@ function Main_Right({ data, money,cartId }) {
             
         },[indexAddress,infor]);
         // console.log(129,defaultAddress)
-        console.log( 111,defaultAddress[0]);
+        console.log( 111,defaultAddress);
         return (
 
             <div className="right">
                 <ModalAddAdress 
                 setIndexAddress={setIndexAddress}
-        cartId = {cartId}
+                cartId = {cartId}
                 showModal={showModal} 
                 isModalVisible={isModalVisible} 
                 setIsModalVisible={setIsModalVisible} 
