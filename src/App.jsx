@@ -32,7 +32,7 @@ import "./App.css";
 import AddItem from "./page/shop/productManagement/priceItem/addItem_Phu/AddItem";
 import EditItem from './page/shop/productManagement/editProduct/priceItem/addItem_Phu/EditItem';
 import PrivateRouteShop from './page/shop/componentDataTableAdmin/PrivateRouter';
-import TotalCart from './page/user/cart/cart/TotalCart';
+import TotalCart from './page/user/cart/TotalCart';
 
 function App() {
   function getCookie(cname) {
