@@ -55,14 +55,13 @@ function Profile() {
             />
           </div>
           <div className={styles.account}>
-            <Link to='/user/profile'>
-              <MenuUserIcon icon={listIcon[1]}>
-                <div>
-                  <span>Tài khoản của</span>
-                  <br />
-                  <strong>{user.username}</strong>
-                </div>
-              </MenuUserIcon>
+            <Link to='/user/profile'> <MenuUserIcon icon={listIcon[1]}>
+              <div>
+                <span>Tài khoản của</span>
+                <br />
+                <strong>{user.username}</strong>
+              </div>
+            </MenuUserIcon>
             </Link>
           </div>
           <div className={styles.headerList}>

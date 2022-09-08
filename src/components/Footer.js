@@ -15,7 +15,7 @@ import {
 import TotaFooter from "./subFooter";
 function Footer() {
   return (
-    <div>
+    <div className="Wrapper_footer">
       <div className="Footer">
         <TotaFooter title={"Hỗ trợ khách hàng"}>
           <FooterDetal

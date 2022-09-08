@@ -118,38 +118,33 @@ function UserInfo() {
   }
 
   return (
-    <div className={styles.userInfomation}>
-      <>
-        <Modal
-          title="Cập nhật ảnh đại diện"
-          visible={isModalVisible}
-          onOk={handleOk}
-          onCancel={handleCancel}
-        >
-          <Upload
-            name="avatar"
-            listType="picture-card"
-            className="avatar-uploader"
-            showUploadList={false}
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            beforeUpload={beforeUpload}
-            onChange={handleChange}
-          >
-            {imageUrl ? (
-              <img
-                src={imageUrl}
-                alt="avatar"
-                style={{
-                  width: "100%",
-                }}
-              />
-            ) : (
-              uploadButton
-            )}
-          </Upload>
-        </Modal>
-      </>
-      <div className={styles.acountForm}>
+  <div className= {styles.userInfomation}>
+    <>
+      <Modal title="Cập nhật ảnh đại diện" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      <Upload
+      name="avatar"
+      listType="picture-card"
+      className="avatar-uploader"
+      showUploadList={false}
+      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+      beforeUpload={beforeUpload}
+      onChange={handleChange}
+    >
+      {imageUrl ? (
+        <img
+          src={imageUrl}
+          alt="avatar"
+          style={{
+            width: '100%',
+          }}
+        />
+      ) : (
+        uploadButton
+      )}
+    </Upload>
+      </Modal>
+    </>
+      <div className= {styles.acountForm}>
         <div>Thông tin cá nhân</div>
         <div className={styles.formInfor}>
           <div className={styles.formAvatar}>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StarOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { color } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 
 function ProductRight(props) {
   
@@ -11,7 +12,7 @@ function ProductRight(props) {
   const [index, setIndex] = useState(0);
   
  
-
+  const nav = useNavigate()
   useEffect(() => {
     setCount(0);
     for (let i = 0; i < listProduct.length; i++) {
@@ -38,7 +39,9 @@ function ProductRight(props) {
       return item.indexOf(item1) === index1;
     });
   });
-
+  const handleGotoShop = ()=>{
+    nav(`/ShopHome?ShopID=${props.shopId}`)
+  }
   return (
     <div className="productright">
       <div className="header">
@@ -206,7 +209,7 @@ function ProductRight(props) {
               </div>
             </div>
             <div className="seller-action">
-              <a className="action">
+              <a className="action" onClick={handleGotoShop}>
                 {props.action[0]}
                 <span>Xem shop</span>
               </a>
