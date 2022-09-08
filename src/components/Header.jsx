@@ -30,19 +30,20 @@ function Header(props) {
   // }
   let setTime;
 
-  const user_information = useSelector(function(state){ 
-    return state.user})
-   function SearchTitle(e) {
+  const user_information = useSelector(function (state) {
+    return state.user
+  })
+  function SearchTitle(e) {
 
-    let getInputSearch=document.querySelector(".componentHeaderInput").value; 
+    let getInputSearch = document.querySelector(".componentHeaderInput").value;
     setSearch(getInputSearch);
     // props.getValue(getInputSearch);
     clearTimeout(setTime)
-    setTime =setTimeout(()=>{
-      const res =  getAPI(`/product/find-product-by-name?productName=${e}`)
-      .then((data) =>{
-        console.log(36,data.data.product)
-        let dataSearch = data.data.product;
+    setTime = setTimeout(() => {
+      const res = getAPI(`/product/find-product-by-name?productName=${e}`)
+        .then((data) => {
+          console.log(36, data.data.product)
+          let dataSearch = data.data.product;
           if (dataSearch.length > 0) {
             setWord(dataSearch);
           } else {
@@ -54,34 +55,34 @@ function Header(props) {
             ]);
           }
           clearTimeout(setTime);
-        
-      })
-      .catch((err) => {
-        console.log(err);
-        clearTimeout(setTime);
-      })
-    },[500])
+
+        })
+        .catch((err) => {
+          console.log(err);
+          clearTimeout(setTime);
+        })
+    }, [500])
 
   }
   ///
-  
+
   function on_mypage() {
     nav("/user/profile");
   }
   //đăng xuất xóa cookie và local
 
   ///hiển thị số lượng Sản phâm ở giỏ hàng
-  const  [numberCart,setNumberCart]=useState(0)
-  useEffect(()=>{
+  const [numberCart, setNumberCart] = useState(0)
+  useEffect(() => {
     getAPI("/cart/get-loged-in-cart")
-    .then((data)=>{
-      setNumberCart(data.data.cart.listProduct.length+data.data.cart.product.length)
-     console.log(77,data.data.cart)
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  },[])
+      .then((data) => {
+        setNumberCart(data.data.cart.listProduct.length + data.data.cart.product.length)
+        console.log(77, data.data.cart)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }, [])
   // chuyển đến phần tìm kiếm:
   function removeAccents(str) {
     var AccentsMap = [
@@ -111,19 +112,19 @@ function Header(props) {
     let linkProduct = document.querySelector('.componentHeaderInput').value;
     let linkProductModify = removeAccents(linkProduct);
     console.log(linkProductModify)
-    if(linkProduct !== ''){
+    if (linkProduct !== '') {
       nav(`/filter?seaarch=${linkProductModify}`);
     }
-   
+
   }
   // const  userLogin = useSelector(function (state) {
-    
+
   //   return state.user;
   // });
   // console.log(21, userLogin)
-  
 
-  const [DataHeader,setDataHeader] = useState(['Thịt','Rau củ','Nhà cửa','Điện tử','Thiết Bị Số','Điện thoại','Mẹ & Bé'])
+
+  const [DataHeader, setDataHeader] = useState(['Thịt', 'Rau củ', 'Nhà cửa', 'Điện tử', 'Thiết Bị Số', 'Điện thoại', 'Mẹ & Bé'])
   return (
     <div>
       <div className="Header" id='Header_Shop__Home'>
@@ -139,38 +140,39 @@ function Header(props) {
                 <div className="HeaderTopContainerInput">
                   <div className="InputCover">
                     <input type="text" name="" id="" className='componentHeaderInput'
-                      onKeyPress={EnterInputSeach}
+                      // onKeyPress={EnterInputSeach}
                       placeholder='Tìm sản phẩm, danh mục hay thương hiệu mong muốn ...'
                       onChange={(e) => {
-                        document.querySelector('.HeaderCoverInput').setAttribute('style','display:none')
-                        SearchTitle(e.target.value)} }
-                      
-                      />
-                      <div className="ShowCoverInput">
-                            <a href=""className='HeaderCoverInput'>
-                                <span className='HeaderCoverInputText'>Săn Sale Công Nghệ</span>
-                                <img src
-                                ="https://salt.tikicdn.com/cache/140x28/ts/banner/ec/32/4e/2227fe4869feaf2a75598c0ab0a8cf29.png"
-                                 alt="" />
-                            </a>
-                            <div className="HistorySeach"
-                               style={search ? { display: "inline-block" } : { display: "none" }}
-                               onClick={(e) => {
-                                filterProduct(e);
-                              }}
-                              >
-                                {  
-                                      word.slice(0,5).map(value=>{
-                                                return(
-                                                    <div  className="SearchWord"> 
-                                                                       <SearchOutlined className = 'seach-icon'/>
-                                                                      {value.productName}
-                                                      </div>
-                                                           )       
-                                                                
-                                                           })
-                                                        }
-                                            {/* <p className='ListHistorySeach'>
+                        document.querySelector('.HeaderCoverInput').setAttribute('style', 'display:none')
+                        SearchTitle(e.target.value)
+                      }}
+
+                    />
+                    <div className="ShowCoverInput">
+                      <a href="" className='HeaderCoverInput'>
+                        <span className='HeaderCoverInputText'>Săn Sale Công Nghệ</span>
+                        <img src
+                          ="https://salt.tikicdn.com/cache/140x28/ts/banner/ec/32/4e/2227fe4869feaf2a75598c0ab0a8cf29.png"
+                          alt="" />
+                      </a>
+                      <div className="HistorySeach"
+                        style={search ? { display: "inline-block" } : { display: "none" }}
+                        onClick={(e) => {
+                          filterProduct(e);
+                        }}
+                      >
+                        {
+                          word.slice(0, 5).map(value => {
+                            return (
+                              <div className="SearchWord">
+                                <SearchOutlined className='seach-icon' />
+                                {value.productName}
+                              </div>
+                            )
+
+                          })
+                        }
+                        {/* <p className='ListHistorySeach'>
                                       <img src="https://salt.tikicdn.com/ts/upload/e8/aa/26/42a11360f906c4e769a0ff144d04bfe1.png" alt="" witdth = '40px' height= '40px' />
                                       tai  nghe blutool
                                   </p>                          
@@ -282,13 +284,13 @@ function Header(props) {
                       </div>
                     </div>
                   </div>
-                  <button className = 'HeaderbuttonSeach cursorPoiter'
-                  onClick={(e) => {
-                    filterProduct(e);
-                  }}
+                  <button className='HeaderbuttonSeach cursorPoiter'
+                    onClick={(e) => {
+                      filterProduct(e);
+                    }}
                   >
-                    
-                    <img src="https://salt.tikicdn.com/ts/upload/ed/5e/b8/8538366274240326978318348ea8af7c.png" className = 'icon-seach' alt="" />
+
+                    <img src="https://salt.tikicdn.com/ts/upload/ed/5e/b8/8538366274240326978318348ea8af7c.png" className='icon-seach' alt="" />
                     Tìm Kiếm
                   </button>
                 </div>
@@ -352,7 +354,7 @@ function Header(props) {
                       <img src="https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png" alt="" className='HeaderUserImg' />
                       <div className="HeaderUserLoginContainer">
                         <span className="HeaderUserLogin">
-                          <Link to='/sign-in'>  <span >Đăng Nhập</span></Link> 
+                          <Link to='/sign-in'>  <span >Đăng Nhập</span></Link>
 
 
                           / <Link to='/sign-up'><span >Đăng kí</span></Link>
