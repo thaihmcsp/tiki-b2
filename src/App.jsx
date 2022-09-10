@@ -24,9 +24,9 @@ import AdminLogin from './page/admin/login/Login';
 import ShopLogin from './page/shop/login/Login';
 
 
-import Detail from "./page/user/detail/Detail";
+// import Detail from "./page/user/detail/Detail";
 import PrivateRouter from './components/PrivateRouter';
-import ShopMenu from './page/shop/productManagement/Product';
+// import ShopMenu from './page/shop/productManagement/Product';
 import ShopProfile from './page/shop/shopProfile/ShopProfile';
 
 import Order from './page/user/order/maintotal/Main';
@@ -69,7 +69,7 @@ function App() {
             <Route path='/sign-in' element={<SignIn/>} />
             <Route path='/sign-in-admin' element={<AdminLogin/>} />
             <Route path='/sign-in-shop' element={<ShopLogin/>} />
-            <Route path='/adminShop' 
+            {/* <Route path='/adminShop' 
                 element={<PrivateRouteShop>
                              <ShopMenu/>
                         </PrivateRouteShop>}>   
@@ -78,8 +78,8 @@ function App() {
                 element={<PrivateRouteShop>
                              <ShopMenu/>
                         </PrivateRouteShop>}>   
-                        <Route path='/adminShop/Product' element={<ManagementProduct/>}/>
-            </Route>
+                        {/* <Route path='/adminShop/Product' element={<ManagementProduct/>}/> */}
+            {/* </Route> } */}
             <Route path='/addItem' 
                 element={<PrivateRouteShop>
                              <AddItem/>
@@ -98,16 +98,16 @@ function App() {
             </Route>
             <Route path='/' element={<Header/>}> 
                 <Route path='/' element={<Home/>} />
-                <Route path='/detail/:productId' element={<Detail/>} />
+                {/* <Route path='/detail/:productId' element={<Detail/>} /> */}
                 <Route path='/filter' element={<Filter/>}/>
                 <Route path='/shop/dashboard' element={<ShopDashBoardAll/>} />
                 <Route path='/user' element={<UserInfoMenu/>}> 
                     <Route path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> }/>
                     <Route path='/user/order' element={ <div className='order'><Order/></div> } />
                 </Route>
-                <Route path='/ShopHome' element={<ShopHome/>}/>
+                {/* <Route path='/ShopHome' element={<ShopHome/>}/> */}
                 <Route path='/shop' element={<Shop></Shop>}/>
-                <Route path='/detail' element={<Detail />}/>
+                {/* <Route path='/detail' element={<Detail />}/> */}
                 <Route path='/cart' element={<TotalCart/>} />
             </Route>
         </Routes>      

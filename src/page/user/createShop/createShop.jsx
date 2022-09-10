@@ -1,9 +1,9 @@
 import React from "react";
 import { listBranch } from "./listBranch";
-import "./CreateShop.css";
 import { useSelector } from "react-redux";
 import { postAPI } from "../../../config/api";
 import { useNavigate } from "react-router-dom";
+import "./createShop.css";
 function CreateShop() {
   const shop = useSelector((state) => state.user);
   const nav = useNavigate()
