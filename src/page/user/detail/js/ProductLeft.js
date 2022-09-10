@@ -5,8 +5,9 @@ import ProductRight from "./ProductRight";
 
 function ProductLeft(props) {
   const hanldeImg = (id) => {
+   
     const getImg = document.getElementById(id).getAttribute("src");
-    props.setcolorDetail({ color: getImg });
+    props.setcolorDetail({color: getImg });
   };
 
   return (
@@ -34,9 +35,9 @@ function ProductLeft(props) {
           <div>Chia sẻ</div>
           {props.icon}
         </div>
-        <div>
+        {/* <div>
           <img id="banner" src={props.banner} />
-        </div>
+        </div> */}
       </div>
       <div className="kfTKQv"></div>
     </div>

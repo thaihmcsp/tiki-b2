@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { LoadVarient } from '../../../AddItemReducerSlice'
 import BasicInfo from '../../basic/BasicInfo'
 import AddVarient from './addVarient/AddVarient'
 import ListVarient from './listVarient/ListVarient'
@@ -15,9 +17,13 @@ function Varient() {
         option:[],
         key:''
     }
-])
+  ])
+  const dispatch = useDispatch()
+  useEffect(function(){
+    dispatch(LoadVarient(varient))
+  },[])
   return (
-    <div className={style.Varient}>
+    <div className={style.Varient} id='Varient_step__scroll'>
         <h2>
           Giá bán, Kho hàng và Biến thể
         </h2>

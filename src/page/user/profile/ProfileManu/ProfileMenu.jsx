@@ -60,7 +60,8 @@ function Profile() {
               <br />
               <strong>{user.username}</strong>
             </div>
-          </MenuUserIcon></Link>
+          </MenuUserIcon>
+          </Link>
         </div>
         <div className= {styles.headerList}>
           <Link to='/user/profile'>

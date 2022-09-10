@@ -4,14 +4,27 @@ import {
   PlusOutlined,
   RightOutlined,
 } from "@ant-design/icons";
-import React from "react";
+import React, { useState } from "react";
 import ComponentTableProducts from "../componentDataTableAdmin/ComponentTableProducts";
 import "./ManagementProduct.css";
 import { Tabs } from "antd";
 import FilterProducts from "../componentDataTableAdmin/FilterProducts";
+import { useNavigate } from "react-router-dom";
 
 const { TabPane } = Tabs;
 function ManagementProduct() {
+  const nav = useNavigate()
+  function handleClick() {
+    nav('/addItem')
+  }
+  const [value, setValue] = useState('')
+  const [selectSort, setselectSort] = useState('')
+  const [count, setCount] = useState(0)
+  function handleClose() {
+    const close = document.querySelector(".mgm-product-notification");
+    close.style.backgroundColor = 'unset'
+    close.innerHTML = ''
+  }
   return (
     <div className="mgm-product">
       <p>
@@ -25,7 +38,7 @@ function ManagementProduct() {
           <select name="" id="">
             <option value="">Quản lý số lượng lớn</option>
           </select>
-          <button>
+          <button onClick={handleClick}>
             <PlusOutlined />
             Thêm sản phẩm
           </button>
@@ -37,17 +50,18 @@ function ManagementProduct() {
           phẩm. <a href="">Tìm hiểu thêm</a>
         </span>
         <span>
-          <CloseOutlined />
+          <CloseOutlined onClick={handleClose} />
         </span>
       </div>
       <div className="" style={{ width: "100%", margin: "24px 0" }}>
         <div className="card-container">
           <Tabs type="card">
             <TabPane tab="Tất cả" key="1">
-              <FilterProducts />,
+              <FilterProducts setValue={setValue} setselectSort={setselectSort} setCount={setCount} count={count} />,
             </TabPane>
             <TabPane tab="Đang hoạt động" key="2">
               <FilterProducts />
+              
             </TabPane>
             <TabPane tab="Hết hàng" key="3">
               <FilterProducts />
@@ -68,7 +82,7 @@ function ManagementProduct() {
         </div>
       </div>
       <div>
-        <ComponentTableProducts />
+        <ComponentTableProducts value={value} selectSort={selectSort} count={count} />
       </div>
     </div>
   );

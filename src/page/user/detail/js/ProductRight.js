@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import { StarOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { color } from "@mui/system";
-import { getAPI } from "../../../../config/api";
+import { useNavigate } from "react-router-dom";
+
 function ProductRight(props) {
-  const listProduct = props.Product.product.productDetailId;
-  const thump = props.Product.product.thump;
+  
+  const listProduct = props.productDetail.productDetailId;
 
   const [count, setCount] = useState(0);
   const [index, setIndex] = useState(0);
-  const [listproduct, setListProducts] = useState([]);
-
+  
+ 
+  const nav = useNavigate()
   useEffect(() => {
     setCount(0);
     for (let i = 0; i < listProduct.length; i++) {
@@ -23,20 +25,7 @@ function ProductRight(props) {
       }
     }
   }, [props.myColor, props.mySize]);
-
-  //get Data
-  useEffect(() => {
-    getAPI("/product/get-one-product/62da5f60bc070a53bcbc3220")
-      .then((data) => {
-        setListProducts(data);
-        console.log(data.data.product.productDetailId);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  // useEffect(() => {
+  
   const optionTotal = [[], [], []];
 
   listProduct.map((item, index) => {
@@ -50,34 +39,34 @@ function ProductRight(props) {
       return item.indexOf(item1) === index1;
     });
   });
-
-  console.log(51, option);
-
+  const handleGotoShop = ()=>{
+    nav(`/ShopHome?ShopID=${props.shopId}`)
+  }
   return (
     <div className="productright">
       <div className="header">
         <div className="brand">
           <span className="brand-and-author ">
-            Thương hiệu : <a href={props.brand}>OEM &nbsp;</a>
+            Thương hiệu : {props.productDetail.brandId.brandName}
           </span>
           <div class=" gXZfKO"></div>
           <div className="bestseller">
             <p>
-              <span>Đứng thứ 3 trong </span>
+              {/* <span>Đứng thứ 3 trong </span>
               <a href={props.bestseller}>
                 Top 1000 Áo thun nam dài tay bán chạy tháng này
-              </a>
+              </a> */}
             </p>
           </div>
         </div>
-        <h1 className="title">{props.Product.product.productName}</h1>
+        <h1 className="title">{props.productDetail.productName}</h1>
         <div className="below-title">
           <div>
             <div className="rate">
               <a className="number">(Xem 25 đánh giá)</a>
               <div class=" gXZfKO"></div>
             </div>
-            <div className="quantity">Đã bán {props.Product.product.sold}</div>
+            <div className="quantity">Đã bán {props.productDetail.sold}</div>
           </div>
         </div>
       </div>
@@ -87,26 +76,26 @@ function ProductRight(props) {
             <div className="price-discount">
               <div className="current-price">
                 {props.mySize == undefined || props.myColor == undefined ? (
-                  <>{props.Product.product.price.toLocaleString()}₫</>
+                  <>{props.productDetail.price.toLocaleString()}₫</>
                 ) : count == 1 ? (
                   <>{listProduct[index].price.toLocaleString()}₫</>
                 ) : (
                   "Hết hàng"
                 )}
+
               </div>
-              <div className="list-price">{props.listprice}</div>
-              <div className="discount">{props.discount}</div>
+              {/* <div className="list-price">{props.listprice}</div>
+              <div className="discount">{props.discount}</div> */}
             </div>
             <div className="item">
               <img src={props.icon}></img>
             </div>
           </div>
-
-          <div className="selectproduct">
+              {props.productDetail.productDetailId.length>0? <div className="selectproduct">
             <div className="select-color">
               <p className="detail-color">
                 <p id="detail-color">
-                  Màu: <span id="color-select">{props.colorDetail.name}</span>
+                  Màu: <span id="color-select" >{props.colorDetail.name}</span>
                 </p>
               </p>
               <div className="product-color">
@@ -127,7 +116,7 @@ function ProductRight(props) {
             </div>
             <div className="select-size">
               <p id="detail-size">
-                Size: <span id="size-select">{props.sizeDetail}</span>
+                Size: <span id="size-select" >{props.sizeDetail}</span>
               </p>
               <div className="size">
                 {option[2].map((item, index) => {
@@ -145,7 +134,8 @@ function ProductRight(props) {
                 })}
               </div>
             </div>
-          </div>
+          </div>: null}
+          
           <div className="delivery">
             <div>
               <span>Giao đến</span>
@@ -167,14 +157,14 @@ function ProductRight(props) {
                   {props.amoutn[0]}
                 </button>
                 <div className="amoutn-value">
-                  <span id="amoutn-value">1</span>
+                  <span id="amoutn-value" >1</span>
                 </div>
                 <button id="amoutn-up" onClick={() => props.AmoutnUp()}>
                   {props.amoutn[1]}
                 </button>
               </div>
               <div className="group-button">
-                <button onClick={() => props.buyProduct()}>Chọn mua</button>
+                <button onClick={() => props.handleBuy()}>Chọn mua</button>
               </div>
             </div>
           </div>
@@ -186,11 +176,11 @@ function ProductRight(props) {
                 <picture className="overview-left">
                   <img
                     className="logo"
-                    src={props.Product.product.shopId.logo}
+                    src={props.productDetail.shopId.logo}
                   ></img>
                 </picture>
                 <div className="overview-right">
-                  <span>{props.Product.product.shopId.shopName}</span>
+                  <span>{props.productDetail.shopId.shopName}</span>
                 </div>
               </a>
             </div>
@@ -219,7 +209,7 @@ function ProductRight(props) {
               </div>
             </div>
             <div className="seller-action">
-              <a className="action">
+              <a className="action" onClick={handleGotoShop}>
                 {props.action[0]}
                 <span>Xem shop</span>
               </a>

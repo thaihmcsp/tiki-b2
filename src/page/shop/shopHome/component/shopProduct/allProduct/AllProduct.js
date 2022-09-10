@@ -4,10 +4,10 @@ import React, { useEffect, useState } from 'react';
 import style from './allProduct.module.css'
 import './allProduct.css'
 import PopularProduct from './popularProduct/PopularProduct';
-import data from '../../../shopProductData/data';
 
 
-function AllProduct({activeKey1}) {
+
+function AllProduct({activeKey1,allProduct}) {
 
   const { TabPane } = Tabs;
 
@@ -21,55 +21,32 @@ function AllProduct({activeKey1}) {
   const [listHightToLowPrice,setListHightToLowPrice] = useState([])
 
   useEffect(function(){
-    setListProduct(()=>{
-      const newData = []
-      data.product.map(function(obj){
-          obj.product.map(item=>{
-              newData.push(item)
-          })
-      })
-      return newData
-    })
+    setListProduct(allProduct)
     setListBestSale(()=>{
-      const newData = []
-      data.product.map(function(obj){
-          obj.product.map(item=>{
-              newData.push(item)
-          })
-      })
-      const Data = newData.filter(item=>{
-        return item.sold >= 800
+      const newData = []    
+      const Data = allProduct.filter(item=>{
+        return item.sold >= 200
       })
       return Data
     })
  
     setListLowToHightPrice(()=>{
-      const newData = []
-      data.product.map(function(obj){
-          obj.product.map(item=>{
-              newData.push(item)
-          })
-      })
-      const Data = newData.sort((a,b)=>{
+      const newData = [...allProduct]
+      newData.sort((a,b)=>{
         return a.price - b.price
       })
-      return Data
+      return newData
     }) 
 
     setListHightToLowPrice(()=>{
-      const newData = []
-      data.product.map(function(obj){
-          obj.product.map(item=>{
-              newData.push(item)
-          })
-      })
-      const Data = newData.sort((a,b)=>{
+      const newData = [...allProduct]
+      newData.sort((a,b)=>{
         return b.price - a.price
       })
-      return Data
+      return newData
     })
 
-  },[data])
+  },[allProduct])
 
   return (
     <div className={style.AllProduct}>

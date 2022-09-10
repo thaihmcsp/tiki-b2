@@ -1,5 +1,6 @@
-import React, { useState, Component,useRef,useEffect } from 'react'
-import { Select } from 'antd';
+import React, { useState, useEffect,useRef } from 'react'
+import { PlusOutlined } from '@ant-design/icons';
+import { Divider, Input, Select, Space, Button } from 'antd';
 import { Checkbox } from 'antd';
 import * as React1 from 'react';
 import Stack from '@mui/material/Stack';
@@ -9,12 +10,33 @@ import style from './varient.module.css'
 import './varient.css'
 import Optional from './optional/Optional';
 const { Option } = Select;
+let index = 0;
 const onChange = (e) => {
     console.log(`checked = ${e.target.checked}`);
   };
 
-function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,option2,setOption2,Key2}) {
+function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,option2,setOption2,Key2,varient,setKey2}) {
+    const [items, setItems] = useState(['Nhóm màu', 'Biến thể']);
+    const [name, setName] = useState('');
+    const inputRef = useRef(null);
+  
+    const onNameChange = (event) => {
+      setName(event.target.value);
+      console.log(25,event.target.value)
+    };
+  
+    const addItem = (e) => {
+      e.preventDefault();
+      setItems([...items, name || `New item ${index++}`]);
+      setName('');
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 0);
+    };
 
+    const handleSelectedChange1 =(value,option)=>{
+        setKey(value)
+    }
   const [newKey,setNewKey] = useState(Key)
 
   useEffect(function(){
@@ -24,9 +46,14 @@ function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,
   const handleDeleteVarient =(index)=>{
     if(window.confirm('Bạn có thực sự muốn xoá Biến thể này?')){
         if(index==0){
-            setKey(Key2)
-            setOption(option2)
-            setOption2([])
+            if(option2.length>0){
+                setKey(Key2)
+                setKey2(Key)
+                setOption(option2)
+                setOption2([])
+            }else{
+                setOption([])
+            }
         }
         if(index==1){
             setKey('Biến thể')
@@ -63,23 +90,42 @@ function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,
         <label>
             <span>*</span> Tên biến thể:
             <Select
+                value={Key}
+                onChange={handleSelectedChange1}
                 className='Varient_Add'
-                showSearch
                 style={{
-                width: 200,
+                    width: 300,
                 }}
-                placeholder="Chọn biến thể"
-                optionFilterProp="children"
-                filterOption={(input, option) => option.children.includes(input)}
-                filterSort={(optionA, optionB) =>
-                optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-
-                }
-                value={newKey}
-                onChange={handleSelectedChange}
-            >
-                <Option value="Nhóm màu">Nhóm màu</Option>
-                <Option value="Biến Thể">Biến Thể</Option>
+                placeholder="Vui lòng chọn biến thể hoặc tạo biến thể"
+                dropdownRender={(menu) => (
+                    <>
+                    {menu}
+                    <Divider
+                        style={{
+                        margin: '8px 0',
+                        }}
+                    />
+                    <Space
+                        style={{
+                        padding: '0 8px 4px',
+                        }}
+                    >
+                        <Input
+                        placeholder="Please enter item"
+                        ref={inputRef}
+                        value={name}
+                        onChange={onNameChange}
+                        />
+                        <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
+                        Add item
+                        </Button>
+                    </Space>
+                    </>
+                )}
+                >
+                {items.map((item) => (
+                    <Option key={item}>{item}</Option>
+                ))}
             </Select>
         </label>
         <div className={style.all_varient}>
@@ -90,12 +136,12 @@ function SubVarient({index,setAddVarient,addVarient,option,setOption,Key,setKey,
                 {
                     option.map((option1,index)=>{
                         return(
-                            <Optional option={option1} index={index}
+                            <Optional 
+                            option={option1} 
+                            index={index}
                             key={index} 
                             setOption={setOption} optionAll={option} 
                             id = {index==option.length-1? 'Option_last-focus':'none'}
-                            // {{index == option.length-1} && ref={inputRef}}
-
                             />
                         )
                     })

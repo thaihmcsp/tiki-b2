@@ -4,7 +4,7 @@ export const Product = {
     productName: "Apple iPhone 13",
     brandId: {
       _id: "62ee3fb997618cf8403d488c",
-      brandName: "SamSung",
+      brandName: "Apple",
       thump:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkMbxy2YUDO5ycdm9Eb8thEPQ03McHIxETGA&usqp=CAU",
       info: [],

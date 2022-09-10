@@ -51,7 +51,7 @@ function Voucher() {
             <img src='https://salt.tikicdn.com/ts/brickv2og/36/a5/71/4a28285eb3a232ae22601efb47d1e7e2.png' />
             <img src='https://cdn.thesaigontimes.vn/wp-content/uploads/2022/01/KV-Tet-2022_h3.jpg' />
         </div>
-        <div className={style.voucher}>
+        <div className={style.voucher} id='Voucher_Shop__Home'>
             {data.map(function(item){
                 return(
                     <div className={style.item}>
