@@ -415,14 +415,14 @@ label {
 .gJkhWZ p {
     margin: 0px;
 }
-p {
+/* p {
     margin: 0px 0px 10px;
     display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-}
+} */
 .gJkhWZ .additional-text a {
     margin-left: 4px;
     color: rgb(11, 116, 229);

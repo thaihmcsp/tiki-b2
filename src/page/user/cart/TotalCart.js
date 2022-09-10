@@ -6,21 +6,19 @@ import { getAPI } from "../../../config/api";
 
 function TotalCart() {
   const [listProduct, setListProduct] = React.useState([]);
-  console.log(9, listProduct);
   useEffect(() => {
     getCart();
   }, []);
+  const [cartID,setCartID] = useState('')
   async function getCart() {
     try {
       const data = await getAPI("/cart/get-loged-in-cart");
-      console.log(data);
+      setCartID(data.data.cart._id)
       const listProductdetail = data.data.cart.listProduct;
-      console.log(listProductdetail);
-      console.log(19, data.data.cart.product);
       const newData = data.data.cart.product;
       const NEWDATA = newData.map((item) => {
         return {
-          productDetailId: {
+          productDetailId: {  
             _id: item.productId._id,
             productId: item.productId,
             price: item.productId.price,
@@ -30,45 +28,66 @@ function TotalCart() {
           _id: item.productId._id,
         };
       });
-
-      setListProduct([...NEWDATA, ...listProductdetail]);
+      const Newdata = [...NEWDATA, ...listProductdetail]
+      const EndData = []
+      Newdata.map(item=>{
+        if(item.selected==false){
+          EndData.push(item) 
+        }
+      })
+      setListProduct(()=>{
+        if(EndData&&EndData.length>0){
+          return EndData
+        }else{
+          return []
+        }
+      });
     } catch (error) {
       console.log(error);
     }
   }
-  window.addEventListener("scroll", () => {
-    if (window.scrollY >= 180) {
+  console.log(49,listProduct)
+  const windowScroll = ()=>{
+    if (window.scrollY >= 180&&newData&&newData.length>0) {
       document.querySelector(".total-cart").style.position = "sticky";
       document.querySelector(".total-cart").style.top = "0";
       document.querySelector(".total-cart").style.zIndex = "1";
     } else {
       document.querySelector(".total-cart").style.position = "static";
     }
-  });
+  }
+  useEffect(function(){
+    window.addEventListener("scroll", windowScroll);
+    return ()=>{
+      window.removeEventListener("scroll", windowScroll,false);
+    }
+  },[])
 
   const [newData, setNewData] = useState([]);
 
   useEffect(
     function () {
-      setNewData(() => {
-        let Obj = {};
-        let DATA = [];
-        listProduct.map((item) => {
-          const newDATA = listProduct.filter((item2) => {
-            return item2.productDetailId.productId.shopId.shopName == item.productDetailId.productId.shopId.shopName;
+      if(listProduct&&listProduct.length>0){
+        setNewData(() => {
+          let Obj = {};
+          let DATA = [];
+          listProduct.map((item) => {
+            const newDATA = listProduct.filter((item2) => {
+              return item2.productDetailId.productId.shopId.shopName == item.productDetailId.productId.shopId.shopName;
+            });
+            if (!Obj[item.productDetailId.productId.shopId.shopName]) {
+              const Element = {
+                checked: false,
+                shopName: item.productDetailId.productId.shopId.shopName,
+                listProduct: [...newDATA],
+              };
+              DATA.push(Element);
+            }
+            Obj[item.productDetailId.productId.shopId.shopName] = Obj[item.productDetailId.productId.shopId.shopName] ? Obj[item.productDetailId.productId.shopId.shopName] : newDATA;
           });
-          if (!Obj[item.productDetailId.productId.shopId.shopName]) {
-            const Element = {
-              checked: false,
-              shopName: item.productDetailId.productId.shopId.shopName,
-              listProduct: [...newDATA],
-            };
-            DATA.push(Element);
-          }
-          Obj[item.productDetailId.productId.shopId.shopName] = Obj[item.productDetailId.productId.shopId.shopName] ? Obj[item.productDetailId.productId.shopId.shopName] : newDATA;
+          return DATA;
         });
-        return DATA;
-      });
+      }
     },
     [listProduct]
   );
@@ -256,38 +275,42 @@ function TotalCart() {
   const [product, setProduct] = useState([]);
   useEffect(
     function () {
-      setProduct(() => {
-        let total = 0;
-        newData.map((item) => {
-          total += item.listProduct.length;
+      if(newData.length>0){
+        setProduct(() => {
+          let total = 0;
+          newData.map((item) => {
+            total += item.listProduct.length;
+          });
+          return total;
         });
-        return total;
-      });
-      const ListallCheckItem = document.querySelectorAll(".checkItem");
-      if (
-        [...ListallCheckItem].filter((item) => {
-          return item.checked == false;
-        }).length == 0
-      ) {
-        document.querySelector(`.${style.TotalCheckItemStore}`).checked = true;
-      } else {
-        document.querySelector(`.${style.TotalCheckItemStore}`).checked = false;
+        const ListallCheckItem = document.querySelectorAll(".checkItem");
+        if (
+          [...ListallCheckItem].filter((item) => {
+            return item.checked == false;
+          }).length == 0
+        ) {
+          document.querySelector(`.${style.TotalCheckItemStore}`).checked = true;
+        } else {
+          document.querySelector(`.${style.TotalCheckItemStore}`).checked = false;
+        }
+        setFinalTotal(() => {
+          const newListFinalTotal = [];
+          const newListCheked = [...ListallCheckItem];
+          newListCheked.map((item) => {
+            if (item.checked == true) {
+              const index = item.getAttribute("index");
+              const index1 = item.getAttribute("index1");
+              newListFinalTotal.push(newData[index].listProduct[index1]);
+            }
+          });
+          return newListFinalTotal;
+        });
       }
-      setFinalTotal(() => {
-        const newListFinalTotal = [];
-        const newListCheked = [...ListallCheckItem];
-        newListCheked.map((item) => {
-          if (item.checked == true) {
-            const index = item.getAttribute("index");
-            const index1 = item.getAttribute("index1");
-            newListFinalTotal.push(newData[index].listProduct[index1]);
-          }
-        });
-        return newListFinalTotal;
-      });
+      
     },
     [newData]
   );
+  console.log(302,newData)
   const handleCheckStore = (e, index) => {
     setNewData(() => {
       const newListData = [...newData];
@@ -349,6 +372,7 @@ function TotalCart() {
 
   return (
     <div className="totalcart-container">
+        {newData&&newData.length>0?
       <div className="totalcart-right">
         <div className="total-cart">
           <label>
@@ -442,8 +466,11 @@ function TotalCart() {
           })}
         </div>
       </div>
+      :<div className="img_cart__empty">
+          <img src="https://cdni.iconscout.com/illustration/premium/thumb/confusing-woman-due-to-empty-cart-4558760-3780056.png"/>
+      </div>}
       <div className="totalcart-left">
-        <ClosingCart listProduct={listProduct} total={total} finalTotal={finalTotal} />
+        <ClosingCart listProduct={listProduct} total={total} finalTotal={finalTotal} cartID={cartID} />
       </div>
     </div>
   );

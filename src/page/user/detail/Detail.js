@@ -32,7 +32,7 @@ function Detail() {
     name: '',
   });
 
-  
+   
   const [sizeDetail, setSizeDetail] = useState(
     Product.product.productDetailId[0].option[1].value
   );

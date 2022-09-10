@@ -11,7 +11,7 @@
 
 .mgm-products-right select {
   margin-right: 6px;
-  padding: 4px;
+  padding: 4px 12px;
   border-radius: 8px;
   outline: none;
   color: rgb(26, 148, 255);
@@ -23,7 +23,7 @@
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 4px;
+  padding: 4px 12px;
 }
 
 .mgm-product-notification {
@@ -104,7 +104,7 @@
 }
 
 .mgm-product {
-  margin-left: 80px;
+
 }
 
 .card-container .ant-tabs {

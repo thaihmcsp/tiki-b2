@@ -9,7 +9,9 @@ function Admin() {
   return (
     <div className={styles.admin}>
         { <ManuAdmin setData= {setData}/>}
-        <Outlet context={data}/>
+        <div className={styles.Outlet}>
+          <Outlet context={data}/>
+        </div>
     </div>
     
   )

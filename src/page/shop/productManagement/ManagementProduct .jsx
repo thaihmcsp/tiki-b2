@@ -25,6 +25,7 @@ function ManagementProduct() {
     close.style.backgroundColor = 'unset'
     close.innerHTML = ''
   }
+
   return (
     <div className="mgm-product">
       <p>
@@ -53,7 +54,7 @@ function ManagementProduct() {
           <CloseOutlined onClick={handleClose} />
         </span>
       </div>
-      <div className="" style={{ width: "100%", margin: "24px 0" }}>
+      <div className="" style={{ width: "100%", margin: "12px 0 24px 0" }}>
         <div className="card-container">
           <Tabs type="card">
             <TabPane tab="Tất cả" key="1">
