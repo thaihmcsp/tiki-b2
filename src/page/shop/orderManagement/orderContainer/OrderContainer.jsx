@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { GlobalStyles } from '../GlobalStyles/index.js'
 import { Select, Checkbox  } from 'antd'
 import ListData from '../listData/ListData.jsx'
@@ -8,15 +8,68 @@ import Headerr from './oederheader/Headerr'
 import { UserOutlined, WechatOutlined, PrinterOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 import { blue } from '@mui/material/colors'
+import { useEffect } from 'react'
+import { getAPI } from '../../../../config/api.js'
+
+
 const { Option } = Select
 const OrderContainer = () => {
+  const [listOder,setLisOder] = useState([])
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   }
   const onChange = (e) => {
     console.log(`checked = ${e.target.checked}`);
   };
-  
+
+  useEffect(async()=>{
+
+    try{
+      
+      // const res1 = await getAPI(`/order/get-orders-by-shop/62fde7d19549b8b708773a0d`)
+      // console.log(12234,res1)
+      // const newdata1 = res1.data.listOrder
+      // console.log(2345,newdata1)
+      // const data1 = newdata1.map((value)=>{
+      //   return {
+      //     id: value._id,
+      //     image: value.product[0].productId.thump[0],
+      //     title:value.product[0].productId.productName,
+      //     color: 'Blue',
+      //     code: value._id,
+      //     amout: value.product[0].quantity,
+      //     price: value.product[0].productId.price,
+      //     delivery: 'COD',
+      //     sdh: value.phone,
+      //     total:value.total
+      //   }
+      // })
+      const res = await getAPI(`/order/get-orders-by-shop/62ece78420a301d53e54add3`)
+      const newData = res.data.listOrder
+      const daTa  = []
+      newData.map((value)=>{
+        value.product.map((subvalue,index)=>{
+          daTa.push( {
+          id: value._id,
+          image: value.product[index].productId.thump[0],
+          title:value.product[index].productId.productName,
+          color: 'Blue',
+          code: value._id,
+          amout: value.product[index].quantity,
+          price: value.product[index].productId.price,
+          delivery: 'COD',
+          sdh: value.phone,
+          total:value.total
+          })
+        })
+        
+      })
+      setLisOder(daTa)
+    }catch(e){
+      console.log(e)
+    }; 
+  },[])
+  console.log(21,listproduct)
   return (
     <div className={styles.order_Container}>
     <Headerr/>
@@ -29,7 +82,7 @@ const OrderContainer = () => {
     <p>Thao tác</p>
     </div>
     <ul className= {styles.order_list}>
-      {listproduct.map(value => {
+      {listOder.length>0 && listOder.map(value => {
         return (
           <li key={value.id} className= {styles.order_item}>
           <div className= {styles.order_item_header}>
@@ -64,7 +117,7 @@ const OrderContainer = () => {
             <span className={styles.order_info_price_amount}>x 1</span>
             </div>
             <div className={styles.order_info_new}>
-            <p><span>đ</span> 151.900</p>
+            <p><span>đ</span> {value.total}</p>
             <span className={styles.order_info_delivery}>{value.delivery}</span>
             </div>
             <p className={styles.order_info_standard}>Tiêu chuẩn</p>

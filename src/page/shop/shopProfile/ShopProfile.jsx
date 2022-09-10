@@ -34,7 +34,6 @@ const beforeUpload = (file) => {
 function ShopProfile() {
     const data = useSelector((state) => state.user);
     const dispatch = useDispatch()
-    console.log(8, data.shop.logo)
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState();
     const [imageObject, setImageObject] = useState({});
@@ -64,22 +63,6 @@ function ShopProfile() {
                 console.log(err);
             }
             setIsModalVisible(false);
-            // const OldEmail = document.getElementById('OldEmail').value;
-            // const NewEmail = document.getElementById('NewEmail').value;
-            // const RetypeNewEmail = document.getElementById('RetypeNewEmail').value;
-            // if (!OldEmail || !NewEmail || !RetypeNewEmail) {
-            //     window.alert('Vui lòng nhập đủ thông tin')
-            // } else {
-            //     if (OldEmail !== data.email) {
-            //         window.alert('Email sai')
-            //     } else if (NewEmail !== RetypeNewEmail) {
-            //         window.alert('Email không trùng nhau')
-            //     } if (OldEmail === data.email && NewEmail === RetypeNewEmail) {
-            //         console.log(1)
-            //         setIsModalVisible(false);
-            //     }
-
-            // }
         } else if (checkModal === 'ChangePhone') {
             const NewPhone = document.getElementById('NewPhone').value;
             if (NewPhone % 1 === 0) {
@@ -120,7 +103,6 @@ function ShopProfile() {
             try {
                 const formData = new FormData();
                 formData.append('logo', imageObject)
-                console.log(119, imageObject)
                 const res = await patchAPI('/shop/change-shop-logo/' + data.shop._id, formData);
                 const reslogo = await getAPI('/auth/me')
                 const action = updateInfo(reslogo.data)
@@ -136,7 +118,6 @@ function ShopProfile() {
         setIsModalVisible(false);
     };
     const handleChange = (info) => {
-        console.log('info', info);
         let url = URL.createObjectURL(info.file.originFileObj);
         setImageObject(info.file.originFileObj);
         setImageUrl(url)
@@ -160,9 +141,6 @@ function ShopProfile() {
                 {
                     checkModal === 'Changefullname' ? <div className={styles.InputsetEmail}>
                         {<input placeholder='Họ và tên' id='fullname'></input>}
-                        {/* <input placeholder='Nhập Email cũ' id='OldEmail' className={styles.InputModal}></input>
-                            <input placeholder='Nhập Email mới' id='NewEmail'></input>
-                            <input placeholder='Nhập lại Email' id='RetypeNewEmail'></input> */}
                     </div> : checkModal === 'ChangePhone' ? <div className={styles.InputsetPhone}>
                         <input placeholder='Nhập số điện thoại mới' id='NewPhone'></input>
                     </div> : checkModal === 'ChangeName' ? <div className={styles.InputsetName}>
