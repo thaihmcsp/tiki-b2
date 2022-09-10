@@ -3,8 +3,10 @@ import { useState } from "react";
 import { Button, Modal } from "antd";
 import style from "./ClosingCart.module.css";
 import "./ClosingCart.css";
-function ClosingCart({ total, finalTotal }) {
-  console.log(total);
+import { useNavigate } from "react-router-dom";
+import { patchAPI } from "../../../config/api";
+function ClosingCart({ total, finalTotal,cartID }) {
+  console.log(total,finalTotal);
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("Content of the modal");
@@ -12,7 +14,39 @@ function ClosingCart({ total, finalTotal }) {
   const showModal = () => {
     setVisible(true);
   };
-
+  const nav = useNavigate()
+  const handlegotoByNow = async()=>{
+    console.log(18,{finalTotal})
+    let success = true
+    if(finalTotal.length>0){
+      await Promise.all(finalTotal.map(async(item)=>{
+        console.log(cartID)
+        if(item._id==item.productDetailId._id){
+          const newStatus = {
+              productId: item._id,
+              selected: true
+          }
+          await patchAPI(`/cart/update-cart-selected-status/${cartID}`,newStatus)
+                    .then(data=>console.log('changeStatusOK'))
+                    .catch(error => success=false)
+        }else{
+          const newStatus = {
+            productDetailId: item.productDetailId._id,
+            selected: true
+          }
+          await patchAPI(`/cart/update-cart-selected-status/${cartID}`,newStatus)
+                  .then(data=>console.log('changeStatusOK'))
+                  .catch(error => success=false)
+          
+        }}
+      ))
+    }
+    if(success){
+      nav('/order')
+    }else{
+      window.alert('Thất bại, vui lòng thử lại')
+    }
+  }
   const handleOk = () => {
     setModalText("The modal will be closed after two seconds");
     setConfirmLoading(true);
@@ -28,7 +62,7 @@ function ClosingCart({ total, finalTotal }) {
   };
 
   return (
-    <div>
+    <div className="total_closing__cart">
       <div className="right-cart">
         <div>
           <div className="box-1">
@@ -264,7 +298,7 @@ function ClosingCart({ total, finalTotal }) {
               </div>
             </div>
           </div>
-          <button class="btn-closingCart">Mua Hàng {`(${finalTotal.length})`}</button>
+          <button class="btn-closingCart" onClick={handlegotoByNow}>Mua Hàng {`(${finalTotal.length})`}</button>
         </div>
       </div>
     </div>

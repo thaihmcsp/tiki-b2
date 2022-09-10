@@ -184,17 +184,17 @@
   margin: 15px 0px 0px;
 }
 
-.ant-btn-primary {
+.total_closing__cart .ant-btn-primary {
   border: none !important;
   background: none !important;
   text-shadow: none !important;
   box-shadow: none !important;
   color: rgb(13, 46, 212) !important;
 }
-.ant-btn {
+.total_closing__cart .ant-btn {
   padding: 0 !important;
 }
-.ant-modal-content {
+.total_closing__cart .ant-modal-content {
   position: absolute;
   top: 20px;
   left: 50%;
@@ -209,16 +209,16 @@
   outline: 0px;
   background-color: rgb(255, 255, 255);
 }
-.modal-sale-tiki {
+.total_closing__cart .modal-sale-tiki {
   padding: 16px 0px;
   display: flex;
   flex-direction: column;
 }
 
-.ant-modal-header {
+.total_closing__cart .ant-modal-header {
   border-bottom: none;
 }
-.modal-search-tiki {
+.total_closing__cart .modal-search-tiki {
   border-radius: 4px;
   box-shadow: none;
   border: 1px solid rgb(196, 196, 207);
@@ -230,7 +230,7 @@
   padding: 8px 12px 8px 44px;
   outline: 0px;
 }
-.modal-input-container {
+.total_closing__cart .modal-input-container {
   position: relative;
   padding: 0 22px;
   display: flex;
@@ -240,11 +240,11 @@
   top: 8px;
   left: 28px;
 }
-.ant-modal-body {
+.total_closing__cart .ant-modal-body {
   padding: 0;
 }
 
-.modal-input-container .modal-button-tiki-sale {
+.total_closing__cart .modal-input-container .modal-button-tiki-sale {
   pointer-events: none;
   background: rgb(235, 235, 240);
   border: 1px solid rgb(221, 221, 227);
@@ -268,10 +268,10 @@
   margin-left: 8px;
 }
 
-.ant-btn-default {
+.total_closing__cart .ant-btn-default {
   display: none !important;
 }
-.ant-modal-footer .ant-btn-primary {
+.total_closing__cart .ant-modal-footer .ant-btn-primary {
   font-size: 16px;
   line-height: 24px;
   font-weight: 500;
@@ -287,7 +287,7 @@
   outline: 0px;
   border-radius: 4px;
 }
-.ant-modal-footer {
+.total_closing__cart .ant-modal-footer {
   position: absolute;
   bottom: 8px;
   left: 10px;
@@ -295,10 +295,10 @@
   color: rgb(255, 255, 255);
   width: 96%;
 }
-.ant-btn-primary {
+.total_closing__cart .ant-btn-primary {
   content: "Xác nhận";
 }
-.ant-modal-footer {
+.total_closing__cart .ant-modal-footer {
   border: none;
   border-radius: 8px;
 }
@@ -315,5 +315,11 @@
   height: 18px;
   display: inline-flex;
   -webkit-box-align: center;
+  align-items: center;
+}
+.img_cart__empty{
+  width: 70%;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }

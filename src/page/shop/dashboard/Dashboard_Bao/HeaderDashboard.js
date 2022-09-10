@@ -1,6 +1,5 @@
 import React from "react";
 import { Progress } from "antd";
-import Chart from "chart.js/auto";
 import style from "./HeaderDashboard.module.css";
 import "./HeaderDashboardData";
 import "./HeaderDashboard.css";

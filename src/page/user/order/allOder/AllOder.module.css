@@ -2,17 +2,22 @@
     margin-top: 15px;
 }
 .OderTitle {
+    padding: 0 0 4px 0;
     margin-top: 15px;
     background-color: rgb(255, 255,255);
+    border-bottom: solid 2px #0095ff;
 }
 .Oder_HeaderTitle {
-    font-size: 18px;
+    font-size: 14px;
+    text-transform: uppercase;
     text-align: left;
     display: flex;
     align-items: center;
-   padding: 10px 10px 10px 20px;
+    padding: 4px 0 2px 12px;
     border-bottom: 1px solid rgb(238, 233, 233);
     margin-bottom: 0;
+    background: #0095ff;
+    color: #fff;
 }
 .MidleTitle {
     position: relative;
@@ -33,11 +38,11 @@
     border-radius: 4px  ;
     margin-top: auto;
     margin-bottom: auto;
+    box-shadow: 0.5px 0.5px 2px rgba(0, 0, 0, 0.2);
 }
 .ImageTitleText {
     display: flex;
     position: absolute;
-    color: red;
     top: 5px;
     right: 15px;
     align-items: flex-end;
@@ -47,7 +52,7 @@
 .ImageTitleText p {
     margin-top: 6px;
     margin-bottom: 6px;
-    flex: right;
+
 }
 .OrderBottomTitle {
     display: flex;
@@ -62,13 +67,18 @@
     margin: 0 10px;
 }
 .OderBottom_Shoplogo img {
-    width: 25px;
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
     margin-right: 10px;
-    border-radius: 4px;
+    border-radius: 50%;
+    border: solid 1px #ccc;
 }
 .OderBottom_Shoplogo span {
-    font-size: 16px;
-    opacity: 0.7;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+    cursor: pointer;
 }
 .ImageNumber {
     display: flex;
@@ -93,10 +103,12 @@
 
 
 .BottomTitle_Button {
-    padding: 3px;
+    padding: 0 3px;
     background-color: white;
-    border: 1.5px solid rgb(139, 192, 223);
+    border: 1.5px solid #ccc;
     margin-left: 10px;
     border-radius: 4px;
     outline: none;
+    font-size: 12px;
+
 }

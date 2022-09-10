@@ -40,8 +40,9 @@ function OderTitle(props) {
       props.setshowPagination(true)
     }
   }
+ 
   return (
-    <div className={clsx(styles.User_Oder_Title)} onClick={() => { ShowDataTitle(props, props.Title) }}>
+    <div className={clsx(styles.User_Oder_Title, 'OptionsAll_Oder__history')} onClick={() => { ShowDataTitle(props, props.Title) }}>
       {props.Title}
     </div>
   )

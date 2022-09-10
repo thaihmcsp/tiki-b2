@@ -17,7 +17,7 @@ import { Button, Menu } from "antd";
 import React, { useState } from "react";
 import "antd/dist/antd.css";
 import "./ShopMenu.css";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -30,18 +30,22 @@ function getItem(label, key, icon, children, type) {
 }
 
 const items = [
-  getItem("Quản lý sản phẩm", "1", <ShoppingOutlined />),
-  getItem("Quản lý đơn hàng", "2", <PrinterOutlined />),
-  getItem("Quản lý hồ sơ Shop", "3", <IdcardOutlined />),
-  getItem("Option 4", "4", <ProfileOutlined />),
-  getItem("Option 5", "5", <GlobalOutlined />),
-  getItem("Option 6", "6", <FireOutlined />),
-  getItem("Option 7", "7", <FlagOutlined />),
-  getItem("Option 8", "8", <FolderOpenOutlined />),
-  getItem("Option 9", "9", <CloudDownloadOutlined />),
-  getItem("Option 10", "10", <BarChartOutlined />),
-  getItem("Option 12", "11", <PayCircleOutlined />),
-  getItem("Option 11", "12", <DeleteOutlined />),
+
+  getItem("Dasboard", "0", <Link to='Dashboard'> 
+       <img src="https://media.loveitopcdn.com/3807/logo-tiki-dongphucsongphu-02.png" alt="dasboard"  className="logo_admin__shop_img"/>
+    </Link>),
+  getItem("Quản lý sản phẩm", "1", <Link to='Product'> <ShoppingOutlined /></Link>),
+  getItem("Quản lý đơn hàng", "2", <Link to='Order'> <PrinterOutlined /></Link>),
+  getItem("Quản lý hồ sơ Shop", "3", <Link to='Profile'> <IdcardOutlined /></Link>),
+  getItem("Chức năng tạm khoá", "4", <ProfileOutlined />),
+  getItem("Chức năng tạm khoá", "5", <GlobalOutlined />),
+  getItem("Chức năng tạm khoá", "6", <FireOutlined />),
+  getItem("Chức năng tạm khoá", "7", <FlagOutlined />),
+  getItem("Chức năng tạm khoá", "8", <FolderOpenOutlined />),
+  getItem("Chức năng tạm khoá", "9", <CloudDownloadOutlined />),
+  getItem("Chức năng tạm khoá", "10", <BarChartOutlined />),
+  getItem("Chức năng tạm khoá", "11", <PayCircleOutlined />),
+  getItem("Chức năng tạm khoá", "12", <DeleteOutlined />),
 ];
 
 function ShopMenu() {
@@ -51,16 +55,14 @@ function ShopMenu() {
     <div className="db-Product">
       <div className="db-Product-left">
 
-        <Button type="HomeOutlined" style={{ width: 80 }}>
-          <HomeOutlined />
-        </Button>
         <Menu
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={["0"]}
           defaultOpenKeys={["sub1"]}
           mode="inline"
           theme="dark"
           inlineCollapsed={collapsed}
           items={items}
+          className="Menu_shop__admin"
         />
       </div>
       <div className="db-Product-right">

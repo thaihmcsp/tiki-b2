@@ -36,7 +36,7 @@ body {
 }
 
 
-.ant-btn-primary {
+.filter-modall .ant-btn-primary {
   border: unset !important;
   background:none !important;
   display: none !important;

@@ -1,8 +1,5 @@
-
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import CreateShop from './page/user/createShop/createShop'
-
-
+import { BrowserRouter, Routes, Route, Router } from 'react-router-dom';
+// import CreateShop from './page/user/createShop/CreateShop'`
 import SignUp from './page/user/signUp/SignUp';
 import SignIn from './page/user/signIn/SignIn';
 import Header from './components/Header';
@@ -21,28 +18,23 @@ import UserInfoMenu from './page/user/profile/UserInfoMenu';
 import Category from './page/admin/categoryManagement/Category';
 import User from './page/admin/userManagement/User';
 import AdminLogin from './page/admin/login/Login';
+import OrderUser from './page/user/order/Order'
 import ShopLogin from './page/shop/login/Login';
-
-
-// import Detail from "./page/user/detail/Detail";
-import PrivateRouter from './components/PrivateRouter';
-// import ShopMenu from './page/shop/productManagement/Product';
-import ShopProfile from './page/shop/shopProfile/ShopProfile';
-
 import Order from './page/user/order/maintotal/Main';
-// import ShopHome from './page/shop/shopHome/ShopHome';
-
-// import ShopProfile from './page/shop/shopProfile/ShopProfile';
-// import ShopMenu from './page/shop/productManagement/ShopMenu';
-// import ManagementProduct from './page/shop/productManagement/ManagementProduct ';
-// import Detail from "./page/user/detail/Detail";
+import ShopHome from './page/shop/shopHome/ShopHome';
+import  OderHistory from './page/user/order/Order';
+import ShopProfile from './page/shop/shopProfile/ShopProfile';
+import ShopMenu from './page/shop/productManagement/ShopMenu';
+import ManagementProduct from './page/shop/productManagement/ManagementProduct ';
+import Detail from "./page/user/detail/Detail";
 import "antd/dist/antd.css";
 import "./App.css";
 import AddItem from "./page/shop/productManagement/priceItem/addItem_Phu/AddItem";
 import EditItem from './page/shop/productManagement/editProduct/priceItem/addItem_Phu/EditItem';
 import PrivateRouteShop from './page/shop/componentDataTableAdmin/PrivateRouter';
 import TotalCart from './page/user/cart/TotalCart';
-
+import ShopDashboard from './page/shop/dashboard/ShopDashboard';
+import OrderContainer from './page/shop/orderManagement/orderContainer/OrderContainer';
 
 function App() {
   function getCookie(cname) {
@@ -60,26 +52,25 @@ function App() {
     }
     return "";
   }
-
-  console.log(39, getCookie('tiki-user'))
   return (
     <BrowserRouter>
-        <Routes>          
-            <Route path='/sign-up' element={<SignUp/>} />    
+        <Routes>
+          {/* SIGIN_SIGUP ROUTER */}
+            <Route path='/sign-up' element={<SignUp/>} />
             <Route path='/sign-in' element={<SignIn/>} />
             <Route path='/sign-in-admin' element={<AdminLogin/>} />
             <Route path='/sign-in-shop' element={<ShopLogin/>} />
-            {/* <Route path='/adminShop' 
-                element={<PrivateRouteShop>
-                             <ShopMenu/>
-                        </PrivateRouteShop>}>   
-            </Route>
+
+            {/* SHOP ROUTER */}
             <Route path='/adminShop' 
                 element={<PrivateRouteShop>
                              <ShopMenu/>
                         </PrivateRouteShop>}>   
-                        {/* <Route path='/adminShop/Product' element={<ManagementProduct/>}/> */}
-            {/* </Route> } */}
+                        <Route path='/adminShop/Product' element={<ManagementProduct/>}/>
+                        <Route path='/adminShop/Dashboard' element={<ShopDashBoardAll/>}/>
+                        <Route path='/adminShop/Order' element={<OrderContainer/>}/>
+                        <Route path='/adminShop/Profile' element={<ShopProfile />}/>
+            </Route>
             <Route path='/addItem' 
                 element={<PrivateRouteShop>
                              <AddItem/>
@@ -90,29 +81,34 @@ function App() {
                              <EditItem/>
                         </PrivateRouteShop>}>   
             </Route>
-            {/* <Route path='/create-shop' element={<CreateShop/>}/> */}
+            {/* ROUTER ADMIN */}
+
             <Route path='/admin' element={<Admin/>} >
-                <Route path='category' element={<Category/>} />
-                <Route path='shop' element={<Shop/>}></Route>
-                <Route path='user' element={<User/>}></Route>
+                <Route path='/admin/category' element={<Category/>} />
+                <Route path='/admin/dashboard' element={<ShopDashboard/>} />
+                <Route path='/admin/shop' element={<Shop/>}></Route>
+                <Route path='/admin/user' element={<User/>}></Route>
             </Route>
+
+
+            {/* USER ROUTER */}
             <Route path='/' element={<Header/>}> 
                 <Route path='/' element={<Home/>} />
-                {/* <Route path='/detail/:productId' element={<Detail/>} /> */}
                 <Route path='/filter' element={<Filter/>}/>
-                <Route path='/shop/dashboard' element={<ShopDashBoardAll/>} />
                 <Route path='/user' element={<UserInfoMenu/>}> 
                     <Route path='/user/profile' element={ <div className='profile'> <UserInfo /> <ProfileList/> </div> }/>
                     <Route path='/user/order' element={ <div className='order'><Order/></div> } />
                 </Route>
-                {/* <Route path='/ShopHome' element={<ShopHome/>}/> */}
-                <Route path='/shop' element={<Shop></Shop>}/>
-                {/* <Route path='/detail' element={<Detail />}/> */}
+                <Route path='/ShopHome' element={<ShopHome/>}/>
+                <Route path='/detail' element={<Detail />}/>
                 <Route path='/cart' element={<TotalCart/>} />
             </Route>
-        </Routes>      
-    </BrowserRouter>
-  );    
-           
+            <Route path='/order' element={ <div className='order'><Order/></div> } />
+            <Route path='*' element={<SignIn />} /><Route/>
+            <Route/>
+
+            </Routes>
+        </BrowserRouter>
+    );
 }
 export default App;
