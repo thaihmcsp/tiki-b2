@@ -59,17 +59,8 @@ function Login() {
             } 
              else {    
                 var resp = await postAPI('/auth/login/shop', { email, password})
-                setCookie('tiki-user', resp.data.token, 57);
-
-                console.log(20,resp)
-                
-                const res = await getAPI('/auth/me');
-                window.localStorage.setItem('tiki-user',JSON.stringify(res.data))
-                const action = userLogin(res.data);
-                    dispatch(action);
-                      
-                  nav('/adminShop')          
-                
+                setCookie('tiki-shop', resp.data.token, 30);                   
+                nav('/adminShop/Dashboard')           
         }
     }
         catch (error) {

@@ -64,22 +64,7 @@ function ShopProfile() {
                 console.log(err);
             }
             setIsModalVisible(false);
-            // const OldEmail = document.getElementById('OldEmail').value;
-            // const NewEmail = document.getElementById('NewEmail').value;
-            // const RetypeNewEmail = document.getElementById('RetypeNewEmail').value;
-            // if (!OldEmail || !NewEmail || !RetypeNewEmail) {
-            //     window.alert('Vui lòng nhập đủ thông tin')
-            // } else {
-            //     if (OldEmail !== data.email) {
-            //         window.alert('Email sai')
-            //     } else if (NewEmail !== RetypeNewEmail) {
-            //         window.alert('Email không trùng nhau')
-            //     } if (OldEmail === data.email && NewEmail === RetypeNewEmail) {
-            //         console.log(1)
-            //         setIsModalVisible(false);
-            //     }
 
-            // }
         } else if (checkModal === 'ChangePhone') {
             const NewPhone = document.getElementById('NewPhone').value;
             if (NewPhone % 1 === 0) {

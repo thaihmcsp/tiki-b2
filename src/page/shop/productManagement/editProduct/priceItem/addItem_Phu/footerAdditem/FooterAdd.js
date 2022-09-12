@@ -17,10 +17,19 @@ function FooterAdd() {
       varient:state.subItemProduct.varient
     }
   })
+  const image = useSelector(state=>state.imageUpdate.newImage)
+  const delImage = useSelector(state=>state.imageUpdate.delImd)
+  console.log(22,delImage)
+  const oldImage = useSelector(state=>{
+    return state.eidtProduct.thump
+  })
+  console.log(31,oldImage)
+
   const defaultDetail = Detail.data.productDetailId
   const newDetail = Detail.newDetail
+  
+  console.log(20,image)
   const ID = Detail.data._id
-  const image = useSelector(state=>state.imageUpdate)
   // console.log(15,ID,defaultDetail,newDetail)
   const handleSubmitEditItem = async function(){  
       const listDe = document.querySelectorAll('.optionVarientALL')
@@ -58,20 +67,20 @@ function FooterAdd() {
           })
             const newProduct = {
               about:Detail.data.about,
-              categoryId:Detail.data.categoryId,
-              // productDetailId:[],
+              categoryId:Detail.data.categoryId._id,
               productName: Detail.data.productName,
               public:Detail.data.public,
-              shopId:Detail.data.shopId,
+              shopId:Detail.data.shopId._id,
               sold: Detail.data.sold,
               totalStorage:totalStorage>0?totalStorage:Detail.data.totalStorege,
-              _id:ID
             }
             console.log(36,newProduct,data)
 
             if(checked===true){
-              await patchAPI(`/product/update-product-info/${ID}`,newProduct)
+              console.log(74,'updating product have detail')
+              await patchAPI(`/product/update-product-info/${ID}`,newProduct) 
               if(image.length>0){
+                console.log('đang up ảnh trưởng hợp 1')
                 await Promise.all(image.map(async(item,index)=>{
                   const formData = new FormData();
                   formData.append('thump', JSON.parse(item))
@@ -84,6 +93,7 @@ function FooterAdd() {
               }
               console.log(86,defaultDetail,data)
               if(defaultDetail.length>0){
+                console.log('updetailing......')
                   await Promise.all(defaultDetail.map(async(item)=>{
                     const index = data.findIndex(subitem=>subitem._id== item._id)
                     if(index == -1){
@@ -134,24 +144,28 @@ function FooterAdd() {
                         .catch(error=>console.log(error))
                 }))
               }
-              if(image.length>0){
-                await patchAPI(`/product/update-product-info/${ID}`,{
-                  thump:[]
+              if(image.length!=0){
+                await patchAPI(`/product/add-product-thump/${ID}`,image)
+                .then(data=>{
+                  console.log('up ảnh ok 1',data);
                 })
-                await Promise.all(image.map(async(item,index)=>{
-                  const formData = new FormData();
-                  formData.append('thump', JSON.parse(item))
-                  await patchAPI(`/product/add-product-thump/${ID}`,formData)
-                  .then(data=>{
-                    console.log('up ảnh ok');
+              }
+              if(delImage&&delImage.length>0){
+                await Promise.all(delImage.map(async(item)=>{
+                  const link = item.startsWith('https://tiki.thaihm.site/')?item.slice(25):item
+                  console.log(156,link)
+                  patchAPI(`/product/delete-product-thump/${ID}`,{
+                    path:link
                   })
-                  .catch(error=>console.log(error))
+                    .then(data=>console.log('xoá ảnh ok'))
+                    .catch(error=>console.log('xoá ảnh không thành công'))
                 }))
               }
               nav('/adminShop/Product')
             }
            
         }else if(Detail.varient[0].option.length==0){
+          console.log(74,'updating product dont have detail')
           const priceMain = newList[0].querySelector('.Add_price__varient .hello_ant-input-number-input').value
           const totalStorege = newList[0].querySelector('.Add_storege-btn .hello_ant-input-number-input').value
           const pubLic = newList[0].querySelector('#SellupPulish').getAttribute('aria-checked')
@@ -169,18 +183,19 @@ function FooterAdd() {
             }
 
             await patchAPI(`/product/update-product-info/${ID}`,newProduct)
-            if(image.length>0){
-              await patchAPI(`/product/update-product-info/${ID}`,{
-                thump:[]
+            if(image.length!=0){
+              await patchAPI(`/product/add-product-thump/${ID}`,image)
+              .then(data=>{
+                console.log('up ảnh ok 1',data);
               })
-              await Promise.all(image.map(async(item,index)=>{
-                const formData = new FormData();
-                formData.append('thump', JSON.parse(item))
-                await patchAPI(`/product/add-product-thump/${ID}`,formData)
-                .then(data=>{
-                  console.log('up ảnh ok');
+            }
+            if(delImage&&delImage.length>0){
+              await Promise.all(data.map(async(item)=>{
+                patchAPI(`/product/delete-product-thump/${ID}`,{
+                  path:item
                 })
-                .catch(error=>console.log(error))
+                  .then(data=>console.log('xoá ảnh ok'))
+                  .catch(error=>console.log('xoá ảnh không thành công'))
               }))
             }
             if(defaultDetail.length>0){

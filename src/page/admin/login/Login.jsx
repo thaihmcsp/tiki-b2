@@ -15,6 +15,7 @@ function setCookie(cname, cvalue, exdays) {
     const d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     let expires = "expires="+ d.toUTCString();
+    console.log(expires);
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
 
@@ -58,23 +59,13 @@ function Login() {
             } 
              else {
                 var resp = await postAPI('/auth/login/admin', { email, password})
-                setCookie('tiki-user', resp.data.token, 57);
-
-                console.log(20,resp)
-                
-                const res = await getAPI('/auth/me');
-                window.localStorage.setItem('tiki-user',JSON.stringify(res.data))
-                const action = userLogin(res.data);
-                    dispatch(action);
-                      
-                  nav('/')
-                 
+                setCookie('tiki-admin', resp.data.token,30); 
+                  nav('/admin/dashboard')
                 }
-
             }
         
         catch (error) {
-            console.log('loi',error)
+            console.log('đăng nhập thất bại vui lòng đăng nhập lại',error)
             alert(error.response.data.message)
         }
 
