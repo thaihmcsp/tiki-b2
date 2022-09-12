@@ -149,6 +149,7 @@ function Header(props) {
         console.log(err);
       })
   }, [])
+
   const [DataHeader, setDataHeader] = useState(['Thịt', 'Rau củ', 'Nhà cửa', 'Điện tử', 'Thiết Bị Số', 'Điện thoại', 'Mẹ & Bé'])
   const handlegotoCart = () => {
     nav(`/cart?userID=${cartId}`)
