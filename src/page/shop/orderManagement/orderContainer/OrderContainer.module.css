@@ -3,7 +3,15 @@
     max-width: 100%;
     margin: 0 auto;
 }
-
+.order_item .order_item_middle:not(:last-child)::after {
+    content: '';
+    width: 95%;
+    height: 1px;
+    background: #000;
+    position: absolute;
+    bottom: 0;
+    left: 2.5%;
+}
 .order_header {
     display: grid;
     grid-template-columns:  40% 10% 10% 25% 15%;
@@ -73,9 +81,9 @@
 .order_item_middle {
     display: grid;
     grid-template-columns: 30% 10% 10% 10% 20% 10%;
-    padding: 10px 25px 30px 15px;
-
-}
+    padding: 20px 25px 10px 15px;
+    position: relative;
+}   
 
 .order_info_price_box {
     margin-left: 10px;

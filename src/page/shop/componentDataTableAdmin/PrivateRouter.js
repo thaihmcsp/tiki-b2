@@ -11,10 +11,13 @@ function PrivateRouteShop({ children,sigin }) {
     console.log({data},sigin)
     let login = false
 
-    if(sigin == '/sign-up'){
+    if(sigin == '/sign-in'){
+        console.log(15,data[`tiki-user`])
         if(data[`tiki-user`]){
+            console.log('đã đăng nhập user')
             login = true
         }else{
+            console.log('chưa đăng nhập user')
             login = false
         }
     }else if(sigin == '/sign-in-shop'){
@@ -32,6 +35,7 @@ function PrivateRouteShop({ children,sigin }) {
             login = false
         }
     }
+    console.log(login)
     return login ? children : <Navigate to={`${sigin}`} />;
 }
 export default PrivateRouteShop;

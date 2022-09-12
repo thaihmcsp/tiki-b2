@@ -104,7 +104,7 @@ function FooterAdd() {
                     }
                   }))
                   await Promise.all(data.map(async(item)=>{
-                    const index = defaultDetail.findIndex(subitem=>subitem._id== item._id)
+                    const index = defaultDetail.findIndex(subitem =>subitem._id == item._id)
                     if(index == -1){
                       const newDetail = {
                         price: item.price,
@@ -172,27 +172,28 @@ function FooterAdd() {
           if(priceMain&&totalStorege){
             const newProduct = {
               about:Detail.data.about,
-              categoryId:Detail.data.categoryId,
+              categoryId:Detail.data.categoryId._id,
               productName: Detail.data.productName,
               public:Detail.data.public,
-              shopId:Detail.data.shopId,
+              shopId:Detail.data.shopId._id,
               sold: Detail.data.sold,
               totalStorage:totalStorege,
-              price:priceMain,
-              _id:ID
+              price:priceMain
             }
 
             await patchAPI(`/product/update-product-info/${ID}`,newProduct)
-            if(image.length!=0){
+            if(image && image.length!=0){
               await patchAPI(`/product/add-product-thump/${ID}`,image)
               .then(data=>{
                 console.log('up ảnh ok 1',data);
               })
             }
             if(delImage&&delImage.length>0){
-              await Promise.all(data.map(async(item)=>{
+              await Promise.all(delImage.map(async(item)=>{
+                const link = item.startsWith('https://tiki.thaihm.site/')?item.slice(25):item
+                console.log(156,link)
                 patchAPI(`/product/delete-product-thump/${ID}`,{
-                  path:item
+                  path:link
                 })
                   .then(data=>console.log('xoá ảnh ok'))
                   .catch(error=>console.log('xoá ảnh không thành công'))
