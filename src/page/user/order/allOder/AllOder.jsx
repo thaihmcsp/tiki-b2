@@ -18,7 +18,7 @@ function AllOder(props) {
                                    <h4 style={{ opacity: 0.8 }}>{value.name}</h4>
                               </div>
                               <div className={style.ImageTitleText}>
-                                   <p>{value.price.toLocaleString()}đ </p>
+                                   <p>{(value.price*1).toLocaleString()}đ </p>
                                    <p>x{value.sold}</p>
                               </div>
 
@@ -29,7 +29,7 @@ function AllOder(props) {
                                    <span>{value.shopId.shopname}</span>
                               </div>
                               <div className={style.BottomTitle}>
-                                   <p style={{ textAlign: 'right', fontSize: '16px', opacity: '0.7', marginBottom: '5px' }} >Tổng tiền : <span style={{ opacity: '1', fontWeight: 'bold', color: 'red' }} >{(value.price * value.sold).toLocaleString()}đ</span></p>
+                                   <p style={{ textAlign: 'right', fontSize: '14px', opacity: '0.7', marginBottom: '5px' }} >TOTAL : <span style={{ opacity: '1', fontWeight: '500', color: 'red', textDecoration: 'underline', fontSize: '16px' }} >{(value.price * value.sold).toLocaleString()}đ</span></p>
                                    <div style={{ textAlign: 'right' }}>
                                         <button className={style.BottomTitle_Button}>Mua lại</button>
                                         <button className={style.BottomTitle_Button}>Xem Chi Tiết</button>

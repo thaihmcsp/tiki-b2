@@ -18,12 +18,12 @@ function getItem(label, key, icon, children) {
     label,
   };
 }
-
+{/* <Link to='user'> <AccountCircleIcon/></Link> */}
 const items = [
-  getItem(<Link to='/admin/dashbosh'> Dashboard</Link>, '1',<DashboardIcon/>),
-  getItem(<Link to='/admin/user'> User management</Link>, '2',<AccountCircleIcon/>),
-  getItem(<Link to='/admin/shop'> Shop management</Link>, 'sub1',<ShopIcon/>),
-  getItem(<Link to='/admin/category'>Categories</Link>, 'sub2',<CategoryIcon/>),
+  getItem('Dashboard', '1',<Link to='dashboard'> <DashboardIcon/></Link>),
+  getItem('User management', '2',<Link to='user'> <AccountCircleIcon/></Link>),
+  getItem('Shop management', 'sub1',<Link to='shop'> <ShopIcon/></Link>),
+  getItem('Categories', 'sub2',<Link to='category'> <CategoryIcon/></Link>),
   getItem('Profile','3',<ContactMailIcon/>),
 ];
 function ManuAdmin(props) {
@@ -53,7 +53,7 @@ function ManuAdmin(props) {
           width: 258,
         }}
         defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
+        defaultOpenKeys={['1']}
         mode={mode}
         theme={theme}
         items={items}

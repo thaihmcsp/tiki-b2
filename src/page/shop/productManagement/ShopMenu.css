@@ -1,6 +1,6 @@
 .ant-menu-dark.ant-menu-inline,
 .ant-menu-dark.ant-menu-vertical {
-    height: 95vh;
+    height: 100vh;
 }
 
 .db-Product {
@@ -8,10 +8,31 @@
     background: rgba(218, 218, 218, 0.565);
     position: relative;
 }
-
+.logo_admin__shop{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Menu_shop__admin.ant-menu-dark .ant-menu-item:first-child{
+    height: 80px;
+}
+.ant-menu-dark.Menu_shop__admin .ant-menu-item:first-child .ant-menu-item-selected{
+    background: #fff !important;
+}
+.Menu_shop__admin.ant-menu-dark .ant-menu-item{
+    border-bottom: solid 1px rgb(226, 226, 226);
+}
+.logo_admin__shop_img{
+    width:50px;
+    position: absolute;
+    top: 50%;left: 50%;
+    transform: translate(-50%, -50%);
+}
 .db-Product-right {
     width: 100%;
     padding: 12px 24px;
+    margin-left: 80px;
+    min-height: 100vh;
 }
 
 .db-Product-left {
@@ -32,8 +53,10 @@
 }
 
 .db-Product-left .ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
-    /* background-color:#1e5d87 ; */
     background-color: #579fff;
+}
+.db-Product-left .ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item:first-child.ant-menu-item-selected {
+    background-color: unset;
 }
 
 .db-Product-left .ant-btn-primary:focus {

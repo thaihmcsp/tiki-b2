@@ -114,23 +114,26 @@ const ComponentTableProducts = ({ value, selectSort, count }) => {
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
    
     function handleChange (e){
-    // console.log(118,id)
     console.log(117,e)
     console.log(117,e.target.checked)
-  //   if(e.target.checked == true ){
-  //     try {
-  //       await patchAPI('/product/change-product-publish/'+ id)
-        
-  //     }catch (error) {
-  //       console.log(error)
-  //   }
-  //  }
+
   }
+  let linkImg = ele.thump
+  if(linkImg.length > 0){
+      const newLink = linkImg[0]
+      if(newLink.startsWith('https')){
+          linkImg = newLink
+      }else{
+          linkImg = `https://tiki.thaihm.site/${newLink}`
+      }
+    }else{
+      linkImg = 'https://roofequipmentllc.com/wp-content/uploads/2019/01/noimage.png'
+    }
       return {
         key: index + 1,
         name: (
           <div className={styles.products}>
-            <img src={ele.thump[0]} alt="img" />
+            <img src={linkImg} alt="img" />
             <span>{ele.productName}</span>
           </div>
         ),

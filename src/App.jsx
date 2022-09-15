@@ -33,6 +33,8 @@ import AddItem from "./page/shop/productManagement/priceItem/addItem_Phu/AddItem
 import EditItem from './page/shop/productManagement/editProduct/priceItem/addItem_Phu/EditItem';
 import PrivateRouteShop from './page/shop/componentDataTableAdmin/PrivateRouter';
 import TotalCart from './page/user/cart/TotalCart';
+import ShopDashboard from './page/shop/dashboard/ShopDashboard';
+import OrderContainer from './page/shop/orderManagement/orderContainer/OrderContainer';
 
 function App() {
     function getCookie(cname) {
@@ -50,25 +52,24 @@ function App() {
         }
         return "";
     }
-
-    console.log(39, getCookie('tiki-user'))
     return (
         <BrowserRouter>
             <Routes>
+                {/* SIGIN_SIGUP ROUTER */}
                 <Route path='/sign-up' element={<SignUp />} />
                 <Route path='/sign-in' element={<SignIn />} />
                 <Route path='/sign-in-admin' element={<AdminLogin />} />
                 <Route path='/sign-in-shop' element={<ShopLogin />} />
-                <Route path='/adminShop'
-                    element={<PrivateRouteShop>
-                        <ShopMenu />
-                    </PrivateRouteShop>}>
-                </Route>
+
+                {/* SHOP ROUTER */}
                 <Route path='/adminShop'
                     element={<PrivateRouteShop>
                         <ShopMenu />
                     </PrivateRouteShop>}>
                     <Route path='/adminShop/Product' element={<ManagementProduct />} />
+                    <Route path='/adminShop/Dashboard' element={<ShopDashBoardAll />} />
+                    <Route path='/adminShop/Order' element={<OrderContainer />} />
+                    <Route path='/adminShop/Profile' element={<ShopProfile />} />
                 </Route>
                 <Route path='/addItem'
                     element={<PrivateRouteShop>
@@ -80,35 +81,29 @@ function App() {
                         <EditItem />
                     </PrivateRouteShop>}>
                 </Route>
-                {/* <Route path='/create-shop' element={<CreateShop/>}/> */}
-                <Route path='/admin' element={<Admin />} >
-                    <Route path='category' element={<Category />} />
-                    <Route path='shop' element={<Shop />}></Route>
-                    <Route path='user' element={<User />}></Route>
+                {/* ROUTER ADMIN */}
 
+                <Route path='/admin' element={<Admin />} >
+                    <Route path='/admin/category' element={<Category />} />
+                    <Route path='/admin/dashboard' element={<ShopDashboard />} />
+                    <Route path='/admin/shop' element={<Shop />}></Route>
+                    <Route path='/admin/user' element={<User />}></Route>
                 </Route>
+
+
+                {/* USER ROUTER */}
                 <Route path='/' element={<Header />}>
                     <Route path='/' element={<Home />} />
                     <Route path='/filter' element={<Filter />} />
-                    <Route path='/shop/dashboard' element={<ShopDashBoardAll />} />
                     <Route path='/user' element={<UserInfoMenu />}>
                         <Route path='/user/profile' element={<div className='profile'> <UserInfo /> <ProfileList /> </div>} />
                         <Route path='/user/order' element={<div className='order'><OderHistory /></div>} />
                     </Route>
                     <Route path='/ShopHome' element={<ShopHome />} />
-                    <Route path='/shop' element={<Shop></Shop>} />
                     <Route path='/detail' element={<Detail />} />
                     <Route path='/cart' element={<TotalCart />} />
                 </Route>
                 <Route path='/order' element={<div className='order'><Order /></div>} />
-
-
-                <Route path='/admin' element={<Admin />} >
-                    <Route path='/admin/category' element={<Category />} />
-                    <Route path='/admin/shop' element={<Shop></Shop>} ></Route>
-                    <Route path='/admin/user' element={<User></User>} ></Route>
-                    <Route path='/admin/dashbosh' element={<Shop></Shop>} ></Route>
-                </Route>
                 <Route path='*' element={<SignIn />} /><Route />
                 <Route />
 

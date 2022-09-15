@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { getAPI } from '../../../config/api'
 function Order() {
   const user = useSelector(state => state.user)
+  console.log(user._id)
   const [dataOderTitle, setdataOderTitle] = useState([]);
   const [status, setstatus] = useState('none')
   const [dataInputSeach, setdataInputSeach] = useState([...dataOderTitle])
@@ -21,38 +22,59 @@ function Order() {
   async function getAllUserOrder() {
     try {
       const data = await getAPI('/user-order/get-order-by-userId/' + user._id);
-
+      console.log(58, data)
       setdataOderTitle(() => {
         const newdata = [];
         data.data.listOrder.map((value, index) => {
-          let valueStatus = '';
-          if (value.status === 'pending') {
-            valueStatus = 'Đang xử lí'
-          } else if (value.status === 'shipping') {
-            valueStatus = 'Đang vận chuyển'
-          } else if (value.status === 'waitpayment') {
-            valueStatus = 'Chờ thanh toán'
-          } else if (value.status === 'cancel') {
-            valueStatus = 'Đã Hủy'
-          } else if (value.status === 'complete') {
-            valueStatus = 'Đã Giao'
-          };
-          value.listProduct.map((val, i) => {
-            newdata.push(
-              {
-                name: `${val.productDetailId.productId.productName}`,
-                sold: `${val.quantity}`,
-                shopId: { 
-                  shopname: `${value.shopId.shopName}`,
-                  shoplogo: `${value.shopId.logo}`
-                },
-                status: `${valueStatus}`,
-                price: `${val.productDetailId.price}`,
-                img: ``
 
-              }
-            )
+          console.log(41, value)
+          value.listOrder.map(item => {
+            let valueStatus = '';
+            if (item.status === 'pending') {
+              valueStatus = 'Đang xử lí'
+            } else if (item.status === 'shipping') {
+              valueStatus = 'Đang vận chuyển'
+            } else if (item.status === 'waitpayment') {
+              valueStatus = 'Chờ thanh toán'
+            } else if (item.status === 'cancel') {
+              valueStatus = 'Đã Hủy'
+            } else if (item.status === 'complete') {
+              valueStatus = 'Đã Giao'
+            };
+            if (item.listProduct.length > 0) {
+              newdata.push(
+                {
+                  name: `${item.listProduct[0].productDetailId.productId
+                    .productName}`,
+                  sold: `${item.listProduct[0].quantity}`,
+                  shopId: {
+                    shopname: `${item.shopId.shopName}`,
+                    shoplogo: `${item.shopId.logo}`
+                  },
+                  status: `${valueStatus}`,
+                  price: `${item.listProduct[0].productDetailId.productId
+                    .price}`,
+                  img: `${item.listProduct[0].productDetailId.productId
+                    .thump[0]}`
+
+                })
+            } else {
+              newdata.push(
+                {
+                  name: `${item.product[0].productId.productName}`,
+                  sold: `${item.product[0].quantity}`,
+                  shopId: {
+                    shopname: `${item.shopId.shopName}`,
+                    shoplogo: `${item.shopId.logo}`
+                  },
+                  status: `${valueStatus}`,
+                  price: `${item.product[0].productId.price}`,
+                  img: `${item.product[0].productId.thump[0]}`
+
+                })
+            }
           })
+
         })
 
         return newdata
@@ -74,8 +96,9 @@ function Order() {
 
     return originalElement;
   };
-  function Search_Datatitle() {
 
+  function Search_Datatitle() {
+    console.log(dataInputSeach)
     const seachInput = removeAccents(document.querySelector(`.${styles.TitleInput}`).value).toLocaleLowerCase();
     if (seachInput) {
       const newdata = dataInputSeach.filter(function (value) {
@@ -84,6 +107,7 @@ function Order() {
       })
       if (newdata.length === 0) {
         setemptyOder('https://frontend.tikicdn.com/_desktop-next/static/img/account/empty-order.png')
+
       }
       setnewListdata(newdata)
     }
@@ -118,6 +142,10 @@ function Order() {
       .replace(/[\u0300-\u036f]/g, '')
       .replace(/đ/g, 'd').replace(/Đ/g, 'D');
   }
+  useEffect(function () {
+    const listOption = document.querySelectorAll(`.OptionsAll_Oder__history`)
+    listOption[0].click()
+  }, [dataOderTitle])
   const PaginationList = <div className={styles.Pagination}>
     <Pagination total={newListdata.length} defaultPageSize={3} itemRender={itemRender} onChange={setStartPAgination} current={current} />;
   </div>
@@ -126,10 +154,15 @@ function Order() {
     <div className={styles.Global_OderList}>
       <div className={styles.user_Oder_Listtitle}>
         <OderTitle Title='Tất cả đơn' status={status} setstatus={setstatus} newListdata={dataOderTitle} setnewListdata={setnewListdata} emptyOder={emptyOder} setemptyOder={setemptyOder} setdataInputSeach={setdataInputSeach} setshowPagination={setshowPagination} setstart={setstart} setcurrent={setcurrent} ></OderTitle>
+
         <OderTitle Title='Chờ thanh toán' status={status} setstatus={setstatus} newListdata={dataOderTitle} setnewListdata={setnewListdata} emptyOder={emptyOder} setemptyOder={setemptyOder} setdataInputSeach={setdataInputSeach} setshowPagination={setshowPagination} setstart={setstart} setcurrent={setcurrent} ></OderTitle>
+
         <OderTitle Title='Đang xử lí' status={status} setstatus={setstatus} newListdata={dataOderTitle} setnewListdata={setnewListdata} emptyOder={emptyOder} setemptyOder={setemptyOder} setdataInputSeach={setdataInputSeach} setshowPagination={setshowPagination} setstart={setstart} setcurrent={setcurrent}></OderTitle>
+
         <OderTitle Title='Đang vận chuyển' status={status} setstatus={setstatus} newListdata={dataOderTitle} setnewListdata={setnewListdata} emptyOder={emptyOder} setemptyOder={setemptyOder} setdataInputSeach={setdataInputSeach} setshowPagination={setshowPagination} setstart={setstart} setcurrent={setcurrent}></OderTitle>
+
         <OderTitle Title='Đã Giao' status={status} setstatus={setstatus} newListdata={dataOderTitle} setnewListdata={setnewListdata} emptyOder={emptyOder} setemptyOder={setemptyOder} setdataInputSeach={setdataInputSeach} setshowPagination={setshowPagination} setstart={setstart} setcurrent={setcurrent} ></OderTitle>
+
         <OderTitle Title='Đã Hủy' status={status} setstatus={setstatus} newListdata={dataOderTitle} setnewListdata={setnewListdata} emptyOder={emptyOder} setemptyOder={setemptyOder} setdataInputSeach={setdataInputSeach} setshowPagination={setshowPagination} setstart={setstart} setcurrent={setcurrent}></OderTitle>
       </div>
       <div className={styles.Input}>

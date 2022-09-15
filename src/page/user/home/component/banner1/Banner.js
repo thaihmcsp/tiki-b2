@@ -11,10 +11,7 @@ import clsx from 'clsx';
 import { Autoplay, Pagination, Navigation } from "swiper";
 import './banner_style.css'
 import styles from "./banner.module.css";
-
-
 function Banner() {
-  
   return (
     <div className={clsx(styles.slide)}>
       <Swiper

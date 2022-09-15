@@ -317,3 +317,9 @@
   -webkit-box-align: center;
   align-items: center;
 }
+.img_cart__empty{
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
