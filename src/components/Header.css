@@ -32,8 +32,9 @@
 .HeaderTopContainerRight {
   display: flex;
   align-items: center;
-  margin-left: 6px;
+  margin-left: 12px;
   justify-content: center;
+  margin-right: 50px;
 }
 .HistorySeach {
   height: 400px;

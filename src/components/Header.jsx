@@ -129,13 +129,20 @@ function Header(props) {
     document.cookie = 'tiki-user' + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     nav("/sign-in");
   }
-  window.addEventListener('click', function (e) {
+
+  const WindowClick = (e) => {
     if (e.target.closest('.componentHeaderInput')) {
       document.querySelector('.ShowCoverInput').style.display = 'block';
     } else {
       document.querySelector('.ShowCoverInput').style.display = 'none';
     }
-  })
+  }
+  useEffect(function () {
+    window.addEventListener('click', WindowClick)
+    return () => {
+      window.removeEventListener('click', WindowClick, false);
+    }
+  }, [])
   ///hiển thị số lượng Sản phâm ở giỏ hàng
   const [numberCart, setNumberCart] = useState(0)
   const [cartId, setCartId] = useState('')
@@ -152,7 +159,7 @@ function Header(props) {
 
   const [DataHeader, setDataHeader] = useState(['Thịt', 'Rau củ', 'Nhà cửa', 'Điện tử', 'Thiết Bị Số', 'Điện thoại', 'Mẹ & Bé'])
   const handlegotoCart = () => {
-    nav(`/cart?userID=${cartId}`)
+    nav(`/cart`)
   }
   return (
     <div>

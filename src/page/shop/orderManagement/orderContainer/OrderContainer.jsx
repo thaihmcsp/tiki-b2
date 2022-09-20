@@ -1,104 +1,93 @@
-import React from 'react'
-import { GlobalStyles } from '../GlobalStyles/index.js'
-import { Select, Checkbox  } from 'antd'
-import ListData from '../listData/ListData.jsx'
-import { listproduct } from '../listproduct.js'
-import styles from './OrderContainer.module.css'
-import Headerr from './oederheader/Headerr'
-import { UserOutlined, WechatOutlined, PrinterOutlined } from '@ant-design/icons';
-import { Avatar } from 'antd';
-import { blue } from '@mui/material/colors'
+import React, { useState } from 'react'
+import { Select  } from 'antd'
+import { useEffect } from 'react'
+import { getAPI } from '../../../../config/api.js'
+import { Tabs } from 'antd';
+import PendingOder from './taboderStatus/PendingOder.js'
+
 const { Option } = Select
 const OrderContainer = () => {
+  const [listOder,setLisOder] = useState([])
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   }
   const onChange = (e) => {
     console.log(`checked = ${e.target.checked}`);
   };
-  
-  return (
-    <div className={styles.order_Container}>
-    <Headerr/>
-    <div className={styles.order}>
-    <div className={styles.order_header}>
-    <p>Sản phẩm</p>
-    <p>Tổng cộng</p>
-    <p>Giao hàng</p>
-    <p>Trạng thái</p>
-    <p>Thao tác</p>
-    </div>
-    <ul className= {styles.order_list}>
-      {listproduct.map(value => {
-        return (
-          <li key={value.id} className= {styles.order_item}>
-          <div className= {styles.order_item_header}>
-          <div className= {styles.order_item_header_box}>
-          <div className= {styles.order_item_left}>
-          <Checkbox onChange={onChange} style={{marginRight:20}}></Checkbox>
-              <Avatar size="small" icon={<UserOutlined />}/>
-              <span className={styles.order_item_name}>Ngoconghieu</span>
-              <WechatOutlined  style={{color:'rgb(107, 107, 248)', marginRight:10}}/>
-              <span>(1 sản phẩm)</span>
-            </div>
-            <div className={styles.order_item_right}>
-            <p className={styles.order_item_sdh}>Số đơn hàng: <span>{value.sdh}</span></p>
-            <span>
-              Thời gian tạo: 08 Jul 2022 10:18
-            </span>
-            </div>
-            </div>
-          </div>
-          <div className= {styles.order_item_middle}>
-          <div className= {styles.order_info_product}>
-          <Checkbox onChange={onChange} style={{marginTop:20}}></Checkbox>
-          <img src={value.image} alt='' className={styles.order_info_img}/>
-          <div className= {styles.order_info}>
-            <p className={styles.order_info_title}>{value.title}</p>
-            <span>Nhóm màu: {value.color}</span>
-            <p>Mã SKU NBH: {value.code}</p>
-          </div>
-          </div>
-            <div className= {styles.order_info_price_box}>
-            <p className= {styles.order_info_price}><span>đ</span> {value.price}</p>
-            <span className={styles.order_info_price_amount}>x 1</span>
-            </div>
-            <div className={styles.order_info_new}>
-            <p><span>đ</span> 151.900</p>
-            <span className={styles.order_info_delivery}>{value.delivery}</span>
-            </div>
-            <p className={styles.order_info_standard}>Tiêu chuẩn</p>
-            <div>
-              <p className={styles.order_info_standard}>Chờ Xử lý</p>
-              <p className={styles.order_info_hrs}>80.5 hrs</p>
-              <div>
-              <span><PrinterOutlined style={{marginRight:7}}/>Mã đơn hàng</span>
-              <span style={{marginLeft:10}}><PrinterOutlined style={{marginRight:7}}/>Hóa đơn</span>
-              <p><PrinterOutlined style={{marginRight:7}}/>Danh sách chọn</p>
 
-              </div>
-            </div>
-            <div>
-              <button className={styles.order_info_btn}>Đóng gói & In</button>
-              <Select
-      defaultValue="lucy"
-      style={{
-        width: 150,color: 'blue'
-      }}
-      onChange={handleChange}
-    >
-      <Option value="lucy">export</Option>
-    </Select>
-            </div>
-          </div>
-          </li>
-        )
-      })}
-      <ListData  data= {listproduct}/>
-    </ul>
-    </div>
-    </div>
+  useEffect(()=>{
+      
+      getAPI(`/order/get-orders-by-shop/62ece78420a301d53e54add3`)
+      .then(data =>{
+            const newData = data.data.listOrder
+            const daTa  = []
+            newData.map((value)=>{
+              console.log(25,value)
+              const Obj = {
+                total:value.total,
+                userID:value.userId,
+                delivery: 'COD',
+                id: value._id,
+                listProducts:[]
+              }
+              const listProducts = []
+              value.product.map((subvalue,index)=>{
+                listProducts.push( {
+                  id: value._id,
+                  image: value.product[index].productId.thump[0],
+                  title:value.product[index].productId.productName,
+                  color: 'Blue',
+                  code: value._id,
+                  amout: value.product[index].quantity,
+                  price: value.product[index].productId.price,
+                  delivery: 'COD',
+                  sdh: value.phone,
+                  total:value.total,
+                  userID:value.userId
+                })
+              })
+              value.listProduct.map((subvalue,index)=>{
+                console.log(subvalue)
+                listProducts.push( {
+                  id: subvalue._id,
+                  image: subvalue.productDetailId.productId.thump[0],
+                  title:subvalue.productDetailId.productId.productName,
+                  color: 'Blue',
+                  code: subvalue._id,
+                  amout: subvalue.quantity,
+                  price: subvalue.productDetailId.price,
+                  delivery: 'COD',
+                  sdh: value.phone,
+                  total:value.total
+                })
+              })
+              Obj.listProducts = listProducts
+              daTa.push(Obj)
+            })
+            setLisOder(daTa)
+      })
+      .catch(error => console.log(error))
+  },[])
+  // const APIcall =()=>{
+  console.log(71,listOder)
+  // }
+  return(
+    <Tabs defaultActiveKey="1">
+      <Tabs.TabPane tab="Đang Xử Lí" key="1">
+        <PendingOder listOder={listOder}/>
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="Đang Giao Hàng" key="2">
+        Content of Tab Pane 2
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="Giao Hàng Thành Công" key="3">
+        Content of Tab Pane 3
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="Đơn Thất Bại" key="4">
+        Content of Tab Pane 4
+      </Tabs.TabPane>
+    </Tabs>
   )
+ 
 }
 
 export default OrderContainer

@@ -8,23 +8,23 @@ import './basicInfor.css'
 import { getAPI } from '../../../../../../../config/api';
 import { useSelector,useDispatch } from 'react-redux'
 import { ChangeProductName,ChangeCatagoryName } from '../../../EditProductSlice';
-import { loadImages } from './ImageSliceReducer';
+import { loadDeleteImg, loadImages } from './ImageSliceReducer';
+import useItems from 'antd/lib/menu/hooks/useItems';
 
 
 const getBase64 = (file) => {
   
-  console.log(13,file)
   return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
-
+        
         reader.onload = () => resolve(reader.result);
-
+        
         reader.onerror = (error) => reject(error);
       })
-  };
-function BasicInfo() {
-    const dispatch = useDispatch()
+    };
+    function BasicInfo() {
+      const dispatch = useDispatch()
     const newData = useSelector(state=>{
       return state.eidtProduct
     })
@@ -58,9 +58,29 @@ function BasicInfo() {
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
     const [fileList, setFileList] = useState([])
+
+    useEffect(function(){
+        if(newData.thump&&newData.thump.length>0){
+          const listOldImg = newData.thump.map(item=>{
+            if(item.startsWith('http')){
+              return {
+                thumbUrl:item,
+                url:item
+              }
+            }else{
+              return {
+                thumbUrl:`https://tiki.thaihm.site/${item}`,
+                url:`https://tiki.thaihm.site/${item}`
+              }
+            }
+          })
+        setFileList(listOldImg)
+        }
+    },[newData])
+   
     const handleCancel = () => setPreviewVisible(false);
     const { TextArea } = Input;
-
+    console.log(64,fileList)
     const onChange = (e) => {
       dispatch(ChangeProductName(e.target.value))
     };
@@ -73,20 +93,32 @@ function BasicInfo() {
     }))
   };
     const handlePreview = async (file) => {
-
       if (!file.url && !file.preview) {
         file.preview = await getBase64(file.originFileObj);
       }
-  
       setPreviewImage(file.url || file.preview);
       setPreviewVisible(true);
       setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
     };
-  
+    const [listDelImage,setListDelImage] = useState([])
+  const handleRemove = (file)=>{
+    console.log(102,file)
+    if(file.thumbUrl.startsWith('http')){
+      setListDelImage(()=>{
+        return [...listDelImage,file.thumbUrl]
+      })
+    }
+  }
+  useEffect(function(){
+    dispatch(loadDeleteImg(listDelImage))
+  },[listDelImage])
+  console.log(110,listDelImage)
     const handleChange = ({ fileList: newFileList }) => {
-      console.log(87, newFileList);
-      const newData = newFileList.map(item=>{
-        return JSON.stringify(item.originFileObj)
+      let newData = new FormData();
+      newFileList.map(item=>{
+        if(item.originFileObj){
+          newData.append('thump', item.originFileObj)
+        }
       })
       dispatch(loadImages(newData))
       return setFileList(newFileList)
@@ -124,6 +156,7 @@ function BasicInfo() {
                       fileList={fileList}
                       onPreview={handlePreview}
                       onChange={handleChange}
+                      onRemove={handleRemove}
                   >
                       {fileList.length >= 8 ? null : uploadButton}
                   </Upload>

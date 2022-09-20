@@ -5,9 +5,18 @@ export const ImageSliceReducer = createSlice({
     initialState:initialState,
     reducers:{
         loadImages:((state,action)=>{
-            return action.payload
+            return {
+                ...state,
+                newImage:action.payload
+            }
+        }),
+        loadDeleteImg:((state,action)=>{
+            return {
+                ...state,
+                delImd:action.payload
+            }
         })
     }
 })
-export const { loadImages } = ImageSliceReducer.actions
+export const { loadImages,loadDeleteImg } = ImageSliceReducer.actions
 export const ImageSlice =  ImageSliceReducer.reducer

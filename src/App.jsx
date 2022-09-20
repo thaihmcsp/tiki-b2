@@ -63,7 +63,7 @@ function App() {
 
                 {/* SHOP ROUTER */}
                 <Route path='/adminShop'
-                    element={<PrivateRouteShop>
+                    element={<PrivateRouteShop sigin={'/sign-in-shop'}>
                         <ShopMenu />
                     </PrivateRouteShop>}>
                     <Route path='/adminShop/Product' element={<ManagementProduct />} />
@@ -72,38 +72,51 @@ function App() {
                     <Route path='/adminShop/Profile' element={<ShopProfile />} />
                 </Route>
                 <Route path='/addItem'
-                    element={<PrivateRouteShop>
+                    element={<PrivateRouteShop sigin={'/sign-in-shop'}>
                         <AddItem />
                     </PrivateRouteShop>}>
                 </Route>
                 <Route path='/editItem'
-                    element={<PrivateRouteShop>
+                    element={<PrivateRouteShop sigin={'/sign-in-shop'}>
                         <EditItem />
                     </PrivateRouteShop>}>
                 </Route>
                 {/* ROUTER ADMIN */}
 
-                <Route path='/admin' element={<Admin />} >
+                <Route path='/admin'
+                    element={<PrivateRouteShop sigin={'/sign-in-admin'}>
+                        <Admin />
+                    </PrivateRouteShop>}>
                     <Route path='/admin/category' element={<Category />} />
                     <Route path='/admin/dashboard' element={<ShopDashboard />} />
                     <Route path='/admin/shop' element={<Shop />}></Route>
                     <Route path='/admin/user' element={<User />}></Route>
                 </Route>
 
-
-                {/* USER ROUTER */}
+                {/* USER ROUTER */}u
                 <Route path='/' element={<Header />}>
                     <Route path='/' element={<Home />} />
                     <Route path='/filter' element={<Filter />} />
-                    <Route path='/user' element={<UserInfoMenu />}>
+                    <Route path='/user'
+                        element={<PrivateRouteShop sigin={'/sign-in'}>
+                            <UserInfoMenu />
+                        </PrivateRouteShop>}>
                         <Route path='/user/profile' element={<div className='profile'> <UserInfo /> <ProfileList /> </div>} />
                         <Route path='/user/order' element={<div className='order'><OderHistory /></div>} />
                     </Route>
                     <Route path='/ShopHome' element={<ShopHome />} />
                     <Route path='/detail' element={<Detail />} />
-                    <Route path='/cart' element={<TotalCart />} />
+                    <Route path='/cart'
+                        element={<PrivateRouteShop sigin={'/sign-in'}>
+                            <TotalCart />
+                        </PrivateRouteShop>}>
+                    </Route>
                 </Route>
-                <Route path='/order' element={<div className='order'><Order /></div>} />
+                <Route path='/order'
+                    element={<PrivateRouteShop sigin={'/sign-in'}>
+                        <div className='order'><Order /></div>
+                    </PrivateRouteShop>}>
+                </Route>
                 <Route path='*' element={<SignIn />} /><Route />
                 <Route />
 

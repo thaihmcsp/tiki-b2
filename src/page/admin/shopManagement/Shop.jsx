@@ -28,31 +28,31 @@ function Shop() {
   const [current, setcurrent] = useState(1)
   const [count, setCount] = useState(0)
   useEffect(() => {
-    getAllShop()
+    async function getAllShop() {
+      try {
+        const data = await getAPI('/shop/get-all-shop');
+        setShopListdata(() => {
+          const newdata = [];
+          data.data.listShop.map((value, index) => {
+            newdata.push({
+              name: `${value.shopName}`,
+              timestart: `${value.createdAt}`.slice(0, 10),
+              Shopid: `${value._id}`,
+              avatar: `${value.logo}`,
+              status: `${value.status}`
+            })
+          })
+          setnewListdata(newdata)
+          return newdata
+        })
+  
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }, [count])
 
-  async function getAllShop() {
-    try {
-      const data = await getAPI('/shop/get-all-shop');
-      setShopListdata(() => {
-        const newdata = [];
-        data.data.listShop.map((value, index) => {
-          newdata.push({
-            name: `${value.shopName}`,
-            timestart: `${value.createdAt}`.slice(0, 10),
-            Shopid: `${value._id}`,
-            avatar: `${value.logo}`,
-            status: `${value.status}`
-          })
-        })
-        setnewListdata(newdata)
-        return newdata
-      })
-
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  
   const ListShopActive = () => {
     setShopstatus('accepted')
     SetActiveButton('Đang Hoạt Động')
