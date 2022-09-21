@@ -124,6 +124,7 @@ function Detail() {
     document.getElementsByClassName(
     "HeaderCartTitle"
     )[0].innerHTML = `${cart}`;
+    window.alert('Sản phẩm đã được thêm vào giỏ hàng. Vui lòng kiểm tra tại giỏ hàng')
     
   }
   function AmoutnUp() {

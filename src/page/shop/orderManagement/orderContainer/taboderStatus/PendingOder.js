@@ -9,19 +9,29 @@ import { UserOutlined, WechatOutlined, PrinterOutlined } from '@ant-design/icons
 import { Avatar } from 'antd';
 import { blue } from '@mui/material/colors'
 import { useEffect } from 'react'
-import { getAPI } from '../../../../../config/api.js'
+import { getAPI, patchAPI } from '../../../../../config/api.js'
 import data from '../../../../user/profile/UserInfo_data/data.js'
 import styles from '../OrderContainer.module.css'
 const { Option } = Select
 
-function PendingOder({listOder}) {
+function PendingOder({listOder,count,setcount}) {
     const handleChange = (value) => {
         console.log(`selected ${value}`);
       }
       const onChange = (e) => {
         console.log(`checked = ${e.target.checked}`);
       };
-    
+    function ChangeOrderStatus(id,status){
+       
+        if(status == 'pending'){
+            setcount(count+1)
+            patchAPI('/order/shop-update-order-status/'+id,{"status": "shipping"});
+        } 
+        if(status == 'shipping'){
+            setcount(count+1)
+            patchAPI('/order/shop-update-order-status/'+id,{"status": "complete"});
+        }    
+    } 
     return (
         <div className={styles.order_Container}>
         <Headerr/>
@@ -33,6 +43,7 @@ function PendingOder({listOder}) {
         <p>Trạng thái</p>
         <p>Thao tác</p>
         </div>
+        {console.log(36,listOder)}
         <ul className= {styles.order_list}>
           {listOder.length>0 && listOder.map(Value => {
             return (
@@ -54,6 +65,7 @@ function PendingOder({listOder}) {
                         </div>
                     </div>
                 </div>
+                
                {Value.listProducts.map(value=>{
                 return(
                     <div className= {styles.order_item_middle}>
@@ -68,7 +80,7 @@ function PendingOder({listOder}) {
                     </div>
                     <div className= {styles.order_info_price_box}>
                         <p className= {styles.order_info_price}><span>đ</span> {value.price}</p>
-                        <span className={styles.order_info_price_amount}>x 1</span>
+                        <span className={styles.order_info_price_amount}>{value.amout}</span>
                     </div>
                     <div className={styles.order_info_new}>
                         <p><span>đ</span> {value.total}</p>
@@ -76,7 +88,18 @@ function PendingOder({listOder}) {
                     </div>
                     <p className={styles.order_info_standard}>Tiêu chuẩn</p>
                     <div>
-                        <p className={styles.order_info_standard}>Chờ Xử lý</p>
+                        {
+                            Value.status == 'pending' ? <p className={styles.order_info_standard}>Chờ xử lí</p> : null
+                        }
+                        {
+                            Value.status == 'shipping' ? <p className={styles.order_info_standard}>Đang vận chuyển</p> : null
+                        }
+                        {
+                            Value.status == 'cancel' ? <p className={styles.order_info_standard}>Đơn thất bại</p> : null
+                        }
+                        {
+                            Value.status == 'complete' ? <p className={styles.order_info_standard}>Đã hoàn thành</p> : null
+                        }
                         <p className={styles.order_info_hrs}>80.5 hrs</p>
                         <div>
                             <span><PrinterOutlined style={{marginRight:7}}/>Mã đơn hàng</span>
@@ -86,7 +109,19 @@ function PendingOder({listOder}) {
                         </div>
                     </div>
                     <div>
-                        <button className={styles.order_info_btn}>Đóng gói & In</button>
+                       
+                        {
+                            Value.status == 'pending' ? <button className={styles.order_info_btn} onClick ={()=> {ChangeOrderStatus(Value.id,Value.status)}}> Giao hàng</button> : null
+                        }
+                        {
+                            Value.status == 'shipping' ? <button className={styles.order_info_btn} onClick ={()=> {ChangeOrderStatus(Value.id,Value.status)}}> Giao thành công</button> : null
+                        }
+                        {
+                            Value.status == 'cancel' ? <button className={styles.order_info_btn} onClick ={()=> {ChangeOrderStatus(Value.id,Value.status)}}> Giao thất bại</button> : null
+                        }
+                        {
+                            Value.status == 'complete' ? <button className={styles.order_info_btn} onClick ={()=> {ChangeOrderStatus(Value.id,Value.status)}}>  Đã hoàn thành</button> : null
+                        }
                         <Select
                             defaultValue="lucy"
                             style={{

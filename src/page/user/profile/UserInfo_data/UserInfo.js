@@ -41,6 +41,7 @@ const beforeUpload = (file) => {
 function UserInfo() {
   const dispatch = useDispatch()
   const user = useSelector((state => state.user))
+  console.log(44,user)
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();

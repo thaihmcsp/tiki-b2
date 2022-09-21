@@ -42,6 +42,7 @@ function ProductRight(props) {
   const handleGotoShop = ()=>{
     nav(`/ShopHome?ShopID=${props.shopId}`)
   }
+
   return (
     <div className="productright">
       <div className="header">
@@ -180,7 +181,7 @@ function ProductRight(props) {
                   ></img>
                 </picture>
                 <div className="overview-right">
-                  <span>{props.productDetail.shopId.shopName}</span>
+                  <span onClick={handleGotoShop}>{props.productDetail.shopId.shopName}</span>
                 </div>
               </a>
             </div>

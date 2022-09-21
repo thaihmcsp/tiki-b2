@@ -8,22 +8,22 @@ import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 
 import { Link, useNavigate } from 'react-router-dom'
 
-import {postAPI,getAPI} from '../../../config/api'
+import { postAPI, getAPI } from '../../../config/api'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { userLogin } from '../../../redux/userSlice';
 import "./styleLogin.css"
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    let expires = "expires="+ d.toUTCString();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  }
+}
 function Login() {
     const { Option } = Select;
     const nav = useNavigate()
     const dispatch = useDispatch();
-    
+
     function checkMail() {
         const warmail = document.querySelector('#warmail')
         warmail.style.display = 'none'
@@ -32,15 +32,15 @@ function Login() {
         const warpass = document.querySelector('#warpass')
         warpass.style.display = 'none'
     }
-    
+
     async function shopSignIn() {
         try {
-           
+
             const password = document.querySelector('#password').value
-            const email = document.querySelector('#email').value 
+            const email = document.querySelector('#email').value
             const warmail = document.querySelector('#warmail')
             const warpass = document.querySelector('#warpass')
-            
+
             var mailformat = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
             if (email.trim() === '') {
@@ -56,15 +56,15 @@ function Login() {
                 warpass.style.display = 'block'
 
                 warpass.innerHTML = "Mật khẩu phải có ít nhất 6 ký tự"
-            } 
-             else {    
-                var resp = await postAPI('/auth/login/shop', { email, password})
-                setCookie('tiki-shop', resp.data.token, 30);                   
-                nav('/adminShop/Dashboard')           
+            }
+            else {
+                var resp = await postAPI('/auth/login/shop', { email, password })
+                setCookie('tiki-user', resp.data.token, 30);
+                nav('/adminShop/Dashboard')
+            }
         }
-    }
         catch (error) {
-            console.log('loi',error)
+            console.log('loi', error)
             alert(error.response.data.message)
         }
 
@@ -95,7 +95,7 @@ function Login() {
                 <div className="container">
                     <div className="title"><h1>Đăng nhập với Shop</h1></div>
                     <div className="inputGroup">
-                    <div>
+                        <div>
                             Nhập Email
                         </div>
 
@@ -118,18 +118,18 @@ function Login() {
                         </div>
                         <Space direction="vertical">
 
-                                    <Input.Password
-                                        id="password"
-                                        className="form-control "
-                                        placeholder="Nhập mật khẩu"
-                                        type='password'
-                                        name='password'
-                                        onChange={checkPass}
-                                        iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                                    />
-                                    <span className="warning" id='warpass'></span>
-                                  
-                                </Space>
+                            <Input.Password
+                                id="password"
+                                className="form-control "
+                                placeholder="Nhập mật khẩu"
+                                type='password'
+                                name='password'
+                                onChange={checkPass}
+                                iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                            />
+                            <span className="warning" id='warpass'></span>
+
+                        </Space>
                     </div>
                     <div>
                         <div className="textGroup">

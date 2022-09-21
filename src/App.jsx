@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Router } from 'react-router-dom';
-// import CreateShop from './page/user/createShop/CreateShop'`
+import CreateShop from './page/user/createShop/createShop';
 import SignUp from './page/user/signUp/SignUp';
 import SignIn from './page/user/signIn/SignIn';
 import Header from './components/Header';
@@ -63,9 +63,11 @@ function App() {
 
                 {/* SHOP ROUTER */}
                 <Route path='/adminShop'
-                    element={<PrivateRouteShop sigin={'/sign-in-shop'}>
-                        <ShopMenu />
-                    </PrivateRouteShop>}>
+                    element={
+                        <PrivateRouteShop sigin={'/sign-in-shop'}>
+                            <ShopMenu />
+                        </PrivateRouteShop>
+                    }>
                     <Route path='/adminShop/Product' element={<ManagementProduct />} />
                     <Route path='/adminShop/Dashboard' element={<ShopDashBoardAll />} />
                     <Route path='/adminShop/Order' element={<OrderContainer />} />
@@ -93,13 +95,15 @@ function App() {
                     <Route path='/admin/user' element={<User />}></Route>
                 </Route>
 
-                {/* USER ROUTER */}u
+                {/* USER ROUTER */}
                 <Route path='/' element={<Header />}>
+                    <Route path='/create-shop' element={<CreateShop />}></Route>
                     <Route path='/' element={<Home />} />
                     <Route path='/filter' element={<Filter />} />
                     <Route path='/user'
                         element={<PrivateRouteShop sigin={'/sign-in'}>
                             <UserInfoMenu />
+
                         </PrivateRouteShop>}>
                         <Route path='/user/profile' element={<div className='profile'> <UserInfo /> <ProfileList /> </div>} />
                         <Route path='/user/order' element={<div className='order'><OderHistory /></div>} />

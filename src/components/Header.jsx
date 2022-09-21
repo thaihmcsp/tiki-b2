@@ -22,14 +22,11 @@ function Header(props) {
   const nav = useNavigate()
   const [word, setWord] = useState([]);
   const [search, setSearch] = useState("");
-
-  // let variable = 0;
-  // function getValue(value) {
-  //   variable = value;
-
-  // }
+  const [ListCategory, setListCategory] = useState([]);
+  const [ListProduct, setListProduct] = useState([]);
+  const [checkShop, setCheckShop] = useState(false);
+  const [idShop, setidShop] = useState('');
   let setTime;
-
   const user_information = useSelector(function (state) {
     return state.user
   })
@@ -105,7 +102,7 @@ function Header(props) {
     setTime = setTimeout(() => {
       if (e.charCode === 13) {
         if (removeAccents(getInputSearch).trim() !== '') {
-          nav(`/filter?seaarch=${getInputSearch}`);
+          nav(`/filter?seaarch=${getInputSearch}`)
           document.querySelector(".HistorySeach").setAttribute('style', 'display: none;');
         }
       }
@@ -123,6 +120,18 @@ function Header(props) {
   function on_mypage() {
     nav("/user/profile");
   }
+  function on_myOrder() {
+    nav("/user/order");
+  }
+  function CreateShop_Tiki() {
+    nav("/create-shop");
+  }
+  function Go_FilterCategory(categoryName) {
+    nav(`/filter?search=${categoryName}`);
+  }
+  function Go_ProductDetail(id) {
+    nav(`detail?id=${id}`)
+  }
   //đăng xuất xóa cookie và local
   function logout() {
     window.localStorage.removeItem("tiki-user");
@@ -132,9 +141,9 @@ function Header(props) {
 
   const WindowClick = (e) => {
     if (e.target.closest('.componentHeaderInput')) {
-      document.querySelector('.ShowCoverInput').style.display = 'block';
+      document.querySelector('.ShowCoverInput').setAttribute('style', 'display:block;');
     } else {
-      document.querySelector('.ShowCoverInput').style.display = 'none';
+      document.querySelector('.ShowCoverInput').setAttribute('style', 'display:none;');
     }
   }
   useEffect(function () {
@@ -155,11 +164,56 @@ function Header(props) {
       .catch((err) => {
         console.log(err);
       })
+    getAPI('/category/get-all-categories')
+      .then(res => {
+        const newListCategory = [];
+        res.data.listCategories.map(value => {
+          newListCategory.push({
+            categoryName: value.categoryName,
+            thump: value.thump,
+            id: value._id,
+          });
+        })
+        setListCategory(newListCategory)
+      })
+      .catch((err) => { console.log(err); });
+    getAPI('/product/get-all-products')
+      .then(data => {
+        const newListProduct = [];
+        data.data.listProduct.map(value => {
+          if (value.categoryId) {
+            newListProduct.push({
+              ProductName: value.productName,
+              categoryName: value.categoryId.categoryName,
+              img: value.thump[0],
+              sold: value.sold,
+              id: value._id,
+            });
+          }
+        })
+        newListProduct.sort((a, b) => {
+          return b.sold - a.sold;
+        })
+
+        setListProduct(newListProduct);
+      })
+      .catch(err => console.log(err))
+    getAPI('/auth/me')
+      .then(data => {
+        if (data.data.shop && data.data.shop.status == 'accepted') {
+          setCheckShop(true)
+          setidShop(data.data.shop._id)
+        }
+      })
+      .catch(err => console.log(err))
   }, [])
 
-  const [DataHeader, setDataHeader] = useState(['Thịt', 'Rau củ', 'Nhà cửa', 'Điện tử', 'Thiết Bị Số', 'Điện thoại', 'Mẹ & Bé'])
+
   const handlegotoCart = () => {
     nav(`/cart`)
+  }
+  function go_myShop() {
+    nav('/adminShop/Dashboard')
   }
   return (
     <div>
@@ -199,18 +253,6 @@ function Header(props) {
 
                           })
                         }
-                        {/* <p className='ListHistorySeach'>
-                                      <img src="https://salt.tikicdn.com/ts/upload/e8/aa/26/42a11360f906c4e769a0ff144d04bfe1.png" alt="" witdth = '40px' height= '40px' />
-                                      tai  nghe blutool
-                                  </p>                          
-                                   <p  className='ListHistorySeach'>
-                                      <img src="https://salt.tikicdn.com/ts/upload/e8/aa/26/42a11360f906c4e769a0ff144d04bfe1.png" alt=""  witdth = '40px' height= '40px'/>
-                                    iphone13 Promax
-                                  </p>                          
-                                   <p  className='ListHistorySeach'>
-                                      <img src="https://salt.tikicdn.com/ts/upload/e8/aa/26/42a11360f906c4e769a0ff144d04bfe1.png" alt=""  witdth = '40px' height= '40px'/>
-                                      Điều hòa không khí
-                                  </p>                           */}
                       </div>
 
                       <div className="CoverInputListItems">
@@ -225,88 +267,25 @@ function Header(props) {
                           <p >Tìm Kiếm Phổ Biến</p>
                         </div>
                         <div className="ShowCoverInputListItem">
-                          {/* {CoverInputItems.map((data)=> {
-                                  return <div>
-                                    <img src="{data.img}" alt="" />
-                                    <span>{data.ten}</span>
-                                  </div>
-                               })} */}
-                          <a href="" className='InputCoverLists'>
-                            <img src="https://salt.tikicdn.com/cache/280x280/ts/product/41/78/c4/a4425d3a9679273ea7675c59a3264aba.png" alt="" witdth='50px' height='50px' />
-                            <p>Sét Đồ Nữ</p>
-                          </a>
-                          <a href="" className='InputCoverLists'>
-                            <img src="https://salt.tikicdn.com/cache/280x280/ts/product/5c/57/85/312c7a38df0312e7525a18f61c5a0fbc.jpg" alt="" witdth='50px' height='50px' />
-                            <p>Điện Thoại Xiaomi</p>
-                          </a>
-                          <a href="" className='InputCoverLists'>
-                            <img src="https://salt.tikicdn.com/cache/280x280/ts/product/63/20/7a/86a64e68a0b46f31485428f5665ebded.jpg" alt="" witdth='50px' height='50px' />
-                            <p>Ôp Lưng Iphone</p>
-                          </a>
-                          <a href="" className='InputCoverLists'>
-                            <img src="https://salt.tikicdn.com/cache/280x280/ts/product/50/db/4d/fe17aa78bc1ab2adb45b06140c945033.jpg" alt="" witdth='50px' height='50px' />
-                            <p>Dép trong nhà</p>
-                          </a>
-                          <a href="" className='InputCoverLists'>
-                            <img src="https://salt.tikicdn.com/cache/280x280/ts/product/55/25/7f/1d055982a3231bfaec4a059c5b5b3a66.jpg" alt="" witdth='50px' height='50px' />
-                            <p>Quần đùi nam</p>
-                          </a>
-                          <a href="" className='InputCoverLists'>
-                            <img src="https://salt.tikicdn.com/cache/280x280/ts/product/29/ee/bb/c2dfe5c42f265250352b434c4dd73b1e.jpg" alt="" witdth='50px' height='50px' />
-                            <p>Aó CrosTop Nữ</p>
-                          </a>
+                          {
+                            ListProduct.slice(0, 6).map(value => {
+                              return <div className='InputCoverLists' onClick={() => { Go_ProductDetail(value.id) }}>
+                                < img src={value.img} alt="" witdth='50px' height='50px' />
+                                <p>{value.ProductName.slice(0, 20)}</p>
+                              </div>
+                            })
+                          }
                         </div>
                         <div className="CatogoryAttenion">
-                          <a href="" className="CatogoryList">
-                            <div className='CatogoryListTitle'>
-                              <img src="https://salt.tikicdn.com/ts/category/15/23/95/e2da53c1fadff812db3f6ecb7c950675.png" alt="" witdth='64.5px' height='64.5px' />
-
-                              <p >Trái Cây</p>
+                          {ListCategory.slice(0, 8).map(val => {
+                            return <div className="CatogoryList" onClick={() => { Go_FilterCategory(val.categoryName) }}>
+                              <div className='CatogoryListTitle'>
+                                <img src={val.thump} alt="" witdth='64.5px' height='64.5px' />
+                                <p >{val.categoryName}</p>
+                              </div>
                             </div>
-                          </a>
-
-                          <a href="" className="CatogoryList">
-                            <div className='CatogoryListTitle'>
-                              <img src="https://salt.tikicdn.com/ts/category/fb/83/30/b1a511c06ebc74d1b9e198073bb5762b.png" alt="" witdth='64.5px' height='64.5px' />
-                              <p>Sữa, bơ, phô mai</p>
-                            </div>
-                          </a>
-                          <a href="" className="CatogoryList">
-                            <div className='CatogoryListTitle'>
-                              <img src="https://salt.tikicdn.com/cache/280x280/ts/product/35/6c/4b/709aef22ee52628dcdbdc857ba1bc46c.jpg" alt="" witdth='64.5px' height='64.5px' />
-                              <p>Điện thoại Smartphone</p>
-                            </div>
-                          </a>
-                          <a href="" className="CatogoryList">
-                            <div className='CatogoryListTitle'>
-                              <img src="https://salt.tikicdn.com/cache/280x280/ts/product/6b/bb/91/9114806fba6f0ecf0d0a247ae28317ba.jpg" alt="" witdth='64.5px' height='64.5px' />
-                              <p>Bình, ly uống trà và phụ kiện</p>
-                            </div>
-                          </a>
-                          <a href="" className="CatogoryList">
-                            <div className='CatogoryListTitle'>
-                              <img src="https://salt.tikicdn.com/ts/category/cf/ed/e1/96216aae6dd0e2beeb5e91d301649d28.png" alt="" witdth='64.5px' height='64.5px' />
-                              <p>Giày - Dép nữ</p>
-                            </div>
-                          </a>
-                          <a href="" className="CatogoryList">
-                            <div className='CatogoryListTitle'>
-                              <img src="https://salt.tikicdn.com/cache/280x280/ts/product/51/c1/28/80704f786a6064376698c010f7a5891c.jpg" alt="" witdth='64.5px' height='64.5px' />
-                              <p>Bao Da - Ốp Lưng Điện Thoại Oppo</p>
-                            </div>
-                          </a>
-                          <a href="" className="CatogoryList">
-                            <div className='CatogoryListTitle'>
-                              <img src="https://salt.tikicdn.com/cache/280x280/ts/product/90/55/ea/340eb77f1170e4c381c866c275138a82.jpg" alt="" witdth='64.5px' height='64.5px' />
-                              <p>Tai Nghe Bluetooth Nhét Tai</p>
-                            </div>
-                          </a>
-                          <a href="" className="CatogoryList">
-                            <div className='CatogoryListTitle'>
-                              <img src="https://salt.tikicdn.com/ts/category/13/64/43/226301adcc7660ffcf44a61bb6df99b7.png" alt="" witdth='64.5px' height='64.5px' />
-                              <p>Đồ Chơi - Mẹ & Bé</p>
-                            </div>
-                          </a>
+                          })
+                          }
                         </div>
                       </div>
                     </div>
@@ -328,31 +307,34 @@ function Header(props) {
                           user_information.avatar : "https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png"}
                         alt="" className='HeaderUserImg' />
                       <div className="HeaderUserLoginContainer">
-
                         <span>
-
-
                           <div>
                             <span>{user_information.username ? user_information.username : 'hello'}</span>
                             <img src="https://salt.tikicdn.com/ts/upload/d7/d4/a8/34939af2da1ceeeae9f95b7485784233.png" alt="" className='HeaderUserImgdown' />
                           </div>
-
-
                         </span>
                       </div>
                       <div className="header_navbar_iteam_mypage_selec">
                         <div
                           className="header_navbar_iteam_mypage_selec-item"
-
+                          onClick={on_myOrder}
                         >
                           Đơn hàng của tôi
                         </div>
+                        { }
                         <div
                           className="header_navbar_iteam_mypage_selec-item"
-
                         >
-                          Thông báo của tôi
+                          <span> Thông báo của tôi</span>
                         </div>
+                        {
+                          checkShop ? <div
+                            className="header_navbar_iteam_mypage_selec-item"
+                            onClick={go_myShop}
+                          >
+                            Shop của tôi
+                          </div> : null
+                        }
                         <div
                           className="header_navbar_iteam_mypage_selec-item"
                           onClick={on_mypage}
@@ -410,18 +392,19 @@ function Header(props) {
               <img src="https://salt.tikicdn.com/ts/upload/e5/1d/22/61ff572362f08ead7f34ce410a4a6f96.png" alt="" height='12' witdth='83' />
             </a>
             <div className="HeaderMiddleListData">
-              <a href=" ">trái cây</a>
-              <a href=" ">thịt, trứng</a>
-              <a href=" ">rau củ quả</a>
-              <a href="">sữa, bơ, phô mai</a>
-              <a href="">hải sản</a>
-              <a href="">đồ uống, bia rượu</a>
-              <a href="">bánh kẹo</a>
+
+              {
+                ListCategory.slice(0, 8).map(val => {
+                  return <span onClick={() => { Go_FilterCategory(val.categoryName) }}>
+                    {val.categoryName}
+                  </span>
+                })
+              }
             </div>
             <a href="" className='HeaderSeller'>
               <img src="https://frontend.tikicdn.com/_desktop-next/static/img/icon-seller.svg"
                 alt="" />
-              <span className="HeaderSellerText">Bán hàng cùng Tiki</span>
+              <span className="HeaderSellerText" onClick={CreateShop_Tiki}>Bán hàng cùng Tiki</span>
             </a>
           </div>
 

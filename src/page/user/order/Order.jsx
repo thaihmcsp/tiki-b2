@@ -9,15 +9,17 @@ import { useSelector } from 'react-redux';
 import { getAPI } from '../../../config/api'
 function Order() {
   const user = useSelector(state => state.user)
-  console.log(user._id)
+
   const [dataOderTitle, setdataOderTitle] = useState([]);
   const [status, setstatus] = useState('none')
   const [dataInputSeach, setdataInputSeach] = useState([...dataOderTitle])
   const [emptyOder, setemptyOder] = useState('')
   const [newListdata, setnewListdata] = useState([...dataOderTitle])
+  const [count, setcount] = useState(0)
+
   useEffect(() => {
     getAllUserOrder()
-  }, [])
+  }, [count])
 
   async function getAllUserOrder() {
     try {
@@ -26,22 +28,23 @@ function Order() {
       setdataOderTitle(() => {
         const newdata = [];
         data.data.listOrder.map((value, index) => {
-
-          console.log(41, value)
+          let valueStatus = '';
+          if (value.status === 'pending') {
+            valueStatus = 'Đang xử lí'
+          } else if (value.status === 'shipping') {
+            valueStatus = 'Đang vận chuyển'
+          } else if (value.status === 'waitpayment') {
+            valueStatus = 'Chờ thanh toán'
+          } else if (value.status === 'canceled') {
+            valueStatus = 'Đã Hủy'
+          } else if (value.status === 'complete') {
+            valueStatus = 'Đã Giao'
+          };
           value.listOrder.map(item => {
-            let valueStatus = '';
-            if (item.status === 'pending') {
-              valueStatus = 'Đang xử lí'
-            } else if (item.status === 'shipping') {
-              valueStatus = 'Đang vận chuyển'
-            } else if (item.status === 'waitpayment') {
-              valueStatus = 'Chờ thanh toán'
-            } else if (item.status === 'cancel') {
-              valueStatus = 'Đã Hủy'
-            } else if (item.status === 'complete') {
-              valueStatus = 'Đã Giao'
-            };
+
+
             if (item.listProduct.length > 0) {
+
               newdata.push(
                 {
                   name: `${item.listProduct[0].productDetailId.productId
@@ -49,8 +52,12 @@ function Order() {
                   sold: `${item.listProduct[0].quantity}`,
                   shopId: {
                     shopname: `${item.shopId.shopName}`,
-                    shoplogo: `${item.shopId.logo}`
+                    shoplogo: `${item.shopId.logo}`,
+                    id: item.shopId._id,
                   },
+                  checkIsdetail: true,
+                  idDetail: item.listProduct[0].productDetailId.productId._id,
+                  idOrder: value._id,
                   status: `${valueStatus}`,
                   price: `${item.listProduct[0].productDetailId.productId
                     .price}`,
@@ -65,8 +72,12 @@ function Order() {
                   sold: `${item.product[0].quantity}`,
                   shopId: {
                     shopname: `${item.shopId.shopName}`,
-                    shoplogo: `${item.shopId.logo}`
+                    shoplogo: `${item.shopId.logo}`,
+                    id: item.shopId._id,
                   },
+                  checkIsdetail: false,
+                  idDetail: item.product[0].productId._id,
+                  idOrder: value._id,
                   status: `${valueStatus}`,
                   price: `${item.product[0].productId.price}`,
                   img: `${item.product[0].productId.thump[0]}`
@@ -98,7 +109,8 @@ function Order() {
   };
 
   function Search_Datatitle() {
-    console.log(dataInputSeach)
+
+
     const seachInput = removeAccents(document.querySelector(`.${styles.TitleInput}`).value).toLocaleLowerCase();
     if (seachInput) {
       const newdata = dataInputSeach.filter(function (value) {
@@ -131,6 +143,18 @@ function Order() {
     }
 
   }
+  const Search_Order = () => {
+    setemptyOder('')
+    const seachInput = removeAccents(document.querySelector(`.${styles.TitleInput}`).value).toLocaleLowerCase();
+    const newdata = dataInputSeach.filter(function (value) {
+      const keyPress = removeAccents(value.name).toLocaleLowerCase()
+      return keyPress.includes(seachInput)
+    })
+    setnewListdata(newdata)
+    if (newdata.length === 0) {
+      setemptyOder('https://frontend.tikicdn.com/_desktop-next/static/img/account/empty-order.png')
+    }
+  }
   const [start, setstart] = useState(0)
   const [current, setcurrent] = useState(1)
   function setStartPAgination(page, pageSize) {
@@ -138,9 +162,27 @@ function Order() {
     setcurrent(page)
   }
   function removeAccents(str) {
-    return str.normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/đ/g, 'd').replace(/Đ/g, 'D');
+    var AccentsMap = [
+      "aàảãáạăằẳẵắặâầẩẫấậ",
+      "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
+      "dđ", "DĐ",
+      "eèẻẽéẹêềểễếệ",
+      "EÈẺẼÉẸÊỀỂỄẾỆ",
+      "iìỉĩíị",
+      "IÌỈĨÍỊ",
+      "oòỏõóọôồổỗốộơờởỡớợ",
+      "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
+      "uùủũúụưừửữứự",
+      "UÙỦŨÚỤƯỪỬỮỨỰ",
+      "yỳỷỹýỵ",
+      "YỲỶỸÝỴ"
+    ];
+    for (var i = 0; i < AccentsMap.length; i++) {
+      var re = new RegExp('[' + AccentsMap[i].substr(1) + ']', 'g');
+      var char = AccentsMap[i][0];
+      str = str.replace(re, char);
+    }
+    return str;
   }
   useEffect(function () {
     const listOption = document.querySelectorAll(`.OptionsAll_Oder__history`)
@@ -167,13 +209,13 @@ function Order() {
       </div>
       <div className={styles.Input}>
         <input type="text" placeholder="Tìm đơn hàng theo Mã đơn hàng, Nhà bán hoặc Tên sản phẩm"
-          className={styles.TitleInput} onKeyPress={EnterInputTitle}>
+          className={styles.TitleInput} onKeyPress={EnterInputTitle} onChange={Search_Order}>
         </input>
         <p className={styles.Search_Right} onClick={() => { Search_Datatitle() }}  >
           Tìm đơn hàng
         </p>
       </div>
-      <AllOder newdata={newListdata} emptyOder={emptyOder} start={start}></AllOder>
+      <AllOder count={count} setcount={setcount} newdata={newListdata} emptyOder={emptyOder} start={start}></AllOder>
       {showPagination === true ? PaginationList : null}
     </div>
 

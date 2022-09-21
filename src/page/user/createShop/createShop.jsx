@@ -1,6 +1,6 @@
 import React from "react";
 import { listBranch } from "./listBranch";
-import "./CreateShop.css";
+import "./createShop.css";
 import { useSelector } from "react-redux";
 import { postAPI } from "../../../config/api";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ function CreateShop() {
     try {
       const shopName = document.querySelector("#ShopName").value;
       const res = await postAPI("/shop/create-shop", { shopName: shopName });
-      console.log(13, res);
+      window.alert('Thông tin đăng ký của bạn đang chờ được xác nhận. Vui lòng chờ thông báo')
       nav("/user")
     } catch (err) {
       window.confirm(err.response.data.message)

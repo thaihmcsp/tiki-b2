@@ -24,7 +24,7 @@ const Container = ({ data1, listProducts, setId }) => {
   const [page, setPage] = React.useState(1);
   const nav = useNavigate()
   const [query] = useSearchParams()
-  const search = query.get('seaarch')
+  const search = query.get('search')
 
   const onChange = (page) => {
     setCurrent(page);

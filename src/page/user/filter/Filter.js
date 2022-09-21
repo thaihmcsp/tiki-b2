@@ -12,7 +12,7 @@ const Filter = ({setId}) => {
   const [data1, setData] = useState([])
  const [listProducts,setListProducts]= useState([])
   const [query] = useSearchParams()
-  const search = query.get('seaarch')
+  const search = query.get('search')
 
   function removeAccents(str) {
     var AccentsMap = [

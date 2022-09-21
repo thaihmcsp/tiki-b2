@@ -52,6 +52,9 @@ function SignIn({setUsers}) {
         const warpass = document.querySelector('#warpass')
         warpass.style.display = 'none'
     }
+    function GotoHome(){
+        nav('/')
+    }
     
     async function handleSignIn() {
         try {
@@ -110,7 +113,7 @@ function SignIn({setUsers}) {
             <div className="menu">
                 <div className="menu-left">
                     <div>
-                        <img src="https://salt.tikicdn.com/ts/upload/ae/f5/15/2228f38cf84d1b8451bb49e2c4537081.png" alt='tiki-logo' />
+                        <img onClick={GotoHome} src="https://salt.tikicdn.com/ts/upload/ae/f5/15/2228f38cf84d1b8451bb49e2c4537081.png" alt='tiki-logo' />
                     </div>
                 </div>
 

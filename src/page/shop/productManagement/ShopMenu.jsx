@@ -17,7 +17,7 @@ import { Button, Menu } from "antd";
 import React, { useState } from "react";
 import "antd/dist/antd.css";
 import "./ShopMenu.css";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -29,15 +29,17 @@ function getItem(label, key, icon, children, type) {
   };
 }
 
+
 const items = [
 
-  getItem("Dasboard", "0", <Link to='Dashboard'> 
-       <img src="https://media.loveitopcdn.com/3807/logo-tiki-dongphucsongphu-02.png" alt="dasboard"  className="logo_admin__shop_img"/>
-    </Link>),
+  getItem("Dasboard", "0", <Link to='Dashboard'>
+    <img src="https://media.loveitopcdn.com/3807/logo-tiki-dongphucsongphu-02.png" alt="dasboard" className="logo_admin__shop_img" />
+  </Link>),
+  getItem("Về trang chủ TIKI", "4", <Link to='/'><ProfileOutlined /></Link>),
   getItem("Quản lý sản phẩm", "1", <Link to='Product'> <ShoppingOutlined /></Link>),
   getItem("Quản lý đơn hàng", "2", <Link to='Order'> <PrinterOutlined /></Link>),
   getItem("Quản lý hồ sơ Shop", "3", <Link to='Profile'> <IdcardOutlined /></Link>),
-  getItem("Chức năng tạm khoá", "4", <ProfileOutlined />),
+
   getItem("Chức năng tạm khoá", "5", <GlobalOutlined />),
   getItem("Chức năng tạm khoá", "6", <FireOutlined />),
   getItem("Chức năng tạm khoá", "7", <FlagOutlined />),
@@ -50,6 +52,7 @@ const items = [
 
 function ShopMenu() {
   const [collapsed, setCollapsed] = useState(true);
+
 
   return (
     <div className="db-Product">

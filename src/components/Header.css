@@ -62,7 +62,7 @@
 .componentHeaderInput:focus + .ShowCoverInput{
     z-index: 10000000000000000000;
     display: block;
-    z-index: 1000000;
+ 
 }
 
 /* .componentHeaderInput:focus ~ .HeaderMiddleListData {
@@ -171,7 +171,7 @@
   justify-content: space-between;
   position: relative;
 }
-.HeaderMiddleListData a {
+.HeaderMiddleListData span {
   color: white;
 
   text-decoration: none;
@@ -180,7 +180,10 @@
 }
 .HeaderMiddleListData {
   position: absolute;
-  left: 190px;
+  left: 155px;
+}
+.HeaderMiddleListData:hover span{
+  cursor: pointer;
 }
 .HeaderSellerText {
   color: white;
@@ -251,7 +254,7 @@
     box-shadow: rgb(0 0 0 / 28%) 0px 6px 12px 0px;
     background-color: rgb(255, 255, 255);
     position: absolute;
-    z-index: 99 !important;
+    z-index: 99999999 !important;
     width: calc(100% - 120px);
     display: none;
 }
@@ -282,6 +285,7 @@
 .SearchWord {
     margin-left: 20px;
     font-weight: 700;
+   padding: 10px 0;
     display: flex;
     align-items: center;
 }
@@ -290,6 +294,7 @@
 }
 .SeachInputDataText {
     letter-spacing: 1.5px;
+    margin-bottom: 0;
 }
 .ListHistorySeach {
   display: flex;
@@ -332,6 +337,7 @@
 }
 .InputCoverLists:hover {
     box-shadow: rgb(0 0 0 / 10%) 0px 1px 2px 0px;
+    cursor: pointer;
 }
 .CatogoryList {
   width: 24%;
@@ -354,7 +360,8 @@
 }
 .CatogoryList:hover {
   box-shadow: rgb(0 0 0 / 10%) 0px 0px 20px;
-  z-index: 1;
+  cursor: pointer;
+  z-index: 99999999 !important;
 }
 .CatogoryList p {
   text-decoration: none;
@@ -378,7 +385,7 @@
   background-color: #fff;
   display: none;
   animation: headerNavbarItemNoti1 ease-in 0.3s;
-  z-index: 999;
+  z-index: 999999 !important;
   cursor: pointer;
   padding: 20px;
   /* margin-top: 12px; */
@@ -391,7 +398,6 @@
 .header_navbar_iteam_mypage_selec-item {
   padding-bottom: 5px;
 }
-
 .header_navbar_item_mypage:hover .header_navbar_iteam_mypage_selec {
   display: block;
 }
