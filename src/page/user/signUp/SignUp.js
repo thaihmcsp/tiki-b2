@@ -65,7 +65,8 @@ function SignUp(props) {
                 warpass1.style.display = 'block'
                 warpass1.innerHTML = "Mật khẩu không khớp"
             } else {
-                var resp = await postAPI('/auth/register', { email, password, phone: phonenumber, username })
+                var resp = await postAPI('/auth/register', { email, password, phone: phonenumber, username });
+                
                 nav('/sign-in')
             }
         }

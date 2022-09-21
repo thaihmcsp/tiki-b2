@@ -29,7 +29,7 @@ function PendingOder({listOder,count,setcount}) {
         } 
         if(status == 'shipping'){
             setcount(count+1)
-            patchAPI('/order/shop-update-order-status/'+id,{"status": "complete"});
+            patchAPI('/order/shop-update-order-status/'+id,{"status": "done"});
         }    
     } 
     return (
@@ -95,10 +95,10 @@ function PendingOder({listOder,count,setcount}) {
                             Value.status == 'shipping' ? <p className={styles.order_info_standard}>Đang vận chuyển</p> : null
                         }
                         {
-                            Value.status == 'cancel' ? <p className={styles.order_info_standard}>Đơn thất bại</p> : null
+                            Value.status == 'canceled' ? <p className={styles.order_info_standard}>Đơn thất bại</p> : null
                         }
                         {
-                            Value.status == 'complete' ? <p className={styles.order_info_standard}>Đã hoàn thành</p> : null
+                            Value.status == 'done' ? <p className={styles.order_info_standard}>Đã hoàn thành</p> : null
                         }
                         <p className={styles.order_info_hrs}>80.5 hrs</p>
                         <div>
@@ -117,10 +117,10 @@ function PendingOder({listOder,count,setcount}) {
                             Value.status == 'shipping' ? <button className={styles.order_info_btn} onClick ={()=> {ChangeOrderStatus(Value.id,Value.status)}}> Giao thành công</button> : null
                         }
                         {
-                            Value.status == 'cancel' ? <button className={styles.order_info_btn} onClick ={()=> {ChangeOrderStatus(Value.id,Value.status)}}> Giao thất bại</button> : null
+                            Value.status == 'canceled' ? <button className={styles.order_info_btn} onClick ={()=> {ChangeOrderStatus(Value.id,Value.status)}}> Giao thất bại</button> : null
                         }
                         {
-                            Value.status == 'complete' ? <button className={styles.order_info_btn} onClick ={()=> {ChangeOrderStatus(Value.id,Value.status)}}>  Đã hoàn thành</button> : null
+                            Value.status == 'done' ? <button className={styles.order_info_btn} onClick ={()=> {ChangeOrderStatus(Value.id,Value.status)}}>  Đã hoàn thành</button> : null
                         }
                         <Select
                             defaultValue="lucy"

@@ -12,7 +12,7 @@ import style from './modal.module.css'
 import './modal.css'
 import { patchAPI } from '../../../../../../config/api';
 import { useSelector } from 'react-redux';
-function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAddress,setAllAddress,setIndexAddress,cartId}) {
+function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAddress,setAllAddress,setIndexAddress,cartId, temps}) {
     const [value, setValue] = useState(0);
     const user = useSelector((state => state.user))
     console.log(17, user)
@@ -124,6 +124,7 @@ function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAdd
             }})
             //   console.log(104, resp)
              setAllAddress(resp.data.user.address)
+             temps()
         }
         }
         catch ( error) {

@@ -276,6 +276,7 @@ function Header(props) {
                             })
                           }
                         </div>
+
                         <div className="CatogoryAttenion">
                           {ListCategory.slice(0, 8).map(val => {
                             return <div className="CatogoryList" onClick={() => { Go_FilterCategory(val.categoryName) }}>
@@ -302,10 +303,21 @@ function Header(props) {
                   (
                     <div className="HeaderTopContainerUser cursorPoiter">
                       {/* //hiển thi avartar */}
-                      <img src=
+                      {console.log(305, user_information)}
+                      {/* <img src=
                         {user_information.avatar.length > 0 ?
                           user_information.avatar : "https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png"}
-                        alt="" className='HeaderUserImg' />
+                        alt="" className='HeaderUserImg' /> */}
+                      {
+                        <img className='HeaderUserImg'
+                          src={
+                            user_information.avatar.startsWith("http")
+                              ? user_information.avatar
+                              : "https://tiki.thaihm.site/" + user_information.avatar
+                          }
+                          alt="avatar"
+                        />
+                      }
                       <div className="HeaderUserLoginContainer">
                         <span>
                           <div>

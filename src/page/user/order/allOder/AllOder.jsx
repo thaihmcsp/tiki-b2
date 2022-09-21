@@ -12,8 +12,8 @@ function AllOder(props) {
      function go_Shophome(id) {
           nav(`/ShopHome?ShopID=${id}`)
      }
-     function Go_ProductDetail(idDetail) {
-          nav(`/detail?id=${idDetail}`)
+     function Go_ProductDetail(idproduct) {
+          nav(`/detail?id=${idproduct}`)
      }
      function UserDelete_Oder(idOrder) {
           if (window.confirm('Bạn có chắc chắn muốn hủy đơn hàng ?')) {
@@ -24,6 +24,7 @@ function AllOder(props) {
 
      }
      async function AddOrdertoCart(idDetail, check) {
+          console.log(27, check)
           try {
                let cart = await getAPI("/cart/get-loged-in-cart")
                let cartId = cart.data.cart._id;
@@ -78,7 +79,7 @@ function AllOder(props) {
                                    <p style={{ textAlign: 'right', fontSize: '14px', opacity: '0.7', marginBottom: '5px' }} >TOTAL : <span style={{ opacity: '1', fontWeight: '500', color: 'red', textDecoration: 'underline', fontSize: '16px' }} >{(value.price * value.sold).toLocaleString()}đ</span></p>
                                    <div style={{ textAlign: 'right' }}>
                                         <button className={style.BottomTitle_Button} onClick={() => { AddOrdertoCart(value.idDetail, value.checkIsdetail) }}>Mua Lại</button>
-                                        <button className={style.BottomTitle_Button} onClick={() => { Go_ProductDetail(value.idDetail) }}>Xem Chi Tiết</button>
+                                        <button className={style.BottomTitle_Button} onClick={() => { Go_ProductDetail(value.idproduct) }}>Xem Chi Tiết</button>
                                         {
                                              value.status == 'Đang xử lí' || value.status == 'Chờ thanh toán' ? <button className={style.BottomTitle_Button} onClick={() => { UserDelete_Oder(value.idOrder) }}> Hủy Đơn</button> : null
                                         }

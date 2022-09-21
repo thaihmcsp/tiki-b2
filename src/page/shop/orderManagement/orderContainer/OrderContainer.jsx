@@ -78,7 +78,7 @@ const OrderContainer = () => {
         setLisOderPending(daTa.filter(value => value.status == 'pending'))
         setLisOderShipping(daTa.filter(value => value.status == 'shipping'))
         setLisOdercancel(daTa.filter(value => value.status == 'canceled'))
-        setLisOdercomplete(daTa.filter(value => value.status == 'complete'))
+        setLisOdercomplete(daTa.filter(value => value.status == 'done'))
       })
 
     }

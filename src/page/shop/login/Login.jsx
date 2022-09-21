@@ -60,6 +60,10 @@ function Login() {
             else {
                 var resp = await postAPI('/auth/login/shop', { email, password })
                 setCookie('tiki-user', resp.data.token, 30);
+                const res = await getAPI('/auth/me');
+                const action = userLogin(res.data);
+                dispatch(action);
+                window.localStorage.setItem('tiki-user', JSON.stringify(res.data))
                 nav('/adminShop/Dashboard')
             }
         }

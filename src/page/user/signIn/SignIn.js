@@ -92,7 +92,7 @@ function SignIn({setUsers}) {
                 const action = userLogin(res.data);
                 dispatch(action);
                 window.localStorage.setItem('tiki-user',JSON.stringify(res.data))       
-                  nav('/')
+                nav('/')
 
              }
 

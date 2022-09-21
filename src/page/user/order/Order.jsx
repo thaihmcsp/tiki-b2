@@ -33,15 +33,13 @@ function Order() {
             valueStatus = 'Đang xử lí'
           } else if (value.status === 'shipping') {
             valueStatus = 'Đang vận chuyển'
-          } else if (value.status === 'waitpayment') {
-            valueStatus = 'Chờ thanh toán'
           } else if (value.status === 'canceled') {
             valueStatus = 'Đã Hủy'
-          } else if (value.status === 'complete') {
+          } else if (value.status === 'done') {
             valueStatus = 'Đã Giao'
           };
           value.listOrder.map(item => {
-
+            console.log(44, item)
 
             if (item.listProduct.length > 0) {
 
@@ -56,33 +54,38 @@ function Order() {
                     id: item.shopId._id,
                   },
                   checkIsdetail: true,
-                  idDetail: item.listProduct[0].productDetailId.productId._id,
+                  idDetail: item.listProduct[0].productDetailId._id,
                   idOrder: value._id,
+                  idproduct: item.listProduct[0].productDetailId.productId._id,
                   status: `${valueStatus}`,
-                  price: `${item.listProduct[0].productDetailId.productId
-                    .price}`,
-                  img: `${item.listProduct[0].productDetailId.productId
-                    .thump[0]}`
+                  price: `${item.listProduct[0].productDetailId.price}`,
+                  img: `${item.listProduct[0].productDetailId.listImg[0]}`
 
                 })
-            } else {
-              newdata.push(
-                {
-                  name: `${item.product[0].productId.productName}`,
-                  sold: `${item.product[0].quantity}`,
-                  shopId: {
-                    shopname: `${item.shopId.shopName}`,
-                    shoplogo: `${item.shopId.logo}`,
-                    id: item.shopId._id,
-                  },
-                  checkIsdetail: false,
-                  idDetail: item.product[0].productId._id,
-                  idOrder: value._id,
-                  status: `${valueStatus}`,
-                  price: `${item.product[0].productId.price}`,
-                  img: `${item.product[0].productId.thump[0]}`
+            } else if (item.product.length > 0) {
+              {
+                item.product.map(val => {
+                  newdata.push(
+                    {
+                      name: `${val.productId.productName}`,
+                      sold: `${val.quantity}`,
+                      shopId: {
+                        shopname: `${item.shopId.shopName}`,
+                        shoplogo: `${item.shopId.logo}`,
+                        id: item.shopId._id,
+                      },
+                      checkIsdetail: false,
+                      idDetail: val.productId._id,
+                      idproduct: val.productId._id,
+                      idOrder: value._id,
+                      status: `${valueStatus}`,
+                      price: `${val.productId.price}`,
+                      img: `${val.productId.thump[0]}`
 
+                    })
+                  return newdata
                 })
+              }
             }
           })
 
@@ -197,7 +200,7 @@ function Order() {
       <div className={styles.user_Oder_Listtitle}>
         <OderTitle Title='Tất cả đơn' status={status} setstatus={setstatus} newListdata={dataOderTitle} setnewListdata={setnewListdata} emptyOder={emptyOder} setemptyOder={setemptyOder} setdataInputSeach={setdataInputSeach} setshowPagination={setshowPagination} setstart={setstart} setcurrent={setcurrent} ></OderTitle>
 
-        <OderTitle Title='Chờ thanh toán' status={status} setstatus={setstatus} newListdata={dataOderTitle} setnewListdata={setnewListdata} emptyOder={emptyOder} setemptyOder={setemptyOder} setdataInputSeach={setdataInputSeach} setshowPagination={setshowPagination} setstart={setstart} setcurrent={setcurrent} ></OderTitle>
+        {/* <OderTitle Title='Chờ thanh toán' status={status} setstatus={setstatus} newListdata={dataOderTitle} setnewListdata={setnewListdata} emptyOder={emptyOder} setemptyOder={setemptyOder} setdataInputSeach={setdataInputSeach} setshowPagination={setshowPagination} setstart={setstart} setcurrent={setcurrent} ></OderTitle> */}
 
         <OderTitle Title='Đang xử lí' status={status} setstatus={setstatus} newListdata={dataOderTitle} setnewListdata={setnewListdata} emptyOder={emptyOder} setemptyOder={setemptyOder} setdataInputSeach={setdataInputSeach} setshowPagination={setshowPagination} setstart={setstart} setcurrent={setcurrent}></OderTitle>
 
