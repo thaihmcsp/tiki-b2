@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { StarOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import { color } from "@mui/system";
+import { Button, message, Space } from "antd";
 
 function ProductRight(props) {
-  
   const listProduct = props.productDetail.productDetailId;
-
   const [count, setCount] = useState(0);
   const [index, setIndex] = useState(0);
-  
- 
+  const success = () => {
+    message.success("This is a success message");
+  };
 
   useEffect(() => {
     setCount(0);
@@ -24,7 +24,7 @@ function ProductRight(props) {
       }
     }
   }, [props.myColor, props.mySize]);
-  
+
   const optionTotal = [[], [], []];
 
   listProduct.map((item, index) => {
@@ -79,7 +79,6 @@ function ProductRight(props) {
                 ) : (
                   "Hết hàng"
                 )}
-
               </div>
               {/* <div className="list-price">{props.listprice}</div>
               <div className="discount">{props.discount}</div> */}
@@ -88,51 +87,57 @@ function ProductRight(props) {
               <img src={props.icon}></img>
             </div>
           </div>
-              {props.productDetail.productDetailId.length>0? <div className="selectproduct">
-            <div className="select-color">
-              <p className="detail-color">
-                <p id="detail-color">
-                  Màu: <span id="color-select" >{props.colorDetail.name}</span>
+          {props.productDetail.productDetailId.length > 0 ? (
+            <div className="selectproduct">
+              <div className="select-color">
+                <p className="detail-color">
+                  <p id="detail-color">
+                    Màu: <span id="color-select">{props.colorDetail.name}</span>
+                  </p>
                 </p>
-              </p>
-              <div className="product-color">
-                {option[0].map((item, index) => {
-                  return (
-                    <div
-                      className="option1"
-                      id={item}
-                      onClick={() => props.hanldeColor(item)}
-                    >
-                      <img src={option[1][index]} width={55} height={55}></img>
-                      <span>{item}</span>
-                      {props.tich}
-                    </div>
-                  );
-                })}
+                <div className="product-color">
+                  {option[0].map((item, index) => {
+                    return (
+                      <div
+                        className="option1"
+                        id={item}
+                        onClick={() => props.hanldeColor(item)}
+                      >
+                        <img
+                          src={option[1][index]}
+                          width={55}
+                          height={55}
+                        ></img>
+                        <span>{item}</span>
+                        {props.tich}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="select-size">
+                <p id="detail-size">
+                  Size: <span id="size-select">{props.sizeDetail}</span>
+                </p>
+                <div className="size">
+                  {option[2].map((item, index) => {
+                    return (
+                      <button
+                        className="option2"
+                        id={item}
+                        key={index}
+                        onClick={() => props.hanldeSize(item)}
+                      >
+                        <span>{item}</span>
+                        {props.tich}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-            <div className="select-size">
-              <p id="detail-size">
-                Size: <span id="size-select" >{props.sizeDetail}</span>
-              </p>
-              <div className="size">
-                {option[2].map((item, index) => {
-                  return (
-                    <button
-                      className="option2"
-                      id={item}
-                      key={index}
-                      onClick={() => props.hanldeSize(item)}
-                    >
-                      <span>{item}</span>
-                      {props.tich}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>: null}
-          
+          ) : null}
+
           <div className="delivery">
             <div>
               <span>Giao đến</span>
@@ -154,7 +159,7 @@ function ProductRight(props) {
                   {props.amoutn[0]}
                 </button>
                 <div className="amoutn-value">
-                  <span id="amoutn-value" >1</span>
+                  <span id="amoutn-value">1</span>
                 </div>
                 <button id="amoutn-up" onClick={() => props.AmoutnUp()}>
                   {props.amoutn[1]}
