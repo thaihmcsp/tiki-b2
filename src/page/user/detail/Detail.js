@@ -20,7 +20,7 @@ import { Image } from "antd";
 import { Product } from "./data/test";
 import { color } from "@mui/system";
 import { useSearchParams } from "react-router-dom";
-import { getAPI,patchAPI } from "../../../config/api";
+import { getAPI, patchAPI } from "../../../config/api";
 function Detail() {
   const [listImg, setListImg] = useState([]);
   const [check, setCheck] = useState();
@@ -28,105 +28,103 @@ function Detail() {
   const [mySize, setMySize] = useState();
   const [isDisabled, setIsDisable] = useState(true);
   const [colorDetail, setcolorDetail] = useState({
-    color: '',
-    name: '',
+    color: "",
+    name: "",
   });
   // useEffect(function(){
   //   getData()
   // }, [])
 
-   
   const [sizeDetail, setSizeDetail] = useState(
     Product.product.productDetailId[0].option[1].value
   );
   const [detail, setDetail] = useState(null);
   const [query] = useSearchParams();
   const id = query.get("id");
-  
-  const [shopId,setShopId] = useState('')
+
+  const [shopId, setShopId] = useState("");
   //get Data
   useEffect(() => {
     getAPI(`/product/get-one-product/${id}`)
       .then((data) => {
         setDetail(data.data.product);
-        setShopId(data.data.product.shopId._id)
-        setcolorDetail({color:data.data.product.thump[0], name:""})
+        setShopId(data.data.product.shopId._id);
+        setcolorDetail({ color: data.data.product.thump[0], name: "" });
       })
       .catch((error) => {
         console.log(error);
       });
   }, [id]);
-  console.log(56,shopId)
+  console.log(56, shopId);
   //get cart id
-  const [cartid, setCartid] = useState()
+  const [cartid, setCartid] = useState();
   useEffect(() => {
     getAPI("/cart/get-loged-in-cart")
-    .then((data)=>{
-      setCartid(data.data.cart._id)
-    }).catch((err)=>{
-      console.log(err);
-    })
-    
-  }, [])
-  
+      .then((data) => {
+        setCartid(data.data.cart._id);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   //id-user
-  const idUser = JSON.parse(localStorage.getItem('tiki-user'))
- 
+  const idUser = JSON.parse(localStorage.getItem("tiki-user"));
 
   //get productdetailID
-  const [option,  setOption] = useState({option1:"",option2:""})
-  
+  const [option, setOption] = useState({ option1: "", option2: "" });
 
   //id-cart
-  const [iddetail,setIddetail] = useState()
+  const [iddetail, setIddetail] = useState();
   console.log(iddetail);
   useEffect(() => {
-    if(myColor && mySize){
-      for(let i = 0; i <detail.productDetailId.length;i++){
-        if(myColor==detail.productDetailId[i].option[0].value && mySize==detail.productDetailId[i].option[1].value){
-          setIddetail (detail.productDetailId[i]._id)  
+    if (myColor && mySize) {
+      for (let i = 0; i < detail.productDetailId.length; i++) {
+        if (
+          myColor == detail.productDetailId[i].option[0].value &&
+          mySize == detail.productDetailId[i].option[1].value
+        ) {
+          setIddetail(detail.productDetailId[i]._id);
         }
       }
     }
-  }, [myColor,mySize])
-  
-  
+  }, [myColor, mySize]);
+
   //path-quantity
   console.log();
-  const handleBuy = ()=>{
-  let slBuy = document.querySelector('#amoutn-value').innerHTML
-  if(detail.productDetailId.length>0){  
-    patchAPI(`/cart/add-to-cart/${cartid}`,{
-      productDetailId: iddetail,
-      quantity:slBuy 
-    })
-      .then((data)=>{
-        console.log(data.data)
+  const handleBuy = () => {
+    let slBuy = document.querySelector("#amoutn-value").innerHTML;
+    if (detail.productDetailId.length > 0) {
+      patchAPI(`/cart/add-to-cart/${cartid}`, {
+        productDetailId: iddetail,
+        quantity: slBuy,
       })
-      .catch((error)=>{
-        console.log(error);
+        .then((data) => {
+          console.log(data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      patchAPI(`/cart/add-to-cart/${cartid}`, {
+        productId: id,
+        quantity: slBuy,
       })
-  }else{
-    patchAPI(`/cart/add-to-cart/${cartid}`,{
-      productId:id,
-      quantity:slBuy 
-    })
-      .then((data)=>{
-        console.log(data.data)
-      })
-      .catch((error)=>{
-        console.log(error);
-      })
-  }
+        .then((data) => {
+          console.log(data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
     let cart =
-    document.getElementsByClassName("HeaderCartTitle")[0].innerHTML * 1;
+      document.getElementsByClassName("HeaderCartTitle")[0].innerHTML * 1;
     cart += 1;
-    document.getElementsByClassName(
-    "HeaderCartTitle"
-    )[0].innerHTML = `${cart}`;
-    window.alert('Sản phẩm đã được thêm vào giỏ hàng. Vui lòng kiểm tra tại giỏ hàng')
-    
-  }
+    document.getElementsByClassName("HeaderCartTitle")[0].innerHTML = `${cart}`;
+    window.alert(
+      "Sản phẩm đã được thêm vào giỏ hàng. Vui lòng kiểm tra tại giỏ hàng"
+    );
+  };
   function AmoutnUp() {
     let soluong = document.getElementById("amoutn-value").innerHTML * 1;
     soluong += 1;
@@ -140,7 +138,7 @@ function Detail() {
     let soluong = document.getElementById("amoutn-value").innerHTML * 1;
     soluong -= 1;
     document.getElementById("amoutn-value").innerHTML = `${soluong}`;
-    if (soluong == 1) {
+    if (soluong === 1) {
       setIsDisable(true);
     }
   }
@@ -148,11 +146,8 @@ function Detail() {
   function buyProduct() {
     let cart =
       document.getElementsByClassName("HeaderCartTitle")[0].innerHTML * 1;
-      cart += 1;
-      document.getElementsByClassName(
-      "HeaderCartTitle"
-      )[0].innerHTML = `${cart}`;
-    
+    cart += 1;
+    document.getElementsByClassName("HeaderCartTitle")[0].innerHTML = `${cart}`;
   }
 
   const hanldeColor = (color) => {
