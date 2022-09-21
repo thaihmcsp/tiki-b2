@@ -123,6 +123,7 @@ function TotalCart() {
   }, [finalTotal]);
 
   const onRemove = (e, id, index, index1) => {
+    console.log(126,id)
     setNewData(() => {
       // const potitions = finalTotal.findIndex((item) => {
       //   return item.productDetailId._id === id;
@@ -228,8 +229,7 @@ function TotalCart() {
     });
         try {
         const data = await getAPI('/product/get-one-product/'+id)
-        if(data.data.product){
-         
+        if(data.data.product){      
            await patchAPI('/cart/remove-from-cart/'+cartID,{productId : id})
         }else {
          await patchAPI('/cart/remove-from-cart/'+cartID,{productDetailId : id})

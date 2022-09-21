@@ -73,7 +73,7 @@ function Main_Left({data}) {
                                                         <div className="item-icon">
                                                             <picture className="webpimg-container">
                                                                
-                                                                <img src=                                                               {subItem.productDetailId.productId.thump[0].startsWith('http')?subItem.productDetailId.productId.thump[0]:'https://tiki.thaihm.site/'+subItem.productDetailId.productId.thump[0]}
+                                                                <img src={subItem.productDetailId.productId.thump[0].startsWith('http')?subItem.productDetailId.productId.thump[0]:'https://tiki.thaihm.site/'+subItem.productDetailId.productId.thump[0]}
 
                                                                 alt="icon" width="48" height="48" className="fWjUGo" />
                                                                 
@@ -86,7 +86,7 @@ function Main_Left({data}) {
                                                             <div className="item-info__second-line">
                                                                 <div className="item-info__qty"> SL:x {subItem.quantity}</div>
                                                                 <div className="item-info__price">
-                                                                {String(subItem.productDetailId.price.toLocaleString())}
+                                                                {String((subItem.productDetailId.price * subItem.quantity).toLocaleString().split(',').join('.'))}
                                                                      đ</div>
                                                             </div>
                                                         </div>
@@ -237,7 +237,7 @@ function Main_Left({data}) {
                                 <div className="hEvCDj">
 
                                 </div>
-                                <button className="haMxul"><img alt="add"
+                                <button className="haMxul" disabled><img alt="add"
                                     src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/checkout/icon-add.svg"
                                     width="24" height="24" /><span>Thêm thẻ mới</span></button>
                                 <div className="kpgKjK">

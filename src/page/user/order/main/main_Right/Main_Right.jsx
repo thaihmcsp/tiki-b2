@@ -16,7 +16,7 @@ function Main_Right({ data, money,cartId }) {
     const nav = useNavigate()
     const [addAllress,setAllAddress] = useState(false)
     const [userInfo, setUserInfo] = useState();
-   console.log(17,cartId);
+
     useEffect(() => {
         setUserInfo(data)
     },[data])
@@ -54,7 +54,6 @@ function Main_Right({ data, money,cartId }) {
     ////////////////
  
     function showProduct() {
-        // document.querySelector('.left').style.display = 'block';
         if (check) {
             document.querySelector('.HeMLl').setAttribute("style", "display:none")
             setCheck(false)
@@ -74,9 +73,7 @@ function Main_Right({ data, money,cartId }) {
     // hiển thị số lượng sản phẩm
     var count = 0;
     {
-
         data.map((items) => {
-
             count = count + items.listProduct.length;
         })
        
@@ -87,9 +84,7 @@ function Main_Right({ data, money,cartId }) {
                 try {
                     await getAPI('/auth/me')
                         .then((data) => {
-                            // console.log(102,data)
                             setInfor(data.data.address)
-                            // console.log(106, data.data.address)
                         })
                 } catch (error) {
                     console.log(error)
@@ -106,7 +101,6 @@ function Main_Right({ data, money,cartId }) {
                phone:infor[0].phone,
                address:infor[0].address
             }
-            console.log(obj)
             try {
                  await postAPI('/user-order/user-create-order',obj)
                 nav('/user/order')
@@ -117,8 +111,6 @@ function Main_Right({ data, money,cartId }) {
 
             }
             
-
-        console.log(107, infor)
         /////////////
         const [indexAddress,setIndexAddress]=useState(0)
         useEffect(function(){
@@ -127,8 +119,6 @@ function Main_Right({ data, money,cartId }) {
             }
             
         },[indexAddress,infor]);
-        // console.log(129,defaultAddress)
-        console.log( 111,defaultAddress);
         return (
 
             <div className="right">
@@ -143,7 +133,6 @@ function Main_Right({ data, money,cartId }) {
                 setAllAddress={setAllAddress}
                 />
                
-            {/* </div> */}
                 <div className="flcp_container"
                     style=
                     {
@@ -270,7 +259,6 @@ function Main_Right({ data, money,cartId }) {
 
                                         <>
                                             {item.listProduct.map(subItem => {
-                                                console.log(162, typeof String(subItem.productDetailId.price.toLocaleString()));
                                                 return (
 
 

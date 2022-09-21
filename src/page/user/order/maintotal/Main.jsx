@@ -14,7 +14,6 @@ function Main() {
     const nav = useNavigate()
         ///////////////////
         const [order, setOrder] = useState([])
-        console.log(setOrder);
 
         let { orderId } = useParams();  
         //gộp data cũ thành data mới      
@@ -26,15 +25,11 @@ function Main() {
         async function  temps (){
             try {
                 const cart = await getAPI('/cart/get-loged-in-cart')
-                console.log(29,cart)
-                console.log(19,cart.data.cart.userId._id)
                 setCartId(cart.data.cart._id)
                 const Cart = cart.data.cart
-                console.log(21,cartId)
                 const listProductdetail = cart.data.cart.listProduct
-                console.log(listProductdetail);
                 const newData = cart.data.cart.product
-                console.log(cart.data.cart)
+                console.log(32, newData)
                 const NEWDATA = newData.map((item) => {
                     return {
                       productDetailId: {
@@ -55,8 +50,6 @@ function Main() {
                     }
                   })
                   Cart.listProduct = EndData
-                //   setOrder([...NEWDATA, ...listProductdetail]);
-                console.log(52,Cart.listProduct)
                 const orderList=[]
                 const shopName=[]
                 Cart.listProduct.map((value) => {
@@ -76,8 +69,6 @@ function Main() {
                     }
                 })
 
-                console.log(69,cartId)
-                console.log(46,orderList)
                 setOrder(orderList)
                     
             } catch (error) {
@@ -91,7 +82,6 @@ function Main() {
         const [money,setMoney] = useState(0)
         const [product, setProduct] = useState(0)
 
-    console.log(12, order)
     useEffect(()=>{
         let total=0;
         for(let i=0;i<order.length; i++){
@@ -103,14 +93,12 @@ function Main() {
         }
         setMoney(total)
     },[order])
-   console.log(99,order)
     return (
         <div className='main'>
             <OrderHeader/>
             <main style={{background:'#F5F5FA'}}>
                     <div className="hfMLFx elPTRG">
-                            <Main_Left  data={order}
-                             />
+                            <Main_Left  data={order}/>
                             <Main_Right data={order} money={money}  cartId={cartId} />
                     </div>
             </main>
