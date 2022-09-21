@@ -1,19 +1,25 @@
+import { useSelector } from "react-redux";
 import { Route, Navigate } from "react-router-dom";
+import { getAPI } from "../../../config/api";
 // Redirect
 
 function PrivateRouteShop({ children,sigin }) {
-    const cookies =document.cookie
-    const data = {}
-    cookies.split(';').map(item=>{
-        data[item.split('=')[0].trim()]=item.split('=')[1]
- 
-    })
-    console.log({data},sigin)
+    let user = useSelector((state)=> state.user);
+    console.log(8, user)
+    let role = user.role;
+    let shop = user.shop;
+   
+        // const cookies =document.cookie
+        // const data = {}
+        // cookies.split(';').map(item=>{
+        //     data[item.split('=')[0].trim()]=item.split('=')[1]
+    
+        // })
+        // console.log({data},sigin)
     let login = false
 
     if(sigin == '/sign-in'){
-        console.log(15,data[`tiki-user`])
-        if(data[`tiki-user`]){
+        if(role){
             console.log('đã đăng nhập user')
             login = true
         }else{
@@ -21,13 +27,13 @@ function PrivateRouteShop({ children,sigin }) {
             login = false
         }
     }else if(sigin == '/sign-in-shop'){
-        if(data[`tiki-shop`]){
+        if(role && shop){
             login = true
         }else{
             login = false
         }
     }else if(sigin == '/sign-in-admin'){    
-        if(data[`tiki-admin`]){
+        if(role === 'admin'){
             console.log('oke đã đăng nhập admin')
             login = true
         }else{
@@ -37,5 +43,6 @@ function PrivateRouteShop({ children,sigin }) {
     }
     console.log(login)
     return login ? children : <Navigate to={`${sigin}`} />;
+    
 }
 export default PrivateRouteShop;
