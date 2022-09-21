@@ -281,7 +281,17 @@ function Header(props) {
                           {ListCategory.slice(0, 8).map(val => {
                             return <div className="CatogoryList" onClick={() => { Go_FilterCategory(val.categoryName) }}>
                               <div className='CatogoryListTitle'>
-                                <img src={val.thump} alt="" witdth='64.5px' height='64.5px' />
+                                {/* <img src={val.thump} alt="" witdth='64.5px' height='64.5px' /> */}
+                                {
+                                  <img witdth='64.5px' height='64.5px'
+                                    src={
+                                      val.thump.startsWith("http")
+                                        ? val.thump
+                                        : "https://tiki.thaihm.site/" + val.thump
+                                    }
+                                    alt="avatar"
+                                  />
+                                }
                                 <p >{val.categoryName}</p>
                               </div>
                             </div>
