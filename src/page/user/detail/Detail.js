@@ -16,7 +16,7 @@ import "./css/productleft.css";
 import "./css/productright.css";
 import ProductRight from "./js/ProductRight";
 import Productbottom from "./js/Productbottom";
-import { Image } from "antd";
+import { Image, message } from "antd";
 import { Product } from "./data/test";
 import { color } from "@mui/system";
 import { useSearchParams } from "react-router-dom";
@@ -31,9 +31,9 @@ function Detail() {
     color: "",
     name: "",
   });
-  // useEffect(function(){
-  //   getData()
-  // }, [])
+  const success = () => {
+    message.success("Sản phẩm đã được thêm vào giỏ hàng");
+  };
 
   const [sizeDetail, setSizeDetail] = useState(
     Product.product.productDetailId[0].option[1].value
@@ -121,9 +121,8 @@ function Detail() {
       document.getElementsByClassName("HeaderCartTitle")[0].innerHTML * 1;
     cart += 1;
     document.getElementsByClassName("HeaderCartTitle")[0].innerHTML = `${cart}`;
-    window.alert(
-      "Sản phẩm đã được thêm vào giỏ hàng. Vui lòng kiểm tra tại giỏ hàng"
-    );
+
+    success();
   };
   function AmoutnUp() {
     let soluong = document.getElementById("amoutn-value").innerHTML * 1;
