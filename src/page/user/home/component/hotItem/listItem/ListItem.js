@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import style from '../hotitem.module.css'
 
 function ListItem({listCategories}) {

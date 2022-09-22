@@ -55,7 +55,7 @@ function HotDeal() {
             </div>
             <h4 className={style.header_link}>Xem thêm</h4>
         </div>
-        <Banner/>
+        <Banner />
     </div>
   )
 }

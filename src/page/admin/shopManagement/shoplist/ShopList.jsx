@@ -24,6 +24,7 @@ async function RefuseShop(id, newdata, listdata, setCount, count) {
     try {
         const res = await patchAPI('/shop/admin-change-shop-status/' + id, { 'status': 'rejected' })
         setCount(count + 1)
+
     } catch (err) {
         console.log(err);
     }
@@ -31,7 +32,7 @@ async function RefuseShop(id, newdata, listdata, setCount, count) {
 async function AccepctShop(id, newdata, listdata, setCount, count) {
     console.log(id)
     try {
-        const res = await patchAPI('/shop/admin-change-shop-status/' + id, { 'status': 'accepted' })
+        await patchAPI('/shop/admin-change-shop-status/' + id, { "status": "accepted" })
         setCount(count + 1)
     } catch (err) {
         console.log(err);

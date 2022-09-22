@@ -10,6 +10,7 @@ function ShopHome() {
   useEffect(function(){
     setShopID(newlink.search.split('=')[1])
   },[])
+  console.log(13,newlink.search.split('=')[1])
   const [shopData,setShopData] = useState([])
   const [shopInfor,setShopInfor] = useState([])
   useEffect(function(){

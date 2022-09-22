@@ -9,7 +9,19 @@ import SearchIcon from '@mui/icons-material/Search';
 const { Search } = Input;
 function removeAccents(str) {
   var AccentsMap = [
-
+    "aàảãáạăằẳẵắặâầẩẫấậ",
+    "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
+    "dđ", "DĐ",
+    "eèẻẽéẹêềểễếệ",
+    "EÈẺẼÉẸÊỀỂỄẾỆ",
+    "iìỉĩíị",
+    "IÌỈĨÍỊ",
+    "oòỏõóọôồổỗốộơờởỡớợ",
+    "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
+    "uùủũúụưừửữứự",
+    "UÙỦŨÚỤƯỪỬỮỨỰ",
+    "yỳỷỹýỵ",
+    "YỲỶỸÝỴ"
   ];
   for (var i = 0; i < AccentsMap.length; i++) {
     var re = new RegExp('[' + AccentsMap[i].substr(1) + ']', 'g');
@@ -23,17 +35,15 @@ function FilterProducts({ setValue, setselectSort, setCount, count }) {
   const [val, setVal] = useState('')
   function onChange() {
     const seachData = document.querySelector(`.${styles.inp_search} .ant-input`).value;
-    setValue(seachData);
-    
-    
-    setValue(removeAccents(seachData.toLowerCase()))
 
+    setValue(removeAccents(seachData.toLowerCase()))
   }
   function handleChange(value) {
     setselectSort(value)
   }
   const onSearch = (value) => {
     const seachData = document.querySelector(`.${styles.inp_search} .ant-input`).value;
+    console.log(1)
     if (seachData.trim().length > 0) {
       setValue(removeAccents(seachData.toLowerCase()))
     } else {

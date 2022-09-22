@@ -24,12 +24,19 @@
 
 .nav__link {
     text-decoration: none;
+    cursor: pointer;
     font-size: 0.9rem;
     color: rgba(36, 36, 36, 0.849);
     display: block;
     font-weight: 400;
-    line-height: 20px;
-    padding-bottom: 8px;
+    display: -webkit-box;
+    line-height: 1.4;
+    -webkit-line-clamp: 2;  /* số dòng hiển thị */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom:10px;
+    padding: 0 10px 0 0;
 }
 
 .list_products_item {
@@ -111,6 +118,48 @@
     border-radius: 5px;
 }
 
-@media  only screen and (max-width:769px){
- 
+
+.list_products_item input[type="checkbox"] {
+    position: relative;
+    appearance: none;
+    height: 15px;
+    width: 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid rgba(133, 133, 133, 0.795);
+}
+
+.list_products_item input[type="checkbox"]::after {
+    position: absolute;
+    content: '';
+    top: 8px;
+    left: 1px;
+    width: 5px;
+    height: 1.5px;
+    display: none;
+    transform: rotate(45deg);
+    z-index: 1;
+    background-color: #fff;
+}
+
+.list_products_item input[type="checkbox"]::before {
+    position: absolute !important; 
+    content: '' !important; 
+    top: 5px !important;
+    width: 10px !important;
+    right: 0px !important;
+    height: 1.5px !important;
+    display: none;
+    z-index: 1;
+    transform: rotate(-50deg) !important;
+    background-color: #fff !important;
+}
+
+.list_products_item input[type="checkbox"]:checked:after,
+.list_products_item input[type="checkbox"]:checked:before {
+    display: block;
+}
+
+.list_products_item input[type="checkbox"]:checked {
+    background-color: red;
 }

@@ -16,6 +16,7 @@ function EditItem() {
   useEffect(function(){
     getAPI(`/product/get-one-product/${Id}`)
       .then((data=>{
+        console.log(19,data)
         dispatch(loadDefault(data.data.product))
       })) 
       .catch((error=>{

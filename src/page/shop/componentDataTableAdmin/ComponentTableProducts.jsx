@@ -1,4 +1,4 @@
-import {  Table } from "antd";
+import { Table } from "antd";
 import React, { useEffect, useState } from "react";
 import styles from "./ComponentTableProducts.module.css";
 import { EditOutlined, InfoCircleOutlined } from "@ant-design/icons";
@@ -8,7 +8,7 @@ import { handleBreakpoints } from "@mui/system";
 import { getAPI, patchAPI } from "../../../config/api";
 import { useNavigate } from "react-router-dom";
 import Switch from '@mui/material/Switch';
- 
+
 const columns = [
   {
     title: "Thông tin sản phẩm",
@@ -39,6 +39,19 @@ const rowSelection = {
 };
 function removeAccents(str) {
   var AccentsMap = [
+    "aàảãáạăằẳẵắặâầẩẫấậ",
+    "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
+    "dđ", "DĐ",
+    "eèẻẽéẹêềểễếệ",
+    "EÈẺẼÉẸÊỀỂỄẾỆ",
+    "iìỉĩíị",
+    "IÌỈĨÍỊ",
+    "oòỏõóọôồổỗốộơờởỡớợ",
+    "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
+    "uùủũúụưừửữứự",
+    "UÙỦŨÚỤƯỪỬỮỨỰ",
+    "yỳỷỹýỵ",
+    "YỲỶỸÝỴ"
   ];
   for (var i = 0; i < AccentsMap.length; i++) {
     var re = new RegExp('[' + AccentsMap[i].substr(1) + ']', 'g');

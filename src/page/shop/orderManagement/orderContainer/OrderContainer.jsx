@@ -82,8 +82,7 @@ const OrderContainer = () => {
     setClicked(clicked=>!clicked)
   }
   console.log(clicked)
-  useEffect(()=>{
-      
+  useEffect(()=>{ 
       if(shopId.length>0){
         getAPI(`/order/get-orders-by-shop/${shopId}`)
       .then(data =>{
@@ -137,42 +136,26 @@ const OrderContainer = () => {
             setLisOder(daTa)
       })
       .catch(error => console.log(error))
-      }
-  },[clicked,shopId])
+    }
+  },[])
   // const APIcall =()=>{
   console.log(71,listOder)
-
+  // }
   return(
-    <>
-      <Tabs defaultActiveKey="1" className='shop_order__manager'>
-
-        <Tabs.TabPane tab="Đang Xử Lí" key="1">
-          <PendingOder listOder={pendingOder} clicked={clicked}/>
-        </Tabs.TabPane>
-
-        <Tabs.TabPane tab="Đang Giao Hàng" key="2">
-          <PendingOder listOder={shippingOder} clicked={clicked}/>
-        </Tabs.TabPane>
-
-        <Tabs.TabPane tab="Chờ thanh toán" key="3">
-          <PendingOder listOder={paymentOder} clicked={clicked}/>
-        </Tabs.TabPane>
-
-        <Tabs.TabPane tab="Giao Hàng Thành Công" key="4">
-          <PendingOder listOder={cuccessOder} clicked={clicked}/>
-        </Tabs.TabPane>
-
-        <Tabs.TabPane tab="Đơn Thất Bại" key="5">
-          <PendingOder listOder={cancelOder} clicked={clicked}/>
-        </Tabs.TabPane>
-
-      </Tabs>
-      <div className={style.submitChangeStatusOrder}>
-          <button type="submit"  className={style.submitChangeStatus} onClick={handleSubmitchageStatus}>
-            Submit Change
-          </button>
-      </div>
-    </>
+    <Tabs defaultActiveKey="1">
+      <Tabs.TabPane tab="Đang Xử Lí" key="1">
+        <PendingOder listOder={listOder}/>
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="Đang Giao Hàng" key="2">
+        Content of Tab Pane 2
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="Giao Hàng Thành Công" key="3">
+        Content of Tab Pane 3
+      </Tabs.TabPane>
+      <Tabs.TabPane tab="Đơn Thất Bại" key="4">
+        Content of Tab Pane 4
+      </Tabs.TabPane>
+    </Tabs>
   )
  
 }

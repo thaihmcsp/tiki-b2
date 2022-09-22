@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./Cart.css";
 import ClosingCart from "./ClosingCart";
 import style from "./TotalCart.module.css";
-import { getAPI } from "../../../config/api";
+import { getAPI, patchAPI } from "../../../config/api";
+import data from "../profile/UserInfo_data/data";
 
 function TotalCart() {
   const [listProduct, setListProduct] = React.useState([]);
@@ -16,6 +17,7 @@ function TotalCart() {
       setCartID(data.data.cart._id)
       const listProductdetail = data.data.cart.listProduct;
       const newData = data.data.cart.product;
+      
       const NEWDATA = newData.map((item) => {
         return {
           productDetailId: {  
@@ -121,6 +123,7 @@ function TotalCart() {
   }, [finalTotal]);
 
   const onRemove = (e, id, index, index1) => {
+    console.log(126,id)
     setNewData(() => {
       // const potitions = finalTotal.findIndex((item) => {
       //   return item.productDetailId._id === id;
@@ -203,7 +206,9 @@ function TotalCart() {
     }
   };
 
-  const onDelete = (id, index, index1) => {
+  async function  onDelete(id, index, index1){
+    console.log(209,id)
+    console.log(210,cartID)
     setNewData(() => {
       const newListData = [...newData];
       console.log(134, newListData);
@@ -222,7 +227,19 @@ function TotalCart() {
         return newListData;
       }
     });
-  };
+        try {
+        const data = await getAPI('/product/get-one-product/'+id)
+        if(data.data.product){      
+           await patchAPI('/cart/remove-from-cart/'+cartID,{productId : id})
+        }else {
+         await patchAPI('/cart/remove-from-cart/'+cartID,{productDetailId : id})
+        }
+        }
+        catch (e){
+          console.log(e)
+        }
+
+      }
   const handleCheckItem = (e, index, index1) => {
     if (e.target.checked == true) {
       setFinalTotal(() => {

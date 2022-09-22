@@ -1,44 +1,28 @@
-import React, { useEffect, useState, useRef } from 'react'
-
-import { List1 } from './List1'
-// import { listAddress } from './listAddress'
-// import { listSupplier } from './listSupplier'
+import React, { useEffect, useState } from 'react'
 import styles from './SideBar.module.css'
 import { DownOutlined } from '@ant-design/icons';
 import { v4 as uuidv4 } from 'uuid';
-import './styles.css'
+import '../styles.css'
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 const SideBar = ({setData, listProducts}) => {
   const [address, setAddress] = useState([])
+  const [portfolio,setPortfolio] = useState([])
   const [price200, setPrice200] = useState(0)
   const [brand, setBrand] = useState([])
-  const [count,setCount] = useState('')
+  const [checkcolor,setCheckcolor] = useState()
   const [provider, setProvider] = useState([])
   const [data1, setData1] = useState([]);
   const [listdata, setListData] = useState([]);
   const [supplier, setSupplier] = useState([]);
-  const [check, setCheck] = useState(0);
-  const [check1, setCheck1] = useState(0);
-  const [check2, setCheck2] = useState(0);
-  const [dem1, setDem1] = useState(0)
-  const [dem2, setDem2] = useState(0)
+  const [dem1, setDem1] = useState(true)
+  const [dem2, setDem2] = useState(true)
+  const [dem3, setDem3] = useState(true)
   const [value, setValue] = useState('')
   const [value1, setValue1] = useState('')
-  const [dem3, setDem3] = useState(0)
-const [listAddress, setTListAddress] = useState([])
+  const [listAddress, setTListAddress] = useState([])
   const [listsupplier, setListsupplier] = useState([])
   const [listtrademark, setListTrademark] = useState([])
-  useEffect(() => {
-    setListsupplier(() => { 
-      const newData = []
-      listProducts.map(value => {
-        if(!newData.includes(value.shopId.shopName)) {
-          newData.push(value.shopId.shopName)
-        }
-      })
-      return newData
-    })
-  },[listProducts])
   
   useEffect(() => {
     setListTrademark(() => {
@@ -52,9 +36,7 @@ const [listAddress, setTListAddress] = useState([])
       })
       return newData1
     })
-  },[listProducts])
-  
-  useEffect(() => {
+
     setTListAddress(() => { 
       const newData = []
       listProducts.map(value => {
@@ -64,9 +46,31 @@ const [listAddress, setTListAddress] = useState([])
       })
       return newData
     })
+
+    setListsupplier(() => { 
+      const newData = []
+      listProducts.map(value => {
+        if(!newData.includes(value.shopId.shopName)) {
+          newData.push(value.shopId.shopName)
+        }
+      })
+      return newData
+    })
+
+    document.querySelectorAll('input').forEach(value => {
+      value.checked = false
+    })
+    setDem1(true)
+    setDem2(true)
+    setDem3(true)
+    setAddress([])
+    setBrand([])
+    setProvider([])
+    setPrice200([])
+    setCheckcolor()
+    setPortfolio(listProducts.slice(0,6))
   },[listProducts])
   
-
   useEffect(() => {
     const newData = listAddress.slice(0, 5)
     setData1(newData)
@@ -76,66 +80,50 @@ const [listAddress, setTListAddress] = useState([])
     setSupplier(newData2)
   },[listsupplier,listAddress,listtrademark])
 
-  useEffect(() => {
-    setAddress([])
-    setBrand([])
-    setProvider([])
-    setPrice200([])
-    setDem2(0)
-    setDem1(0)
-    setDem3(0)
-  },[listProducts])
 
-  const handleClick = () => {
-    const hide = document.querySelector('.list_products__btn3')
+  const handleClick = (e) => {
     const icon_sidebar = document.querySelector('.icon-sidebar')
     icon_sidebar.classList.toggle('mystyle1_sidebar')
-   if(check === 0) {
+   if(e.target.innerText === 'Xem Thêm') {
     setData1(listAddress)
-    hide.textContent = 'Thu gọn';
-    setCheck(1)
+    e.target.textContent = 'Thu gọn';
    }else {
     const newData = listAddress.slice(0, 5)
     newData.slice(0, 5)
     setData1(newData)
-    setCheck(0)
-      hide.textContent = 'Xem thêm';
+    e.target.textContent = 'Xem thêm';
    }
   }
 
 
   
-  const handleClick1 = () => {
-    const hide1 = document.querySelector('.list_products__btn1')
+  const handleClick1 = (e) => {
     const icon_sidebar = document.querySelector('.icon-sidebar1')
-    icon_sidebar.classList.toggle('mystyle2_sidebar')
-   if(check1 === 0) {
+   if(e.target.innerText === 'Xem Thêm') {
     setListData(listtrademark)
-    setCheck1(1)
-    hide1.textContent = 'Thu gọn';
+    icon_sidebar.classList.add('mystyle2_sidebar')
+    e.target.textContent = 'Thu gọn';
    }else {
     const newData = listtrademark.slice(0, 5)
     newData.slice(0, 5)
     setListData(newData)
-    setCheck1(0)
-    hide1.textContent = 'Xem thêm';
+    icon_sidebar.classList.remove('mystyle2_sidebar')
+    e.target.textContent = 'Xem thêm';
    }
   }
   
-  const handleClick2 = () => {
-    const hide2 = document.querySelector('.list_products__btn2')
-    const icon_sidebar2 = document.querySelector('.icon-sidebar2')
-    icon_sidebar2.classList.toggle('mystyle_sidebar')
-   if(check2 === 0) {
+  const handleClick2 = (e) => {
+    const hide2 = document.querySelector('.icon-sidebar2')
+   if(e.target.innerText === 'Xem Thêm') {
     setSupplier(listsupplier)
-    setCheck2(1)
-    hide2.textContent = 'Thu gọn';
+    hide2.classList.add('mystyle_sidebar')
+    e.target.textContent = 'Thu gọn';
    }else {
     const newData = listsupplier.slice(0, 5)
     newData.slice(0, 5)
     setSupplier(newData)
-    setCheck2(0)
-    hide2.textContent = 'Xem thêm';
+    hide2.classList.remove('mystyle_sidebar')
+    e.target.textContent = 'Xem thêm';
    }
   }
 
@@ -178,42 +166,51 @@ const [listAddress, setTListAddress] = useState([])
   }, [address, brand, provider, price200]);
 
   const handleprice = () => {
-      const inp1 = document.querySelector('#min-input').value
-      const inp2 = document.querySelector('#max-input').value
       setPrice200([{min:value.split('.').join(''), max:value1.split('.').join('') }])
-      inp1.value =''
-      inp2.value= ''
+      setValue('')
+      setValue1('')
   }
 
   const handle200 = (e) => {
-    if(dem3 === 0) {
+    if(dem3) {
       setPrice200([200000])
-      setDem3(dem3 => ++dem3)
+      setDem3(false)
+      setDem2(true)
+      setDem1(true)
+      setCheckcolor(200)
     }else {
       setPrice200([])
-      setDem3(0)
+      setDem3(true)
+      setCheckcolor()
     }
   }
 
   const handle7500 = () => {
-    if(dem2 === 0) {
+    if(dem2) {
       setPrice200([{min:200000, max:750000}])
-      setDem2(dem2 => ++dem2)
+      setCheckcolor(700)
+      setDem3(true)
+      setDem2(false)
+      setDem1(true)
     }else {
+      setDem2(true)
       setPrice200([])
-      setDem2(0)
+      setCheckcolor()
     }
   }
 
   const handle8500 = () => {
-    if(dem1 === 0) {
+    if(dem1) {
       setPrice200([750000])
-      setDem1(dem1 => ++dem1)
+      setCheckcolor(750)
+      setDem3(true)
+      setDem2(true)
+      setDem1(false)
     }else {
       setPrice200([])
-      setDem1(0)
+      setDem1(true)
+      setCheckcolor()
     }
-   
   }
   const toNumber = number=>{
     const newNumber = number.split('.').join('')
@@ -239,7 +236,6 @@ const [listAddress, setTListAddress] = useState([])
   const btn = document.querySelectorAll('#filter-sidebar-1')
     btn.forEach(iten => {
       iten.addEventListener('click', function(e) {
-        
         btn.forEach(item => {
               item.classList.remove('filter-sidebar_active');
         })
@@ -247,16 +243,20 @@ const [listAddress, setTListAddress] = useState([])
       })
     })
  },[])
+ const nav = useNavigate()
+const hanldpage = (id) => {
+  nav(`/detail?id=${id}`)
+}
 
   return (
     <div className={styles.container}>
     <div className={styles.nav}>
     <h3 className={styles.title}>DANH MỤC SẢN PHẨM</h3>
      <ul className= {styles.nav__list}>
-    {List1.map((val, index) => {
+    {portfolio.length > 0 && portfolio.map((val, index) => {
       return (
-       <li key = {index}>
-            <a href='#' className = {styles.nav__link}>{val}</a>
+       <li key = {val._id}>
+            <span onClick={() => hanldpage(val._id)} className = {styles.nav__link}>{val.productName}</span>
         </li>
       )
     })}
@@ -285,19 +285,16 @@ const [listAddress, setTListAddress] = useState([])
     <div className={styles.nav}>
     </div>
     <div className={styles.nav}>
-    <h3 className={styles.title}>ĐÁNH GIÁ</h3>
-    </div>
-    <div className={styles.nav}>
     <div className={styles.price}>
     <h3 className={styles.title}>GIÁ</h3>
-    <p onClick ={handle200} className = 'filter-sidebar200' id = 'filter-sidebar-1'>Dưới 200.000</p>
-    <p onClick = {() => {handle7500()}} className = 'filter-sidebar700' id ='filter-sidebar-1'>Từ 200.000 đến 750.000</p>
-    <p onClick={() => {handle8500()}} className = 'filter-sidebar750' id =  'filter-sidebar-1'>Trên 750.000</p>
+    <p onClick ={handle200} className = {`filter-sidebar200 ${checkcolor === 200 ? 'filter_active' : ''}`}>Dưới 200.000</p>
+    <p onClick = {() => {handle7500()}} className = {`filter-sidebar700 ${checkcolor === 700 ? 'filter_active' : ''}`}>Từ 200.000 đến 750.000</p>
+    <p onClick={() => {handle8500()}} className = {`filter-sidebar750 ${checkcolor === 750 ? 'filter_active' : ''}`}>Trên 750.000</p>
     <label>Chọn khoảng giá</label>
     <div className={styles.gourp}>
       <input type="text" placeholder='0' id='min-input' value = {value} onChange={them}/>
       <span className={styles.seperate}>-</span>
-      <input type="text" placeholder='0'  id='max-input' value = {value1} onChange={them1}/>
+      <input type="text" placeholder='0'  id='max-input'  value = {value1} onChange={them1}/>
     </div>
       <button className={styles.btn} onClick = {handleprice}>Áp dụng</button>
           </div>

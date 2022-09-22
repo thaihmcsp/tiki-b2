@@ -11,11 +11,11 @@ import TextField from '@mui/material/TextField';
 import style from './modal.module.css'
 import './modal.css'
 import { patchAPI } from '../../../../../../config/api';
-
-
-
-function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAddress,setAllAddress,setIndexAddress,cartId}) {
+import { useSelector } from 'react-redux';
+function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAddress,setAllAddress,setIndexAddress,cartId, temps}) {
     const [value, setValue] = useState(0);
+    const user = useSelector((state => state.user))
+    console.log(17, user)
  ///tạo cảnh báo ở ô textfiled
     const [textInput, setTextInput] = useState('');
    
@@ -93,7 +93,6 @@ function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAdd
         const warname = document.querySelector('#warname')
         const waraddress = document.querySelector('#waraddress')
 
-       console.log(69, textInput)
        
        if (usernames.trim() === '') {
         warname.style.display = 'block'
@@ -116,7 +115,7 @@ function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAdd
         }
         // console.log(102,usernames , phonenumbers , textInput)
         if(usernames && phonenumbers && textInput){
-            var resp = await patchAPI(`/user/update-user-info/${cartId}`, {address:{
+            var resp = await patchAPI(`/user/update-user-info/`+user._id, {address:{
                 name:usernames,
                 phone:phonenumbers,
                 address:textInput
@@ -124,17 +123,14 @@ function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAdd
             }})
             //   console.log(104, resp)
              setAllAddress(resp.data.user.address)
+             temps()
         }
         }
         catch ( error) {
             console.log(110,error)
            
-        }
-     
-
-       
+        }     
     };
-    console.log(137,cartId);
     // handok2
     const handleOk2 =  async(id) => {
         try{
@@ -168,7 +164,7 @@ function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAdd
             }
             console.log(102,usernames , phonenumbers , textInput)
             if(usernames && phonenumbers && textInput){
-                var resp = await patchAPI(`/user/update-user-info/${ cartId}`, {address:{
+                var resp = await patchAPI(`/user/update-user-info/`+user._id , {address:{
                     name:usernames,
                     phone:phonenumbers,
                     address:textInput
@@ -176,6 +172,7 @@ function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAdd
                 }})
                   console.log(104, resp)
                  setAllAddress(resp.data.user.address)
+                 setIsModalVisible(false);
             }
             }
             catch ( error) {

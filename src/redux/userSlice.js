@@ -2,13 +2,13 @@ const { createSlice } = require("@reduxjs/toolkit");
 // const initUser = localStorage.getItem("user")
 //   ? JSON.parse(localStorage.getItem("user"))
 //   : [];
-let string = window.localStorage.getItem('tiki-user')
-console.log(2,string)
-let init 
-if(!string) {
-    init= {}
-}else{
-    init = JSON.parse(string);
+let string = window.localStorage.getItem("tiki-user");
+console.log(2, string);
+let init;
+if (!string) {
+  init = {};
+} else {
+  init = JSON.parse(string);
 }
 
 function getCookie(cname) {
@@ -43,5 +43,5 @@ const userSlice = createSlice({
     }
 })
 
-export const {userLogin, updateInfo} = userSlice.actions;
+export const { userLogin, updateInfo } = userSlice.actions;
 export const userReducer = userSlice.reducer;

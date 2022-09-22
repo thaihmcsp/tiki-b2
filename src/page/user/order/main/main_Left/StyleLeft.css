@@ -502,7 +502,7 @@ label {
     width: 149px;
     height: 40px;
     border-radius: 4px;
-    border: 1px solid rgb(13, 92, 182);
+    border: 1px solid rgb(13, 92, 182, 0.3);
     font-size: 15px;
     line-height: 1.6;
     font-weight: 500;
@@ -511,10 +511,9 @@ label {
     align-items: center;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    background: rgb(255, 255, 255);
-    color: rgb(13, 92, 182);
+    background: rgb(255, 255, 255, 0.5);
+    color: rgb(13, 92, 182, 0.5);
     padding: 0px 12px;
-    cursor: pointer;
     outline: 0px;
     margin-top: 8px;
 }

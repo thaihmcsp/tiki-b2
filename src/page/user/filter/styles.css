@@ -124,8 +124,8 @@ body {
   .filter_modal {
     font-size: 1rem !important;
     margin: 10px 0 10px 5px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left:10px;
+    padding-right:10px;
     font-weight: 300;
     line-height: 15px;
     display: block !important;

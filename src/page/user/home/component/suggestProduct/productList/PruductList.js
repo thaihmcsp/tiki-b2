@@ -23,7 +23,7 @@ function PruductList({listProduct}) {
   const handleToDetailITem=(id)=>{
     nav(`/detail?id=${id}`)
   }
-  console.log(498,listProduct)
+  
   return (  
     <div className={style.PruductList}>
          {

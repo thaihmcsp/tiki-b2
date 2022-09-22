@@ -35,6 +35,8 @@
 .ListItem_item h4{
     padding: 0 10px;
     font-size: 13px;
+    margin-top: 10px;
+    line-height:1.3;
     font-weight: 400;
 }
 @media screen and (max-width: 768px){

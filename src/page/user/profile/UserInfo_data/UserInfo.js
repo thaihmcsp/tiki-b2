@@ -6,7 +6,9 @@ import 'antd/dist/antd.css';
 import { Radio, Modal } from 'antd';
 import DataMonth from './DataMonth';
 import Countries from './Countries';
-import { Link, useNavigate } from 'react-router-dom'
+// import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button } from 'antd';
 import { useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
@@ -17,21 +19,21 @@ import { updateInfo } from '../../../../redux/userSlice';
 
 const getBase64 = (img, callback) => {
   const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
+  reader.addEventListener("load", () => callback(reader.result));
   reader.readAsDataURL(img);
 };
 
 const beforeUpload = (file) => {
-  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
 
   if (!isJpgOrPng) {
-    message.error('You can only upload JPG/PNG file!');
+    message.error("You can only upload JPG/PNG file!");
   }
 
   const isLt2M = file.size / 1024 / 1024 < 2;
 
   if (!isLt2M) {
-    message.error('Image must smaller than 2MB!');
+    message.error("Image must smaller than 2MB!");
   }
 
   return isJpgOrPng && isLt2M;
@@ -39,6 +41,7 @@ const beforeUpload = (file) => {
 function UserInfo() {
   const dispatch = useDispatch()
   const user = useSelector((state => state.user))
+  console.log(44,user)
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
@@ -57,7 +60,7 @@ function UserInfo() {
       dispatch(action)
       setIsModalVisible(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
   const handleCancel = () => {
@@ -81,7 +84,7 @@ function UserInfo() {
       </div>
     </div>
   );
-  async function handleUpdate () {
+  async function handleUpdate() {
     try {
       const adusername = document.querySelector("#adusername").value;
       const adFirstName = document.querySelector("#first_last_name").value;
@@ -96,13 +99,22 @@ function UserInfo() {
       if (dateTime * 1 && dataMother * 1 && dataDay * 1) {
         dateOfBirth = dateTime + "/" + dataMother + "/" + dataDay;
       }
-      const name = await patchAPI('/user/update-user-info/'+user._id, {username: adusername, fullname:adFirstName,
-      dateOfBirth,
-      sex:male.checked===true?male.value:female.checked===true?female.value:other.value,nationality:nationality});
-      const action = updateInfo(name.data.user)
-      dispatch(action)
-    }catch (error){
-      console.log(97,error)
+      const name = await patchAPI("/user/update-user-info/" + user._id, {
+        username: adusername,
+        fullname: adFirstName,
+        dateOfBirth,
+        sex:
+          male.checked === true
+            ? male.value
+            : female.checked === true
+            ? female.value
+            : other.value,
+        nationality: nationality,
+      });
+      const action = updateInfo(name.data.user);
+      dispatch(action);
+    } catch (error) {
+      console.log(97, error);
     }
   }
 
@@ -179,63 +191,90 @@ function UserInfo() {
             </div>
           </div>
         </div>
-        <div className= {styles.formDatetime} >
-          <div className= {styles.formDate}>
-              <p>Ngày sinh</p>
-              <select className={styles.formDatetimeInput} id='datetime'>
-                {data.map(function (data) {
-                  if(new Date(user.dateOfBirth).getFullYear() === data){
-                    return <option value={data} selected>{data}</option>;
-                  }else{
-                    return <option value={data}>{data}</option>;
-                  }
-                })}
-              </select>
-          </div>
-          
-          <div>
-            <select className={styles.formDatetimeInput} id='dataMonth'>
-              {DataMonth.map(function (DataMonth) {
-                if(new Date(user.dateOfBirth).getMonth()+1 === DataMonth){
-                  return <option value={DataMonth} selected>{DataMonth}</option>;
-                }else{
-                  return <option value={DataMonth} >{DataMonth}</option>;
-                }             
+        <div className={styles.formDatetime}>
+          <div className={styles.formDate}>
+            <p>Ngày sinh</p>
+            <select className={styles.formDatetimeInput} id="datetime">
+              {data.map(function (data) {
+                if (new Date(user.dateOfBirth).getFullYear() === data) {
+                  return (
+                    <option value={data} selected>
+                      {data}
+                    </option>
+                  );
+                } else {
+                  return <option value={data}>{data}</option>;
+                }
               })}
             </select>
           </div>
-          <div >
-            <select className= {styles.formDatetimeInput} id='dataDay'>
+
+          <div>
+            <select className={styles.formDatetimeInput} id="dataMonth">
+              {DataMonth.map(function (DataMonth) {
+                if (new Date(user.dateOfBirth).getMonth() + 1 === DataMonth) {
+                  return (
+                    <option value={DataMonth} selected>
+                      {DataMonth}
+                    </option>
+                  );
+                } else {
+                  return <option value={DataMonth}>{DataMonth}</option>;
+                }
+              })}
+            </select>
+          </div>
+          <div>
+            <select className={styles.formDatetimeInput} id="dataDay">
               {DataDay.map(function (DataDay) {
-                if(new Date(user.dateOfBirth).getDate() === DataDay){
-                  return <option value={DataDay} selected>{DataDay}</option>;
-                }else{
-                  return  <option Value={DataDay}>{DataDay}</option>;;
-                }    
+                if (new Date(user.dateOfBirth).getDate() === DataDay) {
+                  return (
+                    <option value={DataDay} selected>
+                      {DataDay}
+                    </option>
+                  );
+                } else {
+                  return <option Value={DataDay}>{DataDay}</option>;
+                }
               })}
             </select>
           </div>
         </div>
-        <div className= {styles.formRadio}>
+        <div className={styles.formRadio}>
           <p>Giới tính</p>
-          <Radio.Group name='radiogroup' defaultValue={user.sex}>
-            <Radio id='male' value={'male'}>Nam</Radio>
-            <Radio id='female' value={'female'}>nữ</Radio>
-            <Radio id= 'other' value={'other'}>Khác</Radio>
+          <Radio.Group name="radiogroup" defaultValue={user.sex}>
+            <Radio id="male" value={"male"}>
+              Nam
+            </Radio>
+            <Radio id="female" value={"female"}>
+              nữ
+            </Radio>
+            <Radio id="other" value={"other"}>
+              Khác
+            </Radio>
           </Radio.Group>
         </div>
-        <div className= {styles.formCountries}>
+        <div className={styles.formCountries}>
           <p>Quốc tịch</p>
-          <select id='formCountriesInput'>
+          <select id="formCountriesInput">
             {Countries.map(function (Countries) {
-              if(user.nationality === Countries){
-                return <option value={Countries} selected>{Countries}</option>;
-              }else{
-              return <option value={Countries}>{Countries}</option>;}
+              if (user.nationality === Countries) {
+                return (
+                  <option value={Countries} selected>
+                    {Countries}
+                  </option>
+                );
+              } else {
+                return <option value={Countries}>{Countries}</option>;
+              }
             })}
           </select>
         </div>
-        <div ><button onClick={handleUpdate} id={styles.formButton}>Lưu thay đổi</button></div>
+        <div>
+          <button onClick={handleUpdate} id={styles.formButton}>
+            Lưu thay đổi
+          </button>
+        </div>
       </div>
     </div>
   );

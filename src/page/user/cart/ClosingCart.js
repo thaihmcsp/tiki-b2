@@ -16,32 +16,39 @@ function ClosingCart({ total, finalTotal,cartID }) {
   };
   const nav = useNavigate()
   const handlegotoByNow = async()=>{
-    console.log(18,{finalTotal})
     let success = true
     if(finalTotal.length>0){
       await Promise.all(finalTotal.map(async(item)=>{
-        console.log(cartID)
-        if(item._id==item.productDetailId._id){
+        if(item._id == item.productDetailId._id){
           const newStatus = {
               productId: item._id,
+              quantity: item.quantity,
               selected: true
           }
           await patchAPI(`/cart/update-cart-selected-status/${cartID}`,newStatus)
                     .then(data=>console.log('changeStatusOK'))
                     .catch(error => success=false)
+    
+          await patchAPI(`/cart/update-cart-quantity/${cartID}`,newStatus)
+                    .then(data=>console.log('changeStatusOK1'))
+                    .catch(error => success=false)
         }else{
           const newStatus = {
             productDetailId: item.productDetailId._id,
+            quantity: item.quantity,
             selected: true
           }
           await patchAPI(`/cart/update-cart-selected-status/${cartID}`,newStatus)
                   .then(data=>console.log('changeStatusOK'))
                   .catch(error => success=false)
-          
+                
+          await patchAPI(`/cart/update-cart-quantity/${cartID}`,newStatus)
+                  .then(data=>console.log('changeStatusOK'))
+                  .catch(error => success=false)
         }}
       ))
     }
-    if(success){
+    if(finalTotal.length>0 && success){
       nav('/order')
     }else{
       window.alert('Thất bại, vui lòng thử lại')
