@@ -106,7 +106,6 @@ const Container = ({ data1, listProducts, setId }) => {
 
   const handleID = (id) => {
     nav(`/detail?id=${id}`)
-    setId(id)
   }
 
   useEffect(() => {
@@ -194,7 +193,7 @@ const Container = ({ data1, listProducts, setId }) => {
           setCheck(4)
         }} id={check === 4 ? 'filter_checked' : undefined}>Giá Cao</span>
       </div>
-      <Modall className='filter_modal' />
+      {/* <Modall className='filter_modal' /> */}
       <div className={style.products}>
         {listProductss.map(val => {
           let linkImg = val.thump
@@ -215,7 +214,6 @@ const Container = ({ data1, listProducts, setId }) => {
 
               </div>
               <div className={style.products_info}>
-                <span className={style.ad}>Ad</span>
                 <h4 className={style.products_title}>{val.productName}</h4>
                 <div className={style.products_rating}>
                   <Rate allowHalf defaultValue={3} style={{ fontSize: '0.7rem' }} />

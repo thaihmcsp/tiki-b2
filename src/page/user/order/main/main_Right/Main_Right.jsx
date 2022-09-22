@@ -54,7 +54,6 @@ function Main_Right({ data, money, cartId }) {
     ////////////////
 
     function showProduct() {
-        // document.querySelector('.left').style.display = 'block';
         if (check) {
             document.querySelector('.HeMLl').setAttribute("style", "display:none")
             setCheck(false)
@@ -74,9 +73,7 @@ function Main_Right({ data, money, cartId }) {
     // hiển thị số lượng sản phẩm
     var count = 0;
     {
-
         data.map((items) => {
-
             count = count + items.listProduct.length;
         })
 
@@ -141,7 +138,6 @@ function Main_Right({ data, money, cartId }) {
                     setAllAddress={setAllAddress}
                 />
 
-                {/* </div> */}
                 <div className="flcp_container"
                     style=
                     {

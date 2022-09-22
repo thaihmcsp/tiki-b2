@@ -24,7 +24,6 @@ function Order() {
   async function getAllUserOrder() {
     try {
       const data = await getAPI('/user-order/get-order-by-userId/' + user._id);
-      console.log(58, data)
       setdataOderTitle(() => {
         const newdata = [];
         data.data.listOrder.map((value, index) => {

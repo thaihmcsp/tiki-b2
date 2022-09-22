@@ -1,10 +1,14 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import style from './item.module.css'
 
 function Item(prop) {
-
+    const nav = useNavigate()
+    const handleTransfer = id => {
+        nav(`/detail?id=${id}`)
+    }
   return (
-    <div className={style.Item}>
+    <div className={style.Item} onClick = {() => handleTransfer(prop.id)}>
         <img src={prop.img} />
         <div className={style.price}>
             <span>

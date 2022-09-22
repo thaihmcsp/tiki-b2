@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import SideBar from './SideBar'
-import Breadcrumb from './Breadcrumb'
+import SideBar from './sideBar/SideBar'
+import Breadcrumb from './Breadcrumb/Breadcrumb'
 import styles from './Filter.module.css'
-import Container from './Container'
+import Container from './fiterContainer/Container'
 import { getAPI } from '../../../config/api'
 import { useSearchParams } from 'react-router-dom';
 
-const Filter = ({setId}) => {
-  // const [inp, setInp] = useState([])
-  const [price750, setPrice750] = useState([])
+const Filter = () => {
+  const [loading, setLoading] = useState(true)
+  const [sos, setSos] = useState(false)
   const [data1, setData] = useState([])
- const [listProducts,setListProducts]= useState([])
+  const [listProducts,setListProducts]= useState([])
   const [query] = useSearchParams()
   const search = query.get('search')
 
@@ -39,7 +39,11 @@ const Filter = ({setId}) => {
     return str;
   }
 
+  console.log(42, listProducts)
+
   useEffect(() => {
+    setListProducts([])
+    setLoading(true)
     getAPI("/product/get-all-products")
     .then((data)=> {
       setListProducts(() => {
@@ -47,38 +51,37 @@ const Filter = ({setId}) => {
         const newData = []
         for(let value of data.data.listProduct) {
           if(search){
-            if(value.price){
-              if(value.categoryId){
+            if(value.price && value.brandId && value.categoryId && value.shopId.address){
                 const newName = value.categoryId.categoryName.toLowerCase()
-                if(search){
                   if(newName.includes(search.toLowerCase())){
                     newData.push(value)
+                    setLoading(false)
+                    setSos(false)
                   }else {
                     if(removeAccents(newName).includes(search.toLowerCase())){
                       newData.push(value)
+                      setLoading(false)
+                      setSos(false)
                     }
                   }
-                }
-              }
-              // else {
-              //   newData.push(value)
-              // }
             }
           }else {
             if(value.price) {
               newData.push(value)
+              setLoading(false)
             }
           }
         }
-
+        if(newData.length === 0) {
+          setSos(true)
+        }
         return newData
       })
     })
     .catch((error) => {
-      console.log(error)
+      setLoading(false)
     }) 
   },[search])
-
 
   return (
     <div className='App'>
@@ -88,7 +91,7 @@ const Filter = ({setId}) => {
                 <div className = {styles.container_box} >
                     <SideBar setData= {setData} listProducts = {listProducts} />
                 </div>
-                <Container data1={data1} listProducts = {listProducts} setId = {setId}/>
+                <Container data1={data1} listProducts = {listProducts} loading = {loading} search = {search} sos= {sos}/>
             </div>
         </div>
     </div>

@@ -1,8 +1,9 @@
 import { clearAllListeners } from '@reduxjs/toolkit'
 import React, { useEffect } from 'react'
+import { useState } from 'react'
 import Banner from './banner/Banner'
 import style from './hotdeal.module.css'
-function HotDeal() {
+function HotDeal({data}) {
 
   function setCountDown(){
     const now = new Date()
@@ -29,15 +30,27 @@ function HotDeal() {
     // document.querySelector('#count_down_second').innerHTML=(m<=9? `0${m}`:m)
 
     // document.querySelector('#count_down_munite').innerHTML=(s<=9? `0${s}`:s)
-
-
   }
+  const [listData, setListData] = useState([])
+
+  useEffect(() => {
+    setListData(() =>  {
+      let newData = [...data]
+       newData.sort((a, b) => b.sold - a.sold)
+       newData = [...newData.filter(item => item.price > 0)]
+       const newDataa = newData.slice(0, 10)
+       return newDataa
+    })
+  },[data])
+
+
   useEffect(function(){
     const interval = setInterval(setCountDown,1000)
     return ()=>{
         clearInterval(interval)
     }
   },[])
+
   return (
     <div className={style.HotDeal}>
         <div className={style.header}>
@@ -57,7 +70,7 @@ function HotDeal() {
             </div>
             <h4 className={style.header_link}>Xem thêm</h4>
         </div>
-        <Banner/>
+        <Banner data = {listData}/>
     </div>
   )
 }

@@ -29,7 +29,7 @@ function Home() {
       });
   }, []);
 
-  console.log(listProduct);
+
   return (
     <div className={style.HomePage}>
       <div className={style.container}>
@@ -43,7 +43,7 @@ function Home() {
           </div>
           <div className={style.second_slider} id="SecondSlide_Shop__Home">
             <div className={style.HotDeal}>
-              <HotDeal />
+              <HotDeal data = {listProduct}/>
             </div>
             <Banner2 />
           </div>

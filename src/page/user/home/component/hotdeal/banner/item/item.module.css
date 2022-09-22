@@ -1,6 +1,7 @@
 .Item{
     padding: 10px;
     width: 100%;
+    cursor: pointer;
 }
 .Item img{
     width: 100%;

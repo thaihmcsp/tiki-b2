@@ -93,7 +93,6 @@ function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAdd
         const warname = document.querySelector('#warname')
         const waraddress = document.querySelector('#waraddress')
 
-       console.log(69, textInput)
        
        if (usernames.trim() === '') {
         warname.style.display = 'block'
@@ -132,7 +131,6 @@ function ModalAddAdress({infor,showModal,setIsModalVisible,isModalVisible,allAdd
            
         }     
     };
-    console.log(137,cartId);
     // handok2
     const handleOk2 =  async(id) => {
         try{

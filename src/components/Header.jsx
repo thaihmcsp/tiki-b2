@@ -93,7 +93,6 @@ function Header(props) {
   }
   ///
   function seachInputData(categoryName) {
-    console.log(99, categoryName)
     nav(`/filter?search=${categoryName}`);
   }
   function EnterInputSeach(e) {
@@ -102,7 +101,7 @@ function Header(props) {
     setTime = setTimeout(() => {
       if (e.charCode === 13) {
         if (removeAccents(getInputSearch).trim() !== '') {
-          nav(`/filter?seaarch=${getInputSearch}`)
+          nav(`/filter?search=${getInputSearch}`)
           document.querySelector(".HistorySeach").setAttribute('style', 'display: none;');
         }
       }
@@ -112,7 +111,7 @@ function Header(props) {
   function SeachInputDataProduct() {
     let getInputSearch = document.querySelector(".componentHeaderInput").value;
     if (removeAccents(getInputSearch).trim() !== '') {
-      nav(`/filter?seaarch=${getInputSearch}`);
+      nav(`/filter?search=${getInputSearch}`);
       document.querySelector(".HistorySeach").setAttribute('style', 'display: none;');
     }
 
@@ -179,22 +178,20 @@ function Header(props) {
       .catch((err) => { console.log(err); });
     getAPI('/product/get-all-products')
       .then(data => {
-        const newListProduct = [];
-        data.data.listProduct.map(value => {
-          if (value.categoryId) {
-            newListProduct.push({
-              ProductName: value.productName,
-              categoryName: value.categoryId.categoryName,
-              img: value.thump[0],
-              sold: value.sold,
-              id: value._id,
-            });
+        console.log(181, data);
+        const newListProduct = data.data.listProduct.map(value => {
+          return {
+            ProductName: value.productName,
+            categoryName: value.categoryId ? value.categoryId.categoryName : "Default Category",
+            img: value.thump[0],
+            sold: value.sold,
+            id: value._id,
           }
         })
         newListProduct.sort((a, b) => {
           return b.sold - a.sold;
         })
-
+        console.log(197, newListProduct)
         setListProduct(newListProduct);
       })
       .catch(err => console.log(err))
