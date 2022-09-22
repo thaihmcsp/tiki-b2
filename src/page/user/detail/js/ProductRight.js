@@ -5,14 +5,12 @@ import { color } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
 function ProductRight(props) {
-  
   const listProduct = props.productDetail.productDetailId;
 
   const [count, setCount] = useState(0);
   const [index, setIndex] = useState(0);
-  
- 
-  const nav = useNavigate()
+
+  const nav = useNavigate();
   useEffect(() => {
     setCount(0);
     for (let i = 0; i < listProduct.length; i++) {
@@ -25,7 +23,7 @@ function ProductRight(props) {
       }
     }
   }, [props.myColor, props.mySize]);
-  
+
   const optionTotal = [[], [], []];
 
   listProduct.map((item, index) => {
@@ -39,26 +37,21 @@ function ProductRight(props) {
       return item.indexOf(item1) === index1;
     });
   });
-  const handleGotoShop = ()=>{
-    nav(`/ShopHome?ShopID=${props.shopId}`)
-  }
+  const handleGotoShop = () => {
+    nav(`/ShopHome?ShopID=${props.shopId}`);
+  };
 
   return (
     <div className="productright">
       <div className="header">
         <div className="brand">
           <span className="brand-and-author ">
-            Thương hiệu : {props.productDetail.brandId.brandName}
+            Thương hiệu :{" "}
+            {props.productDetail.brandId.brandName
+              ? props.productDetail.brandId.brandName
+              : ""}
           </span>
           <div class=" gXZfKO"></div>
-          <div className="bestseller">
-            <p>
-              {/* <span>Đứng thứ 3 trong </span>
-              <a href={props.bestseller}>
-                Top 1000 Áo thun nam dài tay bán chạy tháng này
-              </a> */}
-            </p>
-          </div>
         </div>
         <h1 className="title">{props.productDetail.productName}</h1>
         <div className="below-title">
@@ -83,7 +76,6 @@ function ProductRight(props) {
                 ) : (
                   "Hết hàng"
                 )}
-
               </div>
               {/* <div className="list-price">{props.listprice}</div>
               <div className="discount">{props.discount}</div> */}
@@ -92,51 +84,57 @@ function ProductRight(props) {
               <img src={props.icon}></img>
             </div>
           </div>
-              {props.productDetail.productDetailId.length>0? <div className="selectproduct">
-            <div className="select-color">
-              <p className="detail-color">
-                <p id="detail-color">
-                  Màu: <span id="color-select" >{props.colorDetail.name}</span>
+          {props.productDetail.productDetailId.length > 0 ? (
+            <div className="selectproduct">
+              <div className="select-color">
+                <p className="detail-color">
+                  <p id="detail-color">
+                    Màu: <span id="color-select">{props.colorDetail.name}</span>
+                  </p>
                 </p>
-              </p>
-              <div className="product-color">
-                {option[0].map((item, index) => {
-                  return (
-                    <div
-                      className="option1"
-                      id={item}
-                      onClick={() => props.hanldeColor(item)}
-                    >
-                      <img src={option[1][index]} width={55} height={55}></img>
-                      <span>{item}</span>
-                      {props.tich}
-                    </div>
-                  );
-                })}
+                <div className="product-color">
+                  {option[0].map((item, index) => {
+                    return (
+                      <div
+                        className="option1"
+                        id={item}
+                        onClick={() => props.hanldeColor(item)}
+                      >
+                        <img
+                          src={option[1][index]}
+                          width={55}
+                          height={55}
+                        ></img>
+                        <span>{item}</span>
+                        {props.tich}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="select-size">
+                <p id="detail-size">
+                  Size: <span id="size-select">{props.sizeDetail}</span>
+                </p>
+                <div className="size">
+                  {option[2].map((item, index) => {
+                    return (
+                      <button
+                        className="option2"
+                        id={item}
+                        key={index}
+                        onClick={() => props.hanldeSize(item)}
+                      >
+                        <span>{item}</span>
+                        {props.tich}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-            <div className="select-size">
-              <p id="detail-size">
-                Size: <span id="size-select" >{props.sizeDetail}</span>
-              </p>
-              <div className="size">
-                {option[2].map((item, index) => {
-                  return (
-                    <button
-                      className="option2"
-                      id={item}
-                      key={index}
-                      onClick={() => props.hanldeSize(item)}
-                    >
-                      <span>{item}</span>
-                      {props.tich}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>: null}
-          
+          ) : null}
+
           <div className="delivery">
             <div>
               <span>Giao đến</span>
@@ -158,7 +156,7 @@ function ProductRight(props) {
                   {props.amoutn[0]}
                 </button>
                 <div className="amoutn-value">
-                  <span id="amoutn-value" >1</span>
+                  <span id="amoutn-value">1</span>
                 </div>
                 <button id="amoutn-up" onClick={() => props.AmoutnUp()}>
                   {props.amoutn[1]}
@@ -181,7 +179,9 @@ function ProductRight(props) {
                   ></img>
                 </picture>
                 <div className="overview-right">
-                  <span onClick={handleGotoShop}>{props.productDetail.shopId.shopName}</span>
+                  <span onClick={handleGotoShop}>
+                    {props.productDetail.shopId.shopName}
+                  </span>
                 </div>
               </a>
             </div>
