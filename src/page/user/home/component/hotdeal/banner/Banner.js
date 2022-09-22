@@ -11,7 +11,23 @@ import "./styles.css";
 import style from './banner.module.css'
 import { Pagination, Navigation } from "swiper";
 import Item from "./item/Item";
+import { useEffect } from "react";
+import { getAPI } from "../../../../../../config/api";
 function Banner() {
+    const [listProduct,setListProduct] = useState([])
+    useEffect(function(){
+        getAPI('/product/get-all-products')
+            .then(data=>{
+                console.log(20,data.data.listProduct)
+                setListProduct(()=>{
+                   const listProduct =  data.data.listProduct.sort(function(before,affter){
+                      return affter.sold - before.sold
+                   })
+                   return listProduct.slice(0,20)
+                })
+            })
+            .catch(error=>console.log(error))
+    },[])
     const data=[
         {
             img:'https://salt.tikicdn.com/cache/200x200/ts/product/13/12/f7/31d2e3eaad76fbdfeccdc0d2561eed62.jpg.webp',
@@ -115,15 +131,16 @@ function Banner() {
         className="mySwiper4"
       >
         {
-            data.map(function(item){
+            listProduct.map(function(item){
                 return(
-                    <SwiperSlide id="list__item_header">
+                    <SwiperSlide id="list__item_header" key={item._id}> 
                         <Item 
-                              img={item.img} 
+                              img={item.thump[0].startsWith('http')?item.thump[0]:`https://tiki.thaihm.site/${item.thump[0]}`} 
                               price={item.price} 
-                              discount={item.discount}
+                              discount={Math.round(10+Math.random()*10)}
                               sold={item.sold}
-                              total={item.total}
+                              total={item.totalStorage}
+                              id={item._id}
                         />
                     </SwiperSlide>
                 )

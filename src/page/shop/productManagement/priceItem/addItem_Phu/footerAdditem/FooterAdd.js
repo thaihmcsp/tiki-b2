@@ -38,7 +38,7 @@ function FooterAdd() {
           "key":"Material",
           "value":Material
         })
-      }
+      } 
       if(Age.trim()!= ''){
         about.push({
             "key":"Age",
@@ -85,7 +85,7 @@ function FooterAdd() {
           categoryId:categoryId,
           productName: productName,
           totalStorage:totalStorege*1,
-          brandID:brandId,
+          brandId:brandId,
           shopId:shopID,
           price:priceMain*1,
           publish:pubLic
@@ -156,7 +156,7 @@ function FooterAdd() {
           about:about,
           categoryId:categoryId, 
           productName: productName,
-          brandID:brandId,
+          brandId:brandId,
           shopId:shopID
         }
         let IdProduct

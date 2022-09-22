@@ -47,7 +47,9 @@ body {
   display: none;
 }
 
-
+.ant-btn.ant-btn-primary.filter_modal{
+  display: none;
+}
 .mySwiper_fillter .swiper-button-next:after, .mySwiper_fillter .swiper-button-prev:after {
   font-size: 1rem !important;
   padding: 10px;

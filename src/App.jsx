@@ -67,7 +67,7 @@ function App() {
                              <ShopMenu/>
                         </PrivateRouteShop>}>   
                         <Route path='/adminShop/Product' element={<ManagementProduct/>}/>
-                        <Route path='/adminShop/Dashboard' element={<ShopDashBoardAll/>}/>
+                        <Route path='/adminShop/Dashboard' element={<ShopDashboard/>}/>
                         <Route path='/adminShop/Order' element={<OrderContainer/>}/>
                         <Route path='/adminShop/Profile' element={<ShopProfile />}/>
             </Route>

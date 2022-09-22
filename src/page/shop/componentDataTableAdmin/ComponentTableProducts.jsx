@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import styles from "./ComponentTableProducts.module.css";
 import { EditOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import "./FilterProducts.css";
-// import Modal from "../componentDataTableAdmin/Modal";
-// import array from "./data.js";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { handleBreakpoints } from "@mui/system";
 import { getAPI, patchAPI } from "../../../config/api";
@@ -53,60 +51,50 @@ const ComponentTableProducts = ({ value, selectSort, count }) => {
   const [selectionType, setSelectionType] = useState("checkbox");
   const [listData, setListData] = useState([])
   const [listData1, setListData1] = useState([]);
-  
-  // const handleCancel = (id) => {
-  //   console.log(id)
-  // }
+  const [shopId,setShopId] = useState('')
+
+  useEffect(function(){
+    getAPI('/shop/get-loged-in-shop')
+      .then(data=>{
+        setShopId(data.data.shop._id)
+      })
+      .catch(error=>console.log(error));
+  },[])
+
+
   useEffect(() => {
-    getAPI("/product/get-product-by-shopId/62da5cccbc070a53bcbc31b8")
-      .then((res) => {
-        console.log(74, res.data.product)
-        if (selectSort == 'Giá') {
-          res.data.product.sort((a, b) => {
-            return a.price - b.price
-          })
-        } else if (selectSort == 'Số lượng kho') {
-          res.data.product.sort((a, b) => {
-            return a.totalStorage - b.totalStorage
-          })
-        }
-        const newData = res.data.product
-        if (value.length > 0) {
-          const newDataa = newData.filter(data => {
-            const dataa = removeAccents(data.productName.toLowerCase())
-            if (dataa.includes(value)) {
-              return true
-            }
-          })
-          setListData(newDataa)
-        } else {
-          setListData(newData)
-        }
-        // setListData1(res.data.product)
-        // setListData(res.data.product)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [value, count, selectSort])
-  // useEffect(() => {
-
-  //   if (value.length > 0) {
-  //     const newData = [...listData1]
-  //     const newDataa = newData.filter(data => {
-  //       const dataa = removeAccents(data.productName.toLowerCase())
-  //       if (dataa.includes(value)) {
-  //         return true
-  //       }
-  //     })
-  //     setListData(newDataa)
-  //   } else {
-  //     setListData(listData1)
-  //   }
-  // }, [value, count, selectSort])
-
-
-
+   if(shopId.length>0){
+    getAPI(`/product/get-product-by-shopId/${shopId}`)
+    .then((res) => {
+      console.log(74, res.data.product)
+      if (selectSort == 'Giá') {
+        res.data.product.sort((a, b) => {
+          return a.price - b.price
+        })
+      } else if (selectSort == 'Số lượng kho') {
+        res.data.product.sort((a, b) => {
+          return a.totalStorage - b.totalStorage
+        })
+      }
+      const newData = res.data.product
+      if (value.length > 0) {
+        const newDataa = newData.filter(data => {
+          const dataa = removeAccents(data.productName.toLowerCase())
+          if (dataa.includes(value)) {
+            return true
+          }
+        })
+        setListData(newDataa)
+      } else {
+        setListData(newData)
+      }
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+   }
+  }, [value, count, selectSort,shopId])
+  
   const nav = useNavigate()
   const handleUpdate = (id) => {
     nav(`/editItem?id=${id}`)

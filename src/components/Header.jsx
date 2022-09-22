@@ -97,7 +97,7 @@ function Header(props) {
   ///
   function seachInputData(categoryName) {
     console.log(99, categoryName)
-    nav(`/filter?search=${categoryName}`);
+    nav(`/filter?seaarch=${categoryName}`);
   }
   function EnterInputSeach(e) {
     let getInputSearch = document.querySelector(".componentHeaderInput").value;
@@ -342,12 +342,13 @@ function Header(props) {
                         </span>
                       </div>
                       <div className="header_navbar_iteam_mypage_selec">
-                        <div
-                          className="header_navbar_iteam_mypage_selec-item"
-
-                        >
-                          Đơn hàng của tôi
-                        </div>
+                        <Link to='/user/order'>
+                          <div
+                            className="header_navbar_iteam_mypage_selec-item"
+                          >
+                            Đơn hàng của tôi
+                          </div>
+                        </Link>
                         <div
                           className="header_navbar_iteam_mypage_selec-item"
 

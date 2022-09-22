@@ -1,0 +1,7 @@
+.ant-tabs.shop_order__manager > .ant-tabs-nav .ant-tabs-nav-wrap{
+    background: rgb(255, 255, 255);
+    padding: 4px 12px;
+    max-width: 1155px ;
+    z-index: 100;
+    top: 0;
+}

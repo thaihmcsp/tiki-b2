@@ -13,7 +13,7 @@ const Filter = ({setId}) => {
  const [listProducts,setListProducts]= useState([])
   const [query] = useSearchParams()
   const search = query.get('seaarch')
-
+  
   function removeAccents(str) {
     var AccentsMap = [
       "aàảãáạăằẳẵắặâầẩẫấậ",
@@ -47,6 +47,7 @@ const Filter = ({setId}) => {
         const newData = []
         for(let value of data.data.listProduct) {
           if(search){
+            console.log(1)
             if(value.price){
               if(value.categoryId){
                 const newName = value.categoryId.categoryName.toLowerCase()
@@ -64,7 +65,8 @@ const Filter = ({setId}) => {
               //   newData.push(value)
               // }
             }
-          }else {
+          }
+          else {
             if(value.price) {
               newData.push(value)
             }
@@ -79,7 +81,7 @@ const Filter = ({setId}) => {
     }) 
   },[search])
 
-
+  console.log(82, listProducts)
   return (
     <div className='App'>
         <div  className = {styles.slider}>

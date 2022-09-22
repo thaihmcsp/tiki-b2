@@ -1,6 +1,8 @@
 .products img {
-    width: 20%;
+    width: 65px;
+    height: 65px;
     margin-right: 8px;
+    object-fit: cover;
 }
 
 .products {
