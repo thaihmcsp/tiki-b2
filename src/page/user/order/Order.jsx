@@ -34,11 +34,9 @@ function Order() {
               valueStatus = 'Đang xử lí'
             } else if (item.status === 'shipping') {
               valueStatus = 'Đang vận chuyển'
-            } else if (item.status === 'waitpayment') {
-              valueStatus = 'Chờ thanh toán'
-            } else if (item.status === 'cancel') {
+            } else if (item.status === 'canceled') {
               valueStatus = 'Đã Hủy'
-            } else if (item.status === 'complete') {
+            } else if (item.status === 'done') {
               valueStatus = 'Đã Giao'
             };
             if(item.listProduct.length>0){
@@ -154,8 +152,6 @@ function Order() {
     <div className={styles.Global_OderList}>
       <div className={styles.user_Oder_Listtitle}>
         <OderTitle Title='Tất cả đơn' status={status} setstatus={setstatus} newListdata={dataOderTitle} setnewListdata={setnewListdata} emptyOder={emptyOder} setemptyOder={setemptyOder} setdataInputSeach={setdataInputSeach} setshowPagination={setshowPagination} setstart={setstart} setcurrent={setcurrent} ></OderTitle>
-
-        <OderTitle Title='Chờ thanh toán' status={status} setstatus={setstatus} newListdata={dataOderTitle} setnewListdata={setnewListdata} emptyOder={emptyOder} setemptyOder={setemptyOder} setdataInputSeach={setdataInputSeach} setshowPagination={setshowPagination} setstart={setstart} setcurrent={setcurrent} ></OderTitle>
 
         <OderTitle Title='Đang xử lí' status={status} setstatus={setstatus} newListdata={dataOderTitle} setnewListdata={setnewListdata} emptyOder={emptyOder} setemptyOder={setemptyOder} setdataInputSeach={setdataInputSeach} setshowPagination={setshowPagination} setstart={setstart} setcurrent={setcurrent}></OderTitle>
 

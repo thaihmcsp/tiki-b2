@@ -15,7 +15,7 @@ function AllOder(props) {
                          <div className={style.MidleTitle}>
                               <div className={style.MidleTitle_Left}>
                                    <img src={value.img} alt="" className={style.ImageTitle} />
-                                   <h4 style={{ opacity: 0.8 }}>{value.name}</h4>
+                                   <h4 style={{ opacity: 0.8,width: '80%' }}>{value.name}</h4>
                               </div>
                               <div className={style.ImageTitleText}>
                                    <p>{(value.price*1).toLocaleString()}đ </p>
@@ -25,7 +25,7 @@ function AllOder(props) {
                          </div>
                          <div className={style.OrderBottomTitle}>
                               <div className={style.OderBottom_Shoplogo}>
-                                   <img src={value.shopId.shoplogo} alt="" />
+                                   <img src={value.shopId.shoplogo.startsWith('http') ? value.shopId.shoplogo:`https://tiki.thaihm.site/${value.shopId.shoplogo}`} alt="" />
                                    <span>{value.shopId.shopname}</span>
                               </div>
                               <div className={style.BottomTitle}>
