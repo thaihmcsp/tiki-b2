@@ -5,3 +5,22 @@
     z-index: 100;
     top: 0;
 }
+.submit_btn{
+    background: #fff;
+    width: 1150px;
+    margin-left: 37px;
+    display: flex;
+    justify-content: right;
+    padding: 16px 24px ;
+    border-radius: 12px;
+    position: sticky;
+    bottom: 0;
+}
+.submit__btn_changeStatus{
+    padding: 6px 24px;
+    background: rgb(17, 120, 255);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 6px;
+}

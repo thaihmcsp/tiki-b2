@@ -41,18 +41,15 @@ const OrderContainer = () => {
       const shippingOder = listOder.filter(item=>{
         return item.status === 'shipping'
       })
-      const paymentOder = listOder.filter(item=>{
-        return item.status === 'waitpayment'
-      })
       const cuccessOder = listOder.filter(item=>{
-        return item.status === 'complete'
+        return item.status === 'done'
       })
       const cancelOder = listOder.filter(item=>{
-        return item.status === 'cancel'
+        return item.status === 'canceled'
       })
       setPendingOder(pendingOder)
       setShippingOder(shippingOder)
-      setPaymentOder(paymentOder)
+
       setCancelOder(cancelOder)
       setCuccessOder(cuccessOder)
     }
@@ -68,12 +65,10 @@ const OrderContainer = () => {
         valueStatus = 'pending'
       } else if (input === 'Đang vận chuyển') {
         valueStatus = 'shipping'
-      } else if (input === 'Chờ thanh toán') {
-        valueStatus = 'waitpayment'
       } else if (input === 'Đơn hàng thất bại') {
-        valueStatus = 'cancel'
+        valueStatus = 'canceled'
       } else if (input === 'Giao hàng thành công') {
-        valueStatus = 'complete'
+        valueStatus = 'done'
       };
       await patchAPI(`/order/shop-update-order-status/${Key}`,{
         status: valueStatus
@@ -137,25 +132,34 @@ const OrderContainer = () => {
       })
       .catch(error => console.log(error))
     }
-  },[])
+  },[shopId,clicked])
   // const APIcall =()=>{
   console.log(71,listOder)
   // }
+ 
+
   return(
-    <Tabs defaultActiveKey="1">
-      <Tabs.TabPane tab="Đang Xử Lí" key="1">
-        <PendingOder listOder={listOder}/>
-      </Tabs.TabPane>
-      <Tabs.TabPane tab="Đang Giao Hàng" key="2">
-        Content of Tab Pane 2
-      </Tabs.TabPane>
-      <Tabs.TabPane tab="Giao Hàng Thành Công" key="3">
-        Content of Tab Pane 3
-      </Tabs.TabPane>
-      <Tabs.TabPane tab="Đơn Thất Bại" key="4">
-        Content of Tab Pane 4
-      </Tabs.TabPane>
-    </Tabs>
+    <>
+      <Tabs defaultActiveKey="1">
+        <Tabs.TabPane tab="Đang Xử Lí" key="1">
+          <PendingOder listOder={pendingOder}/>
+        </Tabs.TabPane>
+        <Tabs.TabPane tab="Đang Giao Hàng" key="2">
+          <PendingOder listOder={shippingOder}/>
+        </Tabs.TabPane>
+        <Tabs.TabPane tab="Giao Hàng Thành Công" key="3">
+          <PendingOder listOder={cuccessOder}/>
+        </Tabs.TabPane>
+        <Tabs.TabPane tab="Đơn Thất Bại" key="4">
+          <PendingOder listOder={cancelOder}/>
+        </Tabs.TabPane>
+      </Tabs>
+      <div className="submit_btn">
+        <button className="submit__btn_changeStatus" onClick={handleSubmitchageStatus}>
+            Submit Change
+        </button>
+      </div>
+    </>
   )
  
 }

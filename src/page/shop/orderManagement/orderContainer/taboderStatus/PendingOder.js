@@ -19,7 +19,7 @@ function PendingOder({listOder,clicked}) {
         <div className={styles.order_Container}>
             <Headerr/>
             <div className={styles.order}>
-                <div className={styles.order_header}>
+                <div className={styles.order_header}>  
                     <p>Sản phẩm</p>
                     <p>Tổng cộng</p>
                     <p>Giao hàng</p>

@@ -35,7 +35,6 @@ const items = [
   getItem("Dasboard", "0", <Link to='Dashboard'>
     <img src="https://media.loveitopcdn.com/3807/logo-tiki-dongphucsongphu-02.png" alt="dasboard" className="logo_admin__shop_img" />
   </Link>),
-  getItem("Về trang chủ TIKI", "4", <Link to='/'><ProfileOutlined /></Link>),
   getItem("Quản lý sản phẩm", "1", <Link to='Product'> <ShoppingOutlined /></Link>),
   getItem("Quản lý đơn hàng", "2", <Link to='Order'> <PrinterOutlined /></Link>),
   getItem("Quản lý hồ sơ Shop", "3", <Link to='Profile'> <IdcardOutlined /></Link>),
