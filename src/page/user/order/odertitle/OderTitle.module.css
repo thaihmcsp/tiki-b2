@@ -18,12 +18,15 @@
 }
 .Global_OderList {
     background-color: #f5f5fa;
+    width: 970px;
     /* width: 950px;
     float: right; */
 }
 .User_Oder_Title {
-    width: 16.6%;
-    padding: 12px 0;  
+    width: 20%;
+    padding: 12px 0; 
+    text-align: center; 
+    color: rgb(99, 91, 91);
 }
 .User_Oder_Title:hover {
     cursor: pointer;
@@ -44,7 +47,7 @@
 }
 .Search_Right {
     position: absolute;
-    top: 30px;
+    top: 35px;
     transform: translate(0%, -50%);
     right: 20px;
     padding-left: 16px;
@@ -54,12 +57,21 @@
 .Search_Right:hover{
     cursor: pointer;
 }
+
+.Pagination {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
 @media  only screen and (max-width:768px){
     .user_Oder_Listtitle{
         display: flex;
         overflow-x: auto;   
         justify-content: space-between;
     
+    } 
+    .Global_OderList {
+        width: 100%;
     }
     .user_Oder_Listtitle::-webkit-scrollbar{
         display: none;

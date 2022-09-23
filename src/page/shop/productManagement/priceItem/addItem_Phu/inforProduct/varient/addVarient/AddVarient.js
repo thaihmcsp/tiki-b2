@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { LoadVarient } from '../../../../AddItemReducerSlice'
 import style from './addVarient.module.css'
 import SubVarient from './varient/Varient'
-function AddVarient({setVarient}) {
-    
+function AddVarient({setVarient,varient}) {
+    const dispatch = useDispatch()
     const [option1,setOption1] = useState([])
     const [option2,setOption2] = useState([])
     const [key1,setKey1] = useState('Nhóm Màu')
@@ -20,6 +22,9 @@ function AddVarient({setVarient}) {
             }
         ])
     },[option1,option2,key1,key2])
+    useEffect(function(){
+        dispatch(LoadVarient(varient))
+    },[varient])
   const handleAddVarient =()=>{
     setAddVarient(()=>{
         const newVarient = [...addVarient,1]
@@ -39,6 +44,8 @@ function AddVarient({setVarient}) {
                     Key2={key2}
                     option2={option2}
                     setOption2={setOption2}
+                    varient={varient}
+                    setKey2={setKey2}
                 />
             )
         })}

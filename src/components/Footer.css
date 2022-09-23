@@ -5,6 +5,10 @@
   margin: 0 auto;
   border-bottom: 5px;
 }
+.Wrapper_footer{
+  background: #fff;
+  padding: 16px 0;
+}
 .Footer-subFooter {
   display: flex;
   flex-direction: column;

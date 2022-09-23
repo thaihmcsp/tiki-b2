@@ -1,51 +1,19 @@
-export const rate = [
-  <img
-    alt="thumbnail"
-    src="https://salt.tikicdn.com/cache/400x400/ts/product/f2/69/d0/49c1a0a78b6a0e9f86fc95888b48ddd0.jpg.webp"
-    class="WebpImg__StyledImg-sc-h3ozu8-0 fWjUGo"
-  ></img>,
-  <img
-    alt="thumbnail"
-    src="https://salt.tikicdn.com/cache/400x400/ts/product/a4/35/37/b7d627134de24f65caa921b4cd509af2.jpg.webp"
-    class="WebpImg__StyledImg-sc-h3ozu8-0 fWjUGo"
-  ></img>,
-  <img
-    alt="thumbnail"
-    src="https://salt.tikicdn.com/cache/w1200/ts/product/f7/fa/19/59a1d16a4d9ead7f48d187cd818b7b4f.jpg"
-    class="WebpImg__StyledImg-sc-h3ozu8-0 fWjUGo"
-  ></img>,
-  <img
-    alt="thumbnail"
-    src="https://salt.tikicdn.com/cache/400x400/ts/product/48/d1/13/77ead57a02a91933fc206213d65cebd7.jpg.webp"
-    class="WebpImg__StyledImg-sc-h3ozu8-0 fWjUGo"
-  ></img>,
-  <img
-    alt="thumbnail"
-    src="https://salt.tikicdn.com/cache/400x400/ts/product/aa/d6/8b/4c4821a0e40f1a37090c213a48be0b02.jpg.webp"
-    class="WebpImg__StyledImg-sc-h3ozu8-0 fWjUGo"
-  ></img>,
-  <img
-    alt="thumbnail"
-    src="https://salt.tikicdn.com/cache/w1200/ts/product/0f/d7/94/9b5ab4b997c40317ece001f54b7c006c.jpg"
-    class="WebpImg__StyledImg-sc-h3ozu8-0 fWjUGo"
-  ></img>,
+export const imgproduct = [
+  {
+    img: "https://salt.tikicdn.com/cache/w1200/ts/product/a4/35/37/b56d7307caf8cc4063e5610189ccd165.jpg",
+    name: "Grey",
+  },
+  {
+    img: "https://salt.tikicdn.com/cache/w1200/ts/product/aa/d6/8b/8cec3f81589ed96f0075d4ecf2d822c5.jpg",
+    name: "Black",
+  },
+  {
+    img: "https://salt.tikicdn.com/cache/w1200/ts/product/48/d1/13/63491c6c592bd46a0caa2222b2deadf1.jpg",
+    name: "White",
+  },
 ];
 
-export const color = [
-  <span>THAN</span>,
-  <span>TRẮNG</span>,
-  <span>XANH</span>,
-  <span>XÁM</span>,
-  <span>ĐEN</span>,
-  <span>ĐỎ</span>,
-];
-
-export const size = [
-  <span id="M">M</span>,
-  <span id="L">L</span>,
-  <span id="XL">XL</span>,
-  <span id="XXL">XXL</span>,
-];
+export const size = ["M", "L", "XL", "XXL"];
 
 export const tich = [
   <img
@@ -115,3 +83,4 @@ export const rateshop = [
     <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
   </svg>,
 ];
+const optionClothes = {};

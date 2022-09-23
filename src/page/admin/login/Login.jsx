@@ -5,7 +5,7 @@ import 'antd/dist/antd.css';
 import { Select } from 'antd';
 import { Link, useNavigate } from 'react-router-dom'
 
-import {postAPI,getAPI} from '../../../config/api'
+import { postAPI, getAPI } from '../../../config/api'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { userLogin } from '../../../redux/userSlice';
@@ -13,16 +13,17 @@ import { userLogin } from '../../../redux/userSlice';
 import "./styleLogin.css";
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    let expires = "expires="+ d.toUTCString();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
+    console.log(expires);
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  }
+}
 
 function Login() {
     const { Option } = Select;
     const nav = useNavigate()
     const dispatch = useDispatch();
-    
+
     function checkMail() {
         const warmail = document.querySelector('#warmail')
         warmail.style.display = 'none'
@@ -31,15 +32,15 @@ function Login() {
         const warpass = document.querySelector('#warpass')
         warpass.style.display = 'none'
     }
-    
+
     async function adminSignIn() {
         try {
-           
+
             const password = document.querySelector('#password').value
             const email = document.querySelector('#email').value
             const warmail = document.querySelector('#warmail')
             const warpass = document.querySelector('#warpass')
-            
+
             var mailformat = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
             if (email.trim() === '') {
@@ -55,26 +56,20 @@ function Login() {
                 warpass.style.display = 'block'
 
                 warpass.innerHTML = "Mật khẩu phải có ít nhất 6 ký tự"
-            } 
-             else {
-                var resp = await postAPI('/auth/login/admin', { email, password})
-                setCookie('tiki-user', resp.data.token, 57);
-
-                console.log(20,resp)
-                
-                const res = await getAPI('/auth/me');
-                window.localStorage.setItem('tiki-user',JSON.stringify(res.data))
-                const action = userLogin(res.data);
-                    dispatch(action);
-                      
-                  nav('/')
-                 
-                }
-
             }
-        
+            else {
+                var resp = await postAPI('/auth/login/admin', { email, password })
+                setCookie('tiki-user', resp.data.token, 30);
+                const res = await getAPI('/auth/me');
+                const action = userLogin(res.data);
+                dispatch(action);
+                window.localStorage.setItem('tiki-user', JSON.stringify(res.data))
+                nav('/admin/dashboard')
+            }
+        }
+
         catch (error) {
-            console.log('loi',error)
+            console.log('đăng nhập thất bại vui lòng đăng nhập lại', error)
             alert(error.response.data.message)
         }
 
@@ -129,18 +124,18 @@ function Login() {
                         </div>
                         <Space direction="vertical">
 
-                                    <Input.Password
-                                        id="password"
-                                        className="form-control "
-                                        placeholder="Nhập mật khẩu"
-                                        type='password'
-                                        name='password'
-                                        onChange={checkPass}
-                                        iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                                    />
-                                    <span className="warning" id='warpass'></span>
-                                  
-                                </Space>
+                            <Input.Password
+                                id="password"
+                                className="form-control "
+                                placeholder="Nhập mật khẩu"
+                                type='password'
+                                name='password'
+                                onChange={checkPass}
+                                iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                            />
+                            <span className="warning" id='warpass'></span>
+
+                        </Space>
                     </div>
                     <div>
                         <div className="textGroup">

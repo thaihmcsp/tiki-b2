@@ -1,17 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import { Input, Space } from 'antd';
-import 'antd/dist/antd.css';
-import { Select } from 'antd';
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
-import { Link, useNavigate } from 'react-router-dom'
-import {postAPI,getAPI} from '../../../config/api'
-import { useDispatch, useSelector } from 'react-redux';
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { Input, Space } from "antd";
+import "antd/dist/antd.css";
+import { Select } from "antd";
+import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
+import { Link, useNavigate } from "react-router-dom";
+import { postAPI, getAPI } from "../../../config/api";
+import { useDispatch, useSelector } from "react-redux";
 
-import { userLogin } from '../../../redux/userSlice';
+import { userLogin } from "../../../redux/userSlice";
 
-import "./StyleIn.css"
+import "./StyleIn.css";
 
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
@@ -20,10 +20,28 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
 
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+}
+
+
 function SignIn({setUsers}) {
+    const user = useSelector(state => state.user)
+    const dispatch = useDispatch();
     const { Option } = Select;
     const nav = useNavigate()
-    const dispatch = useDispatch();
     
     
     function checkMail() {
@@ -33,6 +51,9 @@ function SignIn({setUsers}) {
     function checkPass() {
         const warpass = document.querySelector('#warpass')
         warpass.style.display = 'none'
+    }
+    function GotoHome(){
+        nav('/')
     }
     
     async function handleSignIn() {
@@ -65,21 +86,15 @@ function SignIn({setUsers}) {
              else {
                
 
-                var resp = await postAPI('/auth/login', { email, password})
-                
-                setCookie('tiki-user', resp.data.token, 57);
-                
-                console.log(20,resp)
-                
+                var resp = await postAPI('/auth/login', { email, password}) 
+                setCookie('tiki-user', resp.data.token,30);
                 const res = await getAPI('/auth/me');
-                console.log(res.data)
-                window.localStorage.setItem('tiki-user',JSON.stringify(res.data))
                 const action = userLogin(res.data);
-                    dispatch(action);
-                      
-                  nav('/')
-                 
-                }
+                dispatch(action);
+                window.localStorage.setItem('tiki-user',JSON.stringify(res.data))       
+                nav('/')
+
+             }
 
            
                
@@ -98,7 +113,7 @@ function SignIn({setUsers}) {
             <div className="menu">
                 <div className="menu-left">
                     <div>
-                        <img src="https://salt.tikicdn.com/ts/upload/ae/f5/15/2228f38cf84d1b8451bb49e2c4537081.png" alt='tiki-logo' />
+                        <img onClick={GotoHome} src="https://salt.tikicdn.com/ts/upload/ae/f5/15/2228f38cf84d1b8451bb49e2c4537081.png" alt='tiki-logo' />
                     </div>
                 </div>
 

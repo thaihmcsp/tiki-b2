@@ -1,46 +1,15 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './basicInfo.module.css'
 import { Input } from 'antd'
 import { Cascader } from 'antd';
 import './basicInfor.css'
-const options = [
-    {
-      value: 'zhejiang',
-      label: 'Zhejiang',
-      children: [
-        {
-          value: 'hangzhou',
-          label: 'Hangzhou',
-          children: [
-            {
-              value: 'xihu',
-              label: 'West Lake',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      value: 'jiangsu',
-      label: 'Jiangsu',
-      children: [
-        {
-          value: 'nanjing',
-          label: 'Nanjing',
-          children: [
-            {
-              value: 'zhonghuamen',
-              label: 'Zhong Hua Men',
-            },
-          ],
-        },
-      ],
-    },
-  ];
-  
-  const onChange = (value) => {
+import { getAPI } from '../../../../../../config/api';
+import { useDispatch } from 'react-redux';
+import { LoadImgFile } from '../../AddItemReducerSlice';
+
+  const onChange1 = (value) => {
     console.log(value);
   };
 
@@ -54,6 +23,32 @@ const getBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 function BasicInfo() {
+  const dispatch = useDispatch()
+    const [listCatagory,setListCatagory] = useState([])
+    useEffect(function(){
+      getAPI('/category/get-all-categories')
+        .then(data=>{
+          const catagory = data.data.listCategories
+          setListCatagory(()=>{
+            return catagory.map(item=>{
+              return {
+                Name:item.categoryName,
+                id: item._id
+              }
+            })
+          })
+        })
+        .catch(error=>{ 
+          console.log(error)
+        })
+    },[])
+    const options = listCatagory.map(item=>{
+      return {
+        value : item.Name,
+        label: item.Name,
+        id:item.id
+      }
+    })
     const [previewVisible, setPreviewVisible] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
@@ -74,7 +69,12 @@ function BasicInfo() {
       setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
     };
   
-    const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
+    const handleChange = ({ fileList: newFileList }) => {
+      console.log(newFileList)
+      const listImg = newFileList.map(item=>item.originFileObj)
+      dispatch(LoadImgFile(listImg))
+      return setFileList(newFileList)
+    };
   
     const uploadButton = (
       <div>
@@ -89,7 +89,7 @@ function BasicInfo() {
       </div>
     );
   return (
-    <div className={style.BasicInfo}>
+    <div className={style.BasicInfo} id='Basic_infomation'>
         <h2 className={style.title}>
             Thông tin cơ bản
         </h2>
@@ -145,7 +145,7 @@ function BasicInfo() {
             <label>
                 <span className={style.star}>*</span> Danh Mục Ngành Hàng:
                 <div className={style.Input}>
-                    <Cascader options={options} onChange={onChange} placeholder="Lựa chọng nghành hàng" className='selected_product'/>
+                    <Cascader options={options} onChange={onChange1} placeholder="Lựa chọng nghành hàng" className='selected_product'/>
                 </div>
             </label>
         </div>

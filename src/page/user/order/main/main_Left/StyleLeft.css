@@ -132,7 +132,7 @@ label {
     /* width: 100%; */
     border-radius: 12px;
     border: 1px solid rgb(221, 221, 227);
-    margin-top: 20px;
+    margin-top: 35px;
     padding: 20px 16px 16px;
     position: relative;
     display: flex;
@@ -168,7 +168,7 @@ label {
 }
 .fyhLrw .left-content {
     margin-right: 46px;
-    max-width: 482px;
+    width: 482px;
 }
 .fyhLrw .left-content .package-summary {
     margin-top: 8px;
@@ -415,14 +415,14 @@ label {
 .gJkhWZ p {
     margin: 0px;
 }
-p {
+/* p {
     margin: 0px 0px 10px;
     display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-}
+} */
 .gJkhWZ .additional-text a {
     margin-left: 4px;
     color: rgb(11, 116, 229);
@@ -502,7 +502,7 @@ p {
     width: 149px;
     height: 40px;
     border-radius: 4px;
-    border: 1px solid rgb(13, 92, 182);
+    border: 1px solid rgb(13, 92, 182, 0.3);
     font-size: 15px;
     line-height: 1.6;
     font-weight: 500;
@@ -511,10 +511,9 @@ p {
     align-items: center;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    background: rgb(255, 255, 255);
-    color: rgb(13, 92, 182);
+    background: rgb(255, 255, 255, 0.5);
+    color: rgb(13, 92, 182, 0.5);
     padding: 0px 12px;
-    cursor: pointer;
     outline: 0px;
     margin-top: 8px;
 }
@@ -613,6 +612,7 @@ p {
     gap: 10px;
     border: 0.5px solid rgb(199, 199, 199);
     padding: 15px;
+    display: none;
     width: 741px;
 }
 .fycMVa {

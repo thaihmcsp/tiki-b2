@@ -2,3 +2,6 @@
     width: 740px;
     height: calc(100% - 58px)
 }
+#list__item_header{
+    cursor: pointer;
+}

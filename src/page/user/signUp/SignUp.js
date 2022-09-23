@@ -43,14 +43,12 @@ function SignUp(props) {
             var mailformat = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
             if (phonenumber.trim() === '') {
-
                 warphone.innerHTML = 'Vui lòng nhập SĐT'
             }
             else if (!phoneformat.test(phonenumber)) {
                 warphone.style.display = 'block'
                 warphone.innerHTML = "sđt không hợp lệ";
             }
-
             else if (email.trim() === '') {
                 warmail.innerHTML = "Vui lòng nhập email";
             }
@@ -62,21 +60,17 @@ function SignUp(props) {
                 warpass.innerHTML = "Vui lòng nhập mật khẩu"
             } else if (password.length < 6) {
                 warpass.style.display = 'block'
-
                 warpass.innerHTML = "Mật khẩu phải có ít nhất 6 ký tự"
             } else if (password1.trim() === "" || password !== password1) {
                 warpass1.style.display = 'block'
                 warpass1.innerHTML = "Mật khẩu không khớp"
             } else {
-             
-                var resp = await postAPI('/auth/register', { email, password, phone: phonenumber, username })
-                nav('/sign-in')
-                console.log(73, resp)
+                var resp = await postAPI('/auth/register', { email, password, phone: phonenumber, username });
                 
+                nav('/sign-in')
             }
         }
         catch ( error) {
-            console.log(78,error.response.data.message)
             alert(error.response.data.message)
         }
 
@@ -96,8 +90,6 @@ function SignUp(props) {
                     </div>
                 </div>
                 <div className="menu-right">
-
-
                     <a href="#team">
                         <Select defaultValue="Tiếng Việt" style={{ width: 120 }} >
                             <Option value="jack">Tiếng Việt</Option>
@@ -134,14 +126,12 @@ function SignUp(props) {
                         </div>
 
                         <Space direction="vertical">
-
                             <Input
                                 className="form-control email"
                                 placeholder="Nhập email"
                                 id='email'
                                 type='email'
                                 name='email'
-                                // value={values.email}
                                 onChange={checkMail}
 
                             />

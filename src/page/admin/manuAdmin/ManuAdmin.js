@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import styles from './ManuAdmin.module.css'
 import clsx from 'clsx';
 import './menu.css'
+import { Link } from 'react-router-dom';
 
 function getItem(label, key, icon, children) {
   return {
@@ -17,12 +18,12 @@ function getItem(label, key, icon, children) {
     label,
   };
 }
-
+{/* <Link to='user'> <AccountCircleIcon/></Link> */}
 const items = [
-  getItem(' Dashboard', '1',<DashboardIcon/>),
-  getItem('User management', '2',<AccountCircleIcon/>),
-  getItem('Shop management', 'sub1',<ShopIcon/>),
-  getItem('Categories', 'sub2',<CategoryIcon/>),
+  getItem('Dashboard', '1',<Link to='dashboard'> <DashboardIcon/></Link>),
+  getItem('User management', '2',<Link to='user'> <AccountCircleIcon/></Link>),
+  getItem('Shop management', 'sub1',<Link to='shop'> <ShopIcon/></Link>),
+  getItem('Categories', 'sub2',<Link to='category'> <CategoryIcon/></Link>),
   getItem('Profile','3',<ContactMailIcon/>),
 ];
 function ManuAdmin(props) {
@@ -39,6 +40,7 @@ function ManuAdmin(props) {
   function fitter(data) {
     props.setData(data)   
   }
+
   return (
     <div className ={styles.ManuAdmin} >
       <div className ={styles.manuAll_input}>
@@ -51,7 +53,7 @@ function ManuAdmin(props) {
           width: 258,
         }}
         defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
+        defaultOpenKeys={['1']}
         mode={mode}
         theme={theme}
         items={items}

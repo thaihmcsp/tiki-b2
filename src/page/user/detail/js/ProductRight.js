@@ -1,56 +1,72 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StarOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
+import { color } from "@mui/system";
+import { useNavigate } from "react-router-dom";
+
 function ProductRight(props) {
-  // const element = document.getElementsByClassName("color");
-  // element.addEventListener("onClick", myfunction());
-  // function myfunction(key) {
-  //   const key = element.getAttribute("id");
-  //   console.log(key);
-  // }
+  
+  const listProduct = props.productDetail.productDetailId;
 
-  // element.setAttribute("onclick", "changecolor()");
-  // console.log(element);
-  // function changecolor(id) {
-  //   console.log(id);
-  // let imgPath = document.getElementById(id).getAttribute("src");
-  // console.log(imgPath);
-  // }
-  // function addEvent(id) {
-  //   console.log(id);
-  // }
-  // addEvent("than");
-  // function changecolor() {
-  //   console.log(1);
-  // }
+  const [count, setCount] = useState(0);
+  const [index, setIndex] = useState(0);
+  
+ 
+  const nav = useNavigate()
+  useEffect(() => {
+    setCount(0);
+    for (let i = 0; i < listProduct.length; i++) {
+      if (
+        props.myColor === listProduct[i].option[0].value &&
+        props.mySize === listProduct[i].option[1].value
+      ) {
+        setIndex(i);
+        setCount(1);
+      }
+    }
+  }, [props.myColor, props.mySize]);
+  
+  const optionTotal = [[], [], []];
 
+  listProduct.map((item, index) => {
+    optionTotal[0].push(item.option[0].value);
+    optionTotal[1].push(item.listImg[0]);
+    optionTotal[2].push(item.option[1].value);
+  });
+
+  const option = optionTotal.map((item, index) => {
+    return item.filter((item1, index1) => {
+      return item.indexOf(item1) === index1;
+    });
+  });
+  const handleGotoShop = ()=>{
+    nav(`/ShopHome?ShopID=${props.shopId}`)
+  }
   return (
     <div className="productright">
       <div className="header">
         <div className="brand">
           <span className="brand-and-author ">
-            Thương hiệu : <a href={props.brand}>OEM &nbsp;</a>
+            Thương hiệu : {props.productDetail.brandId.brandName?props.productDetail.brandId.brandName:'No Brand'}
           </span>
           <div class=" gXZfKO"></div>
           <div className="bestseller">
             <p>
-              <span>Đứng thứ 3 trong </span>
+              {/* <span>Đứng thứ 3 trong </span>
               <a href={props.bestseller}>
                 Top 1000 Áo thun nam dài tay bán chạy tháng này
-              </a>
+              </a> */}
             </p>
           </div>
         </div>
-        <h1 className="title">
-          áo thun nam dài tay áo thể thao nam body giữ nhiệt
-        </h1>
+        <h1 className="title">{props.productDetail.productName}</h1>
         <div className="below-title">
           <div>
             <div className="rate">
               <a className="number">(Xem 25 đánh giá)</a>
               <div class=" gXZfKO"></div>
             </div>
-            <div className="quantity">Đã bán 147</div>
+            <div className="quantity">Đã bán {props.productDetail.sold}</div>
           </div>
         </div>
       </div>
@@ -58,93 +74,68 @@ function ProductRight(props) {
         <div className="left">
           <div className="price-and-icon">
             <div className="price-discount">
-              <div className="current-price">{props.price}</div>
-              <div className="list-price">{props.listprice}</div>
-              <div className="discount">{props.discount}</div>
+              <div className="current-price">
+                {props.mySize == undefined || props.myColor == undefined ? (
+                  <>{props.productDetail.price.toLocaleString()}₫</>
+                ) : count == 1 ? (
+                  <>{listProduct[index].price.toLocaleString()}₫</>
+                ) : (
+                  "Hết hàng"
+                )}
+
+              </div>
+              {/* <div className="list-price">{props.listprice}</div>
+              <div className="discount">{props.discount}</div> */}
             </div>
             <div className="item">
               <img src={props.icon}></img>
             </div>
           </div>
-
-          <div className="selectproduct">
+              {props.productDetail.productDetailId.length>0? <div className="selectproduct">
             <div className="select-color">
               <p className="detail-color">
-                <p id="detail-color">Màu: {props.colorDetail.name}</p>
+                <p id="detail-color">
+                  Màu: <span id="color-select" >{props.colorDetail.name}</span>
+                </p>
               </p>
               <div className="product-color">
-                <div
-                  id="than"
-                  className="color"
-                  onClick={() => props.changecolor("than")}
-                >
-                  {props.productColor[0]} {props.color[0]}
-                  {props.tich}
-                </div>
-                <div
-                  id="white"
-                  className="color"
-                  onClick={() => props.changecolor("white")}
-                >
-                  {props.productColor[1]} {props.color[1]}
-                  {props.tich}
-                </div>
-                <div
-                  id="blue"
-                  className="color"
-                  onClick={() => props.changecolor("blue")}
-                >
-                  {props.productColor[2]} {props.color[2]}
-                  {props.tich}
-                </div>
-                <div
-                  id="gray"
-                  className="color"
-                  onClick={() => props.changecolor("gray")}
-                >
-                  {props.productColor[3]} {props.color[3]}
-                  {props.tich}
-                </div>
-                <div
-                  id="black"
-                  className="color"
-                  onClick={() => props.changecolor("black")}
-                >
-                  {props.productColor[4]} {props.color[4]}
-                  {props.tich}
-                </div>
-                <div
-                  id="red"
-                  className="color"
-                  onClick={() => props.changecolor("red")}
-                >
-                  {props.productColor[5]} {props.color[5]}
-                  {props.tich}
-                </div>
+                {option[0].map((item, index) => {
+                  return (
+                    <div
+                      className="option1"
+                      id={item}
+                      onClick={() => props.hanldeColor(item)}
+                    >
+                      <img src={option[1][index]} width={55} height={55}></img>
+                      <span>{item}</span>
+                      {props.tich}
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div className="select-size">
-              <p id="detail-size">Size</p>
+              <p id="detail-size">
+                Size: <span id="size-select" >{props.sizeDetail}</span>
+              </p>
               <div className="size">
-                <button onClick={() => props.selectSize("M")}>
-                  {props.size[0]}
-                  {props.tich}
-                </button>
-                <button onClick={() => props.selectSize("L")}>
-                  {props.size[1]}
-                  {props.tich}
-                </button>
-                <button onClick={() => props.selectSize("XL")}>
-                  {props.size[2]}
-                  {props.tich}
-                </button>
-                <button onClick={() => props.selectSize("XXL")}>
-                  {props.size[3]}
-                  {props.tich}
-                </button>
+                {option[2].map((item, index) => {
+                  return (
+                    <button
+                      className="option2"
+                      id={item}
+                      key={index}
+                      onClick={() => props.hanldeSize(item)}
+                    >
+                      <span>{item}</span>
+                      {props.tich}
+                    </button>
+                  );
+                })}
               </div>
             </div>
-          </div>
+          </div>: null}
+          
           <div className="delivery">
             <div>
               <span>Giao đến</span>
@@ -166,14 +157,14 @@ function ProductRight(props) {
                   {props.amoutn[0]}
                 </button>
                 <div className="amoutn-value">
-                  <span id="amoutn-value">1</span>
+                  <span id="amoutn-value" >1</span>
                 </div>
                 <button id="amoutn-up" onClick={() => props.AmoutnUp()}>
                   {props.amoutn[1]}
                 </button>
               </div>
               <div className="group-button">
-                <button>Chọn mua</button>
+                <button onClick={() => props.handleBuy()}>Chọn mua</button>
               </div>
             </div>
           </div>
@@ -183,10 +174,13 @@ function ProductRight(props) {
             <div className="seller-info">
               <a className="overview">
                 <picture className="overview-left">
-                  <img className="logo" src={props.logo}></img>
+                  <img
+                    className="logo"
+                    src={props.productDetail.shopId.logo}
+                  ></img>
                 </picture>
                 <div className="overview-right">
-                  <span>FASHION TREND</span>
+                  <span>{props.productDetail.shopId.shopName}</span>
                 </div>
               </a>
             </div>
@@ -215,7 +209,7 @@ function ProductRight(props) {
               </div>
             </div>
             <div className="seller-action">
-              <a className="action">
+              <a className="action" onClick={handleGotoShop}>
                 {props.action[0]}
                 <span>Xem shop</span>
               </a>

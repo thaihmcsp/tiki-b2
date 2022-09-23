@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 .category{
-    padding: 20px 250px;
     height: 100vh;
 }
 .listCategory{
@@ -49,8 +48,8 @@
 .modalInput{
     display: block;
     padding: 4px 12px;
-    width: 90%;
-    margin: 10px 0;
+    width: 100%;
+    margin: 15px 0;
     border: 1px solid rgb(69, 71, 72);
     border-radius: 4px;
     outline: none;
@@ -58,4 +57,7 @@
 .categorybutton{
     margin-right: 5px;
     padding: 4px 8px;
+}
+.addData{
+    display: flex;
 }

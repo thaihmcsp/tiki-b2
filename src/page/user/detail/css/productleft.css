@@ -11,7 +11,7 @@
 .kfTKQv {
   margin: 0px 12px;
   width: 1px;
-  background: rgb(242, 242, 242);
+  /* background: rgb(242, 242, 242); */
   flex-shrink: 0;
 }
 .webpimg-container {
@@ -19,21 +19,19 @@
 }
 .productleft {
   display: flex;
-  width: 40%;
+  width: auto;
   height: 100%;
 }
 #main {
   width: 444px;
   height: 444px;
-  z-index: 1;
 }
-#img-small {
+.img-small {
   border-radius: 4px;
   cursor: pointer;
-  border: 1px solid blue;
   width: 62px;
   height: 62px;
-  margin-top: 16px;
+  margin: 16px 0 0 16px;
 }
 #banner {
   margin: 32px 0 0 12px;

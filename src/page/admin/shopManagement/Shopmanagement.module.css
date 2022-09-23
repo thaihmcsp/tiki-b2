@@ -3,6 +3,12 @@
     padding: 0;
     box-sizing: border-box;
 }
+.Shop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .ShopManageHeader {
     display: flex;
     margin: 0 50px;
@@ -17,9 +23,7 @@
     font-weight: 600;
 }
 .ShopManage {
-    margin-right: 50px;
     background-color: #f4f7f6;
-    margin-left: 270px;
 }
 .Header_ButtonActive {
  
@@ -40,6 +44,8 @@
     cursor: pointer;
     margin-bottom: 0;
     color: #206a9d;
+    margin-top: 0px;
+    margin-right: 20px;
 }
 .HeaderRight {
     border:  1px solid blue;

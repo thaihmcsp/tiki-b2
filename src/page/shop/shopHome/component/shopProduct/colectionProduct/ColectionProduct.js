@@ -2,19 +2,36 @@ import { Radio, Space, Tabs } from 'antd';
 import React, { useEffect, useState } from 'react';
 import './colectionProduct.css'
 import style from './colectionProduct.module.css'
-import data from '../../../shopProductData/data';
 import ListDataColection from './listDataColection/ListDataColection';
 
 
 const { TabPane } = Tabs;
 
-function ColectionProduct() {
-    const [listData,setListData] = useState([])
+function ColectionProduct({allProduct}) {
 
+    const [colection,setColection] = useState([])
     useEffect(function(){
-        setListData(data.product)
-    },[data])
-
+        setColection(()=>{
+            const data = []
+            const newData = []
+            allProduct.map(item=>{
+                const catagoryName = item.categoryId.categoryName
+                if(!data.includes(catagoryName)){
+                    data.push(catagoryName)
+                    const listColectionData = allProduct.filter(subItem=>{
+                        return subItem.categoryId.categoryName == catagoryName
+                    })
+                    newData.push({
+                        title :catagoryName,
+                        listProduct:listColectionData
+                    })
+                }
+            })
+            return newData
+        })
+    },[allProduct])
+    console.log(33,colection)
+    
     const [tabPosition, setTabPosition] = useState('left');
 
     useEffect(function(){
@@ -32,10 +49,10 @@ function ColectionProduct() {
        
         <>
             <Tabs tabPosition={tabPosition} className='tab_colection'>
-                {listData.map((colection,index)=>{
+                {colection.map((colection,index)=>{
                     return(
                         <TabPane tab={colection.title} key={`${index}`}>
-                            <ListDataColection data={colection.product}/>
+                            <ListDataColection data={colection.listProduct}/>
                         </TabPane>
                     )
                 })}
