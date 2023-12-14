@@ -1,5 +1,5 @@
 import { clearAllListeners } from '@reduxjs/toolkit'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Banner from './banner/Banner'
 import style from './hotdeal.module.css'
 function HotDeal() {
@@ -32,7 +32,12 @@ function HotDeal() {
 
 
   }
-  setInterval(setCountDown,1000)
+  useEffect(function(){
+    const interval = setInterval(setCountDown,1000)
+    return ()=>{
+        clearInterval(interval)
+    }
+  },[])
   return (
     <div className={style.HotDeal}>
         <div className={style.header}>

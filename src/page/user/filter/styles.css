@@ -1,4 +1,7 @@
-#app { height: 100% }
+#app {
+  height: 100%
+}
+
 html,
 body {
   position: relative;
@@ -35,19 +38,12 @@ body {
   align-items: center;
 }
 
-.ant-btn-primary {
-  border: unset !important;
-  background:none !important;
-  display: none !important;
-}
 
-.ant-modal-root{
+/* .ant-modal-root{
   display: none;
-}
+} 
 
-.ant-btn {
-  display:  none !important;
-}
+
 .mySwiper_fillter .swiper-button-next:after, .mySwiper_fillter .swiper-button-prev:after {
   font-size: 1rem !important;
   padding: 10px;
@@ -112,4 +108,4 @@ body {
     transform-origin: top right !important;
   } 
 
-}
+}*/

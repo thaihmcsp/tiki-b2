@@ -72,7 +72,7 @@ function Tranform() {
     setDelivery(!checked)
   };
   return (
-    <div className={style.Tranform}>
+    <div className={style.Tranform} id='Transform_Step__scroll'>
         <h2 className={style.title}>
           Vân chuyển và Bảo hành
         </h2>

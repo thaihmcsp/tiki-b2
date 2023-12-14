@@ -50,6 +50,19 @@ body {
     font-size: 15px;
     color: rgb(110, 110, 110);
 }
+.mySwiper4>.swiper-button-next::before, .mySwiper4>.swiper-button-prev::before{
+    position: absolute;
+    content: '';
+    width: 50px;
+    height: 230px;
+    
+}
+.mySwiper4>.swiper-button-next::before{
+  background: linear-gradient(to left, white,rgba(255,255,255,0.5) ,transparent);
+}
+.mySwiper4>.swiper-button-prev::before{
+  background: linear-gradient(to right, white,rgba(255,255,255,0.5) ,transparent);
+}
 .mySwiper4>.swiper-button-next,.mySwiper4>.swiper-button-prev{
     display: flex;
     justify-content: center;

@@ -1,43 +1,49 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from '../allOder/AllOder.module.css'
 function AllOder(props) {
-  const [statusTitle,setstatusTitle] = useState()  
-  if( props.newdata.length === 0) {
-     // document.querySelector(`${style.OderTitle}`).setAttribute('style', 'display: none')
-     // document.querySelector(`${style.EmptyOder}`).setAttribute("style", "display: flex;")
-  }
-    return (
-    <div className={style.Alloder_Title}>
-         {props.newdata.map(function (value,index){
-          console.log(value);
-           return <div key={index} className = {style.OderTitle}>
-                <p className={style.Oder_HeaderTitle}>{value.status}</p>
-               <div className={style.MidleTitle}>
-                    <div className={style.MidleTitle_Left}>
-                        <img src={value.img} alt="" className={style.ImageTitle} />
-                        <h4 style={{opacity: 0.8}}>{value.name}</h4>
+     const [statusTitle, setstatusTitle] = useState()
+     const [daterender, setdaterender] = useState([...props.newdata]);
+     useEffect(() => {
+          setdaterender(props.newdata.slice(props.start, props.start + 3))
+     }, [props.start, props.newdata])
+
+     return (
+          <div className={style.Alloder_Title}>
+               {daterender.map(function (value, index) {
+                    return <div key={index} className={style.OderTitle}>
+                         <p className={style.Oder_HeaderTitle}>{value.status}</p>
+                         <div className={style.MidleTitle}>
+                              <div className={style.MidleTitle_Left}>
+                                   <img src={value.img} alt="" className={style.ImageTitle} />
+                                   <h4 style={{ opacity: 0.8 }}>{value.name}</h4>
+                              </div>
+                              <div className={style.ImageTitleText}>
+                                   <p>{value.price.toLocaleString()}đ </p>
+                                   <p>x{value.sold}</p>
+                              </div>
+
+                         </div>
+                         <div className={style.OrderBottomTitle}>
+                              <div className={style.OderBottom_Shoplogo}>
+                                   <img src={value.shopId.shoplogo} alt="" />
+                                   <span>{value.shopId.shopname}</span>
+                              </div>
+                              <div className={style.BottomTitle}>
+                                   <p style={{ textAlign: 'right', fontSize: '16px', opacity: '0.7', marginBottom: '5px' }} >Tổng tiền : <span style={{ opacity: '1', fontWeight: 'bold', color: 'red' }} >{(value.price * value.sold).toLocaleString()}đ</span></p>
+                                   <div style={{ textAlign: 'right' }}>
+                                        <button className={style.BottomTitle_Button}>Mua lại</button>
+                                        <button className={style.BottomTitle_Button}>Xem Chi Tiết</button>
+                                   </div>
+                              </div>
+                         </div>
+
                     </div>
-                   <div className={style.ImageTitleText}>
-                    <p>{value.price.toLocaleString()}đ </p>
-                    <p>x{value.number}</p>
-                   </div>
-                   
+               })}
+               <div className={style.EmptyOder}>
+                    <img src={props.emptyOder} className={style.EmptyOder_img} alt="" />
                </div>
-               <div className={style.BottomTitle}>
-                    <p style={{textAlign: 'right',fontSize: '16px',opacity:'0.7',marginBottom: '10px'}} >Tổng tiền : <span style={{opacity:'1', fontWeight:'bold',color:'red'}} >{ (value.price * value.number).toLocaleString()}đ</span></p>
-                   <div style={{textAlign: 'right'}}>
-                        <button className={style.BottomTitle_Button}>Mua lại</button>
-                        <button  className={style.BottomTitle_Button}>Xem Chi Tiết</button>
-                   </div>         
-               </div>
-              
-            </div>
-         })}
-         <div className= {style.EmptyOder}>
-               <img src={props.emptyOder} className = {style.EmptyOder_img} alt="" />    
-         </div>
-    </div>
-  )
+          </div>
+     )
 }
 
 export default AllOder

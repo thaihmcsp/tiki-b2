@@ -1,8 +1,15 @@
 .container {
     display: flex;
     background-color: white;
+    
 }
 
+.slider {
+    width: 1240px;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
 @media  only screen and (max-width:769px){
     .container_box {
         display: none;

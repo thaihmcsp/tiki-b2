@@ -8,16 +8,14 @@ function PopularProduct({listProduct}) {
 
   const [listShow,setListShow] = useState([])
   const [pageSize,setPageSize] = useState(24)
-
-
+ 
   useEffect(function(){
-    setListShow(()=>{
-        const newData = [...listProduct]
-        return newData.splice(0,pageSize)
+      setListShow(()=>{
+        const newData = [...listProduct].splice(0,pageSize)
+        return newData
     })
   },[listProduct,pageSize])
 
-  
   const handleReadmore =()=>{
     if(pageSize < listProduct.length){
       setPageSize((pageSize)=>{
@@ -25,6 +23,7 @@ function PopularProduct({listProduct}) {
       })
     }
   }
+  // console.log(26,listShow)
   return (
     <>
     <div className={style.product}>
@@ -32,11 +31,13 @@ function PopularProduct({listProduct}) {
           {listShow.map(item=>{
               return(
                   <Card1 
-                      img={item.avatar}
-                      title={item.title}
+                      key={item._id}
+                      id={item._id}
+                      img={item.thump}
+                      title={item.productName}
                       sold={item.sold}
                       price={item.price}
-                      discount = {item.discount}
+                      discount = {10+Math.round(10*Math.random())}
                   />
               )
           })}
